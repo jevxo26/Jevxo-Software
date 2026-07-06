@@ -6,8 +6,10 @@ import { usePathname } from "next/navigation";
 
 const navLinks = [
   { label: "Home",      href: "/" },
+  { label: "About",     href: "/about" },
   { label: "Products",  href: "/products" },
   { label: "Services",  href: "/services" },
+  { label: "Partners",  href: "/partners" },
   { label: "Portfolio", href: "/portfolio" },
   { label: "Pricing",   href: "/pricing" },
   { label: "Process",   href: "/process" },
@@ -182,8 +184,11 @@ export default function Navbar() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "flex-start",
+          paddingTop: "90px",
+          paddingBottom: "40px",
           gap: "8px",
+          overflowY: "auto",
           animation: "fadeIn 0.2s ease",
         }}>
           <button
@@ -252,10 +257,24 @@ export default function Navbar() {
       )}
 
       <style>{`
-        @media (max-width: 768px) {
+        @media (max-width: 1250px) {
           .desktop-nav { display: none !important; }
           .cta-btn { display: none !important; }
           .hamburger { display: flex !important; }
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes fadeUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
       `}</style>
     </>

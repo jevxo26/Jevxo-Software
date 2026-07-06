@@ -6,6 +6,7 @@ const footerLinks = {
     { label: "About Us",  href: "/about" },
     { label: "Our Process", href: "/process" },
     { label: "Tech Stack",  href: "/technologies" },
+    { label: "Country Partners", href: "/partners" },
     { label: "Careers",   href: "/jobs" },
   ],
   Resources: [

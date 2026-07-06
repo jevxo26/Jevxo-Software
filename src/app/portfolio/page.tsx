@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 import { portfolioItems as defaultPortfolioItems, portfolioCategories } from "@/lib/data/portfolio";
 
 export default function PortfolioPage() {
@@ -23,9 +25,11 @@ export default function PortfolioPage() {
   const filtered = active === "All" ? portfolioList : portfolioList.filter((p) => p.category === active);
 
   return (
-    <div>
-      {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="bg-hero-gradient section" style={{ position: "relative", overflow: "hidden" }}>
+    <div style={{ background: "#080d1a", color: "#f1f5f9", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+      <Navbar />
+      <div style={{ flex: 1, paddingTop: "80px" }}>
+        {/* ── Hero ─────────────────────────────────────────────── */}
+        <section className="bg-hero-gradient section" style={{ position: "relative", overflow: "hidden" }}>
         <div className="orb orb-cyan"   style={{ width: "450px", height: "450px", top: "-150px", right: "-80px" }} />
         <div className="orb orb-violet" style={{ width: "300px", height: "300px", bottom: "-80px", left: "-60px" }} />
         <div className="container" style={{ position: "relative", zIndex: 1, textAlign: "center" }}>
@@ -135,6 +139,10 @@ export default function PortfolioPage() {
           </Link>
         </div>
       </section>
+
+      </div>
+
+      <Footer />
 
       <style>{`
         @media (max-width: 900px) { .portfolio-grid { grid-template-columns: repeat(2,1fr) !important; } }

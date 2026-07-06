@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 import { portfolioItems, portfolioCategories } from "@/lib/data/portfolio";
 import { teamMembers, stats } from "@/lib/data/team";
 import { services } from "@/lib/data/services";
@@ -129,7 +131,8 @@ export default function HomePage() {
   };
 
   return (
-    <div style={{ position: "relative" }}>
+    <div style={{ position: "relative", background: "#080d1a", color: "#f1f5f9" }}>
+      <Navbar />
       {/* ── 1. HERO SECTION ─────────────────────────────────────────────── */}
       <section className="bg-hero-gradient section" style={{ position: "relative", minHeight: "92vh", display: "flex", alignItems: "center", overflow: "hidden", paddingTop: "140px" }}>
         <div className="orb orb-violet" style={{ width: "600px", height: "600px", top: "-150px", right: "-100px", opacity: 0.6 }} />
@@ -837,6 +840,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <Footer />
 
       <style>{`
         @media (max-width: 768px) {

@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
+import { Bai_Jamjuree } from "next/font/google";
 import "./globals.css";
+
+const baiJamjuree = Bai_Jamjuree({
+  subsets: ["latin"],
+  variable: "--font-bai-jamjuree",
+  weight: ["200", "300", "400", "500", "600", "700"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -24,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={baiJamjuree.variable}>
       <body>{children}</body>
     </html>
   );

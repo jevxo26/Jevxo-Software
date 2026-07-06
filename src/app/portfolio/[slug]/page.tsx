@@ -3,6 +3,8 @@
 import { use, useState, useEffect } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 import { portfolioItems, getPortfolioBySlug } from "@/lib/data/portfolio";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -52,8 +54,10 @@ export default function PortfolioDetailPage({ params }: Props) {
   if (!item) notFound();
 
   return (
-    <div>
-      {/* ── Hero ─────────────────────────────────────────────── */}
+    <div style={{ background: "#080d1a", color: "#f1f5f9", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+      <Navbar />
+      <div style={{ flex: 1, paddingTop: "80px" }}>
+        {/* ── Hero ─────────────────────────────────────────────── */}
       <section className="bg-hero-gradient section" style={{ position: "relative", overflow: "hidden" }}>
         <div className="orb orb-cyan"   style={{ width: "500px", height: "500px", top: "-150px", right: "-120px" }} />
         <div className="orb orb-violet" style={{ width: "300px", height: "300px", bottom: "-60px", left: "-60px" }} />
@@ -134,6 +138,10 @@ export default function PortfolioDetailPage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      </div>
+
+      <Footer />
 
       <style>{`
         @media (max-width: 900px) { .case-study-grid { grid-template-columns: 1fr !important; } }

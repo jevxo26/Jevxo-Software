@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 import { services as defaultServices } from "@/lib/data/services";
 
 export default function ServicesPage() {
@@ -19,9 +21,11 @@ export default function ServicesPage() {
     }
   }, []);
   return (
-    <div>
-      {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="bg-hero-gradient section" style={{ position: "relative", overflow: "hidden" }}>
+    <div style={{ background: "#080d1a", color: "#f1f5f9", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+      <Navbar />
+      <div style={{ flex: 1, paddingTop: "80px" }}>
+        {/* ── Hero ─────────────────────────────────────────────── */}
+        <section className="bg-hero-gradient section" style={{ position: "relative", overflow: "hidden" }}>
         <div className="orb orb-violet" style={{ width: "500px", height: "500px", top: "-200px", right: "-100px" }} />
         <div className="orb orb-cyan"   style={{ width: "350px", height: "350px", bottom: "-100px", left: "-80px" }} />
         <div className="container" style={{ position: "relative", zIndex: 1, textAlign: "center" }}>
@@ -125,6 +129,10 @@ export default function ServicesPage() {
           </Link>
         </div>
       </section>
+
+      </div>
+
+      <Footer />
 
       <style>{`
         .service-card {

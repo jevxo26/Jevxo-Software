@@ -1,11 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import type { Metadata } from "next";
-
-// Note: metadata export not supported in client components.
-// Move metadata to a parent server component if needed.
-// For now the root layout handles the default title.
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 
 const services = [
   "Web Development",
@@ -87,8 +84,10 @@ export default function ContactPage() {
   };
 
   return (
-    <div>
-      {/* ── Hero ─────────────────────────────────────────────── */}
+    <div style={{ background: "#080d1a", color: "#f1f5f9", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+      <Navbar />
+      <div style={{ flex: 1, paddingTop: "80px" }}>
+        {/* ── Hero ─────────────────────────────────────────────── */}
       <section className="bg-hero-gradient section" style={{ position: "relative", overflow: "hidden" }}>
         <div className="orb orb-violet" style={{ width: "500px", height: "500px", top: "-150px", right: "-100px" }} />
         <div className="orb orb-cyan"   style={{ width: "350px", height: "350px", bottom: "-80px", left: "-60px" }} />
@@ -249,6 +248,10 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      </div>
+
+      <Footer />
 
       <style>{`
         @media (max-width: 900px) {

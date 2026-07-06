@@ -3,6 +3,8 @@
 import { use, useState, useEffect } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 import { blogPosts, getBlogBySlug } from "@/lib/data/blog";
 import { formatDate } from "@/lib/utils";
 
@@ -53,8 +55,10 @@ export default function BlogPostPage({ params }: Props) {
   if (!post) notFound();
 
   return (
-    <div>
-      {/* ── Hero ─────────────────────────────────────────────── */}
+    <div style={{ background: "#080d1a", color: "#f1f5f9", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+      <Navbar />
+      <div style={{ flex: 1, paddingTop: "80px" }}>
+        {/* ── Hero ─────────────────────────────────────────────── */}
       <section className="bg-hero-gradient section" style={{ position: "relative", overflow: "hidden" }}>
         <div className="orb orb-pink"   style={{ width: "400px", height: "400px", top: "-120px", right: "-80px" }} />
         <div className="container" style={{ position: "relative", zIndex: 1, maxWidth: "860px" }}>
@@ -146,6 +150,10 @@ export default function BlogPostPage({ params }: Props) {
           </div>
         </section>
       )}
+
+      </div>
+
+      <Footer />
 
       <style>{`
         .related-card {

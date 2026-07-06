@@ -3,6 +3,8 @@
 import { use, useState, useEffect } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 import { services, getServiceBySlug } from "@/lib/data/services";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -43,8 +45,10 @@ export default function ServiceDetailPage({ params }: Props) {
   if (!service) notFound();
 
   return (
-    <div>
-      {/* ── Hero ─────────────────────────────────────────────── */}
+    <div style={{ background: "#080d1a", color: "#f1f5f9", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+      <Navbar />
+      <div style={{ flex: 1, paddingTop: "80px" }}>
+        {/* ── Hero ─────────────────────────────────────────────── */}
       <section className="bg-hero-gradient section" style={{ position: "relative", overflow: "hidden" }}>
         <div className="orb orb-violet" style={{ width: "500px", height: "500px", top: "-150px", right: "-100px" }} />
         <div className="container" style={{ position: "relative", zIndex: 1 }}>
@@ -145,6 +149,10 @@ export default function ServiceDetailPage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      </div>
+
+      <Footer />
 
       <style>{`
         @media (max-width: 900px) {

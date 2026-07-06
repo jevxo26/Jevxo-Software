@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 
 export default function JobsPage() {
   const [applyForm, setApplyForm] = useState({ name: "", email: "", position: "NextJS Dev", portfolio: "", message: "" });
@@ -34,13 +36,14 @@ export default function JobsPage() {
   }, []);
 
   return (
-    <div style={{ position: "relative" }}>
-      
-      {/* Hero */}
-      <section className="bg-hero-gradient section" style={{ position: "relative", overflow: "hidden", textAlign: "center", paddingTop: "120px" }}>
-        <div className="orb orb-violet" style={{ width: "500px", height: "500px", top: "-200px", right: "-100px" }} />
-        <div className="orb orb-cyan" style={{ width: "350px", height: "350px", bottom: "-100px", left: "-80px" }} />
-        <div className="container" style={{ position: "relative", zIndex: 1 }}>
+    <div style={{ background: "#080d1a", color: "#f1f5f9", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+      <Navbar />
+      <div style={{ flex: 1, paddingTop: "80px" }}>
+        {/* Hero */}
+        <section className="bg-hero-gradient section" style={{ position: "relative", overflow: "hidden", textAlign: "center", paddingTop: "120px" }}>
+          <div className="orb orb-violet" style={{ width: "500px", height: "500px", top: "-200px", right: "-100px" }} />
+          <div className="orb orb-cyan" style={{ width: "350px", height: "350px", bottom: "-100px", left: "-80px" }} />
+          <div className="container" style={{ position: "relative", zIndex: 1 }}>
           <div style={{ display: "inline-block", padding: "4px 14px", borderRadius: "100px", border: "1px solid rgba(124,58,237,0.3)", background: "rgba(124,58,237,0.08)", fontSize: "12px", fontWeight: 600, color: "#a78bfa", marginBottom: "24px", textTransform: "uppercase", letterSpacing: "0.1em" }}>
             Careers
           </div>
@@ -167,6 +170,10 @@ export default function JobsPage() {
           </div>
         </div>
       </section>
+
+      </div>
+
+      <Footer />
 
       <style>{`
         @media (max-width: 900px) {
