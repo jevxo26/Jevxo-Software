@@ -95,6 +95,28 @@ export default function Navbar() {
           {/* CTA + Hamburger */}
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
             <Link
+              href="/portal"
+              style={{
+                padding: "8px 16px",
+                borderRadius: "10px",
+                fontSize: "14px",
+                fontWeight: 600,
+                border: "1px solid rgba(124,58,237,0.4)",
+                background: "rgba(124,58,237,0.06)",
+                color: "#a78bfa",
+                transition: "all 0.2s ease",
+              }}
+              className="cta-btn"
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.background = "rgba(124,58,237,0.15)";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.background = "rgba(124,58,237,0.06)";
+              }}
+            >
+              Portal Login
+            </Link>
+            <Link
               href="/contact"
               style={{
                 padding: "9px 20px",
@@ -192,9 +214,24 @@ export default function Navbar() {
             </Link>
           ))}
           <Link
+            href="/portal"
+            style={{
+              marginTop: "8px",
+              padding: "12px 32px",
+              borderRadius: "12px",
+              fontSize: "18px",
+              fontWeight: 700,
+              border: "1px solid rgba(124,58,237,0.4)",
+              background: "rgba(124,58,237,0.06)",
+              color: "#a78bfa",
+              textAlign: "center",
+              width: "200px",
+            }}
+          >Portal Login</Link>
+          <Link
             href="/contact"
             style={{
-              marginTop: "16px",
+              marginTop: "12px",
               padding: "14px 36px",
               borderRadius: "14px",
               fontSize: "18px",
@@ -202,6 +239,8 @@ export default function Navbar() {
               background: "linear-gradient(135deg, #7c3aed, #4f46e5)",
               color: "#fff",
               boxShadow: "0 0 30px rgba(124,58,237,0.4)",
+              textAlign: "center",
+              width: "200px",
             }}
           >Get Started →</Link>
         </div>

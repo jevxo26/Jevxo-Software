@@ -48,10 +48,7 @@ export default function BlogPage() {
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px" }} className="blog-featured">
               {featured.map((post) => (
                 <Link key={post.id} href={`/blog/${post.slug}`} style={{ display: "block" }}>
-                  <div className="glass" style={{ borderRadius: "var(--radius-lg)", overflow: "hidden", transition: "all 0.3s ease", height: "100%" }}
-                    onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)"; }}
-                    onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}
-                  >
+                  <div className="glass blog-card" style={{ borderRadius: "var(--radius-lg)", overflow: "hidden", transition: "all 0.3s ease", height: "100%" }}>
                     <div style={{ height: "180px", background: "linear-gradient(135deg, rgba(236,72,153,0.2), rgba(124,58,237,0.2))", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "56px" }}>
                       {post.category === "Engineering" && "⚙️"}
                       {post.category === "Design"      && "🎨"}
@@ -88,16 +85,7 @@ export default function BlogPage() {
             <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
               {rest.map((post) => (
                 <Link key={post.id} href={`/blog/${post.slug}`} style={{ display: "block" }}>
-                  <div className="glass" style={{ padding: "28px 32px", borderRadius: "var(--radius-md)", display: "flex", alignItems: "center", gap: "24px", transition: "all 0.2s ease" }}
-                    onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLElement).style.borderColor = "rgba(124,58,237,0.25)";
-                      (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)";
-                    }}
-                    onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.08)";
-                      (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.04)";
-                    }}
-                  >
+                  <div className="glass blog-row" style={{ padding: "28px 32px", borderRadius: "var(--radius-md)", display: "flex", alignItems: "center", gap: "24px", transition: "all 0.2s ease", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
                     <div style={{ width: "56px", height: "56px", borderRadius: "12px", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "28px", flexShrink: 0 }}>
                       {post.category === "Mobile" ? "📱" : post.category === "DevOps" ? "☁️" : "📝"}
                     </div>
@@ -123,6 +111,19 @@ export default function BlogPage() {
       </section>
 
       <style>{`
+        .blog-card {
+          transition: all 0.3s ease;
+        }
+        .blog-card:hover {
+          transform: translateY(-4px);
+        }
+        .blog-row {
+          transition: all 0.2s ease;
+        }
+        .blog-row:hover {
+          border-color: rgba(124,58,237,0.25) !important;
+          background: rgba(255,255,255,0.05) !important;
+        }
         @media (max-width: 900px) { .blog-featured { grid-template-columns: repeat(2,1fr) !important; } }
         @media (max-width: 580px) { .blog-featured { grid-template-columns: 1fr !important; } }
       `}</style>

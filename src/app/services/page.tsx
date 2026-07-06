@@ -33,22 +33,13 @@ export default function ServicesPage() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "28px" }} className="services-list">
             {services.map((service, i) => (
               <Link key={service.id} href={`/services/${service.slug}`} style={{ display: "block" }}>
-                <div className="glass" style={{
+                <div className="glass service-card" style={{
                   padding: "40px", borderRadius: "var(--radius-xl)",
                   transition: "all 0.3s ease",
                   height: "100%",
                   display: "flex", flexDirection: "column",
                   animationDelay: `${i * 0.08}s`,
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.transform = "translateY(-6px)";
-                  (e.currentTarget as HTMLElement).style.boxShadow = "0 20px 60px rgba(124,58,237,0.12)";
-                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(124,58,237,0.25)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
-                  (e.currentTarget as HTMLElement).style.boxShadow = "none";
-                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.08)";
+                  border: "1px solid rgba(255,255,255,0.08)",
                 }}
                 >
                   <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "24px" }}>
@@ -126,6 +117,14 @@ export default function ServicesPage() {
       </section>
 
       <style>{`
+        .service-card {
+          transition: all 0.3s ease;
+        }
+        .service-card:hover {
+          transform: translateY(-6px);
+          box-shadow: 0 20px 60px rgba(124,58,237,0.12);
+          border-color: rgba(124,58,237,0.25) !important;
+        }
         @media (max-width: 768px) {
           .services-list { grid-template-columns: 1fr !important; }
         }

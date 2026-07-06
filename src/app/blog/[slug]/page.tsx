@@ -107,10 +107,7 @@ export default async function BlogPostPage({ params }: Props) {
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }} className="related-grid">
               {related.map((p) => (
                 <Link key={p.id} href={`/blog/${p.slug}`} style={{ display: "block" }}>
-                  <div className="glass" style={{ padding: "24px", borderRadius: "16px", transition: "all 0.2s ease" }}
-                    onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.transform = "translateY(-3px)"; }}
-                    onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}
-                  >
+                  <div className="glass related-card" style={{ padding: "24px", borderRadius: "16px", transition: "all 0.2s ease" }}>
                     <span style={{ fontSize: "11px", fontWeight: 600, color: "#f472b6", display: "block", marginBottom: "10px" }}>{p.category}</span>
                     <h3 style={{ fontSize: "15px", fontWeight: 700, marginBottom: "8px", lineHeight: 1.4 }}>{p.title}</h3>
                     <p style={{ color: "var(--text-muted)", fontSize: "13px" }}>{p.readTime} · {formatDate(p.publishedAt)}</p>
@@ -123,6 +120,12 @@ export default async function BlogPostPage({ params }: Props) {
       )}
 
       <style>{`
+        .related-card {
+          transition: all 0.2s ease;
+        }
+        .related-card:hover {
+          transform: translateY(-3px);
+        }
         @media (max-width: 700px) { .related-grid { grid-template-columns: 1fr !important; } }
       `}</style>
     </div>
