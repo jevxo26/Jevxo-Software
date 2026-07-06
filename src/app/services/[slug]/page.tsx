@@ -86,7 +86,7 @@ export default function ServiceDetailPage({ params }: Props) {
 
               <h2 style={{ fontSize: "28px", fontWeight: 700, marginBottom: "24px" }}>What&apos;s Included</h2>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", marginBottom: "48px" }}>
-                {service.features.map((f) => (
+                {service.features.map((f: string) => (
                   <div key={f} style={{ display: "flex", alignItems: "center", gap: "12px", padding: "14px 18px", borderRadius: "12px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
                     <div style={{ width: "20px", height: "20px", borderRadius: "50%", background: "rgba(124,58,237,0.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "11px", flexShrink: 0 }}>✓</div>
                     <span style={{ color: "var(--text-secondary)", fontSize: "14px" }}>{f}</span>
@@ -96,7 +96,7 @@ export default function ServiceDetailPage({ params }: Props) {
 
               <h2 style={{ fontSize: "28px", fontWeight: 700, marginBottom: "24px" }}>Deliverables</h2>
               <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-                {service.deliverables.map((d, i) => (
+                {service.deliverables.map((d: string, i: number) => (
                   <div key={d} style={{ display: "flex", alignItems: "center", gap: "16px", padding: "16px 20px", borderRadius: "12px", background: "rgba(124,58,237,0.06)", border: "1px solid rgba(124,58,237,0.12)" }}>
                     <div style={{ width: "28px", height: "28px", borderRadius: "50%", background: "linear-gradient(135deg, #7c3aed, #4f46e5)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "12px", fontWeight: 700, flexShrink: 0 }}>
                       {i + 1}

@@ -4,20 +4,20 @@ const footerLinks = {
   Company:  [
     { label: "Home",      href: "/" },
     { label: "About Us",  href: "/about" },
-    { label: "Portfolio", href: "/portfolio" },
-    { label: "Blog",      href: "/blog" },
-    { label: "Contact",   href: "/contact" },
+    { label: "Our Process", href: "/process" },
+    { label: "Tech Stack",  href: "/technologies" },
+    { label: "Careers",   href: "/jobs" },
   ],
-  Services: [
-    { label: "Web Development",  href: "/services/web-development" },
-    { label: "UI/UX Design",     href: "/services/ui-ux-design" },
-    { label: "Mobile Apps",      href: "/services/mobile-apps" },
-    { label: "Cloud & DevOps",   href: "/services/cloud-devops" },
-    { label: "AI Integration",   href: "/services/ai-integration" },
+  Resources: [
+    { label: "Products Catalog", href: "/products" },
+    { label: "Services Catalog", href: "/services" },
+    { label: "Project Portfolio", href: "/portfolio" },
+    { label: "Pricing Packages", href: "/pricing" },
+    { label: "FAQ Center",        href: "/faq" },
   ],
   Legal: [
-    { label: "Privacy Policy",    href: "#" },
-    { label: "Terms of Service",  href: "#" },
+    { label: "Privacy Policy",    href: "/privacy" },
+    { label: "Terms of Service",  href: "/privacy" },
     { label: "Cookie Policy",     href: "#" },
   ],
 };

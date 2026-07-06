@@ -110,7 +110,7 @@ export default function BlogPostPage({ params }: Props) {
               The digital landscape is constantly evolving. Staying ahead requires not just technical knowledge, but a deep understanding of the problems you&apos;re trying to solve. In this article, we break down the key principles that guide our thinking at Jevxo.
             </p>
             <h2 style={{ fontSize: "26px", fontWeight: 700, color: "#f1f5f9", margin: "40px 0 16px" }}>Key Takeaways</h2>
-            {post.tags.map((tag) => (
+            {post.tags.map((tag: string) => (
               <div key={tag} style={{ display: "flex", alignItems: "flex-start", gap: "14px", marginBottom: "16px" }}>
                 <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#a78bfa", flexShrink: 0, marginTop: "10px" }} />
                 <p>Deep knowledge of <strong style={{ color: "#f1f5f9" }}>{tag}</strong> is essential for modern {post.category.toLowerCase()} work. Understanding the fundamentals unlocks better decisions at every layer of the stack.</p>
@@ -120,7 +120,7 @@ export default function BlogPostPage({ params }: Props) {
 
           {/* Tags */}
           <div style={{ marginTop: "56px", paddingTop: "32px", borderTop: "1px solid rgba(255,255,255,0.06)", display: "flex", gap: "8px", flexWrap: "wrap" }}>
-            {post.tags.map((tag) => (
+            {post.tags.map((tag: string) => (
               <span key={tag} style={{ padding: "6px 16px", borderRadius: "100px", fontSize: "13px", background: "rgba(124,58,237,0.08)", border: "1px solid rgba(124,58,237,0.2)", color: "#a78bfa" }}>{tag}</span>
             ))}
           </div>

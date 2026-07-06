@@ -262,6 +262,15 @@ export default function HomePage() {
               </div>
             ))}
           </div>
+
+          <div style={{ textAlign: "center", marginTop: "40px" }}>
+            <Link href="/products" style={{ display: "inline-block", padding: "12px 30px", borderRadius: "10px", background: "rgba(124,58,237,0.1)", border: "1px solid rgba(124,58,237,0.3)", color: "#a78bfa", fontWeight: 700, fontSize: "14px", transition: "all 0.2s" }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(124,58,237,0.2)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(124,58,237,0.1)"; }}
+            >
+              Explore Our Software Products →
+            </Link>
+          </div>
         </div>
       </section>
 

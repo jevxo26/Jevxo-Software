@@ -97,7 +97,7 @@ export default function PortfolioDetailPage({ params }: Props) {
               <div>
                 <h3 style={{ fontSize: "18px", fontWeight: 600, marginBottom: "16px" }}>Technologies Used</h3>
                 <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-                  {item.tags.map((tag) => (
+                  {item.tags.map((tag: string) => (
                     <span key={tag} style={{ padding: "6px 16px", borderRadius: "100px", fontSize: "13px", fontWeight: 500, background: "rgba(124,58,237,0.1)", border: "1px solid rgba(124,58,237,0.2)", color: "#a78bfa" }}>{tag}</span>
                   ))}
                 </div>
