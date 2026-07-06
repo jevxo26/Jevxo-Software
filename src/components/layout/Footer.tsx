@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 
 const footerLinks = {
@@ -32,78 +34,51 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer style={{
-      borderTop: "1px solid rgba(255,255,255,0.06)",
-      background: "rgba(8,13,26,0.9)",
-      backdropFilter: "blur(20px)",
-      padding: "80px 0 32px",
-    }}>
-      <div className="container">
+    <footer className="border-t border-slate-900/5 bg-white/90 backdrop-blur-md py-20 pb-8">
+      <div className="mx-auto px-4 w-11/12 max-w-[1400px]">
         {/* Top grid */}
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "2fr 1fr 1fr 1fr",
-          gap: "48px",
-          marginBottom: "64px",
-        }} className="footer-grid">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-12 mb-16">
           {/* Brand */}
-          <div>
-            <Link href="/" style={{ display: "inline-flex", alignItems: "center", gap: "10px", marginBottom: "20px" }}>
-              <div style={{
-                width: "36px", height: "36px",
-                background: "linear-gradient(135deg, #7c3aed, #4f46e5)",
-                borderRadius: "10px",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                fontSize: "18px", fontWeight: 800, color: "#fff",
-              }}>J</div>
-              <span style={{ fontSize: "20px", fontWeight: 700 }}>
-                Jev<span style={{ color: "#7c3aed" }}>xo</span>
+          <div className="md:col-span-2">
+            <Link href="/" className="inline-flex items-center gap-2.5 mb-5">
+              <img src="/logo.svg" alt="Jevxo Logo" className="w-9 h-9" />
+              <span className="text-xl font-bold text-slate-900">
+                Jev<span className="text-violet-600">xo</span>
               </span>
             </Link>
-            <p style={{ color: "var(--text-secondary)", fontSize: "15px", lineHeight: 1.7, maxWidth: "280px", marginBottom: "24px" }}>
+            <p className="text-slate-600 text-sm leading-relaxed max-w-[280px] mb-6">
               We build high-performance digital products that help ambitious companies grow. From idea to launch and beyond.
             </p>
             {/* Socials */}
-            <div style={{ display: "flex", gap: "10px" }}>
+            <div className="flex gap-2.5">
               {socials.map((s) => (
-                <a key={s.label} href={s.href} aria-label={s.label} style={{
-                  width: "36px", height: "36px",
-                  borderRadius: "8px",
-                  border: "1px solid rgba(255,255,255,0.08)",
-                  background: "rgba(255,255,255,0.04)",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: "13px", fontWeight: 700,
-                  color: "var(--text-secondary)",
-                  transition: "all 0.2s ease",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(124,58,237,0.5)";
-                  (e.currentTarget as HTMLElement).style.color = "#a78bfa";
-                  (e.currentTarget as HTMLElement).style.background = "rgba(124,58,237,0.1)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.08)";
-                  (e.currentTarget as HTMLElement).style.color = "var(--text-secondary)";
-                  (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.04)";
-                }}
-                >{s.icon}</a>
+                <a
+                  key={s.label}
+                  href={s.href}
+                  aria-label={s.label}
+                  className="w-9 h-9 rounded-lg border border-slate-900/10 bg-slate-900/5 flex items-center justify-center text-xs font-bold text-slate-600 transition-all duration-200 hover:border-violet-600 hover:text-violet-600 hover:bg-violet-600/10"
+                >
+                  {s.icon}
+                </a>
               ))}
             </div>
           </div>
 
           {/* Link columns */}
           {Object.entries(footerLinks).map(([group, links]) => (
-            <div key={group}>
-              <h4 style={{ fontSize: "13px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--text-muted)", marginBottom: "20px" }}>
+            <div key={group} className="md:col-span-1">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-5">
                 {group}
               </h4>
-              <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "12px" }}>
+              <ul className="flex flex-col gap-3">
                 {links.map((link) => (
-                  <li key={link.href}>
-                    <Link href={link.href} style={{ color: "var(--text-secondary)", fontSize: "14px", transition: "color 0.2s" }}
-                      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#f1f5f9"; }}
-                      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "var(--text-secondary)"; }}
-                    >{link.label}</Link>
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="text-slate-600 text-sm transition-colors duration-200 hover:text-violet-600"
+                    >
+                      {link.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -112,36 +87,15 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div style={{
-          borderTop: "1px solid rgba(255,255,255,0.06)",
-          paddingTop: "32px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          flexWrap: "wrap",
-          gap: "16px",
-        }}>
-          <p style={{ color: "var(--text-muted)", fontSize: "14px" }}>
+        <div className="border-t border-slate-900/5 pt-8 flex justify-between items-center flex-wrap gap-4">
+          <p className="text-slate-500 text-sm">
             © {new Date().getFullYear()} Jevxo. All rights reserved.
           </p>
-          <p style={{ color: "var(--text-muted)", fontSize: "14px" }}>
+          <p className="text-slate-500 text-sm">
             Built with ❤️ by the Jevxo team
           </p>
         </div>
       </div>
-
-      <style>{`
-        @media (max-width: 900px) {
-          .footer-grid {
-            grid-template-columns: 1fr 1fr !important;
-          }
-        }
-        @media (max-width: 500px) {
-          .footer-grid {
-            grid-template-columns: 1fr !important;
-          }
-        }
-      `}</style>
     </footer>
   );
 }

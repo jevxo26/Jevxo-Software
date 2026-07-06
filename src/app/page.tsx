@@ -6,7 +6,6 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { portfolioItems, portfolioCategories } from "@/lib/data/portfolio";
 import { teamMembers, stats } from "@/lib/data/team";
-import { services } from "@/lib/data/services";
 
 // Define Jevxo Solutions based on brief
 const solutions = [
@@ -131,20 +130,21 @@ export default function HomePage() {
   };
 
   return (
-    <div style={{ position: "relative", background: "#080d1a", color: "#f1f5f9" }}>
+    <div className="relative bg-slate-50 text-slate-900 min-h-screen">
       <Navbar />
+
       {/* ── 1. HERO SECTION ─────────────────────────────────────────────── */}
-      <section className="bg-hero-gradient section" style={{ position: "relative", minHeight: "92vh", display: "flex", alignItems: "center", overflow: "hidden", paddingTop: "140px" }}>
-        <div className="orb orb-violet" style={{ width: "600px", height: "600px", top: "-150px", right: "-100px", opacity: 0.6 }} />
-        <div className="orb orb-cyan" style={{ width: "450px", height: "450px", bottom: "-150px", left: "-50px", opacity: 0.5 }} />
-        <div className="container" style={{ position: "relative", zIndex: 5 }}>
-          <div style={{ maxWidth: "800px", margin: "0 auto", textAlign: "center" }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "6px 16px", borderRadius: "100px", border: "1px solid rgba(124,58,237,0.3)", background: "rgba(124,58,237,0.08)", fontSize: "12px", fontWeight: 600, color: "#a78bfa", marginBottom: "28px", textTransform: "uppercase", letterSpacing: "0.15em" }} className="animate-fade-up">
-              <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#06b6d4", display: "inline-block", boxShadow: "0 0 10px #06b6d4" }} />
+      <section className="relative min-h-[92vh] flex items-center overflow-hidden pt-36 pb-20 bg-gradient-to-b from-violet-50 via-white to-slate-50">
+        <div className="absolute w-[600px] h-[600px] -top-36 -right-24 rounded-full bg-violet-600/10 blur-[120px] pointer-events-none opacity-60 animate-pulse-glow" />
+        <div className="absolute w-[450px] h-[450px] -bottom-36 -left-12 rounded-full bg-cyan-500/10 blur-[100px] pointer-events-none opacity-50" />
+        <div className="container relative z-10 mx-auto w-11/12 max-w-[1400px]">
+          <div className="max-w-[800px] mx-auto text-center">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-violet-600/30 bg-violet-600/10 text-xs font-semibold text-violet-700 mb-7 uppercase tracking-wider animate-fade-up">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 shadow-[0_0_10px_#06b6d4]" />
               {heroTag}
             </div>
             
-            <h1 style={{ fontSize: "clamp(30px, 7vw, 68px)", fontWeight: 900, lineHeight: 1.1, letterSpacing: "-0.03em", marginBottom: "28px" }} className="animate-fade-up delay-100">
+            <h1 className="text-4xl md:text-7xl font-extrabold tracking-tight mb-7 leading-none animate-fade-up delay-100 text-slate-900">
               {heroTitle.includes("||") ? (
                 <>
                   {heroTitle.split("||")[0]}<br />
@@ -155,25 +155,15 @@ export default function HomePage() {
               )}
             </h1>
             
-            <p style={{ fontSize: "clamp(16px, 2.5vw, 20px)", color: "var(--text-secondary)", lineHeight: 1.8, maxWidth: "620px", margin: "0 auto 40px" }} className="animate-fade-up delay-200">
+            <p className="text-base md:text-xl text-slate-600 leading-relaxed max-w-[620px] mx-auto mb-10 animate-fade-up delay-200">
               {heroDesc}
             </p>
 
-            <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "16px" }} className="animate-fade-up delay-300">
-              <Link href="/portal" style={{ padding: "16px 36px", borderRadius: "14px", fontWeight: 700, fontSize: "16px", background: "linear-gradient(135deg, #7c3aed, #4f46e5)", color: "#fff", boxShadow: "0 10px 30px rgba(124,58,237,0.35)", transition: "all 0.25s ease" }}
-                onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-2px)"}
-                onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0)"}
-              >
+            <div className="flex flex-wrap justify-center gap-4 animate-fade-up delay-300">
+              <Link href="/portal" className="px-9 py-4 rounded-2xl font-bold text-base bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-xl hover:shadow-violet-600/20 hover:-translate-y-0.5 transition-all duration-200">
                 Access Portal Login →
               </Link>
-              <a href="#solutions" style={{ padding: "16px 36px", borderRadius: "14px", fontWeight: 700, fontSize: "16px", background: "rgba(255,255,255,0.03)", border: "1px solid var(--border)", color: "#f1f5f9", transition: "all 0.25s ease" }}
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById("solutions")?.scrollIntoView({ behavior: "smooth" });
-                }}
-                onMouseEnter={(e) => e.currentTarget.style.background = "rgba(255,255,255,0.08)"}
-                onMouseLeave={(e) => e.currentTarget.style.background = "rgba(255,255,255,0.03)"}
-              >
+              <a href="#solutions" onClick={(e) => { e.preventDefault(); document.getElementById("solutions")?.scrollIntoView({ behavior: "smooth" }); }} className="px-9 py-4 rounded-2xl font-bold text-base bg-slate-900/5 border border-slate-900/10 text-slate-900 hover:bg-slate-900/10 transition-all duration-200">
                 Explore Solutions
               </a>
             </div>
@@ -182,43 +172,43 @@ export default function HomePage() {
       </section>
 
       {/* ── 2. THE HUB & LIVE STATS ─────────────────────────────────────── */}
-      <section className="section bg-section-gradient" id="the-hub" style={{ borderTop: "1px solid var(--border)" }}>
-        <div className="container">
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "60px", alignItems: "center" }} className="hub-grid">
+      <section className="py-24 border-t border-slate-900/10 bg-slate-50/50" id="the-hub">
+        <div className="container mx-auto w-11/12 max-w-[1400px]">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <div style={{ color: "#a78bfa", fontSize: "14px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "12px" }}>
+              <div className="text-violet-600 text-sm font-bold uppercase tracking-wider mb-3">
                 The Hub
               </div>
-              <h2 style={{ fontSize: "clamp(30px, 4vw, 48px)", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "24px", lineHeight: 1.2 }}>
+              <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-6 leading-tight text-slate-900">
                 One Core Vision.<br />
                 <span className="gradient-text-warm">Unlimited Scale.</span>
               </h2>
-              <p style={{ color: "var(--text-secondary)", fontSize: "16px", lineHeight: 1.8, marginBottom: "20px" }}>
+              <p className="text-slate-600 text-base leading-relaxed mb-5">
                 Jevxo is designed to act as the primary operational engine for next-gen ventures. Our mission is to integrate website deployment, customer relations, employee productivity, partner tracking, and localized sales networks into one singular product architecture.
               </p>
-              <p style={{ color: "var(--text-secondary)", fontSize: "16px", lineHeight: 1.8, marginBottom: "28px" }}>
+              <p className="text-slate-600 text-base leading-relaxed mb-8">
                 No more duct-taping ten different software applications. Jevxo is a coherent ecosystem that empowers small enterprises and country-level agencies alike.
               </p>
-              <div style={{ display: "flex", gap: "24px" }}>
-                <div style={{ borderLeft: "3px solid #7c3aed", paddingLeft: "16px" }}>
-                  <div style={{ fontSize: "15px", fontWeight: 600, color: "#f1f5f9" }}>Global Framework</div>
-                  <p style={{ fontSize: "13px", color: "var(--text-secondary)" }}>Built to operate seamlessly across borders and currencies.</p>
+              <div className="flex flex-col sm:flex-row gap-6">
+                <div className="border-l-3 border-violet-600 pl-4">
+                  <div className="text-sm font-bold text-slate-900 mb-1">Global Framework</div>
+                  <p className="text-xs text-slate-500 leading-relaxed">Built to operate seamlessly across borders and currencies.</p>
                 </div>
-                <div style={{ borderLeft: "3px solid #06b6d4", paddingLeft: "16px" }}>
-                  <div style={{ fontSize: "15px", fontWeight: 600, color: "#f1f5f9" }}>Integrated Automation</div>
-                  <p style={{ fontSize: "13px", color: "var(--text-secondary)" }}>Pre-wired pipelines automate data syncs between departments.</p>
+                <div className="border-l-3 border-cyan-500 pl-4">
+                  <div className="text-sm font-bold text-slate-900 mb-1">Integrated Automation</div>
+                  <p className="text-xs text-slate-500 leading-relaxed">Pre-wired pipelines automate data syncs between departments.</p>
                 </div>
               </div>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {stats.map((st, idx) => (
-                <div key={idx} className="glass" style={{ padding: "30px 24px", borderRadius: "var(--radius-lg)", border: "1px solid rgba(255,255,255,0.06)", display: "flex", flexDirection: "column", gap: "8px" }}>
-                  <div style={{ fontSize: "clamp(32px, 5vw, 44px)", fontWeight: 900, color: idx % 2 === 0 ? "#a78bfa" : "#60a5fa", lineHeight: 1 }}>
+                <div key={idx} className="glass p-7 rounded-2xl flex flex-col gap-2 shadow-sm border border-slate-900/5 bg-white/70 backdrop-blur-md">
+                  <div className={`text-4xl md:text-5xl font-black leading-none ${idx % 2 === 0 ? "text-violet-600" : "text-cyan-600"}`}>
                     {st.value}{st.suffix}
                   </div>
-                  <div style={{ fontSize: "15px", fontWeight: 700, color: "#f1f5f9" }}>{st.label}</div>
-                  <p style={{ fontSize: "12px", color: "var(--text-secondary)", lineHeight: 1.4 }}>{st.description}</p>
+                  <div className="text-sm font-bold text-slate-900">{st.label}</div>
+                  <p className="text-xs text-slate-500 leading-normal">{st.description}</p>
                 </div>
               ))}
             </div>
@@ -227,50 +217,36 @@ export default function HomePage() {
       </section>
 
       {/* ── 3. SOLUTIONS GRID ─────────────────────────────────────────── */}
-      <section className="section" id="solutions" style={{ borderTop: "1px solid var(--border)", position: "relative" }}>
-        <div className="orb orb-cyan" style={{ width: "300px", height: "300px", top: "100px", right: "-100px", opacity: 0.3 }} />
-        <div className="container">
-          <div style={{ textAlign: "center", marginBottom: "60px" }}>
-            <div style={{ color: "#a78bfa", fontSize: "14px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "12px" }}>
+      <section className="py-24 border-t border-slate-900/10 relative" id="solutions">
+        <div className="absolute w-[300px] h-[300px] top-24 -right-24 rounded-full bg-cyan-500/10 blur-[80px] pointer-events-none opacity-30" />
+        <div className="container mx-auto w-11/12 max-w-[1400px]">
+          <div className="text-center mb-16">
+            <div className="text-violet-600 text-sm font-bold uppercase tracking-wider mb-3">
               Solutions
             </div>
-            <h2 style={{ fontSize: "clamp(30px, 4vw, 44px)", fontWeight: 800, letterSpacing: "-0.02em" }}>
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900">
               Tailored Systems for <span className="gradient-text">Every Department</span>
             </h2>
-            <p style={{ color: "var(--text-secondary)", maxWidth: "580px", margin: "16px auto 0", fontSize: "16px" }}>
+            <p className="text-slate-600 max-w-[580px] mx-auto mt-4 text-base">
               Explore the individual SaaS modules that can be activated instantly inside your Jevxo Client portal.
             </p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: "24px" }}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             {activeSolutions.map((sol) => (
-              <div key={sol.id} className="glass" style={{ padding: "32px 24px", borderRadius: "var(--radius-lg)", transition: "all 0.3s ease", display: "flex", flexDirection: "column", height: "100%" }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "translateY(-6px)";
-                  e.currentTarget.style.borderColor = "rgba(124,58,237,0.3)";
-                  e.currentTarget.style.boxShadow = "0 10px 30px rgba(124,58,237,0.1)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.borderColor = "var(--border)";
-                  e.currentTarget.style.boxShadow = "none";
-                }}
-              >
-                <div style={{ fontSize: "36px", marginBottom: "16px" }}>{sol.icon}</div>
-                <h3 style={{ fontSize: "18px", fontWeight: 700, marginBottom: "8px", color: "#f1f5f9" }}>{sol.title}</h3>
-                <p style={{ fontSize: "14px", color: "var(--text-secondary)", lineHeight: 1.6, flex: 1, marginBottom: "20px" }}>{sol.desc}</p>
-                <div style={{ display: "inline-flex", fontSize: "12px", fontWeight: 600, color: "#a78bfa", background: "rgba(124,58,237,0.08)", padding: "4px 10px", borderRadius: "6px", width: "fit-content" }}>
+              <div key={sol.id} className="glass p-8 rounded-2xl flex flex-col h-full border border-slate-900/5 bg-white/70 backdrop-blur-md hover:-translate-y-1.5 hover:border-violet-600/30 hover:shadow-lg hover:shadow-violet-600/5 transition-all duration-300">
+                <div className="text-4xl mb-4">{sol.icon}</div>
+                <h3 className="text-lg font-bold mb-2 text-slate-900">{sol.title}</h3>
+                <p className="text-sm text-slate-600 leading-relaxed flex-1 mb-5">{sol.desc}</p>
+                <div className="inline-flex text-xs font-semibold text-violet-700 bg-violet-600/10 px-2.5 py-1 rounded-md w-fit">
                   {sol.tag}
                 </div>
               </div>
             ))}
           </div>
 
-          <div style={{ textAlign: "center", marginTop: "40px" }}>
-            <Link href="/products" style={{ display: "inline-block", padding: "12px 30px", borderRadius: "10px", background: "rgba(124,58,237,0.1)", border: "1px solid rgba(124,58,237,0.3)", color: "#a78bfa", fontWeight: 700, fontSize: "14px", transition: "all 0.2s" }}
-              onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(124,58,237,0.2)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(124,58,237,0.1)"; }}
-            >
+          <div className="text-center mt-10">
+            <Link href="/products" className="inline-block px-7 py-3 rounded-lg bg-violet-600/10 border border-violet-600/30 text-violet-700 font-bold text-sm hover:bg-violet-600/20 transition-all duration-200">
               Explore Our Software Products →
             </Link>
           </div>
@@ -278,30 +254,30 @@ export default function HomePage() {
       </section>
 
       {/* ── 4. VENTURES ───────────────────────────────────────────────── */}
-      <section className="section bg-section-gradient" id="ventures" style={{ borderTop: "1px solid var(--border)", position: "relative" }}>
-        <div className="container">
-          <div style={{ textAlign: "center", marginBottom: "60px" }}>
-            <div style={{ color: "#a78bfa", fontSize: "14px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "12px" }}>
+      <section className="py-24 border-t border-slate-900/10 bg-slate-50/50 relative" id="ventures">
+        <div className="container mx-auto w-11/12 max-w-[1400px]">
+          <div className="text-center mb-16">
+            <div className="text-violet-600 text-sm font-bold uppercase tracking-wider mb-3">
               Ventures
             </div>
-            <h2 style={{ fontSize: "clamp(30px, 4vw, 44px)", fontWeight: 800, letterSpacing: "-0.02em" }}>
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900">
               Our Ecosystem of <span className="gradient-text-warm">Active Enterprises</span>
             </h2>
-            <p style={{ color: "var(--text-secondary)", maxWidth: "580px", margin: "16px auto 0", fontSize: "16px" }}>
+            <p className="text-slate-600 max-w-[580px] mx-auto mt-4 text-base">
               Jevxo operates specialized subsidiary companies, each dedicated to engineering and managing specific industries.
             </p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: "28px" }}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
             {ventures.map((v, idx) => (
-              <div key={idx} className="glass" style={{ padding: "32px", borderRadius: "var(--radius-xl)", display: "flex", gap: "20px" }}>
-                <div style={{ width: "50px", height: "50px", borderRadius: "12px", background: "linear-gradient(135deg, #7c3aed, #4f46e5)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "22px", flexShrink: 0, color: "#fff", boxShadow: "0 4px 12px rgba(124,58,237,0.3)" }}>
+              <div key={idx} className="glass p-8 rounded-2xl flex gap-5 border border-slate-900/5 bg-white/70 backdrop-blur-md">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-600 to-indigo-600 flex items-center justify-center text-xl shrink-0 text-white shadow-md shadow-violet-600/20">
                   {v.icon}
                 </div>
                 <div>
-                  <h3 style={{ fontSize: "19px", fontWeight: 700, marginBottom: "4px" }}>{v.title}</h3>
-                  <div style={{ fontSize: "12px", fontWeight: 500, color: "#06b6d4", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "12px" }}>{v.focus}</div>
-                  <p style={{ fontSize: "14px", color: "var(--text-secondary)", lineHeight: 1.6 }}>{v.desc}</p>
+                  <h3 className="text-lg font-bold text-slate-900 mb-1">{v.title}</h3>
+                  <div className="text-xs font-semibold text-cyan-600 uppercase tracking-wider mb-3">{v.focus}</div>
+                  <p className="text-sm text-slate-600 leading-relaxed">{v.desc}</p>
                 </div>
               </div>
             ))}
@@ -310,25 +286,25 @@ export default function HomePage() {
       </section>
 
       {/* ── 5. NETWORK MAP WIDGET ─────────────────────────────────────── */}
-      <section className="section" id="network" style={{ borderTop: "1px solid var(--border)", overflow: "hidden" }}>
-        <div className="container">
-          <div style={{ textAlign: "center", marginBottom: "50px" }}>
-            <div style={{ color: "#a78bfa", fontSize: "14px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "12px" }}>
+      <section className="py-24 border-t border-slate-900/10 overflow-hidden" id="network">
+        <div className="container mx-auto w-11/12 max-w-[1400px]">
+          <div className="text-center mb-16">
+            <div className="text-violet-600 text-sm font-bold uppercase tracking-wider mb-3">
               Global Network
             </div>
-            <h2 style={{ fontSize: "clamp(30px, 4vw, 44px)", fontWeight: 800, letterSpacing: "-0.02em" }}>
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900">
               Active Jevxo <span className="gradient-text">Ecosystem Map</span>
             </h2>
-            <p style={{ color: "var(--text-secondary)", maxWidth: "580px", margin: "16px auto 0", fontSize: "16px" }}>
+            <p className="text-slate-600 max-w-[580px] mx-auto mt-4 text-base">
               Hover over or click on our operational centers to see active statistics and client volumes.
             </p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "3fr 2fr", gap: "40px", alignItems: "center" }} className="network-grid">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 items-center">
             {/* SVG Map Container */}
-            <div className="glass" style={{ position: "relative", padding: "20px", borderRadius: "var(--radius-xl)", background: "rgba(8,13,26,0.5)", border: "1px solid rgba(255,255,255,0.06)", height: "420px", overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <div className="lg:col-span-3 glass relative p-5 rounded-2xl bg-slate-900/5 border border-slate-900/10 h-[420px] overflow-hidden flex items-center justify-center">
               {/* Fake SVG World Map Background */}
-              <svg viewBox="0 0 1000 500" width="100%" height="100%" style={{ opacity: 0.15, pointerEvents: "none" }}>
+              <svg viewBox="0 0 1000 500" className="w-full h-full opacity-15 pointer-events-none">
                 <path d="M150,150 Q170,120 200,130 T250,160 T300,120 T350,150 T400,110 T450,130 T500,160 T550,130 T600,160 T650,120 T700,140 T750,120 T800,150 T850,130 T900,170" fill="none" stroke="#94a3b8" strokeWidth="2" strokeDasharray="5,5" />
                 <path d="M100,280 Q130,240 180,260 T250,230 T320,270 T400,220 T480,260 T550,230 T620,280 T700,240 T780,290 T850,250 T920,300" fill="none" stroke="#94a3b8" strokeWidth="2" strokeDasharray="5,5" />
                 <circle cx="150" cy="180" r="10" fill="#94a3b8" opacity="0.2" />
@@ -343,39 +319,21 @@ export default function HomePage() {
                   key={node.id}
                   onClick={() => setSelectedNode(node)}
                   onMouseEnter={() => setSelectedNode(node)}
+                  className="absolute cursor-pointer p-0 border-0 bg-transparent z-10"
                   style={{
-                    position: "absolute",
                     left: node.x,
                     top: node.y,
                     transform: "translate(-50%, -50%)",
-                    background: "none",
-                    border: "none",
-                    padding: 0,
-                    cursor: "pointer",
-                    zIndex: 10,
                   }}
                 >
-                  <span style={{
-                    display: "block",
-                    width: selectedNode?.id === node.id ? "16px" : "10px",
-                    height: selectedNode?.id === node.id ? "16px" : "10px",
-                    borderRadius: "50%",
-                    backgroundColor: selectedNode?.id === node.id ? "#7c3aed" : "#06b6d4",
-                    boxShadow: selectedNode?.id === node.id ? "0 0 20px #7c3aed" : "0 0 10px #06b6d4",
-                    transition: "all 0.25s ease",
-                  }} />
-                  <span style={{
-                    position: "absolute",
-                    top: "100%",
-                    left: "50%",
-                    transform: "translateX(-50%)",
-                    whiteSpace: "nowrap",
-                    fontSize: "11px",
-                    color: "var(--text-secondary)",
-                    fontWeight: 600,
-                    marginTop: "6px",
-                    opacity: selectedNode?.id === node.id ? 1 : 0.6,
-                  }}>
+                  <span className={`block rounded-full transition-all duration-200 ${
+                    selectedNode?.id === node.id 
+                      ? "w-4 h-4 bg-violet-600 shadow-[0_0_20px_#7c3aed]" 
+                      : "w-2.5 h-2.5 bg-cyan-500 shadow-[0_0_10px_#06b6d4]"
+                  }`} />
+                  <span className={`absolute top-full left-1/2 -translate-x-1/2 whitespace-nowrap text-[11px] text-slate-500 font-semibold mt-1.5 transition-opacity ${
+                    selectedNode?.id === node.id ? "opacity-100" : "opacity-60"
+                  }`}>
                     {node.name.split(" ")[0]}
                   </span>
                 </button>
@@ -383,40 +341,40 @@ export default function HomePage() {
             </div>
 
             {/* Selected Node Details Card */}
-            <div>
+            <div className="lg:col-span-2">
               {selectedNode ? (
-                <div className="glass" style={{ padding: "40px 32px", borderRadius: "var(--radius-xl)", border: "1px solid rgba(124,58,237,0.2)", background: "rgba(13,21,48,0.45)" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "20px" }}>
-                    <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#06b6d4", boxShadow: "0 0 10px #06b6d4" }} />
-                    <span style={{ fontSize: "14px", fontWeight: 700, color: "#a78bfa", textTransform: "uppercase", letterSpacing: "0.05em" }}>Node Statistics</span>
+                <div className="glass p-10 rounded-2xl border border-violet-600/20 bg-white/80 backdrop-blur-md shadow-sm">
+                  <div className="flex items-center gap-2.5 mb-5">
+                    <span className="w-2 h-2 rounded-full bg-cyan-500 shadow-[0_0_10px_#06b6d4]" />
+                    <span className="text-xs font-bold text-violet-700 uppercase tracking-wider">Node Statistics</span>
                   </div>
-                  <h3 style={{ fontSize: "28px", fontWeight: 800, marginBottom: "24px" }}>{selectedNode.name}</h3>
+                  <h3 className="text-3xl font-extrabold text-slate-900 mb-6">{selectedNode.name}</h3>
 
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px", marginBottom: "32px" }}>
+                  <div className="grid grid-cols-2 gap-5 mb-8">
                     <div>
-                      <div style={{ fontSize: "13px", color: "var(--text-secondary)" }}>Active Websites</div>
-                      <div style={{ fontSize: "24px", fontWeight: 700, color: "#fff" }}>{selectedNode.websites}</div>
+                      <div className="text-xs text-slate-500">Active Websites</div>
+                      <div className="text-2xl font-bold text-slate-900">{selectedNode.websites}</div>
                     </div>
                     <div>
-                      <div style={{ fontSize: "13px", color: "var(--text-secondary)" }}>Clients Base</div>
-                      <div style={{ fontSize: "24px", fontWeight: 700, color: "#fff" }}>{selectedNode.clients}</div>
+                      <div className="text-xs text-slate-500">Clients Base</div>
+                      <div className="text-2xl font-bold text-slate-900">{selectedNode.clients}</div>
                     </div>
                     <div>
-                      <div style={{ fontSize: "13px", color: "var(--text-secondary)" }}>Country Partners</div>
-                      <div style={{ fontSize: "24px", fontWeight: 700, color: "#fff" }}>{selectedNode.partners}</div>
+                      <div className="text-xs text-slate-500">Country Partners</div>
+                      <div className="text-2xl font-bold text-slate-900">{selectedNode.partners}</div>
                     </div>
                     <div>
-                      <div style={{ fontSize: "13px", color: "var(--text-secondary)" }}>Annual Revenue</div>
-                      <div style={{ fontSize: "24px", fontWeight: 700, color: "#06b6d4" }}>{selectedNode.revenue}</div>
+                      <div className="text-xs text-slate-500">Annual Revenue</div>
+                      <div className="text-2xl font-bold text-cyan-600">{selectedNode.revenue}</div>
                     </div>
                   </div>
 
-                  <Link href="/portal" style={{ display: "block", textAlign: "center", padding: "14px", borderRadius: "10px", background: "linear-gradient(135deg, #7c3aed, #4f46e5)", fontWeight: 700, fontSize: "14px", color: "#fff", transition: "all 0.2s" }}>
+                  <Link href="/portal" className="block text-center py-3.5 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 font-bold text-sm text-white shadow-md hover:shadow-violet-600/20 hover:-translate-y-0.5 transition-all duration-200">
                     Launch Regional Portal →
                   </Link>
                 </div>
               ) : (
-                <div className="glass" style={{ padding: "40px 32px", borderRadius: "var(--radius-xl)", textAlign: "center", color: "var(--text-secondary)" }}>
+                <div className="glass p-10 rounded-2xl text-center text-slate-500 border border-slate-900/5 bg-white/80">
                   Select a node on the map to inspect live metrics.
                 </div>
               )}
@@ -426,29 +384,29 @@ export default function HomePage() {
       </section>
 
       {/* ── 6. PARTNERS ───────────────────────────────────────────────── */}
-      <section className="section bg-section-gradient" id="partners" style={{ borderTop: "1px solid var(--border)" }}>
-        <div className="container">
-          <div style={{ textAlign: "center", marginBottom: "60px" }}>
-            <div style={{ color: "#a78bfa", fontSize: "14px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "12px" }}>
+      <section className="py-24 border-t border-slate-900/10 bg-slate-50/50" id="partners">
+        <div className="container mx-auto w-11/12 max-w-[1400px]">
+          <div className="text-center mb-16">
+            <div className="text-violet-600 text-sm font-bold uppercase tracking-wider mb-3">
               Partners Program
             </div>
-            <h2 style={{ fontSize: "clamp(30px, 4vw, 44px)", fontWeight: 800, letterSpacing: "-0.02em" }}>
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900">
               Earn Commissions with <span className="gradient-text">Jevxo Global</span>
             </h2>
-            <p style={{ color: "var(--text-secondary)", maxWidth: "580px", margin: "16px auto 0", fontSize: "16px" }}>
+            <p className="text-slate-600 max-w-[580px] mx-auto mt-4 text-base">
               We collaborate with individuals, tech stack developers, agencies, and regional leaders. Explore options below.
             </p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: "24px" }}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             {partnerPrograms.map((p, idx) => (
-              <div key={idx} className="glass" style={{ padding: "32px 24px", borderRadius: "var(--radius-xl)", border: "1px solid rgba(255,255,255,0.06)", display: "flex", flexDirection: "column", height: "100%" }}>
-                <div style={{ fontSize: "32px", marginBottom: "16px" }}>{p.icon}</div>
-                <h3 style={{ fontSize: "18px", fontWeight: 700, marginBottom: "8px" }}>{p.role}</h3>
-                <p style={{ fontSize: "14px", color: "var(--text-secondary)", lineHeight: 1.6, flex: 1, marginBottom: "20px" }}>{p.description}</p>
-                <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "16px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                  <span style={{ fontSize: "12px", color: "var(--text-muted)", fontWeight: 600 }}>INCENTIVE:</span>
-                  <span style={{ fontSize: "13px", color: "#06b6d4", fontWeight: 700 }}>{p.commission}</span>
+              <div key={idx} className="glass p-8 rounded-2xl border border-slate-900/5 bg-white/70 backdrop-blur-md flex flex-col h-full shadow-sm">
+                <div className="text-4xl mb-4">{p.icon}</div>
+                <h3 className="text-lg font-bold mb-2 text-slate-900">{p.role}</h3>
+                <p className="text-sm text-slate-600 leading-relaxed flex-1 mb-5">{p.description}</p>
+                <div className="border-t border-slate-900/5 pt-4 flex justify-between items-center">
+                  <span className="text-xs text-slate-500 font-semibold">INCENTIVE:</span>
+                  <span className="text-sm text-cyan-600 font-bold">{p.commission}</span>
                 </div>
               </div>
             ))}
@@ -457,35 +415,28 @@ export default function HomePage() {
       </section>
 
       {/* ── 7. SHOWCASE (PORTFOLIO) ───────────────────────────────────── */}
-      <section className="section" id="showcase" style={{ borderTop: "1px solid var(--border)" }}>
-        <div className="container">
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "50px", flexWrap: "wrap", gap: "24px" }}>
+      <section className="py-24 border-t border-slate-900/10" id="showcase">
+        <div className="container mx-auto w-11/12 max-w-[1400px]">
+          <div className="flex justify-between items-end mb-12 flex-wrap gap-6">
             <div>
-              <div style={{ color: "#a78bfa", fontSize: "14px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "12px" }}>
+              <div className="text-violet-600 text-sm font-bold uppercase tracking-wider mb-3">
                 Showcase
               </div>
-              <h2 style={{ fontSize: "clamp(30px, 4vw, 44px)", fontWeight: 800, letterSpacing: "-0.02em" }}>
+              <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900">
                 Proven Digital <span className="gradient-text">Deliverables</span>
               </h2>
             </div>
             {/* Category Filter Pills */}
-            <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+            <div className="flex gap-2 flex-wrap">
               {portfolioCategories.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  style={{
-                    padding: "8px 16px",
-                    borderRadius: "8px",
-                    fontSize: "13px",
-                    fontWeight: 600,
-                    border: "1px solid",
-                    borderColor: activeCategory === cat ? "rgba(124,58,237,0.3)" : "rgba(255,255,255,0.06)",
-                    background: activeCategory === cat ? "rgba(124,58,237,0.12)" : "rgba(255,255,255,0.02)",
-                    color: activeCategory === cat ? "#a78bfa" : "var(--text-secondary)",
-                    cursor: "pointer",
-                    transition: "all 0.2s ease",
-                  }}
+                  className={`px-4 py-2 rounded-lg text-xs font-semibold border cursor-pointer transition-all duration-200 ${
+                    activeCategory === cat 
+                      ? "border-violet-600/30 bg-violet-600/10 text-violet-700" 
+                      : "border-slate-900/10 bg-slate-900/5 text-slate-600 hover:text-slate-950"
+                  }`}
                 >
                   {cat}
                 </button>
@@ -494,44 +445,33 @@ export default function HomePage() {
           </div>
 
           {/* Portfolio Grid */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))", gap: "30px" }}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {filteredPortfolio.map((item) => (
-              <div key={item.id} className="glass" style={{ borderRadius: "var(--radius-xl)", overflow: "hidden", display: "flex", flexDirection: "column", height: "100%" }}>
+              <div key={item.id} className="glass rounded-2xl overflow-hidden flex flex-col h-full border border-slate-900/5 bg-white/70 backdrop-blur-md shadow-sm">
                 {/* Image Placeholder with Gradients */}
-                <div style={{
-                  height: "200px",
-                  background: `linear-gradient(135deg, rgba(8,13,26,0.9), rgba(13,21,48,0.7)), radial-gradient(circle at top right, rgba(124,58,237,0.3), transparent 70%)`,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  position: "relative",
-                  borderBottom: "1px solid rgba(255,255,255,0.06)",
-                }}>
-                  <div style={{
-                    fontSize: "32px",
-                    opacity: 0.8,
-                  }}>💻</div>
-                  <div style={{ position: "absolute", bottom: "16px", left: "16px", background: "rgba(8,13,26,0.8)", border: "1px solid rgba(255,255,255,0.08)", padding: "4px 10px", borderRadius: "6px", fontSize: "11px", fontWeight: 700, color: "#06b6d4", textTransform: "uppercase" }}>
+                <div className="h-[200px] bg-gradient-to-br from-violet-100 to-cyan-50 flex items-center justify-center relative border-b border-slate-900/5">
+                  <div className="text-3xl opacity-80">💻</div>
+                  <div className="absolute bottom-4 left-4 bg-white/90 border border-slate-900/10 px-2.5 py-1 rounded-md text-[10px] font-bold text-cyan-700 uppercase tracking-wider">
                     {item.category}
                   </div>
                 </div>
 
-                <div style={{ padding: "30px", flex: 1, display: "flex", flexDirection: "column" }}>
-                  <h3 style={{ fontSize: "20px", fontWeight: 700, marginBottom: "8px", color: "#f1f5f9" }}>{item.title}</h3>
-                  <div style={{ fontSize: "13px", color: "var(--text-muted)", marginBottom: "16px" }}>Client: {item.client} | {item.year}</div>
-                  <p style={{ fontSize: "14px", color: "var(--text-secondary)", lineHeight: 1.6, flex: 1, marginBottom: "24px" }}>
+                <div className="p-7 flex-1 flex flex-col">
+                  <h3 className="text-lg font-bold text-slate-900 mb-1">{item.title}</h3>
+                  <div className="text-xs text-slate-500 mb-4">Client: {item.client} | {item.year}</div>
+                  <p className="text-sm text-slate-600 leading-relaxed flex-1 mb-5">
                     {item.description}
                   </p>
 
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: "20px" }}>
+                  <div className="flex flex-wrap gap-1.5 mb-5">
                     {item.tags.map((t) => (
-                      <span key={t} style={{ padding: "3px 8px", borderRadius: "4px", fontSize: "11px", fontWeight: 600, background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)", color: "var(--text-secondary)" }}>{t}</span>
+                      <span key={t} className="px-2 py-1 rounded bg-slate-900/5 border border-slate-900/10 text-[10px] font-semibold text-slate-600">{t}</span>
                     ))}
                   </div>
 
-                  <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "16px", fontSize: "13px" }}>
-                    <span style={{ color: "#a78bfa", fontWeight: 600 }}>Result: </span>
-                    <span style={{ color: "var(--text-secondary)" }}>{item.result}</span>
+                  <div className="border-t border-slate-900/5 pt-4 text-xs">
+                    <span className="text-violet-600 font-bold">Result: </span>
+                    <span className="text-slate-600">{item.result}</span>
                   </div>
                 </div>
               </div>
@@ -541,47 +481,34 @@ export default function HomePage() {
       </section>
 
       {/* ── 8. TEAM SECTION ───────────────────────────────────────────── */}
-      <section className="section bg-section-gradient" id="team" style={{ borderTop: "1px solid var(--border)" }}>
-        <div className="container">
-          <div style={{ textAlign: "center", marginBottom: "60px" }}>
-            <div style={{ color: "#a78bfa", fontSize: "14px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "12px" }}>
+      <section className="py-24 border-t border-slate-900/10 bg-slate-50/50" id="team">
+        <div className="container mx-auto w-11/12 max-w-[1400px]">
+          <div className="text-center mb-16">
+            <div className="text-violet-600 text-sm font-bold uppercase tracking-wider mb-3">
               Our Team
             </div>
-            <h2 style={{ fontSize: "clamp(30px, 4vw, 44px)", fontWeight: 800, letterSpacing: "-0.02em" }}>
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900">
               Ecosystem <span className="gradient-text">Architects & Leadership</span>
             </h2>
-            <p style={{ color: "var(--text-secondary)", maxWidth: "580px", margin: "16px auto 0", fontSize: "16px" }}>
+            <p className="text-slate-600 max-w-[580px] mx-auto mt-4 text-base">
               The developers, system operators, designers, and growth experts building the core Jevxo core framework.
             </p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: "28px" }}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             {teamMembers.map((m) => (
-              <div key={m.id} className="glass" style={{ padding: "30px", borderRadius: "var(--radius-xl)", textAlign: "center" }}>
+              <div key={m.id} className="glass p-7 rounded-2xl text-center border border-slate-900/5 bg-white/70 backdrop-blur-md shadow-sm">
                 {/* Fake Avatar */}
-                <div style={{
-                  width: "90px",
-                  height: "90px",
-                  borderRadius: "50%",
-                  background: "linear-gradient(135deg, #7c3aed, #06b6d4)",
-                  margin: "0 auto 20px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: "36px",
-                  fontWeight: 700,
-                  color: "#fff",
-                  boxShadow: "0 8px 24px rgba(124,58,237,0.3)",
-                }}>
+                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-violet-600 to-indigo-600 mx-auto mb-5 flex items-center justify-center text-2xl font-bold text-white shadow-md shadow-violet-600/20">
                   {m.name.charAt(0)}
                 </div>
-                <h3 style={{ fontSize: "18px", fontWeight: 700, marginBottom: "4px" }}>{m.name}</h3>
-                <div style={{ fontSize: "13px", fontWeight: 600, color: "#06b6d4", marginBottom: "12px", textTransform: "uppercase", letterSpacing: "0.05em" }}>{m.role}</div>
-                <p style={{ fontSize: "13px", color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: "20px" }}>{m.bio}</p>
-                <div style={{ display: "flex", justifyContent: "center", gap: "12px" }}>
-                  {m.linkedin && <a href={m.linkedin} style={{ fontSize: "13px", color: "var(--text-muted)" }}>LinkedIn</a>}
-                  {m.twitter && <a href={m.twitter} style={{ fontSize: "13px", color: "var(--text-muted)" }}>Twitter</a>}
-                  {m.github && <a href={m.github} style={{ fontSize: "13px", color: "var(--text-muted)" }}>GitHub</a>}
+                <h3 className="text-lg font-bold text-slate-900 mb-1">{m.name}</h3>
+                <div className="text-xs font-semibold text-cyan-600 mb-3 uppercase tracking-wider">{m.role}</div>
+                <p className="text-xs text-slate-600 leading-relaxed mb-5">{m.bio}</p>
+                <div className="flex justify-center gap-3">
+                  {m.linkedin && <a href={m.linkedin} className="text-xs text-slate-400 hover:text-violet-600 transition-colors">LinkedIn</a>}
+                  {m.twitter && <a href={m.twitter} className="text-xs text-slate-400 hover:text-violet-600 transition-colors">Twitter</a>}
+                  {m.github && <a href={m.github} className="text-xs text-slate-400 hover:text-violet-600 transition-colors">GitHub</a>}
                 </div>
               </div>
             ))}
@@ -590,78 +517,68 @@ export default function HomePage() {
       </section>
 
       {/* ── 9 & 10. PRICING & HOSTING PLANS ───────────────────────────── */}
-      <section className="section" id="pricing" style={{ borderTop: "1px solid var(--border)" }}>
-        <div className="container">
-          <div style={{ textAlign: "center", marginBottom: "50px" }}>
-            <div style={{ color: "#a78bfa", fontSize: "14px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "12px" }}>
+      <section className="py-24 border-t border-slate-900/10" id="pricing">
+        <div className="container mx-auto w-11/12 max-w-[1400px]">
+          <div className="text-center mb-12">
+            <div className="text-violet-600 text-sm font-bold uppercase tracking-wider mb-3">
               Pricing
             </div>
-            <h2 style={{ fontSize: "clamp(30px, 4vw, 44px)", fontWeight: 800, letterSpacing: "-0.02em" }}>
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900">
               Transparent <span className="gradient-text">Software & Hosting</span> Rates
             </h2>
-            <p style={{ color: "var(--text-secondary)", maxWidth: "580px", margin: "16px auto 0", fontSize: "16px" }}>
+            <p className="text-slate-600 max-w-[580px] mx-auto mt-4 text-base">
               Select between monthly billing or save 20% on annual commitments.
             </p>
 
             {/* Monthly / Annual Toggle */}
-            <div style={{ display: "inline-flex", background: "rgba(255,255,255,0.03)", border: "1px solid var(--border)", padding: "4px", borderRadius: "100px", marginTop: "30px" }}>
+            <div className="inline-flex bg-slate-900/5 border border-slate-900/10 p-1 rounded-full mt-8">
               <button
                 onClick={() => setBillingPeriod("monthly")}
-                style={{
-                  padding: "8px 20px",
-                  borderRadius: "100px",
-                  fontSize: "13px",
-                  fontWeight: 600,
-                  border: "none",
-                  background: billingPeriod === "monthly" ? "#7c3aed" : "none",
-                  color: billingPeriod === "monthly" ? "#fff" : "var(--text-secondary)",
-                  transition: "all 0.2s",
-                }}
+                className={`px-5 py-2 rounded-full text-xs font-semibold transition-all duration-200 cursor-pointer ${
+                  billingPeriod === "monthly" ? "bg-violet-600 text-white shadow" : "text-slate-600 hover:text-slate-900"
+                }`}
               >Monthly</button>
               <button
                 onClick={() => setBillingPeriod("annually")}
-                style={{
-                  padding: "8px 20px",
-                  borderRadius: "100px",
-                  fontSize: "13px",
-                  fontWeight: 600,
-                  border: "none",
-                  background: billingPeriod === "annually" ? "#7c3aed" : "none",
-                  color: billingPeriod === "annually" ? "#fff" : "var(--text-secondary)",
-                  transition: "all 0.2s",
-                }}
+                className={`px-5 py-2 rounded-full text-xs font-semibold transition-all duration-200 cursor-pointer ${
+                  billingPeriod === "annually" ? "bg-violet-600 text-white shadow" : "text-slate-600 hover:text-slate-900"
+                }`}
               >Annually (Save 20%)</button>
             </div>
           </div>
 
-          <h3 style={{ fontSize: "22px", fontWeight: 700, marginBottom: "24px", color: "#f1f5f9", textAlign: "center" }}>
+          <h3 className="text-xl font-bold mb-6 text-slate-900 text-center">
             1. Software Suite Plans
           </h3>
           {/* Software plans grid */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", gap: "24px", marginBottom: "60px" }}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-16">
             {plans.map((p, idx) => {
               const actualPrice = billingPeriod === "annually" ? Math.floor(p.price * 0.8) : p.price;
               return (
-                <div key={idx} className="glass" style={{ padding: "36px 28px", borderRadius: "var(--radius-xl)", border: idx === 2 ? "1.5px solid #7c3aed" : "1px solid rgba(255,255,255,0.06)", position: "relative", background: idx === 2 ? "rgba(124,58,237,0.02)" : "rgba(8,13,26,0.3)" }}>
+                <div key={idx} className={`glass p-8 rounded-2xl relative shadow-sm border ${idx === 2 ? "border-violet-600 bg-violet-600/5" : "border-slate-900/5 bg-white/70 backdrop-blur-md"}`}>
                   {idx === 2 && (
-                    <span style={{ position: "absolute", top: "-12px", right: "20px", background: "#7c3aed", color: "#fff", fontSize: "11px", fontWeight: 700, padding: "4px 10px", borderRadius: "100px", textTransform: "uppercase" }}>Recommended</span>
+                    <span className="absolute -top-3 right-5 bg-violet-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">Recommended</span>
                   )}
-                  <h4 style={{ fontSize: "18px", fontWeight: 700, marginBottom: "8px" }}>{p.name}</h4>
-                  <p style={{ fontSize: "13px", color: "var(--text-secondary)", marginBottom: "24px", minHeight: "38px" }}>{p.desc}</p>
+                  <h4 className="text-lg font-bold mb-2 text-slate-900">{p.name}</h4>
+                  <p className="text-xs text-slate-500 mb-6 min-h-[38px]">{p.desc}</p>
                   
-                  <div style={{ marginBottom: "28px" }}>
-                    <span style={{ fontSize: "36px", fontWeight: 900, color: "#fff" }}>${actualPrice}</span>
-                    <span style={{ fontSize: "14px", color: "var(--text-secondary)" }}> / mo</span>
+                  <div className="mb-7">
+                    <span className="text-3xl font-extrabold text-slate-900">${actualPrice}</span>
+                    <span className="text-xs text-slate-500"> / mo</span>
                   </div>
 
-                  <Link href="/portal" style={{ display: "block", textAlign: "center", padding: "12px", borderRadius: "8px", background: idx === 2 ? "linear-gradient(135deg, #7c3aed, #4f46e5)" : "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", fontWeight: 700, fontSize: "13px", color: "#fff", marginBottom: "28px", transition: "all 0.2s" }}>
+                  <Link href="/portal" className={`block text-center py-2.5 rounded-lg font-bold text-xs mb-7 border transition-all duration-200 ${
+                    idx === 2 
+                      ? "bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:shadow-violet-600/20 hover:-translate-y-0.5" 
+                      : "bg-slate-900/5 border-slate-900/10 text-slate-700 hover:bg-slate-900/10"
+                  }`}>
                     Get Started
                   </Link>
 
-                  <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "12px", fontSize: "13px", color: "var(--text-secondary)" }}>
+                  <ul className="flex flex-col gap-3 text-xs text-slate-600">
                     {p.features.map((f, fIdx) => (
-                      <li key={fIdx} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                        <span style={{ color: "#06b6d4" }}>✓</span> {f}
+                      <li key={fIdx} className="flex items-center gap-2">
+                        <span className="text-cyan-600 font-bold">✓</span> {f}
                       </li>
                     ))}
                   </ul>
@@ -670,11 +587,11 @@ export default function HomePage() {
             })}
           </div>
 
-          <h3 style={{ fontSize: "22px", fontWeight: 700, marginBottom: "24px", color: "#f1f5f9", textAlign: "center" }}>
+          <h3 className="text-xl font-bold mb-6 text-slate-900 text-center">
             2. Dedicated Hosting Plans
           </h3>
           {/* Hosting plans grid */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: "28px" }}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { name: "Starter Cloud Node", price: 15, bandwidth: "500 GB Bandwidth", space: "10 GB NVMe Storage", db: "1 MariaDB / PG Database", ssl: "Free SSL certificate" },
               { name: "Business Cloud Node", price: 45, bandwidth: "2.5 TB Bandwidth", space: "80 GB NVMe Storage", db: "10 Databases", ssl: "Free Wildcard SSL + Cloudflare CDN" },
@@ -682,14 +599,14 @@ export default function HomePage() {
             ].map((p, idx) => {
               const actualPrice = billingPeriod === "annually" ? Math.floor(p.price * 0.8) : p.price;
               return (
-                <div key={idx} className="glass" style={{ padding: "36px", borderRadius: "var(--radius-xl)", background: "rgba(13,21,48,0.2)" }}>
-                  <h4 style={{ fontSize: "19px", fontWeight: 700, marginBottom: "8px" }}>{p.name}</h4>
-                  <div style={{ marginBottom: "24px" }}>
-                    <span style={{ fontSize: "32px", fontWeight: 900, color: "#fff" }}>${actualPrice}</span>
-                    <span style={{ fontSize: "14px", color: "var(--text-secondary)" }}> / mo</span>
+                <div key={idx} className="glass p-8 rounded-2xl bg-white/70 backdrop-blur-md border border-slate-900/5 shadow-sm">
+                  <h4 className="text-lg font-bold mb-2 text-slate-900">{p.name}</h4>
+                  <div className="mb-6">
+                    <span className="text-3xl font-extrabold text-slate-900">${actualPrice}</span>
+                    <span className="text-xs text-slate-500"> / mo</span>
                   </div>
 
-                  <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "12px", fontSize: "13px", color: "var(--text-secondary)", marginBottom: "28px" }}>
+                  <ul className="flex flex-col gap-3 text-xs text-slate-600 mb-7">
                     <li>📊 {p.bandwidth}</li>
                     <li>💾 {p.space}</li>
                     <li>🗄️ {p.db}</li>
@@ -697,7 +614,7 @@ export default function HomePage() {
                     <li>🛡️ 99.99% Uptime Guarantee</li>
                   </ul>
 
-                  <Link href="/portal" style={{ display: "block", textAlign: "center", padding: "12px", borderRadius: "8px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", fontWeight: 700, fontSize: "13px", color: "#fff" }}>
+                  <Link href="/portal" className="block text-center py-2.5 rounded-lg bg-slate-900/5 border border-slate-900/10 font-bold text-xs text-slate-700 hover:bg-slate-900/10 transition-colors">
                     Provision Node
                   </Link>
                 </div>
@@ -708,80 +625,80 @@ export default function HomePage() {
       </section>
 
       {/* ── 11. CONTACT FORM ──────────────────────────────────────────── */}
-      <section className="section bg-section-gradient" id="contact" style={{ borderTop: "1px solid var(--border)" }}>
-        <div className="container">
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: "60px", alignItems: "center" }} className="contact-grid">
+      <section className="py-24 border-t border-slate-900/10 bg-slate-50/50" id="contact">
+        <div className="container mx-auto w-11/12 max-w-[1400px]">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <div style={{ color: "#a78bfa", fontSize: "14px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "12px" }}>
+              <div className="text-violet-600 text-sm font-bold uppercase tracking-wider mb-3">
                 Contact Us
               </div>
-              <h2 style={{ fontSize: "clamp(30px, 4vw, 48px)", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "24px" }}>
+              <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-6 text-slate-900">
                 Let&apos;s Build Something <span className="gradient-text">Exceptional</span>
               </h2>
-              <p style={{ color: "var(--text-secondary)", fontSize: "16px", lineHeight: 1.8, marginBottom: "30px" }}>
+              <p className="text-slate-600 text-base leading-relaxed mb-8">
                 Have questions regarding Jevxo licensing, agency partner White-labeling programs, or dedicated enterprise cloud deployments? Write to our core development and leadership squad.
               </p>
 
-              <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
-                  <div style={{ width: "40px", height: "40px", borderRadius: "50%", background: "rgba(124,58,237,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: "#a78bfa", fontSize: "18px" }}>✉</div>
+              <div className="flex flex-col gap-5">
+                <div className="flex items-center gap-3.5">
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center text-base shrink-0 bg-violet-600/10 text-violet-600">✉</div>
                   <div>
-                    <div style={{ fontSize: "11px", color: "var(--text-muted)", fontWeight: 700, textTransform: "uppercase" }}>Ecosystem Sales</div>
-                    <div style={{ fontSize: "14px", fontWeight: 600, color: "#f1f5f9" }}>sales@jevxo.com</div>
+                    <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Ecosystem Sales</div>
+                    <div className="text-sm font-semibold text-slate-900">sales@jevxo.com</div>
                   </div>
                 </div>
-                <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
-                  <div style={{ width: "40px", height: "40px", borderRadius: "50%", background: "rgba(6,182,212,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: "#06b6d4", fontSize: "18px" }}>📞</div>
+                <div className="flex items-center gap-3.5">
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center text-base shrink-0 bg-cyan-500/10 text-cyan-600">📞</div>
                   <div>
-                    <div style={{ fontSize: "11px", color: "var(--text-muted)", fontWeight: 700, textTransform: "uppercase" }}>Global Headquarters</div>
-                    <div style={{ fontSize: "14px", fontWeight: 600, color: "#f1f5f9" }}>+880 1700 000000</div>
+                    <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Global Headquarters</div>
+                    <div className="text-sm font-semibold text-slate-900">+880 1700 000000</div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="glass" style={{ padding: "40px", borderRadius: "var(--radius-xl)" }}>
+            <div className="glass p-10 rounded-2xl bg-white/80 backdrop-blur-md border border-slate-900/5 shadow-sm">
               {contactSubmitted ? (
-                <div style={{ textAlign: "center", padding: "40px 0" }}>
-                  <div style={{ fontSize: "48px", marginBottom: "16px" }}>✉️</div>
-                  <h3 style={{ fontSize: "22px", fontWeight: 700, marginBottom: "8px", color: "#06b6d4" }}>Message Logged!</h3>
-                  <p style={{ color: "var(--text-secondary)", fontSize: "14px" }}>Thank you. Our sales engineers will reach out to you within 24 hours.</p>
+                <div className="text-center py-10">
+                  <div className="text-5xl mb-4">✉️</div>
+                  <h3 className="text-xl font-bold text-cyan-600 mb-2">Message Logged!</h3>
+                  <p className="text-slate-500 text-sm">Thank you. Our sales engineers will reach out to you within 24 hours.</p>
                 </div>
               ) : (
                 <form onSubmit={handleContactSubmit}>
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px", marginBottom: "20px" }} className="form-row">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
                     <div>
-                      <label htmlFor="name" style={{ display: "block", fontSize: "12px", fontWeight: 700, color: "#a78bfa", textTransform: "uppercase", marginBottom: "8px" }}>Your Name</label>
+                      <label htmlFor="name" className="block text-xs font-bold text-violet-600 uppercase mb-2">Your Name</label>
                       <input
                         type="text"
                         id="name"
                         required
                         value={contactForm.name}
                         onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
-                        style={{ width: "100%", padding: "12px 16px", borderRadius: "8px", border: "1px solid var(--border)", background: "rgba(255,255,255,0.03)", color: "#fff", fontSize: "14px" }}
+                        className="w-full px-4 py-3 rounded-lg border border-slate-900/10 bg-slate-900/5 text-slate-900 text-sm outline-none focus:border-violet-600 focus:ring-1 focus:ring-violet-600 transition-all"
                       />
                     </div>
                     <div>
-                      <label htmlFor="email" style={{ display: "block", fontSize: "12px", fontWeight: 700, color: "#a78bfa", textTransform: "uppercase", marginBottom: "8px" }}>Email Address</label>
+                      <label htmlFor="email" className="block text-xs font-bold text-violet-600 uppercase mb-2">Email Address</label>
                       <input
                         type="email"
                         id="email"
                         required
                         value={contactForm.email}
                         onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
-                        style={{ width: "100%", padding: "12px 16px", borderRadius: "8px", border: "1px solid var(--border)", background: "rgba(255,255,255,0.03)", color: "#fff", fontSize: "14px" }}
+                        className="w-full px-4 py-3 rounded-lg border border-slate-900/10 bg-slate-900/5 text-slate-900 text-sm outline-none focus:border-violet-600 focus:ring-1 focus:ring-violet-600 transition-all"
                       />
                     </div>
                   </div>
 
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px", marginBottom: "20px" }} className="form-row">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
                     <div>
-                      <label htmlFor="type" style={{ display: "block", fontSize: "12px", fontWeight: 700, color: "#a78bfa", textTransform: "uppercase", marginBottom: "8px" }}>Inquiry Type</label>
+                      <label htmlFor="type" className="block text-xs font-bold text-violet-600 uppercase mb-2">Inquiry Type</label>
                       <select
                         id="type"
                         value={contactForm.type}
                         onChange={(e) => setContactForm({ ...contactForm, type: e.target.value })}
-                        style={{ width: "100%", padding: "12px 16px", borderRadius: "8px", border: "1px solid var(--border)", background: "rgba(8,13,26,0.9)", color: "#fff", fontSize: "14px" }}
+                        className="w-full px-4 py-3 rounded-lg border border-slate-900/10 bg-slate-900/5 text-slate-900 text-sm outline-none focus:border-violet-600 focus:ring-1 focus:ring-violet-600 transition-all"
                       >
                         <option value="Sales">Ecosystem Sales</option>
                         <option value="WhiteLabel">White-Labeling Program</option>
@@ -791,12 +708,12 @@ export default function HomePage() {
                       </select>
                     </div>
                     <div>
-                      <label htmlFor="budget" style={{ display: "block", fontSize: "12px", fontWeight: 700, color: "#a78bfa", textTransform: "uppercase", marginBottom: "8px" }}>Monthly Budget</label>
+                      <label htmlFor="budget" className="block text-xs font-bold text-violet-600 uppercase mb-2">Monthly Budget</label>
                       <select
                         id="budget"
                         value={contactForm.budget}
                         onChange={(e) => setContactForm({ ...contactForm, budget: e.target.value })}
-                        style={{ width: "100%", padding: "12px 16px", borderRadius: "8px", border: "1px solid var(--border)", background: "rgba(8,13,26,0.9)", color: "#fff", fontSize: "14px" }}
+                        className="w-full px-4 py-3 rounded-lg border border-slate-900/10 bg-slate-900/5 text-slate-900 text-sm outline-none focus:border-violet-600 focus:ring-1 focus:ring-violet-600 transition-all"
                       >
                         <option value="$1k - $5k">$1,000 - $5,000</option>
                         <option value="$5k - $15k">$5,000 - $15,000</option>
@@ -805,32 +722,21 @@ export default function HomePage() {
                     </div>
                   </div>
 
-                  <div style={{ marginBottom: "28px" }}>
-                    <label htmlFor="message" style={{ display: "block", fontSize: "12px", fontWeight: 700, color: "#a78bfa", textTransform: "uppercase", marginBottom: "8px" }}>Message / Details</label>
+                  <div className="mb-7">
+                    <label htmlFor="message" className="block text-xs font-bold text-violet-600 uppercase mb-2">Message / Details</label>
                     <textarea
                       id="message"
                       rows={5}
                       required
                       value={contactForm.message}
                       onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
-                      style={{ width: "100%", padding: "12px 16px", borderRadius: "8px", border: "1px solid var(--border)", background: "rgba(255,255,255,0.03)", color: "#fff", fontSize: "14px" }}
+                      className="w-full px-4 py-3 rounded-lg border border-slate-900/10 bg-slate-900/5 text-slate-900 text-sm outline-none focus:border-violet-600 focus:ring-1 focus:ring-violet-600 transition-all"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    style={{
-                      width: "100%",
-                      padding: "16px",
-                      borderRadius: "10px",
-                      background: "linear-gradient(135deg, #7c3aed, #4f46e5)",
-                      color: "#fff",
-                      fontSize: "15px",
-                      fontWeight: 700,
-                      border: "none",
-                      boxShadow: "0 4px 20px rgba(124,58,237,0.3)",
-                      transition: "all 0.2s",
-                    }}
+                    className="w-full py-4 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-bold text-sm shadow-md hover:shadow-violet-600/20 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer"
                   >
                     Submit Inquiry
                   </button>
@@ -842,19 +748,6 @@ export default function HomePage() {
       </section>
 
       <Footer />
-
-      <style>{`
-        @media (max-width: 768px) {
-          .hub-grid, .network-grid, .contact-grid {
-            grid-template-columns: 1fr !important;
-            gap: 40px !important;
-          }
-          .form-row {
-            grid-template-columns: 1fr !important;
-            gap: 16px !important;
-          }
-        }
-      `}</style>
     </div>
   );
 }

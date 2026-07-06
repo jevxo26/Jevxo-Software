@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Shield, Handshake, Users, Briefcase, TrendingUp, Laptop, Network } from "lucide-react";
 
 interface TopnavProps {
   activeRole: string;
@@ -9,39 +10,40 @@ interface TopnavProps {
 export default function Topnav({ activeRole }: TopnavProps) {
   const getRoleInfo = (role: string) => {
     switch (role) {
-      case "admin": return { title: "Global Admin Dashboard", icon: "🛡️" };
-      case "crm": return { title: "CRM Workflow Management", icon: "🤝" };
-      case "hr": return { title: "HR & Intern Core", icon: "👥" };
-      case "partner": return { title: "Regional Partner Center", icon: "💼" };
-      case "sales": return { title: "Sales Battle Arena", icon: "🚀" };
-      case "client": return { title: "Client Control Center", icon: "💻" };
-      default: return { title: "Jevxo Node Console", icon: "🌐" };
+      case "admin": return { title: "Global Admin Dashboard", icon: Shield };
+      case "crm": return { title: "CRM Workflow Management", icon: Handshake };
+      case "hr": return { title: "HR & Intern Core", icon: Users };
+      case "partner": return { title: "Regional Partner Center", icon: Briefcase };
+      case "sales": return { title: "Sales Battle Arena", icon: TrendingUp };
+      case "client": return { title: "Client Control Center", icon: Laptop };
+      default: return { title: "Jevxo Node Console", icon: Network };
     }
   };
 
   const info = getRoleInfo(activeRole);
+  const Icon = info.icon;
 
   return (
-    <header style={{ height: "72px", borderBottom: "1px solid rgba(255,255,255,0.06)", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 40px", background: "rgba(8,13,26,0.5)", flexShrink: 0 }}>
+    <header className="h-[72px] border-b border-slate-900/10 flex items-center justify-between px-10 bg-white/50 backdrop-blur-md shrink-0">
       
       {/* Title */}
-      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-        <span style={{ fontSize: "20px" }}>{info.icon}</span>
-        <h1 style={{ fontSize: "18px", fontWeight: 700 }}>
+      <div className="flex items-center gap-3">
+        <Icon size={20} className="text-violet-600" />
+        <h1 className="text-lg font-bold text-slate-900">
           {info.title}
         </h1>
       </div>
 
       {/* Action / Sessions */}
-      <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
+      <div className="flex items-center gap-6">
         
         {/* Live Active Session Indicator */}
-        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#10b981", display: "inline-block", boxShadow: "0 0 8px #10b981" }} />
-          <span style={{ fontSize: "12px", color: "var(--text-secondary)", fontWeight: 600 }}>Active Session</span>
+        <div className="flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block shadow-[0_0_8px_#10b981]" />
+          <span className="text-xs text-slate-600 font-semibold">Active Session</span>
         </div>
         
-        <Link href="/" style={{ fontSize: "13px", padding: "6px 14px", borderRadius: "6px", border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.03)", fontWeight: 600 }}>
+        <Link href="/" className="text-xs px-3.5 py-1.5 rounded-md border border-slate-900/10 bg-slate-900/5 font-semibold text-slate-900 hover:bg-slate-900/10 transition-colors">
           Leave Portal
         </Link>
       </div>

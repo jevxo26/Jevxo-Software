@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" fill="none">
+  <defs>
+    <linearGradient id="logo-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="50%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#a855f7" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Left stem and bottom hook of the 'J' style -->
+  <path d="M30 135 L30 225 L75 225 C 60 210, 45 180, 30 135 Z" fill="url(#logo-grad)" />
+  
+  <!-- Top-left to bottom-right curved swoosh -->
+  <path d="M32 75 C 90 105, 170 150, 270 225 C 210 195, 130 150, 32 75 Z" fill="url(#logo-grad)" />
+  
+  <!-- Bottom-left to top-right curved swoosh (cross tick) -->
+  <path d="M30 225 C 105 180, 180 120, 268 75 C 210 105, 135 150, 30 225 Z" fill="url(#logo-grad)" />
+</svg>

@@ -28,7 +28,7 @@ export default function DashboardLayout({ children }: LayoutProps) {
       const last = localStorage.getItem("jevxo_last_role");
       if (last) setStoredRole(last);
     }
-  }, [pathname]);
+  }, [pathname, segments]);
 
   const activeRole = (segments[2] === "settings" || segments[2] === "support") ? storedRole : initialRole;
 
@@ -37,19 +37,19 @@ export default function DashboardLayout({ children }: LayoutProps) {
   };
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh", background: "#080d1a", color: "#f1f5f9" }}>
+    <div className="flex min-h-screen bg-slate-50 text-slate-900">
       
       {/* Modular Sidebar Component */}
       <Sidebar activeRole={activeRole} pathname={pathname} onRoleChange={handleRoleChange} />
 
       {/* Main Content Area */}
-      <main style={{ flex: 1, display: "flex", flexDirection: "column", height: "100vh", overflowY: "auto" }}>
+      <main className="flex-1 flex flex-col h-screen overflow-y-auto">
         
         {/* Modular Topnav Component */}
         <Topnav activeRole={activeRole} />
 
         {/* Scrollable Dashboard Body */}
-        <div style={{ flex: 1, padding: "40px" }}>
+        <div className="flex-1 p-10">
           {children}
         </div>
       </main>

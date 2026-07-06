@@ -1,7 +1,30 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import {
+  BarChart3,
+  Users,
+  Monitor,
+  DollarSign,
+  Ticket,
+  Settings,
+  Handshake,
+  FolderHeart,
+  TrendingUp,
+  Calendar,
+  Coins,
+  GraduationCap,
+  Briefcase,
+  Folder,
+  Target,
+  Trophy,
+  LayoutDashboard,
+  Receipt,
+  Globe,
+  Rocket,
+  MessageSquare
+} from "lucide-react";
 
 interface SidebarProps {
   activeRole: string;
@@ -9,40 +32,40 @@ interface SidebarProps {
   onRoleChange: (role: string) => void;
 }
 
-const navLinks: Record<string, Array<{ label: string; href: string; icon: string }>> = {
+const navLinks: Record<string, Array<{ label: string; href: string; icon: React.ComponentType<{ size?: number; className?: string }> }>> = {
   admin: [
-    { label: "Command Overview", href: "/dashboard/admin", icon: "📊" },
-    { label: "Client Database", href: "/dashboard/admin/clients", icon: "👥" },
-    { label: "Hosting Metrics", href: "/dashboard/admin/hosting", icon: "🖥️" },
-    { label: "Revenue Center", href: "/dashboard/admin/revenue", icon: "💰" },
-    { label: "Support Tickets", href: "/dashboard/admin/support", icon: "🎟️" },
-    { label: "Ecosystem CMS", href: "/dashboard/admin/cms", icon: "⚙️" },
+    { label: "Command Overview", href: "/dashboard/admin", icon: BarChart3 },
+    { label: "Client Database", href: "/dashboard/admin/clients", icon: Users },
+    { label: "Hosting Metrics", href: "/dashboard/admin/hosting", icon: Monitor },
+    { label: "Revenue Center", href: "/dashboard/admin/revenue", icon: DollarSign },
+    { label: "Support Tickets", href: "/dashboard/admin/support", icon: Ticket },
+    { label: "Ecosystem CMS", href: "/dashboard/admin/cms", icon: Settings },
   ],
   crm: [
-    { label: "Leads Kanban", href: "/dashboard/crm", icon: "🤝" },
-    { label: "Customer Records", href: "/dashboard/crm/customers", icon: "📇" },
-    { label: "Sales Reports", href: "/dashboard/crm/reports", icon: "📈" },
+    { label: "Leads Kanban", href: "/dashboard/crm", icon: Handshake },
+    { label: "Customer Records", href: "/dashboard/crm/customers", icon: FolderHeart },
+    { label: "Sales Reports", href: "/dashboard/crm/reports", icon: TrendingUp },
   ],
   hr: [
-    { label: "Attendance Console", href: "/dashboard/hr", icon: "👥" },
-    { label: "Leave Requests", href: "/dashboard/hr/leaves", icon: "📅" },
-    { label: "Payroll System", href: "/dashboard/hr/payroll", icon: "💵" },
-    { label: "Internship Tracker", href: "/dashboard/hr/interns", icon: "🎓" },
+    { label: "Attendance Console", href: "/dashboard/hr", icon: Users },
+    { label: "Leave Requests", href: "/dashboard/hr/leaves", icon: Calendar },
+    { label: "Payroll System", href: "/dashboard/hr/payroll", icon: Coins },
+    { label: "Internship Tracker", href: "/dashboard/hr/interns", icon: GraduationCap },
   ],
   partner: [
-    { label: "Earnings Wallet", href: "/dashboard/partner", icon: "💼" },
-    { label: "Marketing Kit", href: "/dashboard/partner/marketing", icon: "📁" },
+    { label: "Earnings Wallet", href: "/dashboard/partner", icon: Briefcase },
+    { label: "Marketing Kit", href: "/dashboard/partner/marketing", icon: Folder },
   ],
   sales: [
-    { label: "Daily Targets", href: "/dashboard/sales", icon: "🎯" },
-    { label: "Battle Arena", href: "/dashboard/sales/leaderboard", icon: "⚔️" },
+    { label: "Daily Targets", href: "/dashboard/sales", icon: Target },
+    { label: "Battle Arena", href: "/dashboard/sales/leaderboard", icon: Trophy },
   ],
   client: [
-    { label: "Client Dashboard", href: "/dashboard/client", icon: "💻" },
-    { label: "Billing & Invoices", href: "/dashboard/client/billing", icon: "🧾" },
-    { label: "Domain & Hosting", href: "/dashboard/client/domain", icon: "🌐" },
-    { label: "Web Performance", href: "/dashboard/client/performance", icon: "📊" },
-    { label: "Marketing Hub", href: "/dashboard/client/marketing", icon: "🚀" },
+    { label: "Client Dashboard", href: "/dashboard/client", icon: LayoutDashboard },
+    { label: "Billing & Invoices", href: "/dashboard/client/billing", icon: Receipt },
+    { label: "Domain & Hosting", href: "/dashboard/client/domain", icon: Globe },
+    { label: "Web Performance", href: "/dashboard/client/performance", icon: BarChart3 },
+    { label: "Marketing Hub", href: "/dashboard/client/marketing", icon: Rocket },
   ],
 };
 
@@ -66,45 +89,28 @@ export default function Sidebar({ activeRole, pathname, onRoleChange }: SidebarP
   const currentRoleLinks = navLinks[activeRole] || [];
 
   return (
-    <aside style={{ width: "280px", borderRight: "1px solid rgba(255,255,255,0.06)", background: "rgba(8,13,26,0.9)", display: "flex", flexDirection: "column", flexShrink: 0 }}>
+    <aside className="w-[280px] border-r border-slate-900/10 bg-white/95 flex flex-col shrink-0 h-screen sticky top-0">
       
       {/* Brand Header */}
-      <div style={{ padding: "24px 28px", borderBottom: "1px solid rgba(255,255,255,0.06)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <Link href="/" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <div style={{
-            width: "30px", height: "30px",
-            background: "linear-gradient(135deg, #7c3aed, #4f46e5)",
-            borderRadius: "8px",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            fontSize: "14px", fontWeight: 800, color: "#fff",
-          }}>J</div>
-          <span style={{ fontSize: "18px", fontWeight: 700 }}>
-            Jev<span style={{ color: "#7c3aed" }}>xo</span>
+      <div className="px-7 py-6 border-b border-slate-900/10 flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-2.5">
+          <img src="/logo.svg" alt="Jevxo Logo" className="w-[30px] h-[30px]" />
+          <span className="text-lg font-bold text-slate-900">
+            Jev<span className="text-violet-600">xo</span>
           </span>
         </Link>
-        <span style={{ fontSize: "10px", fontWeight: 700, padding: "2px 6px", borderRadius: "100px", border: "1px solid rgba(124,58,237,0.3)", background: "rgba(124,58,237,0.08)", color: "#a78bfa" }}>
+        <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full border border-violet-600/30 bg-violet-600/10 text-violet-600">
           v1.0
         </span>
       </div>
 
       {/* Role Selector */}
-      <div style={{ padding: "20px" }}>
-        <label style={{ display: "block", fontSize: "10px", fontWeight: 700, color: "#a78bfa", textTransform: "uppercase", marginBottom: "8px", letterSpacing: "0.05em" }}>Active Panel Portal</label>
+      <div className="p-5">
+        <label className="block text-[10px] font-bold text-violet-600 uppercase mb-2 tracking-wider">Active Panel Portal</label>
         <select
           value={activeRole}
           onChange={(e) => onRoleChange(e.target.value)}
-          style={{
-            width: "100%",
-            padding: "10px 14px",
-            borderRadius: "8px",
-            border: "1px solid rgba(124,58,237,0.3)",
-            background: "rgba(13,21,48,0.85)",
-            color: "#a78bfa",
-            fontSize: "13px",
-            fontWeight: 600,
-            cursor: "pointer",
-            outline: "none",
-          }}
+          className="w-full px-3.5 py-2.5 rounded-lg border border-violet-600/30 bg-slate-900/5 text-violet-600 text-sm font-semibold cursor-pointer outline-none transition-all focus:border-violet-600 focus:ring-1 focus:ring-violet-600"
         >
           <option value="admin">🛡️ Global Admin</option>
           <option value="crm">🤝 CRM Manager</option>
@@ -116,31 +122,24 @@ export default function Sidebar({ activeRole, pathname, onRoleChange }: SidebarP
       </div>
 
       {/* Role-specific Navigation Links */}
-      <nav style={{ flex: 1, padding: "10px 16px", display: "flex", flexDirection: "column", gap: "6px" }}>
-        <div style={{ padding: "8px 12px", fontSize: "12px", color: "var(--text-muted)", fontWeight: 700, textTransform: "uppercase" }}>
+      <nav className="flex-1 px-4 py-2.5 flex flex-col gap-1.5 overflow-y-auto">
+        <div className="px-3 py-2 text-xs text-slate-500 font-bold uppercase tracking-wider">
           Navigation Links
         </div>
         {currentRoleLinks.map((link) => {
           const isLinkActive = pathname === link.href;
+          const Icon = link.icon;
           return (
             <Link
               key={link.href}
               href={link.href}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "10px",
-                padding: "10px 12px",
-                borderRadius: "8px",
-                fontSize: "13px",
-                fontWeight: 600,
-                transition: "all 0.2s ease",
-                background: isLinkActive ? "rgba(124,58,237,0.12)" : "transparent",
-                color: isLinkActive ? "#a78bfa" : "var(--text-secondary)",
-                border: isLinkActive ? "1px solid rgba(124,58,237,0.2)" : "1px solid transparent",
-              }}
+              className={`flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
+                isLinkActive
+                  ? "bg-violet-600/10 text-violet-600 border border-violet-600/20"
+                  : "text-slate-600 hover:text-slate-900 hover:bg-slate-900/5 border border-transparent"
+              }`}
             >
-              <span>{link.icon}</span>
+              <Icon size={16} />
               <span>{link.label}</span>
             </Link>
           );
@@ -148,34 +147,27 @@ export default function Sidebar({ activeRole, pathname, onRoleChange }: SidebarP
       </nav>
 
       {/* System & Support Core Links */}
-      <nav style={{ padding: "10px 16px 20px 16px", borderTop: "1px solid rgba(255,255,255,0.06)", display: "flex", flexDirection: "column", gap: "6px" }}>
-        <div style={{ padding: "8px 12px", fontSize: "11px", color: "var(--text-muted)", fontWeight: 700, textTransform: "uppercase" }}>
+      <nav className="px-4 py-2.5 pb-5 border-t border-slate-900/10 flex flex-col gap-1.5">
+        <div className="px-3 py-2 text-xs text-slate-500 font-bold uppercase tracking-wider">
           Ecosystem Core
         </div>
         {[
-          { label: "Profile & Settings", href: "/dashboard/settings", icon: "⚙️" },
-          { label: "Help & Live Chat", href: "/dashboard/support", icon: "💬" },
+          { label: "Profile & Settings", href: "/dashboard/settings", icon: Settings },
+          { label: "Help & Live Chat", href: "/dashboard/support", icon: MessageSquare },
         ].map((link) => {
           const isLinkActive = pathname === link.href;
+          const Icon = link.icon;
           return (
             <Link
               key={link.href}
               href={link.href}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "10px",
-                padding: "10px 12px",
-                borderRadius: "8px",
-                fontSize: "13px",
-                fontWeight: 600,
-                transition: "all 0.2s ease",
-                background: isLinkActive ? "rgba(124,58,237,0.12)" : "transparent",
-                color: isLinkActive ? "#a78bfa" : "var(--text-secondary)",
-                border: isLinkActive ? "1px solid rgba(124,58,237,0.2)" : "1px solid transparent",
-              }}
+              className={`flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
+                isLinkActive
+                  ? "bg-violet-600/10 text-violet-600 border border-violet-600/20"
+                  : "text-slate-600 hover:text-slate-900 hover:bg-slate-900/5 border border-transparent"
+              }`}
             >
-              <span>{link.icon}</span>
+              <Icon size={16} />
               <span>{link.label}</span>
             </Link>
           );
@@ -183,15 +175,15 @@ export default function Sidebar({ activeRole, pathname, onRoleChange }: SidebarP
       </nav>
 
       {/* Sidebar Footer User Details */}
-      <div style={{ padding: "20px 24px", borderTop: "1px solid rgba(255,255,255,0.06)", display: "flex", alignItems: "center", gap: "12px" }}>
-        <div style={{ width: "32px", height: "32px", borderRadius: "50%", background: "rgba(124,58,237,0.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "18px" }}>
+      <div className="px-6 py-5 border-t border-slate-900/10 flex items-center gap-3">
+        <div className="w-8 h-8 rounded-full bg-violet-600/10 flex items-center justify-center text-lg">
           {avatarEmoji}
         </div>
-        <div style={{ minWidth: 0, flex: 1 }}>
-          <div style={{ fontWeight: 600, fontSize: "12px", color: "#fff", textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "nowrap" }}>
+        <div className="min-w-0 flex-1">
+          <div className="font-semibold text-xs text-slate-900 truncate">
             {profileName}
           </div>
-          <div style={{ fontSize: "10px", color: "var(--text-muted)", marginTop: "1px" }}>jevxo_host_asia_01</div>
+          <div className="text-[10px] text-slate-500 mt-0.5">jevxo_host_asia_01</div>
         </div>
       </div>
 

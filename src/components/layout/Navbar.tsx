@@ -1,29 +1,60 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const navLinks = [
-  { label: "Home",      href: "/" },
-  { label: "About",     href: "/about" },
-  { label: "Products",  href: "/products" },
-  { label: "Services",  href: "/services" },
-  { label: "Partners",  href: "/partners" },
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Products", href: "/products" },
+  { label: "Services", href: "/services" },
+  { label: "Partners", href: "/partners" },
   { label: "Portfolio", href: "/portfolio" },
-  { label: "Pricing",   href: "/pricing" },
-  { label: "Process",   href: "/process" },
-  { label: "Stack",     href: "/technologies" },
-  { label: "Blog",      href: "/blog" },
-  { label: "Jobs",      href: "/jobs" },
-  { label: "FAQ",       href: "/faq" },
-  { label: "Contact",   href: "/contact" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Process", href: "/process" },
+  { label: "Stack", href: "/technologies" },
+  { label: "Blog", href: "/blog" },
+  { label: "Jobs", href: "/jobs" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Contact", href: "/contact" },
 ];
 
+type IndicatorState = { left: number; top: number; width: number; height: number; opacity: number };
+
 export default function Navbar() {
-  const pathname  = usePathname();
-  const [scrolled, setScrolled]   = useState(false);
-  const [menuOpen, setMenuOpen]   = useState(false);
+  const pathname = usePathname();
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [indicator, setIndicator] = useState<IndicatorState>({ left: 0, top: 0, width: 0, height: 0, opacity: 0 });
+
+  const navRef = useRef<HTMLDivElement>(null);
+  const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
+
+  const moveIndicator = useCallback((href: string | null) => {
+    const container = navRef.current;
+    const target = href ? linkRefs.current[href] : null;
+    if (!container || !target) {
+      setIndicator((s) => ({ ...s, opacity: 0 }));
+      return;
+    }
+    const cRect = container.getBoundingClientRect();
+    const tRect = target.getBoundingClientRect();
+    setIndicator({
+      left: tRect.left - cRect.left,
+      top: tRect.top - cRect.top,
+      width: tRect.width,
+      height: tRect.height,
+      opacity: 1,
+    });
+  }, []);
+
+  useEffect(() => {
+    moveIndicator(pathname);
+    const onResize = () => moveIndicator(pathname);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [pathname, moveIndicator]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -36,137 +67,87 @@ export default function Navbar() {
   return (
     <>
       <header
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 1000,
-          transition: "all 0.3s ease",
-          background: scrolled
-            ? "rgba(8,13,26,0.85)"
-            : "transparent",
-          backdropFilter: scrolled ? "blur(20px)" : "none",
-          borderBottom: scrolled ? "1px solid rgba(255,255,255,0.06)" : "1px solid transparent",
-        }}
+        className={`fixed top-0 left-0 right-0 z-[1000] transition-[background,border-color] duration-300 ease-in-out border-b ${
+          scrolled
+            ? "bg-white/85 backdrop-blur-md border-slate-900/5 shadow-sm"
+            : "bg-transparent border-transparent"
+        }`}
       >
-        <div className="container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: "72px" }}>
+        <div className="mx-auto px-4 flex items-center justify-between h-[76px] w-11/12 max-w-[1400px]">
           {/* Logo */}
-          <Link href="/" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-            <div style={{
-              width: "36px", height: "36px",
-              background: "linear-gradient(135deg, #7c3aed, #4f46e5)",
-              borderRadius: "10px",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              fontSize: "18px", fontWeight: 800, color: "#fff",
-              boxShadow: "0 0 20px rgba(124,58,237,0.4)",
-            }}>J</div>
-            <span style={{ fontSize: "20px", fontWeight: 700, letterSpacing: "-0.02em" }}>
-              Jev<span style={{ color: "#7c3aed" }}>xo</span>
+          <Link href="/" className="flex items-center gap-[10px]">
+            <img src="/logo.svg" alt="Jevxo Logo" className="w-9 h-9" />
+            <span className="text-lg font-semibold tracking-tight text-slate-900">
+              Jev<span className="text-violet-600">xo</span>
             </span>
           </Link>
 
           {/* Desktop nav */}
-          <nav style={{ display: "flex", gap: "4px" }} className="desktop-nav">
+          <div
+            ref={navRef}
+            className="relative hidden min-[1251px]:flex gap-[2px] items-center"
+            onMouseLeave={() => moveIndicator(pathname)}
+          >
+            <div
+              className="absolute bg-violet-600/10 border border-violet-600/20 rounded-[8px] pointer-events-none"
+              style={{
+                left: indicator.left,
+                top: indicator.top,
+                width: indicator.width,
+                height: indicator.height,
+                opacity: indicator.opacity,
+                transition:
+                  "left 0.35s cubic-bezier(0.22,1,0.36,1), width 0.35s cubic-bezier(0.22,1,0.36,1), top 0.35s ease, opacity 0.25s ease",
+              }}
+            />
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                style={{
-                  padding: "8px 16px",
-                  borderRadius: "8px",
-                  fontSize: "14px",
-                  fontWeight: 500,
-                  transition: "all 0.2s ease",
-                  color: pathname === link.href ? "#a78bfa" : "var(--text-secondary)",
-                  background: pathname === link.href ? "rgba(124,58,237,0.12)" : "transparent",
-                }}
-                onMouseEnter={(e) => {
-                  if (pathname !== link.href) {
-                    (e.currentTarget as HTMLElement).style.color = "#f1f5f9";
-                    (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)";
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (pathname !== link.href) {
-                    (e.currentTarget as HTMLElement).style.color = "var(--text-secondary)";
-                    (e.currentTarget as HTMLElement).style.background = "transparent";
-                  }
-                }}
+                ref={(el) => { linkRefs.current[link.href] = el; }}
+                onMouseEnter={() => moveIndicator(link.href)}
+                className={`relative px-4 py-2.5 rounded-[8px] text-[11px] font-bold tracking-wider uppercase transition-colors duration-200 ${
+                  pathname === link.href ? "text-violet-700" : "text-slate-600 hover:text-slate-900"
+                }`}
               >
                 {link.label}
               </Link>
             ))}
-          </nav>
+          </div>
 
           {/* CTA + Hamburger */}
-          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <div className="flex items-center gap-[10px]">
             <Link
               href="/portal"
-              style={{
-                padding: "8px 16px",
-                borderRadius: "10px",
-                fontSize: "14px",
-                fontWeight: 600,
-                border: "1px solid rgba(124,58,237,0.4)",
-                background: "rgba(124,58,237,0.06)",
-                color: "#a78bfa",
-                transition: "all 0.2s ease",
-              }}
-              className="cta-btn"
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.background = "rgba(124,58,237,0.15)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.background = "rgba(124,58,237,0.06)";
-              }}
+              className="hidden min-[1251px]:inline-block px-4 py-2 rounded-lg text-[13px] font-bold tracking-wide border border-slate-900/10 text-slate-700 hover:border-slate-900/20 hover:bg-slate-900/5 transition-all duration-200"
             >
               Portal Login
             </Link>
             <Link
               href="/contact"
-              style={{
-                padding: "9px 20px",
-                borderRadius: "10px",
-                fontSize: "14px",
-                fontWeight: 600,
-                background: "linear-gradient(135deg, #7c3aed, #4f46e5)",
-                color: "#fff",
-                transition: "all 0.2s ease",
-                boxShadow: "0 0 20px rgba(124,58,237,0.3)",
-              }}
-              className="cta-btn"
+              className="hidden min-[1251px]:inline-block px-5 py-2.5 rounded-lg text-[13px] font-bold tracking-wide text-white bg-gradient-to-r from-violet-600 to-indigo-600 shadow-md hover:shadow-violet-600/20 hover:-translate-y-0.5 transition-all duration-250"
             >
               Get Started
             </Link>
             <button
-              className="hamburger"
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label="Toggle menu"
-              style={{
-                display: "none",
-                flexDirection: "column",
-                gap: "5px",
-                background: "none",
-                border: "none",
-                padding: "8px",
-                cursor: "pointer",
-              }}
+              aria-expanded={menuOpen}
+              className="hidden max-[1250px]:flex flex-col gap-[5px] bg-transparent border-none p-2 cursor-pointer"
             >
               {[0, 1, 2].map((i) => (
-                <span key={i} style={{
-                  display: "block",
-                  width: "22px",
-                  height: "2px",
-                  background: "#f1f5f9",
-                  borderRadius: "2px",
-                  transition: "all 0.3s ease",
-                  transform: menuOpen
-                    ? i === 0 ? "rotate(45deg) translate(5px, 5px)"
-                    : i === 2 ? "rotate(-45deg) translate(5px, -5px)"
-                    : "scaleX(0)"
-                    : "none",
-                }} />
+                <span
+                  key={i}
+                  className={`block w-5 h-0.5 bg-slate-900 rounded-sm transition-all duration-300 ${
+                    menuOpen
+                      ? i === 0
+                        ? "rotate-45 translate-y-[7px]"
+                        : i === 2
+                        ? "-rotate-45 -translate-y-[7px]"
+                        : "scale-x-0"
+                      : ""
+                  }`}
+                />
               ))}
             </button>
           </div>
@@ -175,108 +156,41 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div style={{
-          position: "fixed",
-          inset: 0,
-          zIndex: 999,
-          background: "rgba(8,13,26,0.98)",
-          backdropFilter: "blur(20px)",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "flex-start",
-          paddingTop: "90px",
-          paddingBottom: "40px",
-          gap: "8px",
-          overflowY: "auto",
-          animation: "fadeIn 0.2s ease",
-        }}>
+        <div className="fixed inset-0 z-[999] bg-white/98 flex flex-col items-center justify-start pt-[88px] pb-10 gap-1 overflow-y-auto animate-[fadeIn_0.2s_ease]">
           <button
             onClick={() => setMenuOpen(false)}
-            style={{
-              position: "absolute", top: "24px", right: "24px",
-              background: "rgba(255,255,255,0.08)",
-              border: "1px solid rgba(255,255,255,0.1)",
-              borderRadius: "50%",
-              width: "40px", height: "40px",
-              color: "#f1f5f9",
-              fontSize: "18px",
-              display: "flex", alignItems: "center", justifyContent: "center",
-            }}
-          >✕</button>
+            aria-label="Close menu"
+            className="absolute top-6 right-6 z-[1] bg-slate-900/5 border border-slate-900/10 rounded-full w-[38px] h-[38px] text-slate-950 text-base flex items-center justify-center hover:bg-slate-900/10 transition-colors"
+          >
+            ✕
+          </button>
           {navLinks.map((link, i) => (
             <Link
               key={link.href}
               href={link.href}
-              style={{
-                fontSize: "28px",
-                fontWeight: 700,
-                color: pathname === link.href ? "#a78bfa" : "#f1f5f9",
-                padding: "12px 32px",
-                borderRadius: "12px",
-                background: pathname === link.href ? "rgba(124,58,237,0.1)" : "transparent",
-                animationDelay: `${i * 0.05}s`,
-                animation: "fadeUp 0.4s ease forwards",
-                opacity: 0,
-              }}
+              className={`relative text-2xl font-bold tracking-tight px-8 py-2 rounded-[10px] opacity-0 animate-[fadeUp_0.4s_ease_forwards] ${
+                pathname === link.href ? "text-violet-600 bg-violet-600/10" : "text-slate-800"
+              }`}
+              style={{ animationDelay: `${i * 0.04}s` }}
             >
               {link.label}
             </Link>
           ))}
+          <div className="w-12 h-px bg-slate-900/10 my-[14px]" />
           <Link
             href="/portal"
-            style={{
-              marginTop: "8px",
-              padding: "12px 32px",
-              borderRadius: "12px",
-              fontSize: "18px",
-              fontWeight: 700,
-              border: "1px solid rgba(124,58,237,0.4)",
-              background: "rgba(124,58,237,0.06)",
-              color: "#a78bfa",
-              textAlign: "center",
-              width: "200px",
-            }}
-          >Portal Login</Link>
+            className="px-8 py-3 rounded-[10px] text-base font-semibold border border-slate-900/10 text-slate-800 text-center w-[200px]"
+          >
+            Portal Login
+          </Link>
           <Link
             href="/contact"
-            style={{
-              marginTop: "12px",
-              padding: "14px 36px",
-              borderRadius: "14px",
-              fontSize: "18px",
-              fontWeight: 700,
-              background: "linear-gradient(135deg, #7c3aed, #4f46e5)",
-              color: "#fff",
-              boxShadow: "0 0 30px rgba(124,58,237,0.4)",
-              textAlign: "center",
-              width: "200px",
-            }}
-          >Get Started →</Link>
+            className="mt-[10px] px-8 py-3.5 rounded-[10px] text-base font-bold bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-lg text-center w-[200px]"
+          >
+            Get Started →
+          </Link>
         </div>
       )}
-
-      <style>{`
-        @media (max-width: 1250px) {
-          .desktop-nav { display: none !important; }
-          .cta-btn { display: none !important; }
-          .hamburger { display: flex !important; }
-        }
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        @keyframes fadeUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
     </>
   );
 }
