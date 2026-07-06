@@ -1,13 +1,23 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { services } from "@/lib/data/services";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Services",
-  description: "Explore our full range of digital services — web development, UI/UX design, mobile apps, cloud infrastructure, AI integration, and digital strategy.",
-};
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { services as defaultServices } from "@/lib/data/services";
 
 export default function ServicesPage() {
+  const [servicesList, setServicesList] = useState(defaultServices);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("jevxo_cms_data");
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        if (parsed.services) setServicesList(parsed.services);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  }, []);
   return (
     <div>
       {/* ── Hero ─────────────────────────────────────────────── */}
@@ -31,7 +41,7 @@ export default function ServicesPage() {
       <section className="section">
         <div className="container">
           <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "28px" }} className="services-list">
-            {services.map((service, i) => (
+            {servicesList.map((service, i) => (
               <Link key={service.id} href={`/services/${service.slug}`} style={{ display: "block" }}>
                 <div className="glass service-card" style={{
                   padding: "40px", borderRadius: "var(--radius-xl)",

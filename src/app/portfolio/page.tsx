@@ -1,12 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { portfolioItems, portfolioCategories } from "@/lib/data/portfolio";
+import { portfolioItems as defaultPortfolioItems, portfolioCategories } from "@/lib/data/portfolio";
 
 export default function PortfolioPage() {
   const [active, setActive] = useState("All");
-  const filtered = active === "All" ? portfolioItems : portfolioItems.filter((p) => p.category === active);
+  const [portfolioList, setPortfolioList] = useState(defaultPortfolioItems);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("jevxo_cms_data");
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        if (parsed.portfolio) setPortfolioList(parsed.portfolio);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  }, []);
+
+  const filtered = active === "All" ? portfolioList : portfolioList.filter((p) => p.category === active);
 
   return (
     <div>

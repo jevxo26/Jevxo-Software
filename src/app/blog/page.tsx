@@ -1,16 +1,27 @@
-import type { Metadata } from "next";
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { blogPosts, blogCategories } from "@/lib/data/blog";
+import { blogPosts as defaultBlogPosts, blogCategories } from "@/lib/data/blog";
 import { formatDate } from "@/lib/utils";
 
-export const metadata: Metadata = {
-  title: "Blog",
-  description: "Insights, tutorials, and behind-the-scenes stories from the Jevxo team on web development, design, AI, and more.",
-};
-
 export default function BlogPage() {
-  const featured = blogPosts.filter((p) => p.featured);
-  const rest     = blogPosts.filter((p) => !p.featured);
+  const [posts, setPosts] = useState(defaultBlogPosts);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("jevxo_cms_data");
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        if (parsed.blogPosts) setPosts(parsed.blogPosts);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  }, []);
+
+  const featured = posts.filter((p) => p.featured);
+  const rest     = posts.filter((p) => !p.featured);
 
   return (
     <div>

@@ -38,7 +38,20 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("sending");
+    const newMsg = {
+      id: `msg_${Date.now()}`,
+      name: form.name,
+      email: form.email,
+      type: form.service || "General Inquiry",
+      budget: form.budget || "Not Specified",
+      message: form.message,
+      submittedAt: new Date().toISOString()
+    };
     try {
+      const stored = localStorage.getItem("jevxo_contact_messages");
+      const current = stored ? JSON.parse(stored) : [];
+      localStorage.setItem("jevxo_contact_messages", JSON.stringify([newMsg, ...current]));
+      
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

@@ -1,4 +1,6 @@
-import type { Metadata } from "next";
+"use client";
+
+import { use, useState, useEffect } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { blogPosts, getBlogBySlug } from "@/lib/data/blog";
@@ -6,23 +8,49 @@ import { formatDate } from "@/lib/utils";
 
 type Props = { params: Promise<{ slug: string }> };
 
-export async function generateStaticParams() {
-  return blogPosts.map((p) => ({ slug: p.slug }));
-}
+export default function BlogPostPage({ params }: Props) {
+  const { slug } = use(params);
+  const [post, setPost] = useState<any>(null);
+  const [related, setRelated] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const post = getBlogBySlug(slug);
-  if (!post) return { title: "Post Not Found" };
-  return { title: post.title, description: post.excerpt };
-}
+  useEffect(() => {
+    const stored = localStorage.getItem("jevxo_cms_data");
+    let foundPost = null;
+    let currentPosts = blogPosts;
 
-export default async function BlogPostPage({ params }: Props) {
-  const { slug } = await params;
-  const post = getBlogBySlug(slug);
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        if (parsed.blogPosts) {
+          currentPosts = parsed.blogPosts;
+          foundPost = parsed.blogPosts.find((p: any) => p.slug === slug);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    if (!foundPost) {
+      foundPost = getBlogBySlug(slug);
+    }
+    setPost(foundPost);
+
+    if (foundPost) {
+      const rel = currentPosts.filter((p) => p.id !== foundPost.id && p.category === foundPost.category).slice(0, 3);
+      setRelated(rel);
+    }
+    setLoading(false);
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#080d1a", color: "#fff" }}>
+        Loading article...
+      </div>
+    );
+  }
+
   if (!post) notFound();
-
-  const related = blogPosts.filter((p) => p.id !== post.id && p.category === post.category).slice(0, 3);
 
   return (
     <div>

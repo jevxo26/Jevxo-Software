@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { portfolioItems, portfolioCategories } from "@/lib/data/portfolio";
 import { teamMembers, stats } from "@/lib/data/team";
@@ -48,9 +48,56 @@ const partnerPrograms = [
 export default function HomePage() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [billingPeriod, setBillingPeriod] = useState<"monthly" | "annually">("annually");
-  const [selectedNode, setSelectedNode] = useState<typeof networkNodes[0] | null>(networkNodes[0]);
+  
+  // Dynamic CMS States
+  const [heroTitle, setHeroTitle] = useState("The Digital Operating||System for Global Ventures");
+  const [heroDesc, setHeroDesc] = useState("A unified suite of business management platforms, CRM systems, automated growth centers, and enterprise hosting packages. Build, scale, and automate your company.");
+  const [heroTag, setHeroTag] = useState("Jevxo Ecosystem Version 1.0 Live");
+  const [nodes, setNodes] = useState(networkNodes);
+  const [selectedNode, setSelectedNode] = useState<typeof networkNodes[0] | null>(null);
+  const [activeSolutions, setActiveSolutions] = useState(solutions);
+  const [plans, setPlans] = useState([
+    { name: "Starter", price: 29, desc: "For single freelancers or startups", features: ["1 Active Website", "Basic CRM Tracker", "5 Team Seats", "Storage up to 5GB", "Shared Hosting Node"] },
+    { name: "Business", price: 79, desc: "For growing regional businesses", features: ["3 Active Websites", "CRM + Automated Reminders", "25 Team Seats", "Storage up to 25GB", "Dedicated Hosting Node", "Intern Evaluators"] },
+    { name: "Growth", price: 149, desc: "For scaling multi-region brands", features: ["10 Active Websites", "CRM + Kanban + AI Lead Score", "Unlimited Team Seats", "Storage up to 100GB", "E-commerce Engine Integration", "Basic Marketing Hub (1-4)"] },
+    { name: "Enterprise", price: 299, desc: "For global operations and networks", features: ["Unlimited Websites", "All 6 Dashboard Panels", "Custom White-labeling", "Enterprise SLA & Support", "Marketing Hub (All 13 Modules)", "Country Domain Multi-routing"] },
+  ]);
+
   const [contactSubmitted, setContactSubmitted] = useState(false);
   const [contactForm, setContactForm] = useState({ name: "", email: "", type: "Sales", budget: "$1k - $5k", message: "" });
+
+  // Load from local storage if available
+  useEffect(() => {
+    const stored = localStorage.getItem("jevxo_cms_data");
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        if (parsed.heroTitle) setHeroTitle(parsed.heroTitle);
+        if (parsed.heroDesc) setHeroDesc(parsed.heroDesc);
+        if (parsed.heroTag) setHeroTag(parsed.heroTag);
+        if (parsed.networkNodes) {
+          setNodes(parsed.networkNodes);
+          if (parsed.networkNodes.length > 0) {
+            setSelectedNode(parsed.networkNodes[0]);
+          }
+        }
+        if (parsed.pricingPlans) setPlans(parsed.pricingPlans);
+      } catch (e) {
+        console.error("Failed to parse CMS data", e);
+      }
+    } else {
+      if (networkNodes.length > 0) {
+        setSelectedNode(networkNodes[0]);
+      }
+    }
+  }, []);
+
+  // Update selectedNode if nodes list gets populated/reset
+  useEffect(() => {
+    if (!selectedNode && nodes.length > 0) {
+      setSelectedNode(nodes[0]);
+    }
+  }, [nodes, selectedNode]);
 
   const filteredPortfolio = activeCategory === "All"
     ? portfolioItems.filter(item => item.featured)
@@ -58,6 +105,22 @@ export default function HomePage() {
 
   const handleContactSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const newMsg = {
+      id: `msg_${Date.now()}`,
+      name: contactForm.name,
+      email: contactForm.email,
+      type: contactForm.type,
+      budget: contactForm.budget,
+      message: contactForm.message,
+      submittedAt: new Date().toISOString()
+    };
+    try {
+      const stored = localStorage.getItem("jevxo_contact_messages");
+      const current = stored ? JSON.parse(stored) : [];
+      localStorage.setItem("jevxo_contact_messages", JSON.stringify([newMsg, ...current]));
+    } catch (err) {
+      console.error(err);
+    }
     setContactSubmitted(true);
     setTimeout(() => {
       setContactSubmitted(false);
@@ -75,16 +138,22 @@ export default function HomePage() {
           <div style={{ maxWidth: "800px", margin: "0 auto", textAlign: "center" }}>
             <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "6px 16px", borderRadius: "100px", border: "1px solid rgba(124,58,237,0.3)", background: "rgba(124,58,237,0.08)", fontSize: "12px", fontWeight: 600, color: "#a78bfa", marginBottom: "28px", textTransform: "uppercase", letterSpacing: "0.15em" }} className="animate-fade-up">
               <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#06b6d4", display: "inline-block", boxShadow: "0 0 10px #06b6d4" }} />
-              Jevxo Ecosystem Version 1.0 Live
+              {heroTag}
             </div>
             
-            <h1 style={{ fontSize: "clamp(40px, 7vw, 76px)", fontWeight: 900, lineHeight: 1.1, letterSpacing: "-0.03em", marginBottom: "28px" }} className="animate-fade-up delay-100">
-              The Digital Operating<br />
-              <span className="gradient-text">System for Global Ventures</span>
+            <h1 style={{ fontSize: "clamp(30px, 7vw, 68px)", fontWeight: 900, lineHeight: 1.1, letterSpacing: "-0.03em", marginBottom: "28px" }} className="animate-fade-up delay-100">
+              {heroTitle.includes("||") ? (
+                <>
+                  {heroTitle.split("||")[0]}<br />
+                  <span className="gradient-text">{heroTitle.split("||")[1]}</span>
+                </>
+              ) : (
+                <span className="gradient-text">{heroTitle}</span>
+              )}
             </h1>
             
             <p style={{ fontSize: "clamp(16px, 2.5vw, 20px)", color: "var(--text-secondary)", lineHeight: 1.8, maxWidth: "620px", margin: "0 auto 40px" }} className="animate-fade-up delay-200">
-              A unified suite of business management platforms, CRM systems, automated growth centers, and enterprise hosting packages. Build, scale, and automate your company.
+              {heroDesc}
             </p>
 
             <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "16px" }} className="animate-fade-up delay-300">
@@ -171,7 +240,7 @@ export default function HomePage() {
           </div>
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: "24px" }}>
-            {solutions.map((sol) => (
+            {activeSolutions.map((sol) => (
               <div key={sol.id} className="glass" style={{ padding: "32px 24px", borderRadius: "var(--radius-lg)", transition: "all 0.3s ease", display: "flex", flexDirection: "column", height: "100%" }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = "translateY(-6px)";
@@ -257,7 +326,7 @@ export default function HomePage() {
               </svg>
 
               {/* Interactive Nodes */}
-              {networkNodes.map((node) => (
+              {nodes.map((node) => (
                 <button
                   key={node.id}
                   onClick={() => setSelectedNode(node)}
@@ -558,12 +627,7 @@ export default function HomePage() {
           </h3>
           {/* Software plans grid */}
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", gap: "24px", marginBottom: "60px" }}>
-            {[
-              { name: "Starter", price: 29, desc: "For single freelancers or startups", features: ["1 Active Website", "Basic CRM Tracker", "5 Team Seats", "Storage up to 5GB", "Shared Hosting Node"] },
-              { name: "Business", price: 79, desc: "For growing regional businesses", features: ["3 Active Websites", "CRM + Automated Reminders", "25 Team Seats", "Storage up to 25GB", "Dedicated Hosting Node", "Intern Evaluators"] },
-              { name: "Growth", price: 149, desc: "For scaling multi-region brands", features: ["10 Active Websites", "CRM + Kanban + AI Lead Score", "Unlimited Team Seats", "Storage up to 100GB", "E-commerce Engine Integration", "Basic Marketing Hub (1-4)"] },
-              { name: "Enterprise", price: 299, desc: "For global operations and networks", features: ["Unlimited Websites", "All 6 Dashboard Panels", "Custom White-labeling", "Enterprise SLA & Support", "Marketing Hub (All 13 Modules)", "Country Domain Multi-routing"] },
-            ].map((p, idx) => {
+            {plans.map((p, idx) => {
               const actualPrice = billingPeriod === "annually" ? Math.floor(p.price * 0.8) : p.price;
               return (
                 <div key={idx} className="glass" style={{ padding: "36px 28px", borderRadius: "var(--radius-xl)", border: idx === 2 ? "1.5px solid #7c3aed" : "1px solid rgba(255,255,255,0.06)", position: "relative", background: idx === 2 ? "rgba(124,58,237,0.02)" : "rgba(8,13,26,0.3)" }}>

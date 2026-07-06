@@ -1,27 +1,45 @@
-import type { Metadata } from "next";
+"use client";
+
+import { use, useState, useEffect } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { services, getServiceBySlug } from "@/lib/data/services";
 
 type Props = { params: Promise<{ slug: string }> };
 
-export async function generateStaticParams() {
-  return services.map((s) => ({ slug: s.slug }));
-}
+export default function ServiceDetailPage({ params }: Props) {
+  const { slug } = use(params);
+  const [service, setService] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const service = getServiceBySlug(slug);
-  if (!service) return { title: "Service Not Found" };
-  return {
-    title: service.title,
-    description: service.description,
-  };
-}
+  useEffect(() => {
+    const stored = localStorage.getItem("jevxo_cms_data");
+    let foundService = null;
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        if (parsed.services) {
+          foundService = parsed.services.find((s: any) => s.slug === slug);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    if (!foundService) {
+      foundService = getServiceBySlug(slug);
+    }
+    setService(foundService);
+    setLoading(false);
+  }, [slug]);
 
-export default async function ServiceDetailPage({ params }: Props) {
-  const { slug } = await params;
-  const service = getServiceBySlug(slug);
+  if (loading) {
+    return (
+      <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#080d1a", color: "#fff" }}>
+        Loading service info...
+      </div>
+    );
+  }
+
   if (!service) notFound();
 
   return (

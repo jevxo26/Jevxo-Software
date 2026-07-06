@@ -27,8 +27,8 @@ export default function PortalPage() {
     e.preventDefault();
     setIsLoggingIn(true);
     setTimeout(() => {
-      // Redirect to unified dashboard with role query param
-      router.push(`/dashboard?role=${selectedRole.id}`);
+      // Redirect to unified dashboard with role sub-route
+      router.push(`/dashboard/${selectedRole.id}`);
     }, 1200);
   };
 

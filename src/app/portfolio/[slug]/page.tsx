@@ -1,20 +1,11 @@
-import type { Metadata } from "next";
+"use client";
+
+import { use, useState, useEffect } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { portfolioItems, getPortfolioBySlug } from "@/lib/data/portfolio";
 
 type Props = { params: Promise<{ slug: string }> };
-
-export async function generateStaticParams() {
-  return portfolioItems.map((p) => ({ slug: p.slug }));
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const item = getPortfolioBySlug(slug);
-  if (!item) return { title: "Project Not Found" };
-  return { title: item.title, description: item.description };
-}
 
 const categoryIcon: Record<string, string> = {
   "Web Development": "🖥️",
@@ -25,9 +16,39 @@ const categoryIcon: Record<string, string> = {
   "Cloud & DevOps":  "☁️",
 };
 
-export default async function PortfolioDetailPage({ params }: Props) {
-  const { slug } = await params;
-  const item = getPortfolioBySlug(slug);
+export default function PortfolioDetailPage({ params }: Props) {
+  const { slug } = use(params);
+  const [item, setItem] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("jevxo_cms_data");
+    let foundItem = null;
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        if (parsed.portfolio) {
+          foundItem = parsed.portfolio.find((p: any) => p.slug === slug);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    if (!foundItem) {
+      foundItem = getPortfolioBySlug(slug);
+    }
+    setItem(foundItem);
+    setLoading(false);
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#080d1a", color: "#fff" }}>
+        Loading project details...
+      </div>
+    );
+  }
+
   if (!item) notFound();
 
   return (
