@@ -6,6 +6,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { portfolioItems, portfolioCategories } from "@/lib/data/portfolio";
 import { teamMembers, stats } from "@/lib/data/team";
+import "./globals.css";
 
 
 // Define Jevxo Solutions based on brief
