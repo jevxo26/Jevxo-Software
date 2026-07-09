@@ -24,63 +24,66 @@ export default function AdminSupportPage() {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "28px" }}>
+    <div className="flex flex-col gap-7">
       
       {/* Support Center Header */}
-      <div className="glass" style={{ padding: "28px", borderRadius: "16px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }}>
-        <h3 style={{ fontSize: "16px", fontWeight: 700, marginBottom: "4px" }}>Escalation & Complaints Desk</h3>
-        <p style={{ fontSize: "12px", color: "var(--text-secondary)" }}>Review customer complaint logs, escalate hosting blockers, or sign off resolutions.</p>
+      <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-7 rounded-2xl">
+        <h3 className="text-base font-bold text-slate-900 mb-1">Escalation & Complaints Desk</h3>
+        <p className="text-xs text-slate-500">Review customer complaint logs, escalate hosting blockers, or sign off resolutions.</p>
         
         {/* Ticket List */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "16px", marginTop: "24px" }}>
+        <div className="flex flex-col gap-4 mt-6">
           {tickets.map((t) => (
-            <div key={t.id} style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.05)", padding: "20px", borderRadius: "8px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "16px" }}>
-              <div style={{ flex: 1, minWidth: "250px" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "6px" }}>
-                  <span style={{ fontSize: "13px", fontWeight: 800, color: "#fff" }}>{t.id}</span>
-                  <span style={{ fontSize: "12px", color: "var(--text-muted)" }}>| {t.client}</span>
-                  <span style={{
-                    fontSize: "10px",
-                    fontWeight: 700,
-                    padding: "2px 6px",
-                    borderRadius: "4px",
-                    background: t.priority === "High" ? "rgba(239,68,68,0.12)" : t.priority === "Medium" ? "rgba(245,158,11,0.12)" : "rgba(16,185,129,0.12)",
-                    color: t.priority === "High" ? "#ef4444" : t.priority === "Medium" ? "#f59e0b" : "#10b981"
-                  }}>
+            <div key={t.id} className="bg-slate-900/5 border border-slate-900/5 p-5 rounded-xl flex justify-between items-center flex-wrap gap-4">
+              <div className="flex-1 min-w-[250px]">
+                <div className="flex items-center gap-3 mb-1.5">
+                  <span className="text-xs font-extrabold text-slate-900">{t.id}</span>
+                  <span className="text-xs text-slate-400">| {t.client}</span>
+                  <span className={`text-[10px] font-bold py-0.5 px-2 rounded-full ${
+                    t.priority === "High"
+                      ? "bg-red-500/10 text-red-600"
+                      : t.priority === "Medium"
+                      ? "bg-amber-500/10 text-amber-600"
+                      : "bg-emerald-500/10 text-emerald-600"
+                  }`}>
                     {t.priority} Priority
                   </span>
                 </div>
-                <p style={{ fontSize: "14px", fontWeight: 600, color: "#f1f5f9" }}>{t.subject}</p>
-                <div style={{ fontSize: "11px", color: "var(--text-muted)", marginTop: "4px" }}>Logged: {t.date}</div>
+                <p className="text-sm font-semibold text-slate-800">{t.subject}</p>
+                <div className="text-[11px] text-slate-400 mt-1">Logged: {t.date}</div>
               </div>
-
+ 
               {/* Status workflow controls */}
-              <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-                <div style={{ textAlign: "right" }}>
-                  <div style={{ fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase" }}>Pipeline State</div>
-                  <span style={{
-                    fontSize: "12px",
-                    fontWeight: 700,
-                    color: t.status === "Open" ? "#60a5fa" : t.status === "Investigation" ? "#a78bfa" : t.status === "Escalated" ? "#ef4444" : "#10b981"
-                  }}>
+              <div className="flex items-center gap-4">
+                <div className="text-right">
+                  <div className="text-[10px] text-slate-400 uppercase tracking-wider">Pipeline State</div>
+                  <span className={`text-xs font-bold ${
+                    t.status === "Open"
+                      ? "text-blue-500"
+                      : t.status === "Investigation"
+                      ? "text-violet-500"
+                      : t.status === "Escalated"
+                      ? "text-red-500"
+                      : "text-emerald-500"
+                  }`}>
                     {t.status}
                   </span>
                 </div>
-
-                <div style={{ display: "flex", gap: "8px" }}>
+ 
+                <div className="flex gap-2">
                   {t.status !== "Resolved" && (
                     <>
                       {t.status === "Open" && (
-                        <button onClick={() => cycleStatus(t.id, "Investigation")} style={{ padding: "6px 12px", borderRadius: "4px", background: "rgba(167,139,250,0.12)", border: "1px solid rgba(167,139,250,0.3)", color: "#a78bfa", fontSize: "11px", fontWeight: 700, cursor: "pointer" }}>Investigate</button>
+                        <button onClick={() => cycleStatus(t.id, "Investigation")} className="py-1.5 px-3 rounded bg-violet-600/10 border border-violet-600/20 text-violet-600 text-xs font-semibold cursor-pointer hover:bg-violet-600/20 transition-all">Investigate</button>
                       )}
                       {t.status === "Investigation" && (
-                        <button onClick={() => cycleStatus(t.id, "Escalated")} style={{ padding: "6px 12px", borderRadius: "4px", background: "rgba(239,68,68,0.12)", border: "1px solid rgba(239,68,68,0.3)", color: "#ef4444", fontSize: "11px", fontWeight: 700, cursor: "pointer" }}>Escalate</button>
+                        <button onClick={() => cycleStatus(t.id, "Escalated")} className="py-1.5 px-3 rounded bg-red-600/10 border border-red-600/20 text-red-600 text-xs font-semibold cursor-pointer hover:bg-red-600/20 transition-all">Escalate</button>
                       )}
-                      <button onClick={() => cycleStatus(t.id, "Resolved")} style={{ padding: "6px 12px", borderRadius: "4px", background: "rgba(16,185,129,0.12)", border: "1px solid rgba(16,185,129,0.3)", color: "#10b981", fontSize: "11px", fontWeight: 700, cursor: "pointer" }}>Resolve</button>
+                      <button onClick={() => cycleStatus(t.id, "Resolved")} className="py-1.5 px-3 rounded bg-emerald-600/10 border border-emerald-600/20 text-emerald-600 text-xs font-semibold cursor-pointer hover:bg-emerald-600/20 transition-all">Resolve</button>
                     </>
                   )}
                   {t.status === "Resolved" && (
-                    <span style={{ fontSize: "18px" }}>✅</span>
+                    <span className="text-lg">✅</span>
                   )}
                 </div>
               </div>
@@ -88,7 +91,7 @@ export default function AdminSupportPage() {
           ))}
         </div>
       </div>
-
+ 
     </div>
   );
 }

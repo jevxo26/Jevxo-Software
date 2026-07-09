@@ -2,48 +2,48 @@
 
 export default function ClientOverviewPage() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "28px" }}>
+    <div className="flex flex-col gap-7">
       
-      <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1.8fr", gap: "28px" }} className="admin-grid-top">
+      <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1.8fr] gap-7">
         
         {/* Client ID card */}
-        <div className="glass" style={{ padding: "28px", borderRadius: "16px", background: "rgba(13,21,48,0.4)", border: "1px solid rgba(124,58,237,0.3)" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
-            <span style={{ fontSize: "11px", fontWeight: 700, padding: "3px 8px", borderRadius: "4px", background: "rgba(124,58,237,0.15)", color: "#a78bfa" }}>JEVXO NODE PORTAL</span>
-            <span style={{ fontSize: "12px", color: "var(--text-muted)" }}>ID: JEVXO-BD-000001</span>
+        <div className="bg-slate-900 border border-violet-500/30 p-7 rounded-2xl shadow-xl text-white">
+          <div className="flex justify-between items-center mb-5">
+            <span className="text-[11px] font-bold py-0.5 px-2 rounded bg-violet-500/20 text-violet-300 border border-violet-500/30">JEVXO NODE PORTAL</span>
+            <span className="text-xs text-slate-400">ID: JEVXO-BD-000001</span>
           </div>
 
-          <h3 style={{ fontSize: "22px", fontWeight: 800, marginBottom: "8px", color: "#fff" }}>Apex Group Ltd</h3>
-          <div style={{ fontSize: "13px", color: "var(--text-secondary)" }}>Plan Subscription: <strong style={{ color: "#06b6d4" }}>Growth Plan (Annual)</strong></div>
+          <h3 className="text-2xl font-extrabold text-white mb-2">Apex Group Ltd</h3>
+          <div className="text-sm text-slate-300">Plan Subscription: <strong className="text-cyan-400 font-semibold">Growth Plan (Annual)</strong></div>
           
-          <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "16px", marginTop: "20px", display: "flex", gap: "20px" }}>
+          <div className="border-t border-slate-800 pt-4 mt-5 flex gap-5">
             <div>
-              <div style={{ fontSize: "10px", color: "var(--text-muted)", textTransform: "uppercase" }}>SSL Status</div>
-              <span style={{ fontSize: "12px", fontWeight: 700, color: "#10b981" }}>🔒 Secured</span>
+              <div className="text-[10px] text-slate-400 uppercase tracking-wider">SSL Status</div>
+              <span className="text-xs font-bold text-emerald-400">🔒 Secured</span>
             </div>
             <div>
-              <div style={{ fontSize: "10px", color: "var(--text-muted)", textTransform: "uppercase" }}>Domain Renewal</div>
-              <span style={{ fontSize: "12px", fontWeight: 700, color: "#f59e0b" }}>📅 240 days left</span>
+              <div className="text-[10px] text-slate-400 uppercase tracking-wider">Domain Renewal</div>
+              <span className="text-xs font-bold text-amber-400">📅 240 days left</span>
             </div>
           </div>
         </div>
 
         {/* Website Health Score indexes */}
-        <div className="glass" style={{ padding: "28px", borderRadius: "16px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }}>
-          <h3 style={{ fontSize: "15px", fontWeight: 700, marginBottom: "16px" }}>Node Health score Index</h3>
+        <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-7 rounded-2xl">
+          <h3 className="text-[15px] font-bold text-slate-900 mb-4">Node Health score Index</h3>
           
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }} className="dashboard-kpis">
-            <div style={{ textAlign: "center" }}>
-              <div style={{ fontSize: "24px", color: "#10b981", fontWeight: 800 }}>98%</div>
-              <div style={{ fontSize: "11px", color: "var(--text-secondary)", marginTop: "4px" }}>Speed optimization</div>
+          <div className="grid grid-cols-3 gap-5">
+            <div className="text-center">
+              <div className="text-2xl text-emerald-600 font-extrabold">98%</div>
+              <div className="text-[11px] text-slate-500 mt-1">Speed optimization</div>
             </div>
-            <div style={{ textAlign: "center" }}>
-              <div style={{ fontSize: "24px", color: "#06b6d4", fontWeight: 800 }}>100%</div>
-              <div style={{ fontSize: "11px", color: "var(--text-secondary)", marginTop: "4px" }}>Security Index</div>
+            <div className="text-center">
+              <div className="text-2xl text-cyan-600 font-extrabold">100%</div>
+              <div className="text-[11px] text-slate-500 mt-1">Security Index</div>
             </div>
-            <div style={{ textAlign: "center" }}>
-              <div style={{ fontSize: "24px", color: "#a78bfa", fontWeight: 800 }}>92%</div>
-              <div style={{ fontSize: "11px", color: "var(--text-secondary)", marginTop: "4px" }}>SEO Keyword ranking</div>
+            <div className="text-center">
+              <div className="text-2xl text-violet-600 font-extrabold">92%</div>
+              <div className="text-[11px] text-slate-500 mt-1">SEO Keyword ranking</div>
             </div>
           </div>
         </div>

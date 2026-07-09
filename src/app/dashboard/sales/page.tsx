@@ -19,79 +19,84 @@ export default function SalesOverviewPage() {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
+    <div className="flex flex-col gap-7">
       
       {/* Target Progress Bar and scheduler */}
-      <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1.8fr", gap: "28px" }} className="admin-grid-top">
+      <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1.8fr] gap-7">
         
         {/* Target Progress Bar */}
-        <div className="glass" style={{ padding: "28px", borderRadius: "16px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }}>
-          <h3 style={{ fontSize: "15px", fontWeight: 700, marginBottom: "20px" }}>🎯 Target Commission Tracker</h3>
+        <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-7 rounded-2xl">
+          <h3 className="text-sm font-bold text-slate-900 mb-5">🎯 Target Commission Tracker</h3>
           
-          <div style={{ marginBottom: "20px" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", fontSize: "12px", fontWeight: 600, marginBottom: "6px" }}>
-              <span>Daily Target ($500)</span>
-              <span style={{ color: "#06b6d4" }}>70%</span>
+          <div className="mb-5">
+            <div className="flex justify-between text-xs font-bold mb-1.5">
+              <span className="text-slate-800">Daily Target ($500)</span>
+              <span className="text-cyan-600">70%</span>
             </div>
-            <div style={{ width: "100%", height: "8px", background: "rgba(255,255,255,0.06)", borderRadius: "4px" }}>
-              <div style={{ width: "70%", height: "8px", background: "#06b6d4", borderRadius: "4px" }} />
+            <div className="w-full h-2 bg-slate-900/5 rounded-full overflow-hidden">
+              <div style={{ width: "70%" }} className="h-full bg-cyan-600 rounded-full" />
             </div>
           </div>
 
           <div>
-            <div style={{ display: "flex", justifyContent: "space-between", fontSize: "12px", fontWeight: 600, marginBottom: "6px" }}>
-              <span>Monthly Target ($15,000)</span>
-              <span style={{ color: "#a78bfa" }}>85%</span>
+            <div className="flex justify-between text-xs font-bold mb-1.5">
+              <span className="text-slate-800">Monthly Target ($15,000)</span>
+              <span className="text-violet-600">85%</span>
             </div>
-            <div style={{ width: "100%", height: "8px", background: "rgba(255,255,255,0.06)", borderRadius: "4px" }}>
-              <div style={{ width: "85%", height: "8px", background: "#7c3aed", borderRadius: "4px" }} />
+            <div className="w-full h-2 bg-slate-900/5 rounded-full overflow-hidden">
+              <div style={{ width: "85%" }} className="h-full bg-violet-600 rounded-full" />
             </div>
           </div>
         </div>
 
         {/* Meeting Scheduler */}
-        <div className="glass" style={{ padding: "28px", borderRadius: "16px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }} id="sales-meetings">
-          <h3 style={{ fontSize: "16px", fontWeight: 700, marginBottom: "16px" }}>📅 Schedule Client Call</h3>
+        <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-7 rounded-2xl" id="sales-meetings">
+          <h3 className="text-sm font-bold text-slate-900 mb-4">📅 Schedule Client Call</h3>
           <form onSubmit={handleScheduleMeeting}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", marginBottom: "12px" }}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
               <div>
-                <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "6px" }}>Meeting Subject</label>
+                <label className="block text-[10px] text-slate-400 font-bold tracking-wider uppercase mb-1.5">Meeting Subject</label>
                 <input
                   type="text"
                   placeholder="e.g. Core Redesign Demo"
                   required
                   value={meetingSubject}
                   onChange={(e) => setMeetingSubject(e.target.value)}
-                  style={{ width: "100%", padding: "10px", borderRadius: "6px", background: "rgba(0,0,0,0.2)", border: "1px solid var(--border)", color: "#fff", fontSize: "13px" }}
+                  className="w-full p-2 px-3 rounded-lg border border-slate-900/[0.08] bg-white text-slate-900 text-xs focus:outline-none focus:ring-1 focus:ring-violet-600 placeholder:text-slate-400"
                 />
               </div>
 
               <div>
-                <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "6px" }}>Date & Time</label>
+                <label className="block text-[10px] text-slate-400 font-bold tracking-wider uppercase mb-1.5">Date & Time</label>
                 <input
                   type="text"
                   placeholder="e.g. July 10, 3:00 PM"
                   required
                   value={meetingDate}
                   onChange={(e) => setMeetingDate(e.target.value)}
-                  style={{ width: "100%", padding: "10px", borderRadius: "6px", background: "rgba(0,0,0,0.2)", border: "1px solid var(--border)", color: "#fff", fontSize: "13px" }}
+                  className="w-full p-2 px-3 rounded-lg border border-slate-900/[0.08] bg-white text-slate-900 text-xs focus:outline-none focus:ring-1 focus:ring-violet-600 placeholder:text-slate-400"
                 />
               </div>
             </div>
 
-            <button type="submit" style={{ width: "100%", padding: "10px", borderRadius: "6px", background: "linear-gradient(135deg, #7c3aed, #4f46e5)", color: "#fff", fontWeight: 700, border: "none", cursor: "pointer" }}>Log Call Details</button>
+            <button
+              type="submit"
+              className="w-full py-2.5 px-4 rounded-lg bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white font-bold text-xs shadow-md transition-all cursor-pointer"
+            >
+              Log Call Details
+            </button>
           </form>
         </div>
 
       </div>
 
       {/* Upcoming logged meetings */}
-      <div className="glass" style={{ padding: "28px", borderRadius: "16px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }}>
-        <div style={{ fontSize: "12px", fontWeight: 700, color: "var(--text-muted)", marginBottom: "12px" }}>UPCOMING CALLS</div>
-        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+      <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-7 rounded-2xl">
+        <div className="text-[10px] text-slate-400 font-bold tracking-wider uppercase mb-3">UPCOMING CALLS</div>
+        <div className="flex flex-col gap-2">
           {agentMeetings.map((meet, idx) => (
-            <div key={idx} style={{ fontSize: "13px", background: "rgba(255,255,255,0.02)", padding: "12px 16px", borderRadius: "6px", border: "1px solid rgba(255,255,255,0.04)" }}>
-              📞 <strong>{meet.subject}</strong> — Scheduled Date: {meet.date}
+            <div key={idx} className="text-xs bg-slate-900/5 border border-slate-900/5 p-3 px-4 rounded-xl text-slate-700">
+              📞 <strong className="font-bold text-slate-900">{meet.subject}</strong> — Scheduled Date: {meet.date}
             </div>
           ))}
         </div>

@@ -16,26 +16,26 @@ export default function CrmCustomersPage() {
   ];
 
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "1.6fr 1.4fr", gap: "28px" }} className="admin-grid-top">
+    <div className="grid grid-cols-1 lg:grid-cols-[1.6fr_1.4fr] gap-7">
       
       {/* Customer List Card */}
-      <div className="glass" style={{ padding: "28px", borderRadius: "16px" }}>
-        <h3 style={{ fontSize: "16px", fontWeight: 700, marginBottom: "16px" }}>CRM Customer Profiles</h3>
+      <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-7 rounded-2xl">
+        <h3 className="text-sm font-bold text-slate-900 mb-4">CRM Customer Profiles</h3>
         
-        <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+        <div className="flex flex-col gap-4">
           {customerList.map((cust) => (
-            <div key={cust.id} style={{ background: "rgba(255,255,255,0.01)", border: "1px solid rgba(255,255,255,0.05)", padding: "20px", borderRadius: "8px" }}>
-              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "8px" }}>
-                <span style={{ fontSize: "12px", fontWeight: 700, color: "#a78bfa" }}>{cust.id}</span>
-                <span style={{ fontSize: "11px", fontWeight: 700, padding: "2px 6px", borderRadius: "4px", background: "rgba(16,185,129,0.12)", color: "#10b981" }}>{cust.status}</span>
+            <div key={cust.id} className="bg-slate-900/5 border border-slate-900/5 p-5 rounded-2xl">
+              <div className="flex justify-between items-center mb-2">
+                <span className="text-xs font-bold text-violet-600">{cust.id}</span>
+                <span className="text-[10px] font-bold py-0.5 px-2 rounded bg-emerald-500/10 text-emerald-600">{cust.status}</span>
               </div>
 
-              <h4 style={{ fontSize: "15px", fontWeight: 700, color: "#fff" }}>{cust.company}</h4>
-              <div style={{ fontSize: "12px", color: "var(--text-secondary)", marginTop: "2px" }}>Domain: <strong>{cust.domain}</strong></div>
+              <h4 className="text-sm font-bold text-slate-950">{cust.company}</h4>
+              <div className="text-xs text-slate-500 mt-1">Domain: <strong className="text-slate-700">{cust.domain}</strong></div>
               
-              <div style={{ display: "flex", gap: "20px", marginTop: "14px", fontSize: "12px", borderTop: "1px solid rgba(255,255,255,0.04)", paddingTop: "10px", color: "var(--text-secondary)" }}>
-                <div>Plan: <strong>{cust.plan}</strong></div>
-                <div>Renewal: <strong>{cust.renewalDate}</strong></div>
+              <div className="flex gap-5 mt-3.5 text-xs border-t border-slate-900/10 pt-2.5 text-slate-500">
+                <div>Plan: <strong className="text-slate-700">{cust.plan}</strong></div>
+                <div>Renewal: <strong className="text-slate-700">{cust.renewalDate}</strong></div>
               </div>
             </div>
           ))}
@@ -43,21 +43,21 @@ export default function CrmCustomersPage() {
       </div>
 
       {/* Subscription Timeline */}
-      <div className="glass" style={{ padding: "28px", borderRadius: "16px" }}>
-        <h3 style={{ fontSize: "16px", fontWeight: 700, marginBottom: "20px" }}>CRM Activity Timeline</h3>
+      <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-7 rounded-2xl">
+        <h3 className="text-sm font-bold text-slate-900 mb-5">CRM Activity Timeline</h3>
         
-        <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+        <div className="flex flex-col gap-5">
           {timelineLogs.map((log, idx) => (
-            <div key={idx} style={{ display: "flex", gap: "16px" }}>
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#a78bfa", boxShadow: "0 0 6px #a78bfa" }} />
+            <div key={idx} className="flex gap-4">
+              <div className="flex flex-col items-center">
+                <span className="w-2.5 h-2.5 rounded-full bg-violet-600 shadow-[0_0_6px_#a78bfa]" />
                 {idx !== timelineLogs.length - 1 && (
-                  <div style={{ width: "2px", flex: 1, background: "rgba(255,255,255,0.06)", marginTop: "4px" }} />
+                  <div className="w-0.5 flex-1 bg-slate-900/10 mt-1" />
                 )}
               </div>
               <div>
-                <div style={{ fontSize: "11px", color: "var(--text-muted)", fontWeight: 600 }}>{log.time}</div>
-                <p style={{ fontSize: "13px", color: "var(--text-secondary)", marginTop: "4px", lineHeight: 1.5 }}>{log.msg}</p>
+                <div className="text-[10px] text-slate-400 font-bold">{log.time}</div>
+                <p className="text-xs text-slate-600 mt-1 leading-relaxed">{log.msg}</p>
               </div>
             </div>
           ))}

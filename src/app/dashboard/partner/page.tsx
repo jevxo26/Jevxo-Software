@@ -31,40 +31,40 @@ export default function PartnerOverviewPage() {
   ];
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
+    <div className="flex flex-col gap-7">
       
       {/* Commission Cards */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }} className="dashboard-kpis">
-        <div className="glass" style={{ padding: "24px", borderRadius: "12px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }}>
-          <div style={{ fontSize: "12px", color: "var(--text-secondary)", fontWeight: 600, textTransform: "uppercase" }}>Clients Managed</div>
-          <div style={{ fontSize: "28px", fontWeight: 800, marginTop: "8px", color: "#60a5fa" }}>84</div>
-          <div style={{ fontSize: "11px", color: "var(--text-muted)", marginTop: "4px" }}>Across your regional nodes</div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-6 rounded-2xl">
+          <div className="text-[10px] text-slate-400 font-bold tracking-wider uppercase">Clients Managed</div>
+          <div className="text-2xl font-extrabold mt-2 text-blue-500">84</div>
+          <div className="text-[10px] text-slate-400 mt-1">Across your regional nodes</div>
         </div>
-        <div className="glass" style={{ padding: "24px", borderRadius: "12px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }}>
-          <div style={{ fontSize: "12px", color: "var(--text-secondary)", fontWeight: 600, textTransform: "uppercase" }}>Commission Earned</div>
-          <div style={{ fontSize: "28px", fontWeight: 800, marginTop: "8px", color: "#10b981" }}>$14,400.00</div>
-          <div style={{ fontSize: "11px", color: "#10b981", marginTop: "4px" }}>📈 +$1,200.00 pending sync</div>
+        <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-6 rounded-2xl">
+          <div className="text-[10px] text-slate-400 font-bold tracking-wider uppercase">Commission Earned</div>
+          <div className="text-2xl font-extrabold mt-2 text-emerald-600">$14,400.00</div>
+          <div className="text-[10px] text-emerald-600 mt-1">📈 +$1,200.00 pending sync</div>
         </div>
-        <div className="glass" style={{ padding: "24px", borderRadius: "12px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }}>
-          <div style={{ fontSize: "12px", color: "var(--text-secondary)", fontWeight: 600, textTransform: "uppercase" }}>Available Wallet Balance</div>
-          <div style={{ fontSize: "28px", fontWeight: 800, marginTop: "8px", color: "#06b6d4" }}>$5,200.00</div>
-          <div style={{ fontSize: "11px", color: "var(--text-secondary)", marginTop: "4px" }}>Withdrawal checkout ready</div>
+        <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-6 rounded-2xl">
+          <div className="text-[10px] text-slate-400 font-bold tracking-wider uppercase">Available Wallet Balance</div>
+          <div className="text-2xl font-extrabold mt-2 text-cyan-600">$5,200.00</div>
+          <div className="text-[10px] text-slate-400 mt-1">Withdrawal checkout ready</div>
         </div>
       </div>
 
       {/* Withdrawal Request Form & Transaction Log */}
-      <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1.8fr", gap: "28px" }} className="hr-grid">
+      <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1.8fr] gap-7">
         
         {/* Form */}
-        <div className="glass" style={{ padding: "28px", borderRadius: "16px" }}>
-          <h3 style={{ fontSize: "16px", fontWeight: 700, marginBottom: "16px" }}>Request Commission Withdrawal</h3>
+        <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-7 rounded-2xl">
+          <h3 className="text-sm font-bold text-slate-900 mb-4">Request Commission Withdrawal</h3>
           <form onSubmit={handleWithdrawSubmit}>
-            <div style={{ marginBottom: "12px" }}>
-              <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "6px" }}>Select Country Account</label>
+            <div className="mb-3">
+              <label className="block text-[10px] text-slate-400 font-bold tracking-wider uppercase mb-1.5">Select Country Account</label>
               <select
                 value={partnerCountry}
                 onChange={(e) => setPartnerCountry(e.target.value)}
-                style={{ width: "100%", padding: "10px", borderRadius: "6px", background: "rgba(0,0,0,0.2)", border: "1px solid var(--border)", color: "#fff", fontSize: "13px" }}
+                className="w-full p-2 px-3 rounded-lg border border-slate-900/[0.08] bg-white text-slate-900 text-xs focus:outline-none focus:ring-1 focus:ring-violet-600"
               >
                 <option value="Bangladesh">Bangladesh (BKash/Bank)</option>
                 <option value="United Kingdom">United Kingdom (IBAN)</option>
@@ -73,41 +73,41 @@ export default function PartnerOverviewPage() {
               </select>
             </div>
 
-            <div style={{ marginBottom: "20px" }}>
-              <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "6px" }}>Withdraw Amount (USD)</label>
+            <div className="mb-5">
+              <label className="block text-[10px] text-slate-400 font-bold tracking-wider uppercase mb-1.5">Withdraw Amount (USD)</label>
               <input
                 type="number"
                 placeholder="e.g. 500"
                 required
                 value={withdrawAmount}
                 onChange={(e) => setWithdrawAmount(e.target.value)}
-                style={{ width: "100%", padding: "10px", borderRadius: "6px", background: "rgba(0,0,0,0.2)", border: "1px solid var(--border)", color: "#fff", fontSize: "13px" }}
+                className="w-full p-2 px-3 rounded-lg border border-slate-900/[0.08] bg-white text-slate-900 text-xs focus:outline-none focus:ring-1 focus:ring-violet-600"
               />
-              <span style={{ fontSize: "11px", color: "var(--text-muted)", marginTop: "4px", display: "block" }}>Maximum transfer: $5,200.00</span>
+              <span className="text-[10px] text-slate-400 mt-1.5 block">Maximum transfer: $5,200.00</span>
             </div>
 
-            <button type="submit" style={{ width: "100%", padding: "10px", borderRadius: "6px", background: "linear-gradient(135deg, #7c3aed, #4f46e5)", color: "#fff", fontWeight: 700, border: "none", cursor: "pointer" }}>Initiate Bank Transfer</button>
+            <button
+              type="submit"
+              className="w-full py-2.5 px-4 rounded-lg bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white font-bold text-xs shadow-md transition-all cursor-pointer"
+            >
+              Initiate Bank Transfer
+            </button>
           </form>
         </div>
 
         {/* Log */}
-        <div className="glass" style={{ padding: "28px", borderRadius: "16px" }}>
-          <h3 style={{ fontSize: "16px", fontWeight: 700, marginBottom: "16px" }}>Withdrawal Request Logs</h3>
-          <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+        <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-7 rounded-2xl">
+          <h3 className="text-sm font-bold text-slate-900 mb-4">Withdrawal Request Logs</h3>
+          <div className="flex flex-col gap-2.5">
             {withdrawHistory.map((txn) => (
-              <div key={txn.id} style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.04)", padding: "14px 20px", borderRadius: "8px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <div key={txn.id} className="bg-slate-900/5 border border-slate-900/5 p-4 px-5 rounded-xl flex justify-between items-center">
                 <div>
-                  <div style={{ fontWeight: 700, fontSize: "14px", color: "#fff" }}>{txn.amount}</div>
-                  <div style={{ fontSize: "11px", color: "var(--text-muted)", marginTop: "2px" }}>ID: {txn.id} | Date: {txn.date}</div>
+                  <div className="font-bold text-slate-955 text-sm">{txn.amount}</div>
+                  <div className="text-[10px] text-slate-400 mt-0.5">ID: {txn.id} | Date: {txn.date}</div>
                 </div>
-                <span style={{
-                  fontSize: "11px",
-                  fontWeight: 700,
-                  padding: "4px 8px",
-                  borderRadius: "100px",
-                  background: txn.status === "Approved" ? "rgba(16,185,129,0.1)" : "rgba(245,158,11,0.1)",
-                  color: txn.status === "Approved" ? "#10b981" : "#f59e0b"
-                }}>
+                <span className={`text-[10px] font-bold py-1 px-2.5 rounded-full ${
+                  txn.status === "Approved" ? "bg-emerald-500/10 text-emerald-600" : "bg-amber-500/10 text-amber-600"
+                }`}>
                   {txn.status}
                 </span>
               </div>
@@ -118,24 +118,23 @@ export default function PartnerOverviewPage() {
       </div>
 
       {/* Gamified Partner Leaderboard */}
-      <div className="glass" style={{ padding: "28px", borderRadius: "16px" }}>
-        <h3 style={{ fontSize: "16px", fontWeight: 700, marginBottom: "16px" }}>Top Performing Country Partners</h3>
-        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+      <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-7 rounded-2xl">
+        <h3 className="text-sm font-bold text-slate-900 mb-4">Top Performing Country Partners</h3>
+        <div className="flex flex-col gap-3">
           {partnerRankings.map((p) => (
-            <div key={p.rank} style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.05)", padding: "14px 20px", borderRadius: "8px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-                <span style={{ fontSize: "18px", fontWeight: 800, color: p.rank === 1 ? "#f59e0b" : "var(--text-secondary)" }}>#{p.rank}</span>
-                <span style={{ fontWeight: 700, color: "#fff" }}>{p.country}</span>
+            <div key={p.rank} className="bg-slate-900/5 border border-slate-900/5 p-4 px-5 rounded-xl flex justify-between items-center">
+              <div className="flex items-center gap-4">
+                <span className={`text-base font-extrabold ${p.rank === 1 ? "text-amber-500" : "text-slate-500"}`}>#{p.rank}</span>
+                <span className="font-bold text-slate-900 text-xs">{p.country}</span>
               </div>
-              <div style={{ display: "flex", gap: "24px", fontSize: "13px" }}>
-                <div>Clients: <strong>{p.clients}</strong></div>
-                <div>Volume: <strong style={{ color: "#10b981" }}>{p.revenue}</strong></div>
+              <div className="flex gap-6 text-xs text-slate-500">
+                <div>Clients: <strong className="text-slate-700">{p.clients}</strong></div>
+                <div>Volume: <strong className="text-emerald-600 font-semibold">{p.revenue}</strong></div>
               </div>
             </div>
           ))}
         </div>
       </div>
-
     </div>
   );
 }

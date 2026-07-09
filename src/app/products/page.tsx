@@ -82,39 +82,36 @@ export default function ProductsPage() {
   const filtered = activeTab === "All" ? productsList : productsList.filter(p => p.category === activeTab);
 
   return (
-    <div style={{ background: "#080d1a", color: "#f1f5f9", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+    <div className="bg-[#080d1a] text-[#f1f5f9] min-h-screen flex flex-col">
       <Navbar />
 
       {/* Hero */}
-      <section className="bg-hero-gradient section" style={{ position: "relative", overflow: "hidden", paddingTop: "140px", paddingBottom: "60px" }}>
-        <div className="orb orb-violet" style={{ width: "500px", height: "500px", top: "-200px", left: "-100px" }} />
-        <div className="orb orb-cyan"   style={{ width: "350px", height: "350px", bottom: "-100px", right: "-80px" }} />
+      <section className="bg-hero-gradient py-[100px] md:py-[70px] relative overflow-hidden pt-[140px] pb-[60px]">
+        <div className="rounded-full blur-[80px] pointer-events-none absolute bg-violet-600/[0.07] w-[500px] h-[500px] -top-[200px] -left-[100px]" />
+        <div className="rounded-full blur-[80px] pointer-events-none absolute bg-cyan-500/[0.06] w-[350px] h-[350px] -bottom-[100px] -right-[80px]" />
         
-        <div className="container" style={{ position: "relative", zIndex: 1, textAlign: "center" }}>
-          <div style={{ display: "inline-block", padding: "4px 14px", borderRadius: "100px", border: "1px solid rgba(124,58,237,0.3)", background: "rgba(124,58,237,0.08)", fontSize: "12px", fontWeight: 600, color: "#a78bfa", marginBottom: "24px", textTransform: "uppercase", letterSpacing: "0.1em" }}>
+        <div className="w-11/12 max-w-[1400px] mx-auto relative z-[1] text-center">
+          <div className="inline-block py-1 px-3.5 rounded-full border border-violet-600/30 bg-violet-600/8 text-xs font-semibold text-violet-400 mb-6 uppercase tracking-widest">
             Software Catalog
           </div>
-          <h1 style={{ fontSize: "clamp(36px, 6vw, 64px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: "20px" }}>
-            Ready-to-Deploy<br /><span className="gradient-text">SaaS Products</span>
+          <h1 className="text-[clamp(36px,6vw,64px)] font-black tracking-tight mb-5">
+            Ready-to-Deploy<br /><span className="bg-gradient-to-br from-violet-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent">SaaS Products</span>
           </h1>
-          <p style={{ fontSize: "17px", color: "var(--text-secondary)", maxWidth: "580px", margin: "0 auto 40px", lineHeight: 1.8 }}>
+          <p className="text-[17px] text-slate-600 max-w-[580px] mx-auto mb-10 leading-relaxed">
             Robust, pre-built operating panels designed to deploy directly into your corporate cloud nodes within hours.
           </p>
 
           {/* Filters */}
-          <div style={{ display: "flex", gap: "10px", justifyContent: "center", flexWrap: "wrap" }}>
+          <div className="flex gap-2.5 justify-center flex-wrap">
             {(["All", "Business", "Operations", "EdTech", "F&B"] as const).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                style={{
-                  padding: "8px 20px", borderRadius: "8px", border: "none", fontSize: "13px", fontWeight: 600, cursor: "pointer",
-                  background: activeTab === tab ? "rgba(124,58,237,0.15)" : "rgba(255,255,255,0.03)",
-                  color: activeTab === tab ? "#a78bfa" : "var(--text-secondary)",
-                  borderWidth: "1px", borderStyle: "solid",
-                  borderColor: activeTab === tab ? "rgba(124,58,237,0.3)" : "rgba(255,255,255,0.06)",
-                  transition: "all 0.2s ease"
-                }}
+                className={`py-2 px-5 rounded-lg text-[13px] font-semibold cursor-pointer border border-solid transition-all duration-200 ${
+                  activeTab === tab
+                    ? "bg-violet-600/15 text-violet-400 border-violet-600/30"
+                    : "bg-white/3 text-slate-600 border-white/6"
+                }`}
               >
                 {tab === "All" ? "🛍️ All Products" : tab}
               </button>
@@ -124,51 +121,44 @@ export default function ProductsPage() {
       </section>
 
       {/* Grid */}
-      <section className="section" style={{ paddingBottom: "100px" }}>
-        <div className="container">
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "28px" }}>
+      <section className="py-[100px] md:py-[70px] pb-25">
+        <div className="w-11/12 max-w-[1400px] mx-auto">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-7">
             {filtered.map((prod) => (
               <div
                 key={prod.id}
-                className="glass"
-                style={{
-                  padding: "32px", borderRadius: "16px", background: "rgba(255,255,255,0.01)", border: "1px solid rgba(255,255,255,0.06)",
-                  display: "flex", flexDirection: "column", justifyContent: "space-between"
-                }}
+                className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 p-8 rounded-2xl bg-white/[0.01] border-white/[0.06] flex flex-col justify-between"
               >
                 <div>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
-                    <span style={{ fontSize: "36px" }}>{prod.icon}</span>
-                    <span style={{ fontSize: "11px", fontWeight: 700, padding: "2px 8px", borderRadius: "100px", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", color: "var(--text-secondary)" }}>
+                  <div className="flex justify-between items-center mb-4">
+                    <span className="text-4xl">{prod.icon}</span>
+                    <span className="text-[11px] font-bold py-0.5 px-2 rounded-full bg-white/4 border border-white/8 text-slate-600">
                       {prod.category}
                     </span>
                   </div>
 
-                  <h3 style={{ fontSize: "20px", fontWeight: 800, color: "#fff", marginBottom: "6px" }}>{prod.name}</h3>
-                  <p style={{ color: "#a78bfa", fontSize: "12px", fontWeight: 600, marginBottom: "16px" }}>{prod.tagline}</p>
-                  <p style={{ color: "var(--text-secondary)", fontSize: "14px", lineHeight: 1.6, marginBottom: "24px" }}>{prod.desc}</p>
+                  <h3 className="text-xl font-extrabold text-white mb-1.5">{prod.name}</h3>
+                  <p className="text-[#a78bfa] text-xs font-semibold mb-4">{prod.tagline}</p>
+                  <p className="text-slate-600 text-sm leading-normal mb-6">{prod.desc}</p>
 
-                  <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "28px" }}>
+                  <div className="flex flex-col gap-2.5 mb-7">
                     {prod.features.slice(0, 3).map((f) => (
-                      <div key={f} style={{ display: "flex", gap: "8px", alignItems: "center", fontSize: "13px", color: "var(--text-secondary)" }}>
-                        <span style={{ color: "#a78bfa" }}>✓</span>
+                      <div key={f} className="flex gap-2 items-center text-[13px] text-slate-600">
+                        <span className="text-[#a78bfa]">✓</span>
                         <span>{f}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "20px" }}>
+                <div className="flex justify-between items-center border-t border-white/6 pt-5">
                   <div>
-                    <span style={{ display: "block", fontSize: "10px", color: "var(--text-muted)", textTransform: "uppercase" }}>License Rate</span>
-                    <strong style={{ fontSize: "15px", color: "#fff" }}>{prod.price}</strong>
+                    <span className="block text-[10px] text-slate-400 uppercase">License Rate</span>
+                    <strong className="text-[15px] text-white font-bold">{prod.price}</strong>
                   </div>
                   <button
                     onClick={() => setSelectedProduct(prod)}
-                    style={{
-                      padding: "8px 18px", borderRadius: "8px", background: "rgba(124,58,237,0.1)", border: "1px solid rgba(124,58,237,0.3)",
-                      color: "#a78bfa", fontSize: "13px", fontWeight: 600, cursor: "pointer", transition: "all 0.2s ease"
-                    }}
+                    className="py-2 px-[18px] rounded-lg bg-violet-600/10 border border-violet-600/30 text-[#a78bfa] text-[13px] font-semibold cursor-pointer transition-all duration-200"
                   >
                     Details & Demo
                   </button>
@@ -181,45 +171,45 @@ export default function ProductsPage() {
 
       {/* Modal Detail Dialog */}
       {selectedProduct && (
-        <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, zIndex: 1100, display: "flex", alignItems: "center", justifyContent: "center", padding: "20px", background: "rgba(4,6,12,0.85)", backdropFilter: "blur(8px)" }}>
-          <div className="glass" style={{ width: "100%", maxWidth: "600px", padding: "40px", borderRadius: "20px", background: "rgba(8,13,26,0.95)", border: "1px solid rgba(255,255,255,0.1)", position: "relative" }}>
+        <div className="fixed inset-0 z-[1100] flex items-center justify-center p-5 bg-[#04060c]/85 backdrop-blur-sm">
+          <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 w-full max-w-[600px] p-10 rounded-[20px] bg-[#080d1a]/95 border-white/10 relative">
             <button
               onClick={() => setSelectedProduct(null)}
-              style={{ position: "absolute", top: "20px", right: "20px", background: "none", border: "none", color: "var(--text-secondary)", fontSize: "20px", cursor: "pointer" }}
+              className="absolute top-5 right-5 bg-transparent border-none text-slate-600 text-xl cursor-pointer"
             >
               ×
             </button>
 
-            <div style={{ display: "flex", gap: "16px", alignItems: "center", marginBottom: "20px" }}>
-              <span style={{ fontSize: "44px" }}>{selectedProduct.icon}</span>
+            <div className="flex gap-4 items-center mb-5">
+              <span className="text-[44px]">{selectedProduct.icon}</span>
               <div>
-                <h3 style={{ fontSize: "24px", fontWeight: 800, color: "#fff" }}>{selectedProduct.name}</h3>
-                <span style={{ fontSize: "12px", color: "#a78bfa", fontWeight: 600 }}>{selectedProduct.tagline}</span>
+                <h3 className="text-2xl font-extrabold text-white">{selectedProduct.name}</h3>
+                <span className="text-xs text-[#a78bfa] font-semibold">{selectedProduct.tagline}</span>
               </div>
             </div>
 
-            <p style={{ color: "var(--text-secondary)", fontSize: "14px", lineHeight: 1.7, marginBottom: "24px" }}>
+            <p className="text-slate-600 text-sm leading-relaxed mb-6">
               {selectedProduct.desc}
             </p>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px", marginBottom: "28px" }} className="modal-specs-grid">
+            <div className="modal-specs-grid grid grid-cols-2 gap-5 mb-7">
               <div>
-                <h4 style={{ fontSize: "12px", fontWeight: 700, color: "#fff", textTransform: "uppercase", marginBottom: "10px", letterSpacing: "0.05em" }}>Core Capabilities</h4>
-                <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                <h4 className="text-xs font-bold text-white uppercase mb-2.5 tracking-wider">Core Capabilities</h4>
+                <div className="flex flex-col gap-2">
                   {selectedProduct.features.map(f => (
-                    <div key={f} style={{ display: "flex", gap: "8px", alignItems: "center", fontSize: "13px", color: "var(--text-secondary)" }}>
-                      <span style={{ color: "#a78bfa" }}>✓</span>
+                    <div key={f} className="flex gap-2 items-center text-[13px] text-slate-600">
+                      <span className="text-[#a78bfa]">✓</span>
                       <span>{f}</span>
                     </div>
                   ))}
                 </div>
               </div>
               <div>
-                <h4 style={{ fontSize: "12px", fontWeight: 700, color: "#fff", textTransform: "uppercase", marginBottom: "10px", letterSpacing: "0.05em" }}>Technical Specs</h4>
-                <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                <h4 className="text-xs font-bold text-white uppercase mb-2.5 tracking-wider">Technical Specs</h4>
+                <div className="flex flex-col gap-2">
                   {selectedProduct.specs.map(s => (
-                    <div key={s} style={{ display: "flex", gap: "8px", alignItems: "center", fontSize: "13px", color: "var(--text-secondary)" }}>
-                      <span style={{ color: "#a78bfa" }}>↳</span>
+                    <div key={s} className="flex gap-2 items-center text-[13px] text-slate-600">
+                      <span className="text-[#a78bfa]">↳</span>
                       <span>{s}</span>
                     </div>
                   ))}
@@ -227,23 +217,17 @@ export default function ProductsPage() {
               </div>
             </div>
 
-            <div style={{ display: "flex", gap: "12px" }}>
+            <div className="flex gap-3">
               <Link
                 href="/contact"
                 onClick={() => setSelectedProduct(null)}
-                style={{
-                  flex: 1, padding: "14px", borderRadius: "10px", textAlign: "center", fontWeight: 700, fontSize: "14px",
-                  background: "linear-gradient(135deg, #7c3aed, #4f46e5)", color: "#fff"
-                }}
+                className="flex-1 py-3.5 rounded-lg text-center font-bold text-sm bg-gradient-to-br from-violet-600 to-indigo-600 text-white"
               >
                 Purchase Product Licence ({selectedProduct.price.split(" ")[0]})
               </Link>
               <button
                 onClick={() => { alert(`Launching interactive sandboxed demo portal for ${selectedProduct.name}...`); setSelectedProduct(null); }}
-                style={{
-                  padding: "14px 24px", borderRadius: "10px", fontWeight: 700, fontSize: "14px",
-                  background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", color: "#fff", cursor: "pointer"
-                }}
+                className="py-3.5 px-6 rounded-lg font-bold text-sm bg-white/4 border border-white/8 text-white cursor-pointer"
               >
                 Launch Sandbox Demo
               </button>

@@ -23,9 +23,9 @@ export default function CrmOverviewPage() {
   };
 
   const getScoreColor = (score: number) => {
-    if (score >= 90) return "#10b981";
-    if (score >= 75) return "#60a5fa";
-    return "#f59e0b";
+    if (score >= 90) return "text-emerald-600";
+    if (score >= 75) return "text-blue-600";
+    return "text-amber-600";
   };
 
   const filteredLeads = leads.filter(l => 
@@ -34,13 +34,13 @@ export default function CrmOverviewPage() {
   );
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "28px" }}>
+    <div className="flex flex-col gap-7">
       
       {/* CRM Actions header */}
-      <div className="glass" style={{ padding: "24px", borderRadius: "16px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "16px" }}>
+      <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-6 rounded-2xl flex justify-between items-center flex-wrap gap-4">
         <div>
-          <h3 style={{ fontSize: "16px", fontWeight: 700 }}>Interactive Lead Pipeline</h3>
-          <p style={{ fontSize: "12px", color: "var(--text-secondary)" }}>Track potential deals, score quality, and shift pipeline stages.</p>
+          <h3 className="text-sm font-bold text-slate-900">Interactive Lead Pipeline</h3>
+          <p className="text-xs text-slate-500">Track potential deals, score quality, and shift pipeline stages.</p>
         </div>
 
         <div>
@@ -49,41 +49,41 @@ export default function CrmOverviewPage() {
             placeholder="Search deals..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            style={{ padding: "8px 12px", borderRadius: "6px", border: "1px solid var(--border)", background: "rgba(0,0,0,0.2)", color: "#fff", fontSize: "13px", width: "220px" }}
+            className="p-2 px-3 rounded-lg border border-slate-900/[0.08] bg-slate-900/5 text-slate-900 text-xs w-56 focus:outline-none focus:ring-1 focus:ring-violet-600 placeholder:text-slate-400"
           />
         </div>
       </div>
 
       {/* Kanban Board Grid */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: "16px", overflowX: "auto", paddingBottom: "10px" }} className="crm-kanban-row">
+      <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-6 gap-4 overflow-x-auto pb-2.5">
         {columns.map((colName) => {
           const colLeads = filteredLeads.filter(l => l.stage === colName);
           return (
-            <div key={colName} style={{ background: "rgba(0,0,0,0.15)", borderRadius: "12px", padding: "16px", minWidth: "165px" }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px", borderBottom: "1px solid rgba(255,255,255,0.06)", paddingBottom: "8px" }}>
-                <span style={{ fontSize: "12px", fontWeight: 700, color: "var(--text-muted)" }}>{colName.toUpperCase()}</span>
-                <span style={{ fontSize: "10px", fontWeight: 700, padding: "2px 6px", borderRadius: "100px", background: "rgba(255,255,255,0.05)" }}>{colLeads.length}</span>
+            <div key={colName} className="bg-slate-900/5 border border-slate-900/5 rounded-2xl p-4 min-w-[165px]">
+              <div className="flex justify-between items-center mb-4 border-b border-slate-900/10 pb-2">
+                <span className="text-[10px] font-bold text-slate-500 tracking-wider uppercase">{colName}</span>
+                <span className="text-[10px] font-bold py-0.5 px-2 rounded-full bg-slate-900/10 text-slate-600">{colLeads.length}</span>
               </div>
 
-              <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+              <div className="flex flex-col gap-3">
                 {colLeads.map((lead) => (
-                  <div key={lead.id} style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.05)", padding: "12px", borderRadius: "8px" }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "4px" }}>
-                      <span style={{ fontSize: "10px", color: "var(--text-muted)", fontWeight: 700 }}>AI Match Score</span>
-                      <span style={{ fontSize: "10px", fontWeight: 700, color: getScoreColor(lead.score) }}>{lead.score}%</span>
+                  <div key={lead.id} className="bg-white border border-slate-900/[0.08] p-3 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="text-[9px] text-slate-400 font-semibold uppercase tracking-wider">AI Match</span>
+                      <span className={`text-[10px] font-bold ${getScoreColor(lead.score)}`}>{lead.score}%</span>
                     </div>
                     
-                    <h4 style={{ fontSize: "12px", fontWeight: 700, color: "#fff", lineHeight: 1.4 }}>{lead.title}</h4>
-                    <div style={{ fontSize: "11px", color: "var(--text-secondary)", marginTop: "4px" }}>{lead.client}</div>
-                    <div style={{ fontSize: "12px", fontWeight: 700, color: "#a78bfa", marginTop: "8px" }}>{lead.value}</div>
+                    <h4 className="text-xs font-bold text-slate-900 leading-tight">{lead.title}</h4>
+                    <div className="text-[10px] text-slate-500 mt-1">{lead.client}</div>
+                    <div className="text-xs font-bold text-violet-600 mt-2 block">{lead.value}</div>
                     
                     {/* Shift buttons */}
-                    <div style={{ display: "flex", gap: "4px", justifyContent: "flex-end", marginTop: "12px", borderTop: "1px solid rgba(255,255,255,0.04)", paddingTop: "8px" }}>
+                    <div className="flex gap-1 justify-end mt-3 border-t border-slate-900/10 pt-2">
                       {lead.stage !== "New" && (
-                        <button onClick={() => cycleLeadStage(lead.id, "backward")} style={{ padding: "4px 8px", background: "rgba(255,255,255,0.04)", border: "none", color: "var(--text-secondary)", fontSize: "10px", borderRadius: "4px", cursor: "pointer" }}>←</button>
+                        <button onClick={() => cycleLeadStage(lead.id, "backward")} className="p-1 px-2.5 bg-slate-900/5 hover:bg-slate-900/10 border-0 text-slate-600 text-[10px] rounded cursor-pointer transition-colors">←</button>
                       )}
                       {lead.stage !== "Lost" && (
-                        <button onClick={() => cycleLeadStage(lead.id, "forward")} style={{ padding: "4px 8px", background: "rgba(255,255,255,0.04)", border: "none", color: "var(--text-secondary)", fontSize: "10px", borderRadius: "4px", cursor: "pointer" }}>→</button>
+                        <button onClick={() => cycleLeadStage(lead.id, "forward")} className="p-1 px-2.5 bg-slate-900/5 hover:bg-slate-900/10 border-0 text-slate-600 text-[10px] rounded cursor-pointer transition-colors">→</button>
                       )}
                     </div>
                   </div>

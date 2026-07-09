@@ -26,65 +26,65 @@ export default function BlogPage() {
   const rest     = posts.filter((p) => !p.featured);
 
   return (
-    <div style={{ background: "#080d1a", color: "#f1f5f9", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+    <div className="bg-[#080d1a] text-[#f1f5f9] min-h-screen flex flex-col">
       <Navbar />
-      <div style={{ flex: 1, paddingTop: "80px" }}>
+      <div className="flex-1 pt-20">
         {/* ── Hero ─────────────────────────────────────────────── */}
-        <section className="bg-hero-gradient section" style={{ position: "relative", overflow: "hidden" }}>
-        <div className="orb orb-pink"   style={{ width: "400px", height: "400px", top: "-120px", right: "-80px" }} />
-        <div className="orb orb-violet" style={{ width: "300px", height: "300px", bottom: "-60px", left: "-60px" }} />
-        <div className="container" style={{ position: "relative", zIndex: 1, textAlign: "center" }}>
-          <div style={{ display: "inline-block", padding: "4px 14px", borderRadius: "100px", border: "1px solid rgba(236,72,153,0.3)", background: "rgba(236,72,153,0.08)", fontSize: "12px", fontWeight: 600, color: "#f472b6", marginBottom: "24px", textTransform: "uppercase", letterSpacing: "0.1em" }}>
+        <section className="bg-hero-gradient py-[100px] md:py-[70px] relative overflow-hidden">
+        <div className="rounded-full blur-[80px] pointer-events-none absolute bg-pink-500/[0.05] w-[400px] h-[400px] -top-[120px] -right-[80px]" />
+        <div className="rounded-full blur-[80px] pointer-events-none absolute bg-violet-600/[0.07] w-[300px] h-[300px] -bottom-[60px] -left-[60px]" />
+        <div className="w-11/12 max-w-[1400px] mx-auto relative z-[1] text-center">
+          <div className="inline-block py-1 px-3.5 rounded-full border border-[rgba(236,72,153,0.3)] bg-[rgba(236,72,153,0.08)] text-xs font-semibold text-[#f472b6] mb-6 uppercase tracking-widest">
             Jevxo Journal
           </div>
-          <h1 style={{ fontSize: "clamp(36px, 6vw, 72px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: "24px" }}>
-            Ideas Worth <span className="gradient-text-warm">Sharing</span>
+          <h1 className="text-[clamp(36px,6vw,72px)] font-black tracking-tight mb-6">
+            Ideas Worth <span className="bg-gradient-to-br from-pink-500 via-violet-500 to-blue-500 bg-clip-text text-transparent">Sharing</span>
           </h1>
-          <p style={{ fontSize: "18px", color: "var(--text-secondary)", maxWidth: "520px", margin: "0 auto", lineHeight: 1.8 }}>
+          <p className="text-lg text-slate-600 max-w-[520px] mx-auto leading-relaxed">
             Deep dives, practical guides, and honest opinions on the craft of building digital products.
           </p>
         </div>
       </section>
 
-      <section className="section">
-        <div className="container">
+      <section className="py-[100px] md:py-[70px]">
+        <div className="w-11/12 max-w-[1400px] mx-auto">
           {/* Categories */}
-          <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginBottom: "56px" }}>
+          <div className="flex gap-2 mb-14" style={{flexWrap: "wrap"}}>
             {blogCategories.map((cat) => (
-              <span key={cat} style={{ padding: "6px 18px", borderRadius: "100px", fontSize: "13px", fontWeight: 500, border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.03)", color: "var(--text-secondary)", cursor: "pointer" }}>
+              <span className="py-1.5 px-[18px] rounded-full text-[13px] font-medium border border-white/[0.08] bg-white/[0.03] text-slate-600" key={cat} style={{cursor: "pointer"}}>
                 {cat}
               </span>
             ))}
           </div>
 
           {/* Featured Posts */}
-          <div style={{ marginBottom: "56px" }}>
-            <h2 style={{ fontSize: "22px", fontWeight: 700, marginBottom: "28px", color: "var(--text-secondary)" }}>✦ Featured Articles</h2>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px" }} className="blog-featured">
+          <div className="mb-14">
+            <h2 className="text-[22px] font-bold mb-7 text-slate-600">✦ Featured Articles</h2>
+            <div className="blog-featured grid grid-cols-3 gap-6">
               {featured.map((post) => (
-                <Link key={post.id} href={`/blog/${post.slug}`} style={{ display: "block" }}>
-                  <div className="glass blog-card" style={{ borderRadius: "var(--radius-lg)", overflow: "hidden", transition: "all 0.3s ease", height: "100%" }}>
-                    <div style={{ height: "180px", background: "linear-gradient(135deg, rgba(236,72,153,0.2), rgba(124,58,237,0.2))", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "56px" }}>
+                <Link className="block" key={post.id} href={`/blog/${post.slug}`}>
+                  <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 blog-card rounded-[20px] overflow-hidden h-full" style={{transition: "all 0.3s ease"}}>
+                    <div className="h-[180px] bg-[linear-gradient(135deg,rgba(236,72,153,0.2),rgba(124,58,237,0.2))] flex items-center justify-center text-[56px]">
                       {post.category === "Engineering" && "⚙️"}
                       {post.category === "Design"      && "🎨"}
                       {post.category === "AI"          && "🤖"}
                       {post.category === "Mobile"      && "📱"}
                       {post.category === "DevOps"      && "☁️"}
                     </div>
-                    <div style={{ padding: "24px" }}>
-                      <div style={{ display: "flex", gap: "8px", marginBottom: "12px" }}>
-                        <span style={{ padding: "2px 10px", borderRadius: "100px", fontSize: "11px", fontWeight: 600, background: "rgba(236,72,153,0.12)", color: "#f472b6" }}>{post.category}</span>
-                        <span style={{ padding: "2px 10px", borderRadius: "100px", fontSize: "11px", color: "var(--text-muted)" }}>{post.readTime}</span>
+                    <div className="p-6">
+                      <div className="flex gap-2 mb-3">
+                        <span className="py-0.5 px-2.5 rounded-full text-[11px] font-semibold bg-[rgba(236,72,153,0.12)] text-[#f472b6]">{post.category}</span>
+                        <span className="py-0.5 px-2.5 rounded-full text-[11px] text-slate-400">{post.readTime}</span>
                       </div>
-                      <h3 style={{ fontSize: "17px", fontWeight: 700, marginBottom: "10px", lineHeight: 1.4 }}>{post.title}</h3>
-                      <p style={{ color: "var(--text-secondary)", fontSize: "13px", lineHeight: 1.6, marginBottom: "20px" }}>{post.excerpt}</p>
-                      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                        <div style={{ width: "28px", height: "28px", borderRadius: "50%", background: "linear-gradient(135deg, #7c3aed, #ec4899)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: "12px" }}>
+                      <h3 className="text-[17px] font-bold mb-2.5 leading-normal">{post.title}</h3>
+                      <p className="text-slate-600 text-[13px] leading-normal mb-5">{post.excerpt}</p>
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-[28px] h-[28px] rounded-full flex items-center justify-center font-bold text-xs" style={{background: "linear-gradient(135deg, #7c3aed, #ec4899)"}}>
                           {post.author.name[0]}
                         </div>
                         <div>
-                          <div style={{ fontSize: "12px", fontWeight: 600 }}>{post.author.name}</div>
-                          <div style={{ fontSize: "11px", color: "var(--text-muted)" }}>{formatDate(post.publishedAt)}</div>
+                          <div className="text-xs font-semibold">{post.author.name}</div>
+                          <div className="text-[11px] text-slate-400">{formatDate(post.publishedAt)}</div>
                         </div>
                       </div>
                     </div>
@@ -96,27 +96,27 @@ export default function BlogPage() {
 
           {/* More Posts */}
           <div>
-            <h2 style={{ fontSize: "22px", fontWeight: 700, marginBottom: "28px", color: "var(--text-secondary)" }}>More Articles</h2>
-            <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+            <h2 className="text-[22px] font-bold mb-7 text-slate-600">More Articles</h2>
+            <div className="flex flex-col gap-4">
               {rest.map((post) => (
-                <Link key={post.id} href={`/blog/${post.slug}`} style={{ display: "block" }}>
-                  <div className="glass blog-row" style={{ padding: "28px 32px", borderRadius: "var(--radius-md)", display: "flex", alignItems: "center", gap: "24px", transition: "all 0.2s ease", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
-                    <div style={{ width: "56px", height: "56px", borderRadius: "12px", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "28px", flexShrink: 0 }}>
+                <Link className="block" key={post.id} href={`/blog/${post.slug}`}>
+                  <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 blog-row py-7 px-8 rounded-[14px] flex items-center gap-6 bg-white/[0.04] border-white/[0.08]" style={{transition: "all 0.2s ease"}}>
+                    <div className="w-[56px] h-[56px] rounded-xl bg-white/[0.04] border border-white/[0.06] flex items-center justify-center text-[28px]" style={{flexShrink: 0}}>
                       {post.category === "Mobile" ? "📱" : post.category === "DevOps" ? "☁️" : "📝"}
                     </div>
-                    <div style={{ flex: 1 }}>
-                      <div style={{ display: "flex", gap: "8px", marginBottom: "6px" }}>
-                        <span style={{ fontSize: "11px", fontWeight: 600, color: "#a78bfa" }}>{post.category}</span>
-                        <span style={{ fontSize: "11px", color: "var(--text-muted)" }}>· {post.readTime}</span>
+                    <div className="flex-1">
+                      <div className="flex gap-2 mb-1.5">
+                        <span className="text-[11px] font-semibold text-[#a78bfa]">{post.category}</span>
+                        <span className="text-[11px] text-slate-400">· {post.readTime}</span>
                       </div>
-                      <h3 style={{ fontSize: "17px", fontWeight: 700, marginBottom: "6px" }}>{post.title}</h3>
-                      <p style={{ color: "var(--text-secondary)", fontSize: "14px" }}>{post.excerpt}</p>
+                      <h3 className="text-[17px] font-bold mb-1.5">{post.title}</h3>
+                      <p className="text-slate-600 text-sm">{post.excerpt}</p>
                     </div>
-                    <div style={{ color: "var(--text-muted)", fontSize: "13px", flexShrink: 0, textAlign: "right" }}>
-                      <div style={{ marginBottom: "4px" }}>{post.author.name}</div>
+                    <div className="text-slate-400 text-[13px] text-right" style={{flexShrink: 0}}>
+                      <div className="mb-1">{post.author.name}</div>
                       <div>{formatDate(post.publishedAt)}</div>
                     </div>
-                    <div style={{ color: "#a78bfa", fontSize: "20px", flexShrink: 0 }}>→</div>
+                    <div className="text-[#a78bfa] text-xl" style={{flexShrink: 0}}>→</div>
                   </div>
                 </Link>
               ))}

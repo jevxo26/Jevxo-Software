@@ -45,7 +45,7 @@ export default function PortfolioDetailPage({ params }: Props) {
 
   if (loading) {
     return (
-      <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#080d1a", color: "#fff" }}>
+      <div className="min-h-screen flex items-center justify-center bg-[#080d1a] text-[#fff]">
         Loading project details...
       </div>
     );
@@ -54,55 +54,55 @@ export default function PortfolioDetailPage({ params }: Props) {
   if (!item) notFound();
 
   return (
-    <div style={{ background: "#080d1a", color: "#f1f5f9", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+    <div className="bg-[#080d1a] text-[#f1f5f9] min-h-screen flex flex-col">
       <Navbar />
-      <div style={{ flex: 1, paddingTop: "80px" }}>
+      <div className="flex-1 pt-20">
         {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="bg-hero-gradient section" style={{ position: "relative", overflow: "hidden" }}>
-        <div className="orb orb-cyan"   style={{ width: "500px", height: "500px", top: "-150px", right: "-120px" }} />
-        <div className="orb orb-violet" style={{ width: "300px", height: "300px", bottom: "-60px", left: "-60px" }} />
-        <div className="container" style={{ position: "relative", zIndex: 1 }}>
-          <Link href="/portfolio" style={{ display: "inline-flex", alignItems: "center", gap: "8px", color: "var(--text-muted)", fontSize: "14px", marginBottom: "32px" }}>
+      <section className="bg-hero-gradient py-[100px] md:py-[70px] relative overflow-hidden">
+        <div className="rounded-full blur-[80px] pointer-events-none absolute bg-cyan-500/[0.06] w-[500px] h-[500px] -top-[150px] -right-[120px]" />
+        <div className="rounded-full blur-[80px] pointer-events-none absolute bg-violet-600/[0.07] w-[300px] h-[300px] -bottom-[60px] -left-[60px]" />
+        <div className="w-11/12 max-w-[1400px] mx-auto relative z-[1]">
+          <Link className="items-center gap-2 text-slate-400 text-sm mb-8" href="/portfolio" style={{display: "inline-flex"}}>
             ← Back to Portfolio
           </Link>
-          <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginBottom: "20px" }}>
-            <span style={{ padding: "4px 14px", borderRadius: "100px", fontSize: "12px", fontWeight: 600, background: "rgba(124,58,237,0.12)", color: "#a78bfa" }}>{item.category}</span>
-            <span style={{ padding: "4px 14px", borderRadius: "100px", fontSize: "12px", color: "var(--text-muted)", border: "1px solid rgba(255,255,255,0.06)" }}>{item.year}</span>
+          <div className="flex gap-3 mb-5" style={{flexWrap: "wrap"}}>
+            <span className="py-1 px-3.5 rounded-full text-xs font-semibold bg-violet-600/[0.12] text-[#a78bfa]">{item.category}</span>
+            <span className="py-1 px-3.5 rounded-full text-xs text-slate-400 border border-white/[0.06]">{item.year}</span>
           </div>
-          <h1 style={{ fontSize: "clamp(32px, 5vw, 64px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: "16px" }}>{item.title}</h1>
-          <p style={{ color: "var(--text-secondary)", fontSize: "18px", marginBottom: "0" }}>Client: <strong style={{ color: "#f1f5f9" }}>{item.client}</strong></p>
+          <h1 className="text-[clamp(32px,5vw,64px)] font-black tracking-tight mb-4">{item.title}</h1>
+          <p className="text-slate-600 text-lg mb-0">Client: <strong className="text-[#f1f5f9]">{item.client}</strong></p>
         </div>
       </section>
 
       {/* ── Thumbnail ─────────────────────────────────────────── */}
-      <div className="container" style={{ marginTop: "-40px", position: "relative", zIndex: 2 }}>
-        <div style={{ height: "360px", borderRadius: "24px", background: "linear-gradient(135deg, rgba(124,58,237,0.25), rgba(6,182,212,0.2))", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "100px", border: "1px solid rgba(255,255,255,0.06)" }}>
+      <div className="w-11/12 max-w-[1400px] mx-auto mt-[-40px] relative z-[2]">
+        <div className="h-[360px] rounded-[24px] bg-[linear-gradient(135deg,rgba(124,58,237,0.25),rgba(6,182,212,0.2))] flex items-center justify-center text-[100px] border border-white/[0.06]">
           {categoryIcon[item.category] ?? "📁"}
         </div>
       </div>
 
       {/* ── Case Study Content ────────────────────────────────── */}
-      <section className="section">
-        <div className="container">
-          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: "60px", alignItems: "start" }} className="case-study-grid">
+      <section className="py-[100px] md:py-[70px]">
+        <div className="w-11/12 max-w-[1400px] mx-auto">
+          <div className="case-study-grid grid grid-cols-[2fr_1fr] gap-[60px] items-start">
             {/* Main content */}
             <div>
               {[
                 { label: "The Challenge", text: item.challenge },
                 { label: "Our Solution",  text: item.solution },
               ].map((block) => (
-                <div key={block.label} style={{ marginBottom: "48px" }}>
-                  <h2 style={{ fontSize: "26px", fontWeight: 700, marginBottom: "16px" }}>{block.label}</h2>
-                  <p style={{ color: "var(--text-secondary)", fontSize: "16px", lineHeight: 1.8 }}>{block.text}</p>
+                <div className="mb-12" key={block.label}>
+                  <h2 className="text-[26px] font-bold mb-4">{block.label}</h2>
+                  <p className="text-slate-600 text-base leading-relaxed">{block.text}</p>
                 </div>
               ))}
 
               {/* Tags */}
               <div>
-                <h3 style={{ fontSize: "18px", fontWeight: 600, marginBottom: "16px" }}>Technologies Used</h3>
-                <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+                <h3 className="text-lg font-semibold mb-4">Technologies Used</h3>
+                <div className="flex gap-2.5" style={{flexWrap: "wrap"}}>
                   {item.tags.map((tag: string) => (
-                    <span key={tag} style={{ padding: "6px 16px", borderRadius: "100px", fontSize: "13px", fontWeight: 500, background: "rgba(124,58,237,0.1)", border: "1px solid rgba(124,58,237,0.2)", color: "#a78bfa" }}>{tag}</span>
+                    <span className="py-1.5 px-4 rounded-full text-[13px] font-medium bg-violet-600/[0.1] border border-violet-600/[0.2] text-[#a78bfa]" key={tag}>{tag}</span>
                   ))}
                 </div>
               </div>
@@ -111,27 +111,27 @@ export default function PortfolioDetailPage({ params }: Props) {
             {/* Sidebar */}
             <div>
               {/* Result card */}
-              <div style={{ padding: "32px", borderRadius: "var(--radius-lg)", background: "linear-gradient(135deg, rgba(52,211,153,0.1), rgba(6,182,212,0.08))", border: "1px solid rgba(52,211,153,0.2)", marginBottom: "24px" }}>
-                <p style={{ color: "var(--text-muted)", fontSize: "12px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "12px" }}>Result</p>
-                <p style={{ fontSize: "17px", fontWeight: 700, color: "#34d399", lineHeight: 1.6 }}>{item.result}</p>
+              <div className="p-8 rounded-[20px] bg-[linear-gradient(135deg,rgba(52,211,153,0.1),rgba(6,182,212,0.08))] border border-[rgba(52,211,153,0.2)] mb-6">
+                <p className="text-slate-400 text-xs font-semibold uppercase tracking-[0.08em] mb-3">Result</p>
+                <p className="text-[17px] font-bold text-[#34d399] leading-normal">{item.result}</p>
               </div>
 
               {/* Details card */}
-              <div className="glass" style={{ padding: "32px", borderRadius: "var(--radius-lg)", marginBottom: "24px" }}>
-                <h3 style={{ fontSize: "17px", fontWeight: 700, marginBottom: "20px" }}>Project Info</h3>
+              <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 p-8 rounded-[20px] mb-6">
+                <h3 className="text-[17px] font-bold mb-5">Project Info</h3>
                 {[
                   { label: "Client",   value: item.client },
                   { label: "Category", value: item.category },
                   { label: "Year",     value: item.year },
                 ].map((row) => (
-                  <div key={row.label} style={{ display: "flex", justifyContent: "space-between", padding: "12px 0", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
-                    <span style={{ color: "var(--text-muted)", fontSize: "14px" }}>{row.label}</span>
-                    <span style={{ fontWeight: 600, fontSize: "14px" }}>{row.value}</span>
+                  <div className="flex justify-between py-3 px-0" key={row.label} style={{borderBottom: "1px solid rgba(255,255,255,0.05)"}}>
+                    <span className="text-slate-400 text-sm">{row.label}</span>
+                    <span className="font-semibold text-sm">{row.value}</span>
                   </div>
                 ))}
               </div>
 
-              <Link href="/contact" style={{ display: "block", textAlign: "center", padding: "14px 24px", borderRadius: "12px", fontWeight: 700, fontSize: "15px", background: "linear-gradient(135deg, #7c3aed, #4f46e5)", color: "#fff", boxShadow: "0 0 30px rgba(124,58,237,0.4)" }}>
+              <Link className="block text-center py-3.5 px-6 rounded-xl font-bold text-[15px] bg-gradient-to-br from-violet-600 to-indigo-600 text-[#fff]" href="/contact" style={{boxShadow: "0 0 30px rgba(124,58,237,0.4)"}}>
                 Start a Similar Project →
               </Link>
             </div>

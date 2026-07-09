@@ -51,37 +51,34 @@ export default function FAQPage() {
   const filteredFaqs = activeFilter === "all" ? faqs : faqs.filter(f => f.cat === activeFilter);
 
   return (
-    <div style={{ background: "#080d1a", color: "#f1f5f9", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+    <div className="bg-[#080d1a] text-[#f1f5f9] min-h-screen flex flex-col">
       <Navbar />
 
       {/* Hero */}
-      <section className="bg-hero-gradient section" style={{ position: "relative", overflow: "hidden", paddingTop: "140px", paddingBottom: "60px" }}>
-        <div className="orb orb-violet" style={{ width: "500px", height: "500px", top: "-200px", right: "-100px" }} />
-        <div className="container" style={{ position: "relative", zIndex: 1, textAlign: "center" }}>
-          <div style={{ display: "inline-block", padding: "4px 14px", borderRadius: "100px", border: "1px solid rgba(124,58,237,0.3)", background: "rgba(124,58,237,0.08)", fontSize: "12px", fontWeight: 600, color: "#a78bfa", marginBottom: "24px", textTransform: "uppercase", letterSpacing: "0.1em" }}>
+      <section className="bg-hero-gradient py-[100px] md:py-[70px] relative overflow-hidden pt-[140px] pb-[60px]">
+        <div className="rounded-full blur-[80px] pointer-events-none absolute bg-violet-600/[0.07] w-[500px] h-[500px] -top-[200px] -right-[100px]" />
+        <div className="w-11/12 max-w-[1400px] mx-auto relative z-[1] text-center">
+          <div className="inline-block py-1 px-3.5 rounded-full border border-violet-600/30 bg-violet-600/8 text-xs font-semibold text-violet-400 mb-6 uppercase tracking-widest">
             FAQ Center
           </div>
-          <h1 style={{ fontSize: "clamp(36px, 6vw, 64px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: "20px" }}>
-            Frequently Asked<br /><span className="gradient-text">Questions</span>
+          <h1 className="text-[clamp(36px,6vw,64px)] font-black tracking-tight mb-5">
+            Frequently Asked<br /><span className="bg-gradient-to-br from-violet-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent">Questions</span>
           </h1>
-          <p style={{ fontSize: "17px", color: "var(--text-secondary)", maxWidth: "580px", margin: "0 auto 40px", lineHeight: 1.8 }}>
+          <p className="text-[17px] text-slate-600 max-w-[580px] mx-auto mb-10 leading-relaxed">
             Find immediate answers regarding pricing, project timelines, security audits, and our software engineering methods.
           </p>
 
           {/* Filters */}
-          <div style={{ display: "flex", gap: "10px", justifyContent: "center", flexWrap: "wrap" }}>
+          <div className="flex gap-2.5 justify-center flex-wrap">
             {(["all", "general", "process", "billing"] as const).map((filter) => (
               <button
                 key={filter}
                 onClick={() => { setActiveFilter(filter); setActiveFaq(null); }}
-                style={{
-                  padding: "8px 20px", borderRadius: "8px", border: "none", fontSize: "13px", fontWeight: 600, cursor: "pointer",
-                  background: activeFilter === filter ? "rgba(124,58,237,0.15)" : "rgba(255,255,255,0.03)",
-                  color: activeFilter === filter ? "#a78bfa" : "var(--text-secondary)",
-                  borderWidth: "1px", borderStyle: "solid",
-                  borderColor: activeFilter === filter ? "rgba(124,58,237,0.3)" : "rgba(255,255,255,0.06)",
-                  transition: "all 0.2s ease"
-                }}
+                className={`py-2 px-5 rounded-lg text-[13px] font-semibold cursor-pointer border border-solid transition-all duration-200 ${
+                  activeFilter === filter
+                    ? "bg-violet-600/15 text-violet-400 border-violet-600/30"
+                    : "bg-white/3 text-slate-600 border-white/6"
+                }`}
               >
                 {filter === "all" && "✨ Show All"}
                 {filter === "general" && "📁 General Info"}
@@ -94,33 +91,25 @@ export default function FAQPage() {
       </section>
 
       {/* Accordions */}
-      <section className="section" style={{ paddingBottom: "100px" }}>
-        <div className="container" style={{ maxWidth: "720px" }}>
-          <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+      <section className="py-[100px] md:py-[70px] pb-25">
+        <div className="w-11/12 max-w-[1400px] mx-auto max-w-[720px]">
+          <div className="flex flex-col gap-4">
             {filteredFaqs.map((faq, index) => {
               const isSelected = activeFaq === index;
               return (
                 <div
                   key={faq.q}
-                  className="glass"
-                  style={{
-                    borderRadius: "12px", background: "rgba(255,255,255,0.01)", border: "1px solid rgba(255,255,255,0.06)",
-                    overflow: "hidden", transition: "all 0.3s ease"
-                  }}
+                  className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 rounded-xl bg-white/[0.01] border-white/[0.06] overflow-hidden"
                 >
                   <button
                     onClick={() => setActiveFaq(isSelected ? null : index)}
-                    style={{
-                      width: "100%", padding: "20px 24px", display: "flex", justifyContent: "space-between", alignItems: "center",
-                      background: "none", border: "none", color: "#fff", fontWeight: 700, fontSize: "15px",
-                      textAlign: "left", cursor: "pointer"
-                    }}
+                    className="w-full py-5 px-6 flex justify-between items-center bg-transparent border-none text-white font-bold text-[15px] text-left cursor-pointer"
                   >
                     <span>{faq.q}</span>
-                    <span style={{ fontSize: "12px", color: "#a78bfa", transform: isSelected ? "rotate(90deg)" : "none", transition: "transform 0.2s" }}>▶</span>
+                    <span className={`text-xs text-[#a78bfa] transition-transform duration-200 ${isSelected ? "rotate-90" : ""}`}>▶</span>
                   </button>
                   {isSelected && (
-                    <div style={{ padding: "0 24px 24px", color: "var(--text-secondary)", fontSize: "14px", lineHeight: 1.7, borderTop: "1px solid rgba(255,255,255,0.04)", paddingTop: "16px" }}>
+                    <div className="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-white/[0.04] pt-4">
                       {faq.a}
                     </div>
                   )}
@@ -129,14 +118,11 @@ export default function FAQPage() {
             })}
           </div>
 
-          <div style={{ textAlign: "center", marginTop: "60px" }}>
-            <p style={{ color: "var(--text-secondary)", fontSize: "14px", marginBottom: "16px" }}>Still have questions?</p>
+          <div className="text-center mt-[60px]">
+            <p className="text-slate-600 text-sm mb-4">Still have questions?</p>
             <Link
               href="/contact"
-              style={{
-                display: "inline-block", padding: "12px 28px", borderRadius: "10px", fontSize: "14px", fontWeight: 700,
-                background: "linear-gradient(135deg, #7c3aed, #4f46e5)", color: "#fff"
-              }}
+              className="inline-block py-3 px-7 rounded-[10px] text-sm font-bold bg-gradient-to-br from-violet-600 to-indigo-600 text-[#fff]"
             >
               Get in Touch
             </Link>

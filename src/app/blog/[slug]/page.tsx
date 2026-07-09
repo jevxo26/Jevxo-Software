@@ -46,7 +46,7 @@ export default function BlogPostPage({ params }: Props) {
 
   if (loading) {
     return (
-      <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#080d1a", color: "#fff" }}>
+      <div className="min-h-screen flex items-center justify-center bg-[#080d1a] text-[#fff]">
         Loading article...
       </div>
     );
@@ -55,34 +55,34 @@ export default function BlogPostPage({ params }: Props) {
   if (!post) notFound();
 
   return (
-    <div style={{ background: "#080d1a", color: "#f1f5f9", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+    <div className="bg-[#080d1a] text-[#f1f5f9] min-h-screen flex flex-col">
       <Navbar />
-      <div style={{ flex: 1, paddingTop: "80px" }}>
+      <div className="flex-1 pt-20">
         {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="bg-hero-gradient section" style={{ position: "relative", overflow: "hidden" }}>
-        <div className="orb orb-pink"   style={{ width: "400px", height: "400px", top: "-120px", right: "-80px" }} />
-        <div className="container" style={{ position: "relative", zIndex: 1, maxWidth: "860px" }}>
-          <Link href="/blog" style={{ display: "inline-flex", alignItems: "center", gap: "8px", color: "var(--text-muted)", fontSize: "14px", marginBottom: "32px" }}>
+      <section className="bg-hero-gradient py-[100px] md:py-[70px] relative overflow-hidden">
+        <div className="rounded-full blur-[80px] pointer-events-none absolute bg-pink-500/[0.05] w-[400px] h-[400px] -top-[120px] -right-[80px]" />
+        <div className="w-11/12 max-w-[1400px] mx-auto relative z-[1] max-w-[860px]">
+          <Link className="items-center gap-2 text-slate-400 text-sm mb-8" href="/blog" style={{display: "inline-flex"}}>
             ← Back to Blog
           </Link>
-          <div style={{ display: "flex", gap: "10px", marginBottom: "20px", flexWrap: "wrap" }}>
-            <span style={{ padding: "4px 14px", borderRadius: "100px", fontSize: "12px", fontWeight: 600, background: "rgba(236,72,153,0.12)", color: "#f472b6" }}>{post.category}</span>
-            <span style={{ padding: "4px 14px", borderRadius: "100px", fontSize: "12px", color: "var(--text-muted)", border: "1px solid rgba(255,255,255,0.06)" }}>{post.readTime}</span>
+          <div className="flex gap-2.5 mb-5" style={{flexWrap: "wrap"}}>
+            <span className="py-1 px-3.5 rounded-full text-xs font-semibold bg-[rgba(236,72,153,0.12)] text-[#f472b6]">{post.category}</span>
+            <span className="py-1 px-3.5 rounded-full text-xs text-slate-400 border border-white/[0.06]">{post.readTime}</span>
           </div>
-          <h1 style={{ fontSize: "clamp(28px, 4.5vw, 54px)", fontWeight: 900, letterSpacing: "-0.025em", marginBottom: "24px", lineHeight: 1.15 }}>
+          <h1 className="text-[clamp(28px,4.5vw,54px)] font-black tracking-[-0.025em] mb-6 leading-[1.15]">
             {post.title}
           </h1>
-          <p style={{ fontSize: "18px", color: "var(--text-secondary)", lineHeight: 1.7, marginBottom: "32px" }}>
+          <p className="text-lg text-slate-600 leading-relaxed mb-8">
             {post.excerpt}
           </p>
           {/* Author row */}
-          <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
-            <div style={{ width: "44px", height: "44px", borderRadius: "50%", background: "linear-gradient(135deg, #7c3aed, #ec4899)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: "18px" }}>
+          <div className="flex items-center gap-3.5">
+            <div className="w-[44px] h-[44px] rounded-full flex items-center justify-center font-bold text-lg" style={{background: "linear-gradient(135deg, #7c3aed, #ec4899)"}}>
               {post.author.name[0]}
             </div>
             <div>
-              <div style={{ fontWeight: 700, fontSize: "15px" }}>{post.author.name}</div>
-              <div style={{ color: "var(--text-muted)", fontSize: "13px" }}>
+              <div className="font-bold text-[15px]">{post.author.name}</div>
+              <div className="text-slate-400 text-[13px]">
                 {post.author.role} · {formatDate(post.publishedAt)}
               </div>
             </div>
@@ -91,8 +91,8 @@ export default function BlogPostPage({ params }: Props) {
       </section>
 
       {/* ── Cover ─────────────────────────────────────────────── */}
-      <div className="container" style={{ marginTop: "-40px", position: "relative", zIndex: 2, maxWidth: "900px" }}>
-        <div style={{ height: "400px", borderRadius: "24px", background: "linear-gradient(135deg, rgba(236,72,153,0.2), rgba(124,58,237,0.2))", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "100px", border: "1px solid rgba(255,255,255,0.06)" }}>
+      <div className="w-11/12 max-w-[1400px] mx-auto mt-[-40px] relative z-[2] max-w-[900px]">
+        <div className="h-[400px] rounded-[24px] bg-[linear-gradient(135deg,rgba(236,72,153,0.2),rgba(124,58,237,0.2))] flex items-center justify-center text-[100px] border border-white/[0.06]">
           {post.category === "Engineering" && "⚙️"}
           {post.category === "Design"      && "🎨"}
           {post.category === "AI"          && "🤖"}
@@ -102,30 +102,30 @@ export default function BlogPostPage({ params }: Props) {
       </div>
 
       {/* ── Article Body ─────────────────────────────────────── */}
-      <section className="section">
-        <div className="container" style={{ maxWidth: "760px" }}>
+      <section className="py-[100px] md:py-[70px]">
+        <div className="w-11/12 max-w-[1400px] mx-auto max-w-[760px]">
           {/* Simulated rich article body */}
-          <div style={{ color: "var(--text-secondary)", fontSize: "17px", lineHeight: 1.9 }}>
-            <p style={{ marginBottom: "24px" }}>
+          <div className="text-slate-600 text-[17px] leading-[1.9]">
+            <p className="mb-6">
               {post.excerpt} This is a preview of the full article content. In a production site, you&apos;d pull in the full MDX or CMS-driven content here.
             </p>
-            <h2 style={{ fontSize: "26px", fontWeight: 700, color: "#f1f5f9", margin: "40px 0 16px" }}>Why This Matters</h2>
-            <p style={{ marginBottom: "24px" }}>
+            <h2 className="text-[26px] font-bold text-[#f1f5f9] m-[40px_0_16px]">Why This Matters</h2>
+            <p className="mb-6">
               The digital landscape is constantly evolving. Staying ahead requires not just technical knowledge, but a deep understanding of the problems you&apos;re trying to solve. In this article, we break down the key principles that guide our thinking at Jevxo.
             </p>
-            <h2 style={{ fontSize: "26px", fontWeight: 700, color: "#f1f5f9", margin: "40px 0 16px" }}>Key Takeaways</h2>
+            <h2 className="text-[26px] font-bold text-[#f1f5f9] m-[40px_0_16px]">Key Takeaways</h2>
             {post.tags.map((tag: string) => (
-              <div key={tag} style={{ display: "flex", alignItems: "flex-start", gap: "14px", marginBottom: "16px" }}>
-                <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#a78bfa", flexShrink: 0, marginTop: "10px" }} />
-                <p>Deep knowledge of <strong style={{ color: "#f1f5f9" }}>{tag}</strong> is essential for modern {post.category.toLowerCase()} work. Understanding the fundamentals unlocks better decisions at every layer of the stack.</p>
+              <div className="flex items-flex-start gap-3.5 mb-4" key={tag}>
+                <div className="w-[8px] h-[8px] rounded-full bg-[#a78bfa] mt-2.5" style={{flexShrink: 0}} />
+                <p>Deep knowledge of <strong className="text-[#f1f5f9]">{tag}</strong> is essential for modern {post.category.toLowerCase()} work. Understanding the fundamentals unlocks better decisions at every layer of the stack.</p>
               </div>
             ))}
           </div>
 
           {/* Tags */}
-          <div style={{ marginTop: "56px", paddingTop: "32px", borderTop: "1px solid rgba(255,255,255,0.06)", display: "flex", gap: "8px", flexWrap: "wrap" }}>
+          <div className="mt-14 pt-8 border-t border-[1px solid rgba(255,255,255,0.06)] flex gap-2" style={{flexWrap: "wrap"}}>
             {post.tags.map((tag: string) => (
-              <span key={tag} style={{ padding: "6px 16px", borderRadius: "100px", fontSize: "13px", background: "rgba(124,58,237,0.08)", border: "1px solid rgba(124,58,237,0.2)", color: "#a78bfa" }}>{tag}</span>
+              <span className="py-1.5 px-4 rounded-full text-[13px] bg-violet-600/[0.08] border border-violet-600/[0.2] text-[#a78bfa]" key={tag}>{tag}</span>
             ))}
           </div>
         </div>
@@ -133,16 +133,16 @@ export default function BlogPostPage({ params }: Props) {
 
       {/* ── Related Posts ────────────────────────────────────── */}
       {related.length > 0 && (
-        <section className="section-sm" style={{ borderTop: "1px solid var(--border)", paddingBottom: "80px" }}>
-          <div className="container">
-            <h2 style={{ fontSize: "24px", fontWeight: 700, marginBottom: "28px" }}>Related Articles</h2>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }} className="related-grid">
+        <section className="py-[60px] md:py-[40px] border-t border-slate-900/[0.08] pb-20">
+          <div className="w-11/12 max-w-[1400px] mx-auto">
+            <h2 className="text-2xl font-bold mb-7">Related Articles</h2>
+            <div className="related-grid grid grid-cols-3 gap-5">
               {related.map((p) => (
-                <Link key={p.id} href={`/blog/${p.slug}`} style={{ display: "block" }}>
-                  <div className="glass related-card" style={{ padding: "24px", borderRadius: "16px", transition: "all 0.2s ease" }}>
-                    <span style={{ fontSize: "11px", fontWeight: 600, color: "#f472b6", display: "block", marginBottom: "10px" }}>{p.category}</span>
-                    <h3 style={{ fontSize: "15px", fontWeight: 700, marginBottom: "8px", lineHeight: 1.4 }}>{p.title}</h3>
-                    <p style={{ color: "var(--text-muted)", fontSize: "13px" }}>{p.readTime} · {formatDate(p.publishedAt)}</p>
+                <Link className="block" key={p.id} href={`/blog/${p.slug}`}>
+                  <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 related-card p-6 rounded-2xl" style={{transition: "all 0.2s ease"}}>
+                    <span className="text-[11px] font-semibold text-[#f472b6] block mb-2.5">{p.category}</span>
+                    <h3 className="text-[15px] font-bold mb-2 leading-normal">{p.title}</h3>
+                    <p className="text-slate-400 text-[13px]">{p.readTime} · {formatDate(p.publishedAt)}</p>
                   </div>
                 </Link>
               ))}

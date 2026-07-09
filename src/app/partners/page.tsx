@@ -38,59 +38,59 @@ export default function PartnersPage() {
   };
 
   return (
-    <div style={{ background: "#080d1a", color: "#f1f5f9", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+    <div className="bg-[#080d1a] text-[#f1f5f9] min-h-screen flex flex-col">
       <Navbar />
 
       {/* Hero */}
-      <section className="bg-hero-gradient section" style={{ position: "relative", overflow: "hidden", paddingTop: "140px", paddingBottom: "60px" }}>
-        <div className="orb orb-violet" style={{ width: "500px", height: "500px", top: "-200px", left: "-100px" }} />
-        <div className="container" style={{ position: "relative", zIndex: 1, textAlign: "center" }}>
-          <div style={{ display: "inline-block", padding: "4px 14px", borderRadius: "100px", border: "1px solid rgba(124,58,237,0.3)", background: "rgba(124,58,237,0.08)", fontSize: "12px", fontWeight: 600, color: "#a78bfa", marginBottom: "24px", textTransform: "uppercase", letterSpacing: "0.1em" }}>
+      <section className="bg-hero-gradient py-[100px] md:py-[70px] relative overflow-hidden pt-[140px] pb-[60px]">
+        <div className="rounded-full blur-[80px] pointer-events-none absolute bg-violet-600/[0.07] w-[500px] h-[500px] -top-[200px] -left-[100px]" />
+        <div className="w-11/12 max-w-[1400px] mx-auto relative z-[1] text-center">
+          <div className="inline-block py-1 px-3.5 rounded-full border border-violet-600/[0.3] bg-violet-600/[0.08] text-xs font-semibold text-[#a78bfa] mb-6 uppercase tracking-widest">
             Global Networks
           </div>
-          <h1 style={{ fontSize: "clamp(36px, 6vw, 64px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: "20px" }}>
-            Country Sales<br /><span className="gradient-text">Partner Roster</span>
+          <h1 className="text-[clamp(36px,6vw,64px)] font-black tracking-tight mb-5">
+            Country Sales<br /><span className="bg-gradient-to-br from-violet-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent">Partner Roster</span>
           </h1>
-          <p style={{ fontSize: "17px", color: "var(--text-secondary)", maxWidth: "580px", margin: "0 auto", lineHeight: 1.8 }}>
+          <p className="text-[17px] text-slate-600 max-w-[580px] mx-auto leading-relaxed">
             Meet the regional partner directors leading software distribution nodes and earning high-yield lifetime commissions.
           </p>
         </div>
       </section>
 
       {/* Roster Grid */}
-      <section className="section" style={{ paddingBottom: "60px" }}>
-        <div className="container">
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "24px", marginBottom: "60px" }}>
+      <section className="py-[100px] md:py-[70px] pb-[60px]">
+        <div className="w-11/12 max-w-[1400px] mx-auto">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-6 mb-[60px]">
             {partnersList.map((p) => (
-              <div key={p.country} className="glass" style={{ padding: "32px", borderRadius: "16px", background: "rgba(255,255,255,0.01)", border: "1px solid rgba(255,255,255,0.06)" }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                    <span style={{ fontSize: "30px" }}>{p.flag}</span>
-                    <strong style={{ fontSize: "18px", color: "#fff" }}>{p.country}</strong>
+              <div key={p.country} className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 p-8 rounded-2xl bg-white/[0.01] border-white/[0.06]">
+                <div className="flex justify-between items-center mb-5">
+                  <div className="flex items-center gap-2.5">
+                    <span className="text-[30px]">{p.flag}</span>
+                    <strong className="text-lg text-[#fff]">{p.country}</strong>
                   </div>
-                  <span style={{ fontSize: "11px", fontWeight: 700, padding: "2px 10px", borderRadius: "100px", background: "rgba(16,185,129,0.12)", color: "#10b981", border: "1px solid rgba(16,185,129,0.2)" }}>
+                  <span className="text-[11px] font-bold py-0.5 px-2.5 rounded-full bg-[rgba(16,185,129,0.12)] text-[#10b981] border border-[rgba(16,185,129,0.2)]">
                     {p.status}
                   </span>
                 </div>
 
-                <div style={{ borderBottom: "1px solid rgba(255,255,255,0.06)", paddingBottom: "16px", marginBottom: "16px" }}>
-                  <span style={{ display: "block", fontSize: "11px", color: "var(--text-muted)", textTransform: "uppercase" }}>Partner Director</span>
-                  <strong style={{ fontSize: "15px", color: "#fff" }}>{p.partnerName}</strong>
-                  <span style={{ display: "block", fontSize: "12px", color: "#a78bfa", marginTop: "2px" }}>{p.rank}</span>
+                <div className="pb-4 mb-4" style={{borderBottom: "1px solid rgba(255,255,255,0.06)"}}>
+                  <span className="block text-[11px] text-slate-400 uppercase">Partner Director</span>
+                  <strong className="text-[15px] text-[#fff]">{p.partnerName}</strong>
+                  <span className="block text-xs text-[#a78bfa] mt-0.5">{p.rank}</span>
                 </div>
 
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+                <div className="grid grid-cols-[1fr_1fr] gap-3">
                   <div>
-                    <span style={{ display: "block", fontSize: "10px", color: "var(--text-muted)" }}>Total Sales</span>
-                    <strong style={{ fontSize: "14px", color: "#fff" }}>{p.conversions}</strong>
+                    <span className="block text-[10px] text-slate-400">Total Sales</span>
+                    <strong className="text-sm text-[#fff]">{p.conversions}</strong>
                   </div>
                   <div>
-                    <span style={{ display: "block", fontSize: "10px", color: "var(--text-muted)" }}>Total Volume</span>
-                    <strong style={{ fontSize: "14px", color: "#fff" }}>{p.revenueGenerated}</strong>
+                    <span className="block text-[10px] text-slate-400">Total Volume</span>
+                    <strong className="text-sm text-[#fff]">{p.revenueGenerated}</strong>
                   </div>
-                  <div style={{ gridColumn: "span 2", borderTop: "1px dashed rgba(255,255,255,0.05)", paddingTop: "8px", marginTop: "4px" }}>
-                    <span style={{ display: "block", fontSize: "10px", color: "var(--text-muted)" }}>Lifetime Commission Earned</span>
-                    <strong style={{ fontSize: "15px", color: "#06b6d4" }}>{p.commissionEarned}</strong>
+                  <div className="border-t border-[1px dashed rgba(255,255,255,0.05)] pt-2 mt-1" style={{gridColumn: "span 2"}}>
+                    <span className="block text-[10px] text-slate-400">Lifetime Commission Earned</span>
+                    <strong className="text-[15px] text-[#06b6d4]">{p.commissionEarned}</strong>
                   </div>
                 </div>
               </div>
@@ -100,51 +100,48 @@ export default function PartnersPage() {
       </section>
 
       {/* Application Form */}
-      <section className="section bg-section-gradient" style={{ borderTop: "1px solid var(--border)", paddingBottom: "100px" }}>
-        <div className="container" style={{ maxWidth: "600px" }}>
-          <div className="glass" style={{ padding: "40px", borderRadius: "20px", background: "rgba(8,13,26,0.4)" }}>
-            <div style={{ textAlign: "center", marginBottom: "32px" }}>
-              <h2 style={{ fontSize: "26px", fontWeight: 800 }}>Join the Partner Program</h2>
-              <p style={{ color: "var(--text-secondary)", fontSize: "13px", marginTop: "6px" }}>Earn up to 30% lifetime revenue share representing Jevxo software suites in your region.</p>
+      <section className="py-[100px] md:py-[70px] bg-section-gradient border-t border-slate-900/[0.08] pb-[100px]">
+        <div className="w-11/12 max-w-[1400px] mx-auto max-w-[600px]">
+          <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 p-10 rounded-[20px] bg-[rgba(8,13,26,0.4)]">
+            <div className="text-center mb-8">
+              <h2 className="text-[26px] font-extrabold">Join the Partner Program</h2>
+              <p className="text-slate-600 text-[13px] mt-1.5">Earn up to 30% lifetime revenue share representing Jevxo software suites in your region.</p>
             </div>
 
             {submitted ? (
-              <div style={{ textAlign: "center", padding: "30px 0" }}>
-                <span style={{ fontSize: "40px" }}>🤝</span>
-                <h3 style={{ fontSize: "20px", fontWeight: 700, color: "#10b981", marginTop: "12px", marginBottom: "8px" }}>Application Logged!</h3>
-                <p style={{ color: "var(--text-secondary)", fontSize: "13px" }}>Our partner evaluation team will review your application credentials within 48 hours.</p>
+              <div className="text-center py-[30px] px-0">
+                <span className="text-[40px]">🤝</span>
+                <h3 className="text-xl font-bold text-[#10b981] mt-3 mb-2">Application Logged!</h3>
+                <p className="text-slate-600 text-[13px]">Our partner evaluation team will review your application credentials within 48 hours.</p>
               </div>
             ) : (
-              <form onSubmit={handleApply} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+              <form className="flex flex-col gap-5" onSubmit={handleApply}>
                 <div>
-                  <label style={{ display: "block", fontSize: "12px", fontWeight: 700, color: "#a78bfa", textTransform: "uppercase", marginBottom: "8px" }}>Full Name</label>
-                  <input
+                  <label className="block text-xs font-bold text-[#a78bfa] uppercase mb-2">Full Name</label>
+                  <input className="w-full p-3 rounded-lg border border-[var(--border)] bg-white/[0.02] text-[#fff] text-sm"
                     type="text"
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    style={{ width: "100%", padding: "12px", borderRadius: "8px", border: "1px solid var(--border)", background: "rgba(255,255,255,0.02)", color: "#fff", fontSize: "14px" }}
                   />
                 </div>
 
                 <div>
-                  <label style={{ display: "block", fontSize: "12px", fontWeight: 700, color: "#a78bfa", textTransform: "uppercase", marginBottom: "8px" }}>Email Address</label>
-                  <input
+                  <label className="block text-xs font-bold text-[#a78bfa] uppercase mb-2">Email Address</label>
+                  <input className="w-full p-3 rounded-lg border border-[var(--border)] bg-white/[0.02] text-[#fff] text-sm"
                     type="email"
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    style={{ width: "100%", padding: "12px", borderRadius: "8px", border: "1px solid var(--border)", background: "rgba(255,255,255,0.02)", color: "#fff", fontSize: "14px" }}
                   />
                 </div>
 
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+                <div className="grid grid-cols-[1fr_1fr] gap-4">
                   <div>
-                    <label style={{ display: "block", fontSize: "12px", fontWeight: 700, color: "#a78bfa", textTransform: "uppercase", marginBottom: "8px" }}>Target Country</label>
-                    <select
+                    <label className="block text-xs font-bold text-[#a78bfa] uppercase mb-2">Target Country</label>
+                    <select className="w-full p-3 rounded-lg border border-[var(--border)] bg-[#0c1524] text-[#fff] text-sm"
                       value={formData.country}
                       onChange={(e) => setFormData({ ...formData, country: e.target.value })}
-                      style={{ width: "100%", padding: "12px", borderRadius: "8px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "14px" }}
                     >
                       <option value="Bangladesh">Bangladesh</option>
                       <option value="United States">United States</option>
@@ -156,11 +153,10 @@ export default function PartnersPage() {
                   </div>
 
                   <div>
-                    <label style={{ display: "block", fontSize: "12px", fontWeight: 700, color: "#a78bfa", textTransform: "uppercase", marginBottom: "8px" }}>Current Domain</label>
-                    <select
+                    <label className="block text-xs font-bold text-[#a78bfa] uppercase mb-2">Current Domain</label>
+                    <select className="w-full p-3 rounded-lg border border-[var(--border)] bg-[#0c1524] text-[#fff] text-sm"
                       value={formData.experience}
                       onChange={(e) => setFormData({ ...formData, experience: e.target.value })}
-                      style={{ width: "100%", padding: "12px", borderRadius: "8px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "14px" }}
                     >
                       <option value="Agency Owner">Agency Owner</option>
                       <option value="Sales Professional">Sales Professional</option>
@@ -170,12 +166,9 @@ export default function PartnersPage() {
                   </div>
                 </div>
 
-                <button
+                <button className="p-3.5 rounded-lg bg-gradient-to-br from-violet-600 to-indigo-600 border-[none] text-[#fff] font-bold text-sm mt-2"
                   type="submit"
-                  style={{
-                    padding: "14px", borderRadius: "8px", background: "linear-gradient(135deg, #7c3aed, #4f46e5)",
-                    border: "none", color: "#fff", fontWeight: 700, fontSize: "14px", cursor: "pointer", marginTop: "8px"
-                  }}
+                  style={{cursor: "pointer"}}
                 >
                   Submit Partner Application
                 </button>

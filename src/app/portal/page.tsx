@@ -33,96 +33,53 @@ export default function PortalPage() {
   };
 
   return (
-    <div style={{
-      minHeight: "100vh",
-      background: "radial-gradient(ellipse at center, #0d1530 0%, #080d1a 100%)",
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      padding: "80px 20px 40px",
-      position: "relative",
-      overflow: "hidden",
-    }}>
+    <div className="min-h-screen bg-[radial-gradient(ellipse_at_center,#0d1530_0%,#080d1a_100%)] flex flex-col items-center justify-center py-20 px-5 pb-10 relative overflow-hidden">
       {/* Decorative Orbs */}
-      <div className="orb orb-violet" style={{ width: "400px", height: "400px", top: "-100px", left: "-50px", opacity: 0.4 }} />
-      <div className="orb orb-cyan" style={{ width: "350px", height: "350px", bottom: "-100px", right: "-50px", opacity: 0.3 }} />
+      <div className="rounded-full blur-[80px] pointer-events-none absolute bg-violet-600/[0.07] w-[400px] h-[400px] -top-[100px] -left-[50px] opacity-40" />
+      <div className="rounded-full blur-[80px] pointer-events-none absolute bg-cyan-500/[0.06] w-[350px] h-[350px] -bottom-[100px] -right-[50px] opacity-30" />
 
-      <div style={{ position: "relative", zIndex: 10, width: "100%", maxWidth: "980px" }}>
+      <div className="relative z-10 w-full max-w-[980px]">
         
         {/* Back Link */}
-        <Link href="/" style={{
-          display: "inline-flex",
-          alignItems: "center",
-          gap: "8px",
-          color: "var(--text-secondary)",
-          fontSize: "14px",
-          fontWeight: 600,
-          marginBottom: "32px",
-          transition: "color 0.2s",
-        }}
-          onMouseEnter={(e) => e.currentTarget.style.color = "#a78bfa"}
-          onMouseLeave={(e) => e.currentTarget.style.color = "var(--text-secondary)"}
-        >
+        <Link href="/" className="inline-flex items-center gap-2 text-slate-600 text-sm font-semibold mb-8 hover:text-violet-400 transition-colors duration-200">
           ← Return to Public Site
         </Link>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: "40px" }} className="portal-grid">
+        <div className="portal-grid grid grid-cols-[1.2fr_1fr] gap-10">
           
           {/* Left Column: Role Selector Info */}
           <div>
-            <div style={{ marginBottom: "28px" }}>
-              <div style={{ fontSize: "28px", fontWeight: 800, color: "#fff", display: "flex", alignItems: "center", gap: "10px", marginBottom: "8px" }}>
-                <div style={{
-                  width: "32px", height: "32px",
-                  background: "linear-gradient(135deg, #7c3aed, #4f46e5)",
-                  borderRadius: "8px",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: "16px", fontWeight: 800, color: "#fff",
-                }}>J</div>
+            <div className="mb-7">
+              <div className="text-[28px] font-extrabold text-white flex items-center gap-2.5 mb-2">
+                <div className="w-8 h-8 bg-gradient-to-br from-violet-600 to-indigo-600 rounded-lg flex items-center justify-center text-base font-extrabold text-white">J</div>
                 Jevxo Ecosystem
               </div>
-              <p style={{ color: "var(--text-secondary)", fontSize: "14px", lineHeight: 1.6 }}>
+              <p className="text-slate-600 text-sm leading-normal">
                 Select a workspace role below to explore the corresponding operational panel schema.
               </p>
             </div>
 
             {/* Roles Grid */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+            <div className="flex flex-col gap-3">
               {rolesList.map((role) => {
                 const isActive = selectedRole.id === role.id;
                 return (
                   <button
                     key={role.id}
                     onClick={() => handleRoleSelect(role)}
-                    style={{
-                      textAlign: "left",
-                      width: "100%",
-                      padding: "16px 20px",
-                      borderRadius: "12px",
-                      border: "1px solid",
-                      borderColor: isActive ? "rgba(124,58,237,0.3)" : "rgba(255,255,255,0.06)",
-                      background: isActive ? "rgba(124,58,237,0.08)" : "rgba(255,255,255,0.02)",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "16px",
-                      cursor: "pointer",
-                      transition: "all 0.2s ease",
-                    }}
-                    onMouseEnter={(e) => {
-                      if (!isActive) e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)";
-                    }}
-                    onMouseLeave={(e) => {
-                      if (!isActive) e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
-                    }}
+                    className={`text-left w-full p-5 rounded-xl border flex items-center gap-4 cursor-pointer transition-all duration-200 ${
+                      isActive
+                        ? "border-violet-600/30 bg-violet-600/8"
+                        : "border-white/6 bg-white/2 hover:border-white/12"
+                    }`}
                   >
-                    <div style={{ fontSize: "24px" }}>{role.icon}</div>
-                    <div style={{ flex: 1 }}>
-                      <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                        <span style={{ fontSize: "15px", fontWeight: 700, color: isActive ? "#a78bfa" : "#f1f5f9" }}>{role.name}</span>
-                        <span style={{ fontSize: "10px", fontWeight: 700, padding: "2px 6px", borderRadius: "4px", background: isActive ? "rgba(124,58,237,0.2)" : "rgba(255,255,255,0.06)", color: isActive ? "#a78bfa" : "var(--text-secondary)" }}>{role.badge}</span>
+                    <div className="text-2xl">{role.icon}</div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2">
+                        <span className={`text-[15px] font-bold ${isActive ? "text-violet-400" : "text-[#f1f5f9]"}`}>{role.name}</span>
+                        <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${isActive ? "bg-violet-600/20 text-violet-400" : "bg-white/6 text-slate-600"}`}>{role.badge}</span>
                       </div>
-                      <p style={{ fontSize: "12px", color: "var(--text-secondary)", marginTop: "2px", lineHeight: 1.4 }}>{role.desc}</p>
+                      <p className="text-xs text-slate-600 mt-0.5 leading-normal">{role.desc}</p>
                     </div>
                   </button>
                 );
@@ -131,89 +88,42 @@ export default function PortalPage() {
           </div>
 
           {/* Right Column: Portal Login Form */}
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <div className="glass" style={{
-              width: "100%",
-              padding: "40px 32px",
-              borderRadius: "20px",
-              border: "1px solid rgba(124,58,237,0.2)",
-              background: "rgba(8,13,26,0.65)",
-              boxShadow: "0 20px 50px rgba(8,13,26,0.5)",
-            }}>
-              <h3 style={{ fontSize: "20px", fontWeight: 700, marginBottom: "24px", color: "#f1f5f9" }}>Portal Authenticator</h3>
+          <div className="flex items-center">
+            <div className="w-full py-10 px-8 rounded-[20px] border border-violet-600/20 bg-[#080d1a]/65 shadow-[0_20px_50px_rgba(8,13,26,0.5)] backdrop-blur-md">
+              <h3 className="text-xl font-bold mb-6 text-[#f1f5f9]">Portal Authenticator</h3>
 
               <form onSubmit={handleSubmit}>
-                <div style={{ marginBottom: "20px" }}>
-                  <label style={{ display: "block", fontSize: "11px", fontWeight: 700, color: "#a78bfa", textTransform: "uppercase", marginBottom: "8px", letterSpacing: "0.05em" }}>Workspace Account ID</label>
+                <div className="mb-5">
+                  <label className="block text-[11px] font-bold text-violet-400 uppercase mb-2 tracking-wider">Workspace Account ID</label>
                   <input
                     type="text"
                     disabled
                     value={selectedRole.username}
-                    style={{
-                      width: "100%",
-                      padding: "12px 16px",
-                      borderRadius: "8px",
-                      border: "1px solid var(--border)",
-                      background: "rgba(255,255,255,0.02)",
-                      color: "var(--text-secondary)",
-                      fontSize: "14px",
-                      cursor: "not-allowed",
-                    }}
+                    className="w-full py-3 px-4 rounded-lg border border-slate-900/[0.08] bg-white/2 text-slate-600 text-sm cursor-not-allowed"
                   />
                 </div>
 
-                <div style={{ marginBottom: "28px" }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "8px" }}>
-                    <label style={{ display: "block", fontSize: "11px", fontWeight: 700, color: "#a78bfa", textTransform: "uppercase", letterSpacing: "0.05em" }}>Access Pin / Password</label>
-                    <span style={{ fontSize: "12px", color: "var(--text-muted)" }}>Auto-filled</span>
+                <div className="mb-7">
+                  <div className="flex justify-between mb-2">
+                    <label className="block text-[11px] font-bold text-violet-400 uppercase tracking-wider">Access Pin / Password</label>
+                    <span className="text-xs text-slate-400">Auto-filled</span>
                   </div>
                   <input
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    style={{
-                      width: "100%",
-                      padding: "12px 16px",
-                      borderRadius: "8px",
-                      border: "1px solid var(--border)",
-                      background: "rgba(255,255,255,0.03)",
-                      color: "#fff",
-                      fontSize: "14px",
-                    }}
+                    className="w-full py-3 px-4 rounded-lg border border-slate-900/[0.08] bg-white/3 text-white text-sm"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={isLoggingIn}
-                  style={{
-                    width: "100%",
-                    padding: "14px",
-                    borderRadius: "10px",
-                    background: "linear-gradient(135deg, #7c3aed, #4f46e5)",
-                    color: "#fff",
-                    fontSize: "15px",
-                    fontWeight: 700,
-                    border: "none",
-                    boxShadow: "0 0 20px rgba(124,58,237,0.3)",
-                    transition: "all 0.2s",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: "10px",
-                  }}
+                  className="w-full p-3.5 rounded-lg bg-gradient-to-br from-violet-600 to-indigo-600 text-white text-[15px] font-bold border-none shadow-[0_0_20px_rgba(124,58,237,0.3)] transition-all duration-200 flex items-center justify-center gap-2.5 cursor-pointer"
                 >
                   {isLoggingIn ? (
                     <>
-                      <span style={{
-                        display: "inline-block",
-                        width: "16px",
-                        height: "16px",
-                        border: "2px solid rgba(255,255,255,0.3)",
-                        borderTopColor: "#fff",
-                        borderRadius: "50%",
-                        animation: "spin-slow 1s linear infinite",
-                      }} />
+                      <span className="inline-block w-4 h-4 border-2 border-solid border-white/30 border-t-white rounded-full animate-[spin-slow_1s_linear_infinite]" />
                       Verifying Node...
                     </>
                   ) : (
@@ -222,7 +132,7 @@ export default function PortalPage() {
                 </button>
               </form>
 
-              <div style={{ marginTop: "24px", paddingTop: "20px", borderTop: "1px solid rgba(255,255,255,0.06)", fontSize: "11px", color: "var(--text-muted)", lineHeight: 1.5 }}>
+              <div className="mt-6 pt-5 border-t border-white/6 text-[11px] text-slate-400 leading-normal">
                 🔒 This is a secure Next.js 16 endpoint. Selecting a workspace role automatically provisions a secure session token redirecting you to your Jevxo node.
               </div>
             </div>

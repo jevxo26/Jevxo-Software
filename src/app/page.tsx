@@ -7,6 +7,7 @@ import Footer from "@/components/layout/Footer";
 import { portfolioItems, portfolioCategories } from "@/lib/data/portfolio";
 import { teamMembers, stats } from "@/lib/data/team";
 
+
 // Define Jevxo Solutions based on brief
 const solutions = [
   { id: "1", title: "Custom Websites", desc: "High-performance marketing & corporate sites powered by Next.js.", icon: "🌐", tag: "Website" },
@@ -49,7 +50,7 @@ const partnerPrograms = [
 export default function HomePage() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [billingPeriod, setBillingPeriod] = useState<"monthly" | "annually">("annually");
-  
+
   // Dynamic CMS States
   const [heroTitle, setHeroTitle] = useState("The Digital Operating||System for Global Ventures");
   const [heroDesc, setHeroDesc] = useState("A unified suite of business management platforms, CRM systems, automated growth centers, and enterprise hosting packages. Build, scale, and automate your company.");
@@ -73,9 +74,9 @@ export default function HomePage() {
     if (stored) {
       try {
         const parsed = JSON.parse(stored);
-        if (parsed.heroTitle) setHeroTitle(parsed.heroTitle);
-        if (parsed.heroDesc) setHeroDesc(parsed.heroDesc);
-        if (parsed.heroTag) setHeroTag(parsed.heroTag);
+        if (parsed.heroTitle && typeof parsed.heroTitle === "string" && parsed.heroTitle.trim() !== "") setHeroTitle(parsed.heroTitle);
+        if (parsed.heroDesc && typeof parsed.heroDesc === "string" && parsed.heroDesc.trim() !== "") setHeroDesc(parsed.heroDesc);
+        if (parsed.heroTag && typeof parsed.heroTag === "string" && parsed.heroTag.trim() !== "") setHeroTag(parsed.heroTag);
         if (parsed.networkNodes) {
           setNodes(parsed.networkNodes);
           if (parsed.networkNodes.length > 0) {
@@ -135,31 +136,31 @@ export default function HomePage() {
 
       {/* ── 1. HERO SECTION ─────────────────────────────────────────────── */}
       <section className="relative min-h-[92vh] flex items-center overflow-hidden pt-36 pb-20 bg-gradient-to-b from-violet-50 via-white to-slate-50">
-        <div className="absolute w-[600px] h-[600px] -top-36 -right-24 rounded-full bg-violet-600/10 blur-[120px] pointer-events-none opacity-60 animate-pulse-glow" />
+        <div className="absolute w-[600px] h-[600px] -top-36 -right-24 rounded-full bg-violet-600/10 blur-[120px] pointer-events-none opacity-60 animate-[pulse-glow_2s_ease-in-out_infinite]" />
         <div className="absolute w-[450px] h-[450px] -bottom-36 -left-12 rounded-full bg-cyan-500/10 blur-[100px] pointer-events-none opacity-50" />
-        <div className="container relative z-10 mx-auto w-11/12 max-w-[1400px]">
+        <div className="w-11/12 max-w-[1400px] mx-auto relative z-10">
           <div className="max-w-[800px] mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-violet-600/30 bg-violet-600/10 text-xs font-semibold text-violet-700 mb-7 uppercase tracking-wider animate-fade-up">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-violet-600/30 bg-violet-600/10 text-xs font-semibold text-violet-700 mb-7 uppercase tracking-wider">
               <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 shadow-[0_0_10px_#06b6d4]" />
               {heroTag}
             </div>
-            
-            <h1 className="text-4xl md:text-7xl font-extrabold tracking-tight mb-7 leading-none animate-fade-up delay-100 text-slate-900">
+
+            <h1 className="text-4xl md:text-7xl font-extrabold tracking-tight mb-7 leading-none text-slate-900">
               {heroTitle.includes("||") ? (
                 <>
                   {heroTitle.split("||")[0]}<br />
-                  <span className="gradient-text">{heroTitle.split("||")[1]}</span>
+                  <span className="bg-gradient-to-br from-violet-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent">{heroTitle.split("||")[1]}</span>
                 </>
               ) : (
-                <span className="gradient-text">{heroTitle}</span>
+                <span className="bg-gradient-to-br from-violet-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent">{heroTitle}</span>
               )}
             </h1>
-            
-            <p className="text-base md:text-xl text-slate-600 leading-relaxed max-w-[620px] mx-auto mb-10 animate-fade-up delay-200">
+
+            <p className="text-base md:text-xl text-slate-600 leading-relaxed max-w-[620px] mx-auto mb-10">
               {heroDesc}
             </p>
 
-            <div className="flex flex-wrap justify-center gap-4 animate-fade-up delay-300">
+            <div className="flex flex-wrap justify-center gap-4">
               <Link href="/portal" className="px-9 py-4 rounded-2xl font-bold text-base bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-xl hover:shadow-violet-600/20 hover:-translate-y-0.5 transition-all duration-200">
                 Access Portal Login →
               </Link>
@@ -173,7 +174,7 @@ export default function HomePage() {
 
       {/* ── 2. THE HUB & LIVE STATS ─────────────────────────────────────── */}
       <section className="py-24 border-t border-slate-900/10 bg-slate-50/50" id="the-hub">
-        <div className="container mx-auto w-11/12 max-w-[1400px]">
+        <div className="w-11/12 max-w-[1400px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <div className="text-violet-600 text-sm font-bold uppercase tracking-wider mb-3">
@@ -181,7 +182,7 @@ export default function HomePage() {
               </div>
               <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-6 leading-tight text-slate-900">
                 One Core Vision.<br />
-                <span className="gradient-text-warm">Unlimited Scale.</span>
+                <span className="bg-gradient-to-br from-pink-500 via-violet-500 to-blue-500 bg-clip-text text-transparent">Unlimited Scale.</span>
               </h2>
               <p className="text-slate-600 text-base leading-relaxed mb-5">
                 Jevxo is designed to act as the primary operational engine for next-gen ventures. Our mission is to integrate website deployment, customer relations, employee productivity, partner tracking, and localized sales networks into one singular product architecture.
@@ -190,11 +191,11 @@ export default function HomePage() {
                 No more duct-taping ten different software applications. Jevxo is a coherent ecosystem that empowers small enterprises and country-level agencies alike.
               </p>
               <div className="flex flex-col sm:flex-row gap-6">
-                <div className="border-l-3 border-violet-600 pl-4">
+                <div className="border-l-2 border-violet-600 pl-4">
                   <div className="text-sm font-bold text-slate-900 mb-1">Global Framework</div>
                   <p className="text-xs text-slate-500 leading-relaxed">Built to operate seamlessly across borders and currencies.</p>
                 </div>
-                <div className="border-l-3 border-cyan-500 pl-4">
+                <div className="border-l-2 border-cyan-500 pl-4">
                   <div className="text-sm font-bold text-slate-900 mb-1">Integrated Automation</div>
                   <p className="text-xs text-slate-500 leading-relaxed">Pre-wired pipelines automate data syncs between departments.</p>
                 </div>
@@ -203,7 +204,7 @@ export default function HomePage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {stats.map((st, idx) => (
-                <div key={idx} className="glass p-7 rounded-2xl flex flex-col gap-2 shadow-sm border border-slate-900/5 bg-white/70 backdrop-blur-md">
+                <div key={idx} className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 p-7 rounded-2xl flex flex-col gap-2">
                   <div className={`text-4xl md:text-5xl font-black leading-none ${idx % 2 === 0 ? "text-violet-600" : "text-cyan-600"}`}>
                     {st.value}{st.suffix}
                   </div>
@@ -219,13 +220,13 @@ export default function HomePage() {
       {/* ── 3. SOLUTIONS GRID ─────────────────────────────────────────── */}
       <section className="py-24 border-t border-slate-900/10 relative" id="solutions">
         <div className="absolute w-[300px] h-[300px] top-24 -right-24 rounded-full bg-cyan-500/10 blur-[80px] pointer-events-none opacity-30" />
-        <div className="container mx-auto w-11/12 max-w-[1400px]">
+        <div className="w-11/12 max-w-[1400px] mx-auto">
           <div className="text-center mb-16">
             <div className="text-violet-600 text-sm font-bold uppercase tracking-wider mb-3">
               Solutions
             </div>
             <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900">
-              Tailored Systems for <span className="gradient-text">Every Department</span>
+              Tailored Systems for <span className="bg-gradient-to-br from-violet-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent">Every Department</span>
             </h2>
             <p className="text-slate-600 max-w-[580px] mx-auto mt-4 text-base">
               Explore the individual SaaS modules that can be activated instantly inside your Jevxo Client portal.
@@ -234,7 +235,7 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             {activeSolutions.map((sol) => (
-              <div key={sol.id} className="glass p-8 rounded-2xl flex flex-col h-full border border-slate-900/5 bg-white/70 backdrop-blur-md hover:-translate-y-1.5 hover:border-violet-600/30 hover:shadow-lg hover:shadow-violet-600/5 transition-all duration-300">
+              <div key={sol.id} className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 p-8 rounded-2xl flex flex-col h-full hover:-translate-y-1.5 hover:border-violet-600/30 hover:shadow-lg hover:shadow-violet-600/5">
                 <div className="text-4xl mb-4">{sol.icon}</div>
                 <h3 className="text-lg font-bold mb-2 text-slate-900">{sol.title}</h3>
                 <p className="text-sm text-slate-600 leading-relaxed flex-1 mb-5">{sol.desc}</p>
@@ -255,13 +256,13 @@ export default function HomePage() {
 
       {/* ── 4. VENTURES ───────────────────────────────────────────────── */}
       <section className="py-24 border-t border-slate-900/10 bg-slate-50/50 relative" id="ventures">
-        <div className="container mx-auto w-11/12 max-w-[1400px]">
+        <div className="w-11/12 max-w-[1400px] mx-auto">
           <div className="text-center mb-16">
             <div className="text-violet-600 text-sm font-bold uppercase tracking-wider mb-3">
               Ventures
             </div>
             <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900">
-              Our Ecosystem of <span className="gradient-text-warm">Active Enterprises</span>
+              Our Ecosystem of <span className="bg-gradient-to-br from-pink-500 via-violet-500 to-blue-500 bg-clip-text text-transparent">Active Enterprises</span>
             </h2>
             <p className="text-slate-600 max-w-[580px] mx-auto mt-4 text-base">
               Jevxo operates specialized subsidiary companies, each dedicated to engineering and managing specific industries.
@@ -270,7 +271,7 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
             {ventures.map((v, idx) => (
-              <div key={idx} className="glass p-8 rounded-2xl flex gap-5 border border-slate-900/5 bg-white/70 backdrop-blur-md">
+              <div key={idx} className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 p-8 rounded-2xl flex gap-5">
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-600 to-indigo-600 flex items-center justify-center text-xl shrink-0 text-white shadow-md shadow-violet-600/20">
                   {v.icon}
                 </div>
@@ -287,13 +288,13 @@ export default function HomePage() {
 
       {/* ── 5. NETWORK MAP WIDGET ─────────────────────────────────────── */}
       <section className="py-24 border-t border-slate-900/10 overflow-hidden" id="network">
-        <div className="container mx-auto w-11/12 max-w-[1400px]">
+        <div className="w-11/12 max-w-[1400px] mx-auto">
           <div className="text-center mb-16">
             <div className="text-violet-600 text-sm font-bold uppercase tracking-wider mb-3">
               Global Network
             </div>
             <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900">
-              Active Jevxo <span className="gradient-text">Ecosystem Map</span>
+              Active Jevxo <span className="bg-gradient-to-br from-violet-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent">Ecosystem Map</span>
             </h2>
             <p className="text-slate-600 max-w-[580px] mx-auto mt-4 text-base">
               Hover over or click on our operational centers to see active statistics and client volumes.
@@ -302,7 +303,7 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 items-center">
             {/* SVG Map Container */}
-            <div className="lg:col-span-3 glass relative p-5 rounded-2xl bg-slate-900/5 border border-slate-900/10 h-[420px] overflow-hidden flex items-center justify-center">
+            <div className="lg:col-span-3 bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 relative p-5 rounded-2xl h-[420px] overflow-hidden flex items-center justify-center">
               {/* Fake SVG World Map Background */}
               <svg viewBox="0 0 1000 500" className="w-full h-full opacity-15 pointer-events-none">
                 <path d="M150,150 Q170,120 200,130 T250,160 T300,120 T350,150 T400,110 T450,130 T500,160 T550,130 T600,160 T650,120 T700,140 T750,120 T800,150 T850,130 T900,170" fill="none" stroke="#94a3b8" strokeWidth="2" strokeDasharray="5,5" />
@@ -319,21 +320,15 @@ export default function HomePage() {
                   key={node.id}
                   onClick={() => setSelectedNode(node)}
                   onMouseEnter={() => setSelectedNode(node)}
-                  className="absolute cursor-pointer p-0 border-0 bg-transparent z-10"
-                  style={{
-                    left: node.x,
-                    top: node.y,
-                    transform: "translate(-50%, -50%)",
-                  }}
+                  className="absolute cursor-pointer p-0 border-0 bg-transparent z-10 -translate-x-1/2 -translate-y-1/2"
+                  style={{ left: node.x, top: node.y }}
                 >
-                  <span className={`block rounded-full transition-all duration-200 ${
-                    selectedNode?.id === node.id 
-                      ? "w-4 h-4 bg-violet-600 shadow-[0_0_20px_#7c3aed]" 
-                      : "w-2.5 h-2.5 bg-cyan-500 shadow-[0_0_10px_#06b6d4]"
-                  }`} />
-                  <span className={`absolute top-full left-1/2 -translate-x-1/2 whitespace-nowrap text-[11px] text-slate-500 font-semibold mt-1.5 transition-opacity ${
-                    selectedNode?.id === node.id ? "opacity-100" : "opacity-60"
-                  }`}>
+                  <span className={`block rounded-full transition-all duration-200 ${selectedNode?.id === node.id
+                    ? "w-4 h-4 bg-violet-600 shadow-[0_0_20px_#7c3aed]"
+                    : "w-2.5 h-2.5 bg-cyan-500 shadow-[0_0_10px_#06b6d4]"
+                    }`} />
+                  <span className={`absolute top-full left-1/2 -translate-x-1/2 whitespace-nowrap text-[11px] text-slate-500 font-semibold mt-1.5 transition-opacity ${selectedNode?.id === node.id ? "opacity-100" : "opacity-60"
+                    }`}>
                     {node.name.split(" ")[0]}
                   </span>
                 </button>
@@ -343,7 +338,7 @@ export default function HomePage() {
             {/* Selected Node Details Card */}
             <div className="lg:col-span-2">
               {selectedNode ? (
-                <div className="glass p-10 rounded-2xl border border-violet-600/20 bg-white/80 backdrop-blur-md shadow-sm">
+                <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 p-10 rounded-2xl border-violet-600/20">
                   <div className="flex items-center gap-2.5 mb-5">
                     <span className="w-2 h-2 rounded-full bg-cyan-500 shadow-[0_0_10px_#06b6d4]" />
                     <span className="text-xs font-bold text-violet-700 uppercase tracking-wider">Node Statistics</span>
@@ -374,7 +369,7 @@ export default function HomePage() {
                   </Link>
                 </div>
               ) : (
-                <div className="glass p-10 rounded-2xl text-center text-slate-500 border border-slate-900/5 bg-white/80">
+                <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 p-10 rounded-2xl text-center text-slate-500">
                   Select a node on the map to inspect live metrics.
                 </div>
               )}
@@ -385,13 +380,13 @@ export default function HomePage() {
 
       {/* ── 6. PARTNERS ───────────────────────────────────────────────── */}
       <section className="py-24 border-t border-slate-900/10 bg-slate-50/50" id="partners">
-        <div className="container mx-auto w-11/12 max-w-[1400px]">
+        <div className="w-11/12 max-w-[1400px] mx-auto">
           <div className="text-center mb-16">
             <div className="text-violet-600 text-sm font-bold uppercase tracking-wider mb-3">
               Partners Program
             </div>
             <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900">
-              Earn Commissions with <span className="gradient-text">Jevxo Global</span>
+              Earn Commissions with <span className="bg-gradient-to-br from-violet-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent">Jevxo Global</span>
             </h2>
             <p className="text-slate-600 max-w-[580px] mx-auto mt-4 text-base">
               We collaborate with individuals, tech stack developers, agencies, and regional leaders. Explore options below.
@@ -400,7 +395,7 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             {partnerPrograms.map((p, idx) => (
-              <div key={idx} className="glass p-8 rounded-2xl border border-slate-900/5 bg-white/70 backdrop-blur-md flex flex-col h-full shadow-sm">
+              <div key={idx} className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 p-8 rounded-2xl flex flex-col h-full">
                 <div className="text-4xl mb-4">{p.icon}</div>
                 <h3 className="text-lg font-bold mb-2 text-slate-900">{p.role}</h3>
                 <p className="text-sm text-slate-600 leading-relaxed flex-1 mb-5">{p.description}</p>
@@ -416,14 +411,14 @@ export default function HomePage() {
 
       {/* ── 7. SHOWCASE (PORTFOLIO) ───────────────────────────────────── */}
       <section className="py-24 border-t border-slate-900/10" id="showcase">
-        <div className="container mx-auto w-11/12 max-w-[1400px]">
+        <div className="w-11/12 max-w-[1400px] mx-auto">
           <div className="flex justify-between items-end mb-12 flex-wrap gap-6">
             <div>
               <div className="text-violet-600 text-sm font-bold uppercase tracking-wider mb-3">
                 Showcase
               </div>
               <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900">
-                Proven Digital <span className="gradient-text">Deliverables</span>
+                Proven Digital <span className="bg-gradient-to-br from-violet-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent">Deliverables</span>
               </h2>
             </div>
             {/* Category Filter Pills */}
@@ -432,11 +427,10 @@ export default function HomePage() {
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`px-4 py-2 rounded-lg text-xs font-semibold border cursor-pointer transition-all duration-200 ${
-                    activeCategory === cat 
-                      ? "border-violet-600/30 bg-violet-600/10 text-violet-700" 
-                      : "border-slate-900/10 bg-slate-900/5 text-slate-600 hover:text-slate-950"
-                  }`}
+                  className={`px-4 py-2 rounded-lg text-xs font-semibold border cursor-pointer transition-all duration-200 ${activeCategory === cat
+                    ? "border-violet-600/30 bg-violet-600/10 text-violet-700"
+                    : "border-slate-900/10 bg-slate-900/5 text-slate-600 hover:text-slate-950"
+                    }`}
                 >
                   {cat}
                 </button>
@@ -447,7 +441,7 @@ export default function HomePage() {
           {/* Portfolio Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {filteredPortfolio.map((item) => (
-              <div key={item.id} className="glass rounded-2xl overflow-hidden flex flex-col h-full border border-slate-900/5 bg-white/70 backdrop-blur-md shadow-sm">
+              <div key={item.id} className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 rounded-2xl overflow-hidden flex flex-col h-full">
                 {/* Image Placeholder with Gradients */}
                 <div className="h-[200px] bg-gradient-to-br from-violet-100 to-cyan-50 flex items-center justify-center relative border-b border-slate-900/5">
                   <div className="text-3xl opacity-80">💻</div>
@@ -482,13 +476,13 @@ export default function HomePage() {
 
       {/* ── 8. TEAM SECTION ───────────────────────────────────────────── */}
       <section className="py-24 border-t border-slate-900/10 bg-slate-50/50" id="team">
-        <div className="container mx-auto w-11/12 max-w-[1400px]">
+        <div className="w-11/12 max-w-[1400px] mx-auto">
           <div className="text-center mb-16">
             <div className="text-violet-600 text-sm font-bold uppercase tracking-wider mb-3">
               Our Team
             </div>
             <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900">
-              Ecosystem <span className="gradient-text">Architects & Leadership</span>
+              Ecosystem <span className="bg-gradient-to-br from-violet-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent">Architects & Leadership</span>
             </h2>
             <p className="text-slate-600 max-w-[580px] mx-auto mt-4 text-base">
               The developers, system operators, designers, and growth experts building the core Jevxo core framework.
@@ -497,7 +491,7 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             {teamMembers.map((m) => (
-              <div key={m.id} className="glass p-7 rounded-2xl text-center border border-slate-900/5 bg-white/70 backdrop-blur-md shadow-sm">
+              <div key={m.id} className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 p-7 rounded-2xl text-center">
                 {/* Fake Avatar */}
                 <div className="w-20 h-20 rounded-full bg-gradient-to-br from-violet-600 to-indigo-600 mx-auto mb-5 flex items-center justify-center text-2xl font-bold text-white shadow-md shadow-violet-600/20">
                   {m.name.charAt(0)}
@@ -518,13 +512,13 @@ export default function HomePage() {
 
       {/* ── 9 & 10. PRICING & HOSTING PLANS ───────────────────────────── */}
       <section className="py-24 border-t border-slate-900/10" id="pricing">
-        <div className="container mx-auto w-11/12 max-w-[1400px]">
+        <div className="w-11/12 max-w-[1400px] mx-auto">
           <div className="text-center mb-12">
             <div className="text-violet-600 text-sm font-bold uppercase tracking-wider mb-3">
               Pricing
             </div>
             <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900">
-              Transparent <span className="gradient-text">Software & Hosting</span> Rates
+              Transparent <span className="bg-gradient-to-br from-violet-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent">Software & Hosting</span> Rates
             </h2>
             <p className="text-slate-600 max-w-[580px] mx-auto mt-4 text-base">
               Select between monthly billing or save 20% on annual commitments.
@@ -534,15 +528,13 @@ export default function HomePage() {
             <div className="inline-flex bg-slate-900/5 border border-slate-900/10 p-1 rounded-full mt-8">
               <button
                 onClick={() => setBillingPeriod("monthly")}
-                className={`px-5 py-2 rounded-full text-xs font-semibold transition-all duration-200 cursor-pointer ${
-                  billingPeriod === "monthly" ? "bg-violet-600 text-white shadow" : "text-slate-600 hover:text-slate-900"
-                }`}
+                className={`px-5 py-2 rounded-full text-xs font-semibold transition-all duration-200 cursor-pointer ${billingPeriod === "monthly" ? "bg-violet-600 text-white shadow" : "text-slate-600 hover:text-slate-900"
+                  }`}
               >Monthly</button>
               <button
                 onClick={() => setBillingPeriod("annually")}
-                className={`px-5 py-2 rounded-full text-xs font-semibold transition-all duration-200 cursor-pointer ${
-                  billingPeriod === "annually" ? "bg-violet-600 text-white shadow" : "text-slate-600 hover:text-slate-900"
-                }`}
+                className={`px-5 py-2 rounded-full text-xs font-semibold transition-all duration-200 cursor-pointer ${billingPeriod === "annually" ? "bg-violet-600 text-white shadow" : "text-slate-600 hover:text-slate-900"
+                  }`}
               >Annually (Save 20%)</button>
             </div>
           </div>
@@ -555,23 +547,22 @@ export default function HomePage() {
             {plans.map((p, idx) => {
               const actualPrice = billingPeriod === "annually" ? Math.floor(p.price * 0.8) : p.price;
               return (
-                <div key={idx} className={`glass p-8 rounded-2xl relative shadow-sm border ${idx === 2 ? "border-violet-600 bg-violet-600/5" : "border-slate-900/5 bg-white/70 backdrop-blur-md"}`}>
+                <div key={idx} className={`bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 p-8 rounded-2xl relative ${idx === 2 ? "border-violet-600 bg-violet-600/5" : ""}`}>
                   {idx === 2 && (
                     <span className="absolute -top-3 right-5 bg-violet-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">Recommended</span>
                   )}
                   <h4 className="text-lg font-bold mb-2 text-slate-900">{p.name}</h4>
                   <p className="text-xs text-slate-500 mb-6 min-h-[38px]">{p.desc}</p>
-                  
+
                   <div className="mb-7">
                     <span className="text-3xl font-extrabold text-slate-900">${actualPrice}</span>
                     <span className="text-xs text-slate-500"> / mo</span>
                   </div>
 
-                  <Link href="/portal" className={`block text-center py-2.5 rounded-lg font-bold text-xs mb-7 border transition-all duration-200 ${
-                    idx === 2 
-                      ? "bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:shadow-violet-600/20 hover:-translate-y-0.5" 
-                      : "bg-slate-900/5 border-slate-900/10 text-slate-700 hover:bg-slate-900/10"
-                  }`}>
+                  <Link href="/portal" className={`block text-center py-2.5 rounded-lg font-bold text-xs mb-7 border transition-all duration-200 ${idx === 2
+                    ? "bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:shadow-violet-600/20 hover:-translate-y-0.5 border-transparent"
+                    : "bg-slate-900/5 border-slate-900/10 text-slate-700 hover:bg-slate-900/10"
+                    }`}>
                     Get Started
                   </Link>
 
@@ -599,7 +590,7 @@ export default function HomePage() {
             ].map((p, idx) => {
               const actualPrice = billingPeriod === "annually" ? Math.floor(p.price * 0.8) : p.price;
               return (
-                <div key={idx} className="glass p-8 rounded-2xl bg-white/70 backdrop-blur-md border border-slate-900/5 shadow-sm">
+                <div key={idx} className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 p-8 rounded-2xl">
                   <h4 className="text-lg font-bold mb-2 text-slate-900">{p.name}</h4>
                   <div className="mb-6">
                     <span className="text-3xl font-extrabold text-slate-900">${actualPrice}</span>
@@ -626,14 +617,14 @@ export default function HomePage() {
 
       {/* ── 11. CONTACT FORM ──────────────────────────────────────────── */}
       <section className="py-24 border-t border-slate-900/10 bg-slate-50/50" id="contact">
-        <div className="container mx-auto w-11/12 max-w-[1400px]">
+        <div className="w-11/12 max-w-[1400px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <div className="text-violet-600 text-sm font-bold uppercase tracking-wider mb-3">
                 Contact Us
               </div>
               <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-6 text-slate-900">
-                Let&apos;s Build Something <span className="gradient-text">Exceptional</span>
+                Let&apos;s Build Something <span className="bg-gradient-to-br from-violet-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent">Exceptional</span>
               </h2>
               <p className="text-slate-600 text-base leading-relaxed mb-8">
                 Have questions regarding Jevxo licensing, agency partner White-labeling programs, or dedicated enterprise cloud deployments? Write to our core development and leadership squad.
@@ -657,7 +648,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="glass p-10 rounded-2xl bg-white/80 backdrop-blur-md border border-slate-900/5 shadow-sm">
+            <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 p-10 rounded-2xl">
               {contactSubmitted ? (
                 <div className="text-center py-10">
                   <div className="text-5xl mb-4">✉️</div>

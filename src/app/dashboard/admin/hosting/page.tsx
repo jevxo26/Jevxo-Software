@@ -10,34 +10,34 @@ export default function AdminHostingPage() {
   ];
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "28px" }}>
+    <div className="flex flex-col gap-7">
       
       {/* Infrastructure KPI Row */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
-        <div className="glass" style={{ padding: "24px", borderRadius: "12px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }}>
-          <div style={{ fontSize: "12px", color: "var(--text-secondary)", fontWeight: 600, textTransform: "uppercase" }}>Overall Server Load</div>
-          <div style={{ fontSize: "28px", fontWeight: 800, marginTop: "8px", color: "#10b981" }}>38%</div>
-          <div style={{ fontSize: "11px", color: "var(--text-muted)", marginTop: "4px" }}>Across 4 regional nodes</div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-6 rounded-xl">
+          <div className="text-xs text-slate-500 font-semibold uppercase tracking-wider">Overall Server Load</div>
+          <div className="text-[28px] font-extrabold mt-2 text-emerald-600">38%</div>
+          <div className="text-[11px] text-slate-400 mt-1">Across 4 regional nodes</div>
         </div>
-        <div className="glass" style={{ padding: "24px", borderRadius: "12px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }}>
-          <div style={{ fontSize: "12px", color: "var(--text-secondary)", fontWeight: 600, textTransform: "uppercase" }}>Storage Allocated</div>
-          <div style={{ fontSize: "28px", fontWeight: 800, marginTop: "8px", color: "#a78bfa" }}>157 GB / 500 GB</div>
-          <div style={{ fontSize: "11px", color: "var(--text-muted)", marginTop: "4px" }}>31.4% capacity used</div>
+        <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-6 rounded-xl">
+          <div className="text-xs text-slate-500 font-semibold uppercase tracking-wider">Storage Allocated</div>
+          <div className="text-[28px] font-extrabold mt-2 text-violet-600">157 GB / 500 GB</div>
+          <div className="text-[11px] text-slate-400 mt-1">31.4% capacity used</div>
         </div>
-        <div className="glass" style={{ padding: "24px", borderRadius: "12px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }}>
-          <div style={{ fontSize: "12px", color: "var(--text-secondary)", fontWeight: 600, textTransform: "uppercase" }}>Domain SSL Status</div>
-          <div style={{ fontSize: "28px", fontWeight: 800, marginTop: "8px", color: "#f59e0b" }}>1 Flag</div>
-          <div style={{ fontSize: "11px", color: "#ef4444", marginTop: "4px" }}>1 SSL Certificate Expired</div>
+        <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-6 rounded-xl">
+          <div className="text-xs text-slate-500 font-semibold uppercase tracking-wider">Domain SSL Status</div>
+          <div className="text-[28px] font-extrabold mt-2 text-amber-500">1 Flag</div>
+          <div className="text-[11px] text-red-500 mt-1">1 SSL Certificate Expired</div>
         </div>
       </div>
 
       {/* Storage and Bandwidth Meters */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "28px" }} className="admin-grid-top">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-7">
         
         {/* Storage Bar */}
-        <div className="glass" style={{ padding: "28px", borderRadius: "16px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }}>
-          <h3 style={{ fontSize: "15px", fontWeight: 700, marginBottom: "20px" }}>Storage Allocation Progress</h3>
-          <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+        <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-7 rounded-2xl">
+          <h3 className="text-[15px] font-bold text-slate-900 mb-5">Storage Allocation Progress</h3>
+          <div className="flex flex-col gap-4">
             {[
               { label: "US-West-01 Node", used: 60, limit: 150 },
               { label: "UK-London-01 Node", used: 35, limit: 100 },
@@ -45,12 +45,12 @@ export default function AdminHostingPage() {
               { label: "UAE-Dubai-01 Node", used: 12, limit: 100 }
             ].map((node, i) => (
               <div key={i}>
-                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "12px", marginBottom: "6px" }}>
-                  <span>{node.label}</span>
-                  <span style={{ color: "#a78bfa" }}>{node.used} GB / {node.limit} GB</span>
+                <div className="flex justify-between text-xs mb-1.5">
+                  <span className="text-slate-600 font-medium">{node.label}</span>
+                  <span className="text-violet-600 font-semibold">{node.used} GB / {node.limit} GB</span>
                 </div>
-                <div style={{ width: "100%", height: "6px", background: "rgba(255,255,255,0.06)", borderRadius: "3px" }}>
-                  <div style={{ width: `${(node.used / node.limit) * 100}%`, height: "6px", background: "#7c3aed", borderRadius: "3px" }} />
+                <div className="w-full h-1.5 bg-slate-900/5 rounded-full overflow-hidden">
+                  <div style={{ width: `${(node.used / node.limit) * 100}%` }} className="h-full bg-violet-600 rounded-full" />
                 </div>
               </div>
             ))}
@@ -58,9 +58,9 @@ export default function AdminHostingPage() {
         </div>
 
         {/* Bandwidth Usage Chart simulation */}
-        <div className="glass" style={{ padding: "28px", borderRadius: "16px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }}>
-          <h3 style={{ fontSize: "15px", fontWeight: 700, marginBottom: "20px" }}>Bandwidth Load Distribution</h3>
-          <div style={{ height: "160px", display: "flex", alignItems: "flex-end", gap: "16px", paddingBottom: "10px" }}>
+        <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-7 rounded-2xl">
+          <h3 className="text-[15px] font-bold text-slate-900 mb-5">Bandwidth Load Distribution</h3>
+          <div className="h-40 flex items-end gap-4 pb-2.5">
             {[
               { day: "Mon", size: "40%" },
               { day: "Tue", size: "55%" },
@@ -70,9 +70,9 @@ export default function AdminHostingPage() {
               { day: "Sat", size: "45%" },
               { day: "Sun", size: "35%" }
             ].map((bar, i) => (
-              <div key={i} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
-                <div style={{ width: "100%", height: bar.size, background: "linear-gradient(to top, #06b6d4, #0891b2)", borderRadius: "4px 4px 0 0" }} />
-                <span style={{ fontSize: "11px", color: "var(--text-secondary)" }}>{bar.day}</span>
+              <div key={i} className="flex-1 flex flex-col items-center gap-2">
+                <div style={{ height: bar.size }} className="w-full bg-gradient-to-t from-cyan-500 to-cyan-600 rounded-t-md hover:opacity-90 transition-opacity" />
+                <span className="text-[11px] text-slate-500">{bar.day}</span>
               </div>
             ))}
           </div>
@@ -81,40 +81,39 @@ export default function AdminHostingPage() {
       </div>
 
       {/* Domain List and SSL Table */}
-      <div className="glass" style={{ padding: "28px", borderRadius: "16px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }}>
-        <h3 style={{ fontSize: "16px", fontWeight: 700, marginBottom: "16px" }}>Domain Host Records</h3>
-        <div style={{ overflowX: "auto" }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "13px", textAlign: "left" }}>
+      <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-7 rounded-2xl">
+        <h3 className="text-base font-bold text-slate-900 mb-4">Domain Host Records</h3>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse text-sm text-left">
             <thead>
-              <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.06)", color: "var(--text-muted)" }}>
-                <th style={{ padding: "10px" }}>Hostname</th>
-                <th style={{ padding: "10px" }}>IP Address</th>
-                <th style={{ padding: "10px" }}>Bandwidth</th>
-                <th style={{ padding: "10px" }}>Storage</th>
-                <th style={{ padding: "10px" }}>SSL status</th>
-                <th style={{ padding: "10px", textAlign: "right" }}>Renewal Date</th>
+              <tr className="border-b border-slate-900/10 text-slate-400 font-medium">
+                <th className="p-2.5">Hostname</th>
+                <th className="p-2.5">IP Address</th>
+                <th className="p-2.5">Bandwidth</th>
+                <th className="p-2.5">Storage</th>
+                <th className="p-2.5">SSL status</th>
+                <th className="p-2.5 text-right">Renewal Date</th>
               </tr>
             </thead>
             <tbody>
               {domainsList.map((item, index) => (
-                <tr key={index} style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
-                  <td style={{ padding: "12px 10px", fontWeight: 700 }}>{item.domain}</td>
-                  <td style={{ padding: "12px 10px", color: "var(--text-secondary)" }}>{item.ip}</td>
-                  <td style={{ padding: "12px 10px" }}>{item.bandwidth}</td>
-                  <td style={{ padding: "12px 10px" }}>{item.storage}</td>
-                  <td style={{ padding: "12px 10px" }}>
-                    <span style={{
-                      fontSize: "10px",
-                      fontWeight: 700,
-                      padding: "3px 8px",
-                      borderRadius: "100px",
-                      background: item.ssl === "Valid" ? "rgba(16,185,129,0.1)" : item.ssl === "Expired" ? "rgba(239,68,68,0.1)" : "rgba(245,158,11,0.1)",
-                      color: item.ssl === "Valid" ? "#10b981" : item.ssl === "Expired" ? "#ef4444" : "#f59e0b"
-                    }}>
+                <tr key={index} className="border-b border-slate-900/5 hover:bg-slate-50/50 transition-colors">
+                  <td className="py-3 px-2.5 font-bold text-slate-900">{item.domain}</td>
+                  <td className="py-3 px-2.5 text-slate-500">{item.ip}</td>
+                  <td className="py-3 px-2.5 text-slate-600">{item.bandwidth}</td>
+                  <td className="py-3 px-2.5 text-slate-600">{item.storage}</td>
+                  <td className="py-3 px-2.5">
+                    <span className={`text-[10px] font-bold py-0.5 px-2 rounded-full inline-block ${
+                      item.ssl === "Valid"
+                        ? "bg-emerald-500/10 text-emerald-600"
+                        : item.ssl === "Expired"
+                        ? "bg-red-500/10 text-red-600"
+                        : "bg-amber-500/10 text-amber-600"
+                    }`}>
                       {item.ssl}
                     </span>
                   </td>
-                  <td style={{ padding: "12px 10px", textAlign: "right", color: "var(--text-secondary)" }}>{item.expires}</td>
+                  <td className="py-3 px-2.5 text-right text-slate-500">{item.expires}</td>
                 </tr>
               ))}
             </tbody>

@@ -36,46 +36,44 @@ export default function PricingPage() {
   }, []);
 
   return (
-    <div style={{ background: "#080d1a", color: "#f1f5f9", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+    <div className="bg-[#080d1a] text-[#f1f5f9] min-h-screen flex flex-col">
       <Navbar />
 
       {/* Hero */}
-      <section className="bg-hero-gradient section" style={{ position: "relative", overflow: "hidden", paddingTop: "140px", paddingBottom: "60px" }}>
-        <div className="orb orb-violet" style={{ width: "500px", height: "500px", top: "-200px", right: "-100px" }} />
-        <div className="orb orb-cyan"   style={{ width: "350px", height: "350px", bottom: "-100px", left: "-80px" }} />
+      <section className="bg-hero-gradient py-[100px] md:py-[70px] relative overflow-hidden pt-[140px] pb-[60px]">
+        <div className="rounded-full blur-[80px] pointer-events-none absolute bg-violet-600/[0.07] w-[500px] h-[500px] -top-[200px] -right-[100px]" />
+        <div className="rounded-full blur-[80px] pointer-events-none absolute bg-cyan-500/[0.06] w-[350px] h-[350px] -bottom-[100px] -left-[80px]" />
         
-        <div className="container" style={{ position: "relative", zIndex: 1, textAlign: "center" }}>
-          <div style={{ display: "inline-block", padding: "4px 14px", borderRadius: "100px", border: "1px solid rgba(124,58,237,0.3)", background: "rgba(124,58,237,0.08)", fontSize: "12px", fontWeight: 600, color: "#a78bfa", marginBottom: "24px", textTransform: "uppercase", letterSpacing: "0.1em" }}>
+        <div className="w-11/12 max-w-[1400px] mx-auto relative z-[1] text-center">
+          <div className="inline-block py-1 px-3.5 rounded-full border border-violet-600/30 bg-violet-600/8 text-xs font-semibold text-violet-400 mb-6 uppercase tracking-widest">
             Pricing Plans
           </div>
-          <h1 style={{ fontSize: "clamp(36px, 6vw, 64px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: "20px" }}>
-            Transparent pricing for<br /><span className="gradient-text">Software Scaling</span>
+          <h1 className="text-[clamp(36px,6vw,64px)] font-black tracking-tight mb-5">
+            Transparent pricing for<br /><span className="bg-gradient-to-br from-violet-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent">Software Scaling</span>
           </h1>
-          <p style={{ fontSize: "17px", color: "var(--text-secondary)", maxWidth: "580px", margin: "0 auto 40px", lineHeight: 1.8 }}>
+          <p className="text-[17px] text-slate-600 max-w-[580px] mx-auto mb-10 leading-relaxed">
             No hidden costs. Choose the tier that matches your active operational scale, or upgrade instantly from your node console.
           </p>
 
           {/* Toggle */}
-          <div style={{ display: "inline-flex", alignItems: "center", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", padding: "4px", borderRadius: "100px" }}>
+          <div className="inline-flex items-center bg-white/3 border border-white/8 p-1 rounded-full">
             <button
               onClick={() => setIsYearly(false)}
-              style={{
-                padding: "8px 20px", borderRadius: "100px", border: "none", fontSize: "13px", fontWeight: 600, cursor: "pointer",
-                background: !isYearly ? "linear-gradient(135deg, #7c3aed, #4f46e5)" : "transparent",
-                color: !isYearly ? "#fff" : "var(--text-secondary)",
-                transition: "all 0.3s ease"
-              }}
+              className={`py-2 px-5 rounded-full text-[13px] font-semibold cursor-pointer transition-all duration-300 ${
+                !isYearly
+                  ? "bg-gradient-to-br from-violet-600 to-indigo-600 text-white"
+                  : "bg-transparent text-slate-600"
+              }`}
             >
               Monthly billing
             </button>
             <button
               onClick={() => setIsYearly(true)}
-              style={{
-                padding: "8px 20px", borderRadius: "100px", border: "none", fontSize: "13px", fontWeight: 600, cursor: "pointer",
-                background: isYearly ? "linear-gradient(135deg, #7c3aed, #4f46e5)" : "transparent",
-                color: isYearly ? "#fff" : "var(--text-secondary)",
-                transition: "all 0.3s ease"
-              }}
+              className={`py-2 px-5 rounded-full text-[13px] font-semibold cursor-pointer transition-all duration-300 ${
+                isYearly
+                  ? "bg-gradient-to-br from-violet-600 to-indigo-600 text-white"
+                  : "bg-transparent text-slate-600"
+              }`}
             >
               Yearly (Save 20%)
             </button>
@@ -84,9 +82,9 @@ export default function PricingPage() {
       </section>
 
       {/* Grid */}
-      <section className="section" style={{ paddingBottom: "100px" }}>
-        <div className="container">
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "28px", alignItems: "stretch" }}>
+      <section className="py-[100px] md:py-[70px] pb-25">
+        <div className="w-11/12 max-w-[1400px] mx-auto">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-7 items-stretch">
             {plans.map((plan, index) => {
               const basePrice = plan.price;
               const calculatedPrice = isYearly ? Math.floor(basePrice * 0.8 * 12) : basePrice;
@@ -94,35 +92,30 @@ export default function PricingPage() {
               return (
                 <div
                   key={plan.name}
-                  className="glass"
-                  style={{
-                    padding: "36px 30px", borderRadius: "20px", background: "rgba(255,255,255,0.01)", border: "1px solid rgba(255,255,255,0.06)",
-                    display: "flex", flexDirection: "column", justifyContent: "space-between", position: "relative",
-                    transform: plan.name === "Growth" ? "scale(1.03)" : "none",
-                    boxShadow: plan.name === "Growth" ? "0 10px 30px rgba(124,58,237,0.15)" : "none",
-                    borderColor: plan.name === "Growth" ? "rgba(124,58,237,0.4)" : "rgba(255,255,255,0.06)"
-                  }}
+                  className={`bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 py-9 px-[30px] rounded-[20px] bg-white/[0.01] border-white/[0.06] flex flex-col justify-between relative ${
+                    plan.name === "Growth" ? "scale-[1.03] shadow-[0_10px_30px_rgba(124,58,237,0.15)] border-violet-600/40" : "border-white/6"
+                  }`}
                 >
                   {plan.name === "Growth" && (
-                    <span style={{ position: "absolute", top: "-14px", left: "50%", transform: "translateX(-50%)", background: "linear-gradient(135deg, #7c3aed, #4f46e5)", color: "#fff", padding: "4px 12px", borderRadius: "100px", fontSize: "11px", fontWeight: 700, textTransform: "uppercase" }}>
+                    <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-br from-violet-600 to-indigo-600 text-white py-1 px-3 rounded-full text-[11px] font-bold uppercase">
                       Most Popular
                     </span>
                   )}
                   
                   <div>
-                    <h3 style={{ fontSize: "20px", fontWeight: 700, marginBottom: "8px" }}>{plan.name}</h3>
-                    <p style={{ color: "var(--text-secondary)", fontSize: "13px", minHeight: "36px", marginBottom: "24px" }}>{plan.desc}</p>
+                    <h3 className="text-xl font-bold mb-2">{plan.name}</h3>
+                    <p className="text-slate-600 text-[13px] min-h-9 mb-6">{plan.desc}</p>
                     
-                    <div style={{ display: "flex", alignItems: "baseline", gap: "6px", marginBottom: "28px" }}>
-                      <span style={{ fontSize: "40px", fontWeight: 800, color: "#fff" }}>${calculatedPrice}</span>
-                      <span style={{ color: "var(--text-muted)", fontSize: "14px" }}>/{isYearly ? "yr" : "mo"}</span>
+                    <div className="flex items-baseline gap-1.5 mb-7">
+                      <span className="text-[40px] font-extrabold text-white">${calculatedPrice}</span>
+                      <span className="text-slate-400 text-sm">/{isYearly ? "yr" : "mo"}</span>
                     </div>
 
-                    <div style={{ display: "flex", flexDirection: "column", gap: "12px", borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "24px", marginBottom: "32px" }}>
+                    <div className="flex flex-col gap-3 border-t border-white/6 pt-6 mb-8">
                       {plan.features.map((feat) => (
-                        <div key={feat} style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-                          <span style={{ color: "#a78bfa", fontSize: "13px" }}>✓</span>
-                          <span style={{ fontSize: "13px", color: "var(--text-secondary)" }}>{feat}</span>
+                        <div key={feat} className="flex gap-2.5 items-center">
+                          <span className="text-[#a78bfa] text-[13px]">✓</span>
+                          <span className="text-[13px] text-slate-600">{feat}</span>
                         </div>
                       ))}
                     </div>
@@ -130,11 +123,11 @@ export default function PricingPage() {
 
                   <Link
                     href="/contact"
-                    style={{
-                      display: "block", textAlign: "center", padding: "12px", borderRadius: "10px", fontSize: "14px", fontWeight: 700, transition: "all 0.2s ease",
-                      background: plan.name === "Growth" ? "linear-gradient(135deg, #7c3aed, #4f46e5)" : "rgba(255,255,255,0.03)",
-                      color: "#fff", border: plan.name === "Growth" ? "none" : "1px solid rgba(255,255,255,0.08)"
-                    }}
+                    className={`block text-center p-3 rounded-lg text-sm font-bold transition-all duration-200 ${
+                      plan.name === "Growth"
+                        ? "bg-gradient-to-br from-violet-600 to-indigo-600 text-white"
+                        : "bg-white/3 text-white border border-white/8"
+                    }`}
                   >
                     Select Plan
                   </Link>

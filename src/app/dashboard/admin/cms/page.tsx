@@ -271,27 +271,25 @@ export default function AdminCmsPage() {
 
   const deleteBlog = (index: number) => {
     setBlogList(blogList.filter((_, idx) => idx !== index));
-  };
-
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "28px" }}>
+  };  return (
+    <div className="flex flex-col gap-7">
       
       {/* CMS control panel header */}
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <div className="flex justify-between items-center flex-wrap gap-4">
         <div>
-          <h2 style={{ fontSize: "20px", fontWeight: 800 }}>Ecosystem Page Builder (CMS)</h2>
-          <p style={{ fontSize: "12px", color: "var(--text-secondary)", marginTop: "2px" }}>Modify public website layouts, services pricing, blog updates, case-studies and verify inbox logs.</p>
+          <h2 className="text-xl font-extrabold text-slate-900">Ecosystem Page Builder (CMS)</h2>
+          <p className="text-xs text-slate-600 mt-0.5">Modify public website layouts, services pricing, blog updates, case-studies and verify inbox logs.</p>
         </div>
-        <div style={{ display: "flex", gap: "12px" }}>
+        <div className="flex gap-3">
           <button
             onClick={handleResetDefaults}
-            style={{ padding: "10px 18px", borderRadius: "8px", background: "rgba(239, 68, 68, 0.1)", border: "1px solid rgba(239, 68, 68, 0.3)", color: "#ef4444", fontSize: "13px", fontWeight: 600, cursor: "pointer" }}
+            className="py-2.5 px-[18px] rounded-lg bg-red-500/10 border border-red-500/20 text-red-600 text-[13px] font-semibold cursor-pointer hover:bg-red-500/20 transition-all duration-200"
           >
             Reset Defaults
           </button>
           <button
             onClick={handleSaveAll}
-            style={{ padding: "10px 24px", borderRadius: "8px", background: "linear-gradient(135deg, #7c3aed, #4f46e5)", border: "none", color: "#fff", fontSize: "13px", fontWeight: 700, cursor: "pointer", boxShadow: "0 4px 15px rgba(124, 58, 237, 0.25)" }}
+            className="py-2.5 px-6 rounded-lg bg-gradient-to-br from-violet-600 to-indigo-600 border-none text-white text-[13px] font-bold cursor-pointer shadow-[0_4px_15px_rgba(124, 58, 237, 0.25)] hover:shadow-[0_6px_20px_rgba(124,58,237,0.35)] transition-all duration-200"
           >
             Apply & Save CMS Changes
           </button>
@@ -299,31 +297,27 @@ export default function AdminCmsPage() {
       </div>
 
       {saveSuccess && (
-        <div className="glass" style={{ padding: "16px 20px", borderRadius: "8px", background: "rgba(16,185,129,0.15)", border: "1px solid #10b981", color: "#10b981", fontSize: "14px", fontWeight: 600 }}>
-          ✓ Jevxo CMS state synced! All public page routes (Home, Services, Portfolio, Blog, Careers) have updated instantly in the browser. 
-          <span style={{ marginLeft: "12px", color: "#fff" }}>
-            <Link href="/" target="_blank" style={{ textDecoration: "underline" }}>View Live Site ↗</Link>
+        <div className="p-4 rounded-lg bg-emerald-500/15 border border-emerald-500 text-emerald-600 text-sm font-semibold flex items-center justify-between">
+          <span>
+            ✓ Jevxo CMS state synced! All public page routes (Home, Services, Portfolio, Blog, Careers) have updated instantly in the browser.
+          </span>
+          <span className="ml-3 text-white">
+            <Link href="/" target="_blank" className="underline text-violet-600 hover:text-violet-700">View Live Site ↗</Link>
           </span>
         </div>
       )}
 
       {/* Dynamic Tab selection headers */}
-      <div style={{ display: "flex", gap: "6px", borderBottom: "1px solid rgba(255,255,255,0.06)", paddingBottom: "12px", flexWrap: "wrap" }}>
+      <div className="flex gap-1.5 border-b border-slate-900/10 pb-3 flex-wrap">
         {(["hero", "nodes", "pricing", "services", "portfolio", "blog", "jobs", "inbox"] as TabType[]).map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            style={{
-              padding: "10px 16px",
-              borderRadius: "6px",
-              border: "none",
-              background: activeTab === tab ? "rgba(124,58,237,0.15)" : "transparent",
-              color: activeTab === tab ? "#a78bfa" : "var(--text-secondary)",
-              fontWeight: activeTab === tab ? 700 : 500,
-              cursor: "pointer",
-              textTransform: "capitalize",
-              fontSize: "12px"
-            }}
+            className={`py-2 px-4 rounded-lg text-xs font-medium cursor-pointer transition-all duration-200 ${
+              activeTab === tab
+                ? "bg-violet-600/10 text-violet-600 font-bold border border-violet-600/20"
+                : "bg-transparent text-slate-600 hover:text-slate-900 hover:bg-slate-900/5"
+            }`}
           >
             {tab === "hero" && "📝 Hero Section"}
             {tab === "nodes" && "🌍 Map Nodes"}
@@ -338,36 +332,36 @@ export default function AdminCmsPage() {
       </div>
 
       {/* Editor Content Area */}
-      <div className="glass" style={{ padding: "32px", borderRadius: "16px", background: "rgba(255,255,255,0.01)", border: "1px solid rgba(255,255,255,0.06)" }}>
+      <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] p-8 rounded-2xl">
         
         {/* HERO SECTION MANAGER */}
         {activeTab === "hero" && (
-          <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+          <div className="flex flex-col gap-6">
             <div>
-              <label style={{ display: "block", fontSize: "12px", fontWeight: 700, color: "#a78bfa", textTransform: "uppercase", marginBottom: "8px" }}>Ecosystem Version Tag</label>
+              <label className="block text-xs font-bold text-violet-600 uppercase mb-2">Ecosystem Version Tag</label>
               <input
                 type="text"
                 value={heroTag}
                 onChange={(e) => setHeroTag(e.target.value)}
-                style={{ width: "100%", padding: "12px", borderRadius: "8px", border: "1px solid var(--border)", background: "rgba(255,255,255,0.02)", color: "#fff", fontSize: "14px" }}
+                className="w-full p-3 rounded-lg border border-slate-900/[0.08] bg-slate-900/5 text-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-violet-600"
               />
             </div>
             <div>
-              <label style={{ display: "block", fontSize: "12px", fontWeight: 700, color: "#a78bfa", textTransform: "uppercase", marginBottom: "8px" }}>Hero Heading Text (use &apos;||&apos; to highlight second half with gradients)</label>
+              <label className="block text-xs font-bold text-violet-600 uppercase mb-2">Hero Heading Text (use &apos;||&apos; to highlight second half with gradients)</label>
               <input
                 type="text"
                 value={heroTitle}
                 onChange={(e) => setHeroTitle(e.target.value)}
-                style={{ width: "100%", padding: "12px", borderRadius: "8px", border: "1px solid var(--border)", background: "rgba(255,255,255,0.02)", color: "#fff", fontSize: "14px" }}
+                className="w-full p-3 rounded-lg border border-slate-900/[0.08] bg-slate-900/5 text-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-violet-600"
               />
             </div>
             <div>
-              <label style={{ display: "block", fontSize: "12px", fontWeight: 700, color: "#a78bfa", textTransform: "uppercase", marginBottom: "8px" }}>Hero Sub-description</label>
+              <label className="block text-xs font-bold text-violet-600 uppercase mb-2">Hero Sub-description</label>
               <textarea
                 rows={5}
                 value={heroDesc}
                 onChange={(e) => setHeroDesc(e.target.value)}
-                style={{ width: "100%", padding: "12px", borderRadius: "8px", border: "1px solid var(--border)", background: "rgba(255,255,255,0.02)", color: "#fff", fontSize: "14px", lineHeight: "1.6" }}
+                className="w-full p-3 rounded-lg border border-slate-900/[0.08] bg-slate-900/5 text-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-violet-600 leading-relaxed"
               />
             </div>
           </div>
@@ -375,21 +369,21 @@ export default function AdminCmsPage() {
 
         {/* NETWORK MAP NODES MANAGER */}
         {activeTab === "nodes" && (
-          <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <h3 style={{ fontSize: "15px", fontWeight: 700 }}>🌍 Map Coordinates and regional details</h3>
+          <div className="flex flex-col gap-6">
+            <div className="flex justify-between items-center">
+              <h3 className="text-[15px] font-bold text-slate-900">🌍 Map Coordinates and regional details</h3>
               <button
                 onClick={() => setNodes([...nodes, { id: `node_${Date.now()}`, name: "New Country Node", x: "50%", y: "50%", clients: "10+", partners: "2", websites: "20+", revenue: "$60k/yr" }])}
-                style={{ padding: "6px 12px", borderRadius: "6px", background: "rgba(124,58,237,0.15)", border: "1px solid rgba(124,58,237,0.3)", color: "#a78bfa", fontSize: "12px", fontWeight: 600, cursor: "pointer" }}
+                className="py-1.5 px-3 rounded-lg bg-violet-600/10 border border-violet-600/20 text-violet-600 text-xs font-semibold cursor-pointer hover:bg-violet-600/20 transition-colors"
               >
                 + Add Map Node
               </button>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+            <div className="flex flex-col gap-4">
               {nodes.map((node, index) => (
-                <div key={node.id} style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr 1fr 1fr 1fr 1fr 0.4fr", gap: "12px", background: "rgba(255,255,255,0.02)", padding: "16px", borderRadius: "10px", border: "1px solid rgba(255,255,255,0.04)", alignItems: "center" }}>
+                <div key={node.id} className="grid grid-cols-[1.2fr_1fr_1fr_1fr_1fr_1fr_0.4fr] gap-3 bg-slate-900/5 p-4 rounded-xl border border-slate-900/5 items-center">
                   <div>
-                    <label style={{ display: "block", fontSize: "10px", color: "var(--text-muted)", marginBottom: "4px" }}>Country / Name</label>
+                    <label className="block text-[10px] text-slate-500 mb-1">Country / Name</label>
                     <input
                       type="text"
                       value={node.name}
@@ -398,11 +392,11 @@ export default function AdminCmsPage() {
                         copy[index].name = e.target.value;
                         setNodes(copy);
                       }}
-                      style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "12px" }}
+                      className="w-full p-2 rounded border border-slate-900/[0.08] bg-white text-slate-900 text-xs focus:outline-none focus:ring-1 focus:ring-violet-600"
                     />
                   </div>
                   <div>
-                    <label style={{ display: "block", fontSize: "10px", color: "var(--text-muted)", marginBottom: "4px" }}>X coordinate (%)</label>
+                    <label className="block text-[10px] text-slate-500 mb-1">X coordinate (%)</label>
                     <input
                       type="text"
                       value={node.x}
@@ -411,11 +405,11 @@ export default function AdminCmsPage() {
                         copy[index].x = e.target.value;
                         setNodes(copy);
                       }}
-                      style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "12px" }}
+                      className="w-full p-2 rounded border border-slate-900/[0.08] bg-white text-slate-900 text-xs focus:outline-none focus:ring-1 focus:ring-violet-600"
                     />
                   </div>
                   <div>
-                    <label style={{ display: "block", fontSize: "10px", color: "var(--text-muted)", marginBottom: "4px" }}>Y coordinate (%)</label>
+                    <label className="block text-[10px] text-slate-500 mb-1">Y coordinate (%)</label>
                     <input
                       type="text"
                       value={node.y}
@@ -424,11 +418,11 @@ export default function AdminCmsPage() {
                         copy[index].y = e.target.value;
                         setNodes(copy);
                       }}
-                      style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "12px" }}
+                      className="w-full p-2 rounded border border-slate-900/[0.08] bg-white text-slate-900 text-xs focus:outline-none focus:ring-1 focus:ring-violet-600"
                     />
                   </div>
                   <div>
-                    <label style={{ display: "block", fontSize: "10px", color: "var(--text-muted)", marginBottom: "4px" }}>Client Count</label>
+                    <label className="block text-[10px] text-slate-500 mb-1">Client Count</label>
                     <input
                       type="text"
                       value={node.clients}
@@ -437,11 +431,11 @@ export default function AdminCmsPage() {
                         copy[index].clients = e.target.value;
                         setNodes(copy);
                       }}
-                      style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "12px" }}
+                      className="w-full p-2 rounded border border-slate-900/[0.08] bg-white text-slate-900 text-xs focus:outline-none focus:ring-1 focus:ring-violet-600"
                     />
                   </div>
                   <div>
-                    <label style={{ display: "block", fontSize: "10px", color: "var(--text-muted)", marginBottom: "4px" }}>Annual Rev</label>
+                    <label className="block text-[10px] text-slate-500 mb-1">Annual Rev</label>
                     <input
                       type="text"
                       value={node.revenue}
@@ -450,11 +444,11 @@ export default function AdminCmsPage() {
                         copy[index].revenue = e.target.value;
                         setNodes(copy);
                       }}
-                      style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "12px" }}
+                      className="w-full p-2 rounded border border-slate-900/[0.08] bg-white text-slate-900 text-xs focus:outline-none focus:ring-1 focus:ring-violet-600"
                     />
                   </div>
                   <div>
-                    <label style={{ display: "block", fontSize: "10px", color: "var(--text-muted)", marginBottom: "4px" }}>Partner Count</label>
+                    <label className="block text-[10px] text-slate-500 mb-1">Partner Count</label>
                     <input
                       type="text"
                       value={node.partners}
@@ -463,12 +457,12 @@ export default function AdminCmsPage() {
                         copy[index].partners = e.target.value;
                         setNodes(copy);
                       }}
-                      style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "12px" }}
+                      className="w-full p-2 rounded border border-slate-900/[0.08] bg-white text-slate-900 text-xs focus:outline-none focus:ring-1 focus:ring-violet-600"
                     />
                   </div>
                   <button
                     onClick={() => setNodes(nodes.filter((_, idx) => idx !== index))}
-                    style={{ background: "none", border: "none", color: "#ef4444", fontSize: "16px", cursor: "pointer", marginTop: "16px" }}
+                    className="bg-transparent border-none text-red-500 text-base cursor-pointer mt-4 hover:scale-110 transition-transform"
                   >
                     🗑️
                   </button>
@@ -480,15 +474,15 @@ export default function AdminCmsPage() {
 
         {/* PRICING SUBSCRIPTIONS MANAGER */}
         {activeTab === "pricing" && (
-          <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-            <h3 style={{ fontSize: "15px", fontWeight: 700 }}>💰 Edit Pricing Plans</h3>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
+          <div className="flex flex-col gap-6">
+            <h3 className="text-[15px] font-bold text-slate-900">💰 Edit Pricing Plans</h3>
+            <div className="grid grid-cols-2 gap-5">
               {plans.map((plan, index) => (
-                <div key={index} style={{ background: "rgba(255,255,255,0.02)", padding: "20px", borderRadius: "12px", border: "1px solid rgba(255,255,255,0.05)" }}>
-                  <h4 style={{ fontSize: "14px", fontWeight: 700, color: "#a78bfa", marginBottom: "16px" }}>{plan.name} Plan</h4>
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", marginBottom: "12px" }}>
+                <div key={index} className="bg-slate-900/5 p-5 rounded-xl border border-slate-900/5">
+                  <h4 className="text-sm font-bold text-violet-600 mb-4">{plan.name} Plan</h4>
+                  <div className="grid grid-cols-2 gap-3 mb-3">
                     <div>
-                      <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "4px" }}>Price / Month ($)</label>
+                      <label className="block text-[11px] text-slate-500 mb-1">Price / Month ($)</label>
                       <input
                         type="number"
                         value={plan.price}
@@ -497,11 +491,11 @@ export default function AdminCmsPage() {
                           copy[index].price = parseInt(e.target.value) || 0;
                           setPlans(copy);
                         }}
-                        style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "13px" }}
+                        className="w-full p-2 rounded border border-slate-900/[0.08] bg-white text-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-violet-600"
                       />
                     </div>
                     <div>
-                      <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "4px" }}>Plan Title</label>
+                      <label className="block text-[11px] text-slate-500 mb-1">Plan Title</label>
                       <input
                         type="text"
                         value={plan.name}
@@ -510,12 +504,12 @@ export default function AdminCmsPage() {
                           copy[index].name = e.target.value;
                           setPlans(copy);
                         }}
-                        style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "13px" }}
+                        className="w-full p-2 rounded border border-slate-900/[0.08] bg-white text-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-violet-600"
                       />
                     </div>
                   </div>
                   <div>
-                    <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "4px" }}>Plan Description</label>
+                    <label className="block text-[11px] text-slate-500 mb-1">Plan Description</label>
                     <input
                       type="text"
                       value={plan.desc}
@@ -524,7 +518,7 @@ export default function AdminCmsPage() {
                         copy[index].desc = e.target.value;
                         setPlans(copy);
                       }}
-                      style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "13px" }}
+                      className="w-full p-2 rounded border border-slate-900/[0.08] bg-white text-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-violet-600"
                     />
                   </div>
                 </div>
@@ -535,79 +529,79 @@ export default function AdminCmsPage() {
 
         {/* SERVICES CATALOG MANAGER */}
         {activeTab === "services" && (
-          <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <h3 style={{ fontSize: "15px", fontWeight: 700 }}>💼 Public Services Details</h3>
+          <div className="flex flex-col gap-6">
+            <div className="flex justify-between items-center">
+              <h3 className="text-[15px] font-bold text-slate-900">💼 Public Services Details</h3>
               <button
                 onClick={addService}
-                style={{ padding: "6px 12px", borderRadius: "6px", background: "rgba(124,58,237,0.15)", border: "1px solid rgba(124,58,237,0.3)", color: "#a78bfa", fontSize: "12px", fontWeight: 600, cursor: "pointer" }}
+                className="py-1.5 px-3 rounded-lg bg-violet-600/10 border border-violet-600/20 text-violet-600 text-xs font-semibold cursor-pointer hover:bg-violet-600/20 transition-colors"
               >
                 + Add Service
               </button>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+            <div className="flex flex-col gap-5">
               {servicesList.map((srv, idx) => (
-                <div key={srv.id} style={{ background: "rgba(255,255,255,0.02)", padding: "20px", borderRadius: "12px", border: "1px solid rgba(255,255,255,0.05)" }}>
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 0.8fr 0.8fr 0.2fr", gap: "12px", marginBottom: "12px", alignItems: "center" }}>
+                <div key={srv.id} className="bg-slate-900/5 p-5 rounded-xl border border-slate-900/5">
+                  <div className="grid grid-cols-[1fr_1fr_1fr_0.8fr_0.8fr_0.2fr] gap-3 mb-3 items-center">
                     <div>
-                      <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "4px" }}>Service Title</label>
+                      <label className="block text-[11px] text-slate-500 mb-1">Service Title</label>
                       <input
                         type="text"
                         value={srv.title}
                         onChange={(e) => updateService(idx, "title", e.target.value)}
-                        style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "13px" }}
+                        className="w-full p-2 rounded border border-slate-900/[0.08] bg-white text-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-violet-600"
                       />
                     </div>
                     <div>
-                      <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "4px" }}>Route Slug</label>
+                      <label className="block text-[11px] text-slate-500 mb-1">Route Slug</label>
                       <input
                         type="text"
                         value={srv.slug}
                         onChange={(e) => updateService(idx, "slug", e.target.value)}
-                        style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "13px" }}
+                        className="w-full p-2 rounded border border-slate-900/[0.08] bg-white text-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-violet-600"
                       />
                     </div>
                     <div>
-                      <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "4px" }}>Tagline</label>
+                      <label className="block text-[11px] text-slate-500 mb-1">Tagline</label>
                       <input
                         type="text"
                         value={srv.tagline}
                         onChange={(e) => updateService(idx, "tagline", e.target.value)}
-                        style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "13px" }}
+                        className="w-full p-2 rounded border border-slate-900/[0.08] bg-white text-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-violet-600"
                       />
                     </div>
                     <div>
-                      <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "4px" }}>Starting Cost</label>
+                      <label className="block text-[11px] text-slate-500 mb-1">Starting Cost</label>
                       <input
                         type="text"
                         value={srv.startingPrice}
                         onChange={(e) => updateService(idx, "startingPrice", e.target.value)}
-                        style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "13px" }}
+                        className="w-full p-2 rounded border border-slate-900/[0.08] bg-white text-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-violet-600"
                       />
                     </div>
                     <div>
-                      <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "4px" }}>Timeline</label>
+                      <label className="block text-[11px] text-slate-500 mb-1">Timeline</label>
                       <input
                         type="text"
                         value={srv.duration}
                         onChange={(e) => updateService(idx, "duration", e.target.value)}
-                        style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "13px" }}
+                        className="w-full p-2 rounded border border-slate-900/[0.08] bg-white text-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-violet-600"
                       />
                     </div>
                     <button
                       onClick={() => deleteService(idx)}
-                      style={{ background: "none", border: "none", color: "#ef4444", fontSize: "16px", cursor: "pointer", marginTop: "16px" }}
+                      className="bg-transparent border-none text-red-500 text-base cursor-pointer mt-4 hover:scale-110 transition-transform"
                     >
                       🗑️
                     </button>
                   </div>
                   <div>
-                    <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "4px" }}>Service Overview Description</label>
+                    <label className="block text-[11px] text-slate-500 mb-1">Service Overview Description</label>
                     <textarea
                       rows={3}
                       value={srv.description}
                       onChange={(e) => updateService(idx, "description", e.target.value)}
-                      style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "13px", lineHeight: 1.6 }}
+                      className="w-full p-2 rounded border border-slate-900/[0.08] bg-white text-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-violet-600 leading-relaxed"
                     />
                   </div>
                 </div>
@@ -618,53 +612,53 @@ export default function AdminCmsPage() {
 
         {/* PORTFOLIO SHOWCASE MANAGER */}
         {activeTab === "portfolio" && (
-          <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <h3 style={{ fontSize: "15px", fontWeight: 700 }}>🎨 Case-Study Portfolio Items</h3>
+          <div className="flex flex-col gap-6">
+            <div className="flex justify-between items-center">
+              <h3 className="text-[15px] font-bold text-slate-900">🎨 Case-Study Portfolio Items</h3>
               <button
                 onClick={addPortfolio}
-                style={{ padding: "6px 12px", borderRadius: "6px", background: "rgba(124,58,237,0.15)", border: "1px solid rgba(124,58,237,0.3)", color: "#a78bfa", fontSize: "12px", fontWeight: 600, cursor: "pointer" }}
+                className="py-1.5 px-3 rounded-lg bg-violet-600/10 border border-violet-600/20 text-violet-600 text-xs font-semibold cursor-pointer hover:bg-violet-600/20 transition-colors"
               >
                 + Add Project
               </button>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+            <div className="flex flex-col gap-5">
               {portfolioList.map((p, idx) => (
-                <div key={p.id} style={{ background: "rgba(255,255,255,0.02)", padding: "20px", borderRadius: "12px", border: "1px solid rgba(255,255,255,0.05)" }}>
-                  <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr 1fr 1fr 0.5fr 0.2fr", gap: "12px", marginBottom: "12px", alignItems: "center" }}>
+                <div key={p.id} className="bg-slate-900/5 p-5 rounded-xl border border-slate-900/5">
+                  <div className="grid grid-cols-[1.2fr_1fr_1fr_1fr_0.5fr_0.2fr] gap-3 mb-3 items-center">
                     <div>
-                      <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "4px" }}>Project Title</label>
+                      <label className="block text-[11px] text-slate-500 mb-1">Project Title</label>
                       <input
                         type="text"
                         value={p.title}
                         onChange={(e) => updatePortfolio(idx, "title", e.target.value)}
-                        style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "13px" }}
+                        className="w-full p-2 rounded border border-slate-900/[0.08] bg-white text-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-violet-600"
                       />
                     </div>
                     <div>
-                      <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "4px" }}>Slug</label>
+                      <label className="block text-[11px] text-slate-500 mb-1">Slug</label>
                       <input
                         type="text"
                         value={p.slug}
                         onChange={(e) => updatePortfolio(idx, "slug", e.target.value)}
-                        style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "13px" }}
+                        className="w-full p-2 rounded border border-slate-900/[0.08] bg-white text-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-violet-600"
                       />
                     </div>
                     <div>
-                      <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "4px" }}>Client Name</label>
+                      <label className="block text-[11px] text-slate-500 mb-1">Client Name</label>
                       <input
                         type="text"
                         value={p.client}
                         onChange={(e) => updatePortfolio(idx, "client", e.target.value)}
-                        style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "13px" }}
+                        className="w-full p-2 rounded border border-slate-900/[0.08] bg-white text-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-violet-600"
                       />
                     </div>
                     <div>
-                      <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "4px" }}>Category</label>
+                      <label className="block text-[11px] text-slate-500 mb-1">Category</label>
                       <select
                         value={p.category}
                         onChange={(e) => updatePortfolio(idx, "category", e.target.value)}
-                        style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "13px" }}
+                        className="w-full p-2 rounded border border-slate-900/[0.08] bg-white text-slate-900 text-sm cursor-pointer focus:outline-none focus:ring-1 focus:ring-violet-600"
                       >
                         <option value="Web Development">Web Development</option>
                         <option value="E-Commerce">E-Commerce</option>
@@ -675,48 +669,48 @@ export default function AdminCmsPage() {
                       </select>
                     </div>
                     <div>
-                      <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "4px" }}>Featured</label>
+                      <label className="block text-[11px] text-slate-500 mb-1 text-center">Featured</label>
                       <input
                         type="checkbox"
                         checked={p.featured}
                         onChange={(e) => updatePortfolio(idx, "featured", e.target.checked)}
-                        style={{ width: "20px", height: "20px", cursor: "pointer", display: "block", margin: "8px auto 0" }}
+                        className="w-5 h-5 cursor-pointer block mx-auto mt-2"
                       />
                     </div>
                     <button
                       onClick={() => deletePortfolio(idx)}
-                      style={{ background: "none", border: "none", color: "#ef4444", fontSize: "16px", cursor: "pointer", marginTop: "16px" }}
+                      className="bg-transparent border-none text-red-500 text-base cursor-pointer mt-4 hover:scale-110 transition-transform"
                     >
                       🗑️
                     </button>
                   </div>
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", marginBottom: "12px" }}>
+                  <div className="grid grid-cols-2 gap-3 mb-3">
                     <div>
-                      <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "4px" }}>The Challenge</label>
+                      <label className="block text-[11px] text-slate-500 mb-1">The Challenge</label>
                       <textarea
                         rows={2}
                         value={p.challenge}
                         onChange={(e) => updatePortfolio(idx, "challenge", e.target.value)}
-                        style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "13px" }}
+                        className="w-full p-2 rounded border border-slate-900/[0.08] bg-white text-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-violet-600"
                       />
                     </div>
                     <div>
-                      <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "4px" }}>Our Solution</label>
+                      <label className="block text-[11px] text-slate-500 mb-1">Our Solution</label>
                       <textarea
                         rows={2}
                         value={p.solution}
                         onChange={(e) => updatePortfolio(idx, "solution", e.target.value)}
-                        style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "13px" }}
+                        className="w-full p-2 rounded border border-slate-900/[0.08] bg-white text-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-violet-600"
                       />
                     </div>
                   </div>
                   <div>
-                    <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "4px" }}>Result Outcome</label>
+                    <label className="block text-[11px] text-slate-500 mb-1">Result Outcome</label>
                     <input
                       type="text"
                       value={p.result}
                       onChange={(e) => updatePortfolio(idx, "result", e.target.value)}
-                      style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "13px" }}
+                      className="w-full p-2 rounded border border-slate-900/[0.08] bg-white text-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-violet-600"
                     />
                   </div>
                 </div>
@@ -727,44 +721,44 @@ export default function AdminCmsPage() {
 
         {/* BLOG ARTICLES PUBLISHER */}
         {activeTab === "blog" && (
-          <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <h3 style={{ fontSize: "15px", fontWeight: 700 }}>📚 Public Blog Posts</h3>
+          <div className="flex flex-col gap-6">
+            <div className="flex justify-between items-center">
+              <h3 className="text-[15px] font-bold text-slate-900">📚 Public Blog Posts</h3>
               <button
                 onClick={addBlog}
-                style={{ padding: "6px 12px", borderRadius: "6px", background: "rgba(124,58,237,0.15)", border: "1px solid rgba(124,58,237,0.3)", color: "#a78bfa", fontSize: "12px", fontWeight: 600, cursor: "pointer" }}
+                className="py-1.5 px-3 rounded-lg bg-violet-600/10 border border-violet-600/20 text-violet-600 text-xs font-semibold cursor-pointer hover:bg-violet-600/20 transition-colors"
               >
                 + Publish Post
               </button>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+            <div className="flex flex-col gap-5">
               {blogList.map((post, idx) => (
-                <div key={post.id} style={{ background: "rgba(255,255,255,0.02)", padding: "20px", borderRadius: "12px", border: "1px solid rgba(255,255,255,0.05)" }}>
-                  <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr 1fr 0.8fr 0.5fr 0.2fr", gap: "12px", marginBottom: "12px", alignItems: "center" }}>
+                <div key={post.id} className="bg-slate-900/5 p-5 rounded-xl border border-slate-900/5">
+                  <div className="grid grid-cols-[1.2fr_1fr_1fr_0.8fr_0.5fr_0.2fr] gap-3 mb-3 items-center">
                     <div>
-                      <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "4px" }}>Article Title</label>
+                      <label className="block text-[11px] text-slate-500 mb-1">Article Title</label>
                       <input
                         type="text"
                         value={post.title}
                         onChange={(e) => updateBlog(idx, "title", e.target.value)}
-                        style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "13px" }}
+                        className="w-full p-2 rounded border border-slate-900/[0.08] bg-white text-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-violet-600"
                       />
                     </div>
                     <div>
-                      <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "4px" }}>Slug</label>
+                      <label className="block text-[11px] text-slate-500 mb-1">Slug</label>
                       <input
                         type="text"
                         value={post.slug}
                         onChange={(e) => updateBlog(idx, "slug", e.target.value)}
-                        style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "13px" }}
+                        className="w-full p-2 rounded border border-slate-900/[0.08] bg-white text-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-violet-600"
                       />
                     </div>
                     <div>
-                      <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "4px" }}>Category</label>
+                      <label className="block text-[11px] text-slate-500 mb-1">Category</label>
                       <select
                         value={post.category}
                         onChange={(e) => updateBlog(idx, "category", e.target.value)}
-                        style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "13px" }}
+                        className="w-full p-2 rounded border border-slate-900/[0.08] bg-white text-slate-900 text-sm cursor-pointer focus:outline-none focus:ring-1 focus:ring-violet-600"
                       >
                         <option value="Engineering">Engineering</option>
                         <option value="Design">Design</option>
@@ -774,57 +768,57 @@ export default function AdminCmsPage() {
                       </select>
                     </div>
                     <div>
-                      <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "4px" }}>Read Duration</label>
+                      <label className="block text-[11px] text-slate-500 mb-1">Read Duration</label>
                       <input
                         type="text"
                         value={post.readTime}
                         onChange={(e) => updateBlog(idx, "readTime", e.target.value)}
-                        style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "13px" }}
+                        className="w-full p-2 rounded border border-slate-900/[0.08] bg-white text-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-violet-600"
                       />
                     </div>
                     <div>
-                      <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "4px" }}>Featured</label>
+                      <label className="block text-[11px] text-slate-500 mb-1 text-center">Featured</label>
                       <input
                         type="checkbox"
                         checked={post.featured}
                         onChange={(e) => updateBlog(idx, "featured", e.target.checked)}
-                        style={{ width: "20px", height: "20px", cursor: "pointer", display: "block", margin: "8px auto 0" }}
+                        className="w-5 h-5 cursor-pointer block mx-auto mt-2"
                       />
                     </div>
                     <button
                       onClick={() => deleteBlog(idx)}
-                      style={{ background: "none", border: "none", color: "#ef4444", fontSize: "16px", cursor: "pointer", marginTop: "16px" }}
+                      className="bg-transparent border-none text-red-500 text-base cursor-pointer mt-4 hover:scale-110 transition-transform"
                     >
                       🗑️
                     </button>
                   </div>
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", marginBottom: "12px" }}>
+                  <div className="grid grid-cols-2 gap-3 mb-3">
                     <div>
-                      <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "4px" }}>Author Name</label>
+                      <label className="block text-[11px] text-slate-500 mb-1">Author Name</label>
                       <input
                         type="text"
                         value={post.author.name}
                         onChange={(e) => updateBlog(idx, "authorName", e.target.value)}
-                        style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "13px" }}
+                        className="w-full p-2 rounded border border-slate-900/[0.08] bg-white text-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-violet-600"
                       />
                     </div>
                     <div>
-                      <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "4px" }}>Author Role</label>
+                      <label className="block text-[11px] text-slate-500 mb-1">Author Role</label>
                       <input
                         type="text"
                         value={post.author.role}
                         onChange={(e) => updateBlog(idx, "authorRole", e.target.value)}
-                        style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "13px" }}
+                        className="w-full p-2 rounded border border-slate-900/[0.08] bg-white text-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-violet-600"
                       />
                     </div>
                   </div>
                   <div>
-                    <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "4px" }}>Excerpt Text Description</label>
+                    <label className="block text-[11px] text-slate-500 mb-1">Excerpt Text Description</label>
                     <textarea
                       rows={2}
                       value={post.excerpt}
                       onChange={(e) => updateBlog(idx, "excerpt", e.target.value)}
-                      style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "13px" }}
+                      className="w-full p-2 rounded border border-slate-900/[0.08] bg-white text-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-violet-600"
                     />
                   </div>
                 </div>
@@ -835,22 +829,22 @@ export default function AdminCmsPage() {
 
         {/* CAREERS BOARD VACANCY LISTINGS */}
         {activeTab === "jobs" && (
-          <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <h3 style={{ fontSize: "15px", fontWeight: 700 }}>💼 Careers Board Listings</h3>
+          <div className="flex flex-col gap-6">
+            <div className="flex justify-between items-center">
+              <h3 className="text-[15px] font-bold text-slate-900">💼 Careers Board Listings</h3>
               <button
                 onClick={() => setJobs([...jobs, { title: "New Vacancy Opening", type: "Full-Time / Remote", salary: "$2,000/mo", desc: "Brief description of expectations..." }])}
-                style={{ padding: "6px 12px", borderRadius: "6px", background: "rgba(124,58,237,0.15)", border: "1px solid rgba(124,58,237,0.3)", color: "#a78bfa", fontSize: "12px", fontWeight: 600, cursor: "pointer" }}
+                className="py-1.5 px-3 rounded-lg bg-violet-600/10 border border-violet-600/20 text-violet-600 text-xs font-semibold cursor-pointer hover:bg-violet-600/20 transition-colors"
               >
                 + Add Vacancy Listing
               </button>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+            <div className="flex flex-col gap-5">
               {jobs.map((job, index) => (
-                <div key={index} style={{ background: "rgba(255,255,255,0.02)", padding: "20px", borderRadius: "12px", border: "1px solid rgba(255,255,255,0.04)" }}>
-                  <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr 1fr 0.2fr", gap: "16px", marginBottom: "12px", alignItems: "center" }}>
+                <div key={index} className="bg-slate-900/5 p-5 rounded-xl border border-slate-900/5">
+                  <div className="grid grid-cols-[1.2fr_1fr_1fr_0.2fr] gap-4 mb-3 items-center">
                     <div>
-                      <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "4px" }}>Job Title</label>
+                      <label className="block text-[11px] text-slate-500 mb-1">Job Title</label>
                       <input
                         type="text"
                         value={job.title}
@@ -859,11 +853,11 @@ export default function AdminCmsPage() {
                           copy[index].title = e.target.value;
                           setJobs(copy);
                         }}
-                        style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "13px" }}
+                        className="w-full p-2 rounded border border-slate-900/[0.08] bg-white text-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-violet-600"
                       />
                     </div>
                     <div>
-                      <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "4px" }}>Job Category / Type</label>
+                      <label className="block text-[11px] text-slate-500 mb-1">Job Category / Type</label>
                       <input
                         type="text"
                         value={job.type}
@@ -872,11 +866,11 @@ export default function AdminCmsPage() {
                           copy[index].type = e.target.value;
                           setJobs(copy);
                         }}
-                        style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "13px" }}
+                        className="w-full p-2 rounded border border-slate-900/[0.08] bg-white text-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-violet-600"
                       />
                     </div>
                     <div>
-                      <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "4px" }}>Salary / Incentive Budget</label>
+                      <label className="block text-[11px] text-slate-500 mb-1">Salary / Incentive Budget</label>
                       <input
                         type="text"
                         value={job.salary}
@@ -885,18 +879,18 @@ export default function AdminCmsPage() {
                           copy[index].salary = e.target.value;
                           setJobs(copy);
                         }}
-                        style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "13px" }}
+                        className="w-full p-2 rounded border border-slate-900/[0.08] bg-white text-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-violet-600"
                       />
                     </div>
                     <button
                       onClick={() => setJobs(jobs.filter((_, idx) => idx !== index))}
-                      style={{ background: "none", border: "none", color: "#ef4444", fontSize: "16px", cursor: "pointer", marginTop: "16px" }}
+                      className="bg-transparent border-none text-red-500 text-base cursor-pointer mt-4 hover:scale-110 transition-transform"
                     >
                       🗑️
                     </button>
                   </div>
                   <div>
-                    <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "4px" }}>Description</label>
+                    <label className="block text-[11px] text-slate-500 mb-1">Description</label>
                     <textarea
                       rows={2}
                       value={job.desc}
@@ -905,7 +899,7 @@ export default function AdminCmsPage() {
                         copy[index].desc = e.target.value;
                         setJobs(copy);
                       }}
-                      style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid var(--border)", background: "#0c1524", color: "#fff", fontSize: "13px" }}
+                      className="w-full p-2 rounded border border-slate-900/[0.08] bg-white text-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-violet-600"
                     />
                   </div>
                 </div>
@@ -916,16 +910,16 @@ export default function AdminCmsPage() {
 
         {/* CONTACT MESSAGE INBOX LOGGER */}
         {activeTab === "inbox" && (
-          <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <div className="flex flex-col gap-6">
+            <div className="flex justify-between items-center">
               <div>
-                <h3 style={{ fontSize: "15px", fontWeight: 700 }}>📥 Inbound Customer Messages Logs</h3>
-                <p style={{ fontSize: "11px", color: "var(--text-secondary)", marginTop: "2px" }}>Real-time logs of enquiries submitted via home page or contact page forms.</p>
+                <h3 className="text-[15px] font-bold text-slate-900">📥 Inbound Customer Messages Logs</h3>
+                <p className="text-xs text-slate-600 mt-0.5">Real-time logs of enquiries submitted via home page or contact page forms.</p>
               </div>
               {messages.length > 0 && (
                 <button
                   onClick={clearMessages}
-                  style={{ padding: "6px 12px", borderRadius: "6px", background: "rgba(239,68,68,0.15)", border: "1px solid rgba(239,68,68,0.3)", color: "#ef4444", fontSize: "12px", fontWeight: 600, cursor: "pointer" }}
+                  className="py-1.5 px-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-600 text-xs font-semibold cursor-pointer hover:bg-red-500/20 transition-colors"
                 >
                   Clear Inbox
                 </button>
@@ -933,31 +927,31 @@ export default function AdminCmsPage() {
             </div>
 
             {messages.length === 0 ? (
-              <div style={{ textAlign: "center", padding: "60px 0", color: "var(--text-muted)", fontSize: "14px" }}>
+              <div className="text-center py-15 text-slate-400 text-sm">
                 📬 No messages in the inbox yet. Test by submitting forms on the Home or Contact page!
               </div>
             ) : (
-              <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+              <div className="flex flex-col gap-4">
                 {messages.map((msg) => (
-                  <div key={msg.id} style={{ background: "rgba(255,255,255,0.02)", padding: "20px", borderRadius: "12px", border: "1px solid rgba(255,255,255,0.05)" }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", borderBottom: "1px solid rgba(255,255,255,0.05)", paddingBottom: "10px", marginBottom: "12px", flexWrap: "wrap", gap: "10px" }}>
+                  <div key={msg.id} className="bg-slate-900/5 p-5 rounded-xl border border-slate-900/5">
+                    <div className="flex justify-between border-b border-slate-900/10 pb-2.5 mb-3 flex-wrap gap-2.5">
                       <div>
-                        <strong style={{ color: "#fff", fontSize: "14px" }}>{msg.name}</strong> 
-                        <span style={{ color: "var(--text-secondary)", fontSize: "12px", marginLeft: "8px" }}>({msg.email})</span>
+                        <strong className="text-slate-900 text-sm">{msg.name}</strong>
+                        <span className="text-slate-500 text-xs ml-2">({msg.email})</span>
                       </div>
-                      <div style={{ fontSize: "11px", color: "var(--text-muted)" }}>
+                      <div className="text-xs text-slate-400">
                         {new Date(msg.submittedAt).toLocaleString()}
                       </div>
                     </div>
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginBottom: "10px", fontSize: "12px" }}>
+                    <div className="grid grid-cols-2 gap-2.5 mb-2.5 text-xs">
                       <div>
-                        <span style={{ color: "var(--text-muted)" }}>Service Required:</span> <span style={{ color: "#a78bfa", fontWeight: 600 }}>{msg.type}</span>
+                        <span className="text-slate-500">Service Required:</span> <span className="text-violet-600 font-semibold">{msg.type}</span>
                       </div>
                       <div>
-                        <span style={{ color: "var(--text-muted)" }}>Inquiry Budget:</span> <span style={{ color: "#10b981", fontWeight: 600 }}>{msg.budget}</span>
+                        <span className="text-slate-500">Inquiry Budget:</span> <span className="text-emerald-600 font-semibold">{msg.budget}</span>
                       </div>
                     </div>
-                    <p style={{ fontSize: "13px", color: "var(--text-secondary)", background: "rgba(0,0,0,0.15)", padding: "12px", borderRadius: "6px", margin: 0, lineHeight: 1.6 }}>
+                    <p className="text-[13px] text-slate-600 bg-white p-3 rounded-lg margin-0 border border-slate-900/[0.04] leading-relaxed">
                       {msg.message}
                     </p>
                   </div>

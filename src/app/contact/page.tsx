@@ -49,12 +49,9 @@ export default function ContactPage() {
       const current = stored ? JSON.parse(stored) : [];
       localStorage.setItem("jevxo_contact_messages", JSON.stringify([newMsg, ...current]));
       
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-      setStatus(res.ok ? "success" : "error");
+      // Simulate frontend submission response delay
+      await new Promise((resolve) => setTimeout(resolve, 800));
+      setStatus("success");
     } catch {
       setStatus("error");
     }
@@ -84,57 +81,57 @@ export default function ContactPage() {
   };
 
   return (
-    <div style={{ background: "#080d1a", color: "#f1f5f9", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+    <div className="bg-[#080d1a] text-[#f1f5f9] min-h-screen flex flex-col">
       <Navbar />
-      <div style={{ flex: 1, paddingTop: "80px" }}>
+      <div className="flex-1 pt-20">
         {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="bg-hero-gradient section" style={{ position: "relative", overflow: "hidden" }}>
-        <div className="orb orb-violet" style={{ width: "500px", height: "500px", top: "-150px", right: "-100px" }} />
-        <div className="orb orb-cyan"   style={{ width: "350px", height: "350px", bottom: "-80px", left: "-60px" }} />
-        <div className="container" style={{ position: "relative", zIndex: 1, textAlign: "center" }}>
-          <div style={{ display: "inline-block", padding: "4px 14px", borderRadius: "100px", border: "1px solid rgba(124,58,237,0.3)", background: "rgba(124,58,237,0.08)", fontSize: "12px", fontWeight: 600, color: "#a78bfa", marginBottom: "24px", textTransform: "uppercase", letterSpacing: "0.1em" }}>
+      <section className="bg-hero-gradient py-[100px] md:py-[70px] relative overflow-hidden">
+        <div className="rounded-full blur-[80px] pointer-events-none absolute bg-violet-600/[0.07] w-[500px] h-[500px] -top-[150px] -right-[100px]" />
+        <div className="rounded-full blur-[80px] pointer-events-none absolute bg-cyan-500/[0.06] w-[350px] h-[350px] -bottom-[80px] -left-[60px]" />
+        <div className="w-11/12 max-w-[1400px] mx-auto relative z-[1] text-center">
+          <div className="inline-block py-1 px-3.5 rounded-full border border-violet-600/[0.3] bg-violet-600/[0.08] text-xs font-semibold text-[#a78bfa] mb-6 uppercase tracking-widest">
             Get In Touch
           </div>
-          <h1 style={{ fontSize: "clamp(36px, 6vw, 72px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: "24px" }}>
-            Let&apos;s Build Something<br /><span className="gradient-text">Extraordinary</span>
+          <h1 className="text-[clamp(36px,6vw,72px)] font-black tracking-tight mb-6">
+            Let&apos;s Build Something<br /><span className="bg-gradient-to-br from-violet-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent">Extraordinary</span>
           </h1>
-          <p style={{ fontSize: "18px", color: "var(--text-secondary)", maxWidth: "520px", margin: "0 auto", lineHeight: 1.8 }}>
+          <p className="text-lg text-slate-600 max-w-[520px] mx-auto leading-relaxed">
             Tell us about your project. We respond to every enquiry within 24 hours and offer a free 30-minute discovery call.
           </p>
         </div>
       </section>
 
       {/* ── Form + Info ──────────────────────────────────────── */}
-      <section className="section">
-        <div className="container">
-          <div style={{ display: "grid", gridTemplateColumns: "3fr 2fr", gap: "60px", alignItems: "start" }} className="contact-grid">
+      <section className="py-[100px] md:py-[70px]">
+        <div className="w-11/12 max-w-[1400px] mx-auto">
+          <div className="contact-grid grid grid-cols-[3fr_2fr] gap-[60px] items-start">
             {/* Form */}
-            <div className="glass" style={{ padding: "48px", borderRadius: "var(--radius-xl)" }}>
+            <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 p-12 rounded-[28px]">
               {status === "success" ? (
-                <div style={{ textAlign: "center", padding: "40px 0" }}>
-                  <div style={{ fontSize: "64px", marginBottom: "24px" }}>🎉</div>
-                  <h2 style={{ fontSize: "28px", fontWeight: 800, marginBottom: "12px" }}>Message Received!</h2>
-                  <p style={{ color: "var(--text-secondary)", fontSize: "16px" }}>
+                <div className="text-center py-10 px-0">
+                  <div className="text-[64px] mb-6">🎉</div>
+                  <h2 className="text-[28px] font-extrabold mb-3">Message Received!</h2>
+                  <p className="text-slate-600 text-base">
                     Thanks for reaching out. We&apos;ll be in touch within 24 hours.
                   </p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit}>
-                  <h2 style={{ fontSize: "26px", fontWeight: 700, marginBottom: "36px" }}>Start a Project</h2>
+                  <h2 className="text-[26px] font-bold mb-9">Start a Project</h2>
 
                   {/* Name + Email */}
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px", marginBottom: "20px" }} className="form-row">
+                  <div className="form-row grid grid-cols-[1fr_1fr] gap-5 mb-5">
                     <div>
-                      <label style={labelStyle}>Your Name *</label>
-                      <input style={inputStyle} type="text" required placeholder="Alex Johnson"
+                      <label className="block text-[13px] font-semibold text-slate-600 mb-2 uppercase tracking-wider">Your Name *</label>
+                      <input className="w-full px-[18px] py-3.5 rounded-xl border border-white/[0.08] bg-white/[0.04] text-[#f1f5f9] text-[15px] outline-none transition-[border-color] duration-200 focus:border-violet-500/50" type="text" required placeholder="Alex Johnson"
                         value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })}
                         onFocus={(e) => { e.currentTarget.style.borderColor = "rgba(124,58,237,0.5)"; }}
                         onBlur={(e)  => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; }}
                       />
                     </div>
                     <div>
-                      <label style={labelStyle}>Email Address *</label>
-                      <input style={inputStyle} type="email" required placeholder="alex@company.com"
+                      <label className="block text-[13px] font-semibold text-slate-600 mb-2 uppercase tracking-wider">Email Address *</label>
+                      <input className="w-full px-[18px] py-3.5 rounded-xl border border-white/[0.08] bg-white/[0.04] text-[#f1f5f9] text-[15px] outline-none transition-[border-color] duration-200 focus:border-violet-500/50" type="email" required placeholder="alex@company.com"
                         value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })}
                         onFocus={(e) => { e.currentTarget.style.borderColor = "rgba(124,58,237,0.5)"; }}
                         onBlur={(e)  => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; }}
@@ -143,9 +140,9 @@ export default function ContactPage() {
                   </div>
 
                   {/* Company */}
-                  <div style={{ marginBottom: "20px" }}>
-                    <label style={labelStyle}>Company (optional)</label>
-                    <input style={inputStyle} type="text" placeholder="Acme Corp"
+                  <div className="mb-5">
+                    <label className="block text-[13px] font-semibold text-slate-600 mb-2 uppercase tracking-wider">Company (optional)</label>
+                    <input className="w-full px-[18px] py-3.5 rounded-xl border border-white/[0.08] bg-white/[0.04] text-[#f1f5f9] text-[15px] outline-none transition-[border-color] duration-200 focus:border-violet-500/50" type="text" placeholder="Acme Corp"
                       value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })}
                       onFocus={(e) => { e.currentTarget.style.borderColor = "rgba(124,58,237,0.5)"; }}
                       onBlur={(e)  => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; }}
@@ -153,10 +150,10 @@ export default function ContactPage() {
                   </div>
 
                   {/* Service + Budget */}
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px", marginBottom: "20px" }} className="form-row">
+                  <div className="form-row grid grid-cols-[1fr_1fr] gap-5 mb-5">
                     <div>
-                      <label style={labelStyle}>Service Needed</label>
-                      <select style={{ ...inputStyle, cursor: "pointer" }}
+                      <label className="block text-[13px] font-semibold text-slate-600 mb-2 uppercase tracking-wider">Service Needed</label>
+                      <select className="w-full px-[18px] py-3.5 rounded-xl border border-white/[0.08] bg-white/[0.04] text-[#f1f5f9] text-[15px] outline-none transition-[border-color] duration-200 focus:border-violet-500/50 "
                         value={form.service} onChange={(e) => setForm({ ...form, service: e.target.value })}
                       >
                         <option value="">Select a service</option>
@@ -164,8 +161,8 @@ export default function ContactPage() {
                       </select>
                     </div>
                     <div>
-                      <label style={labelStyle}>Budget Range</label>
-                      <select style={{ ...inputStyle, cursor: "pointer" }}
+                      <label className="block text-[13px] font-semibold text-slate-600 mb-2 uppercase tracking-wider">Budget Range</label>
+                      <select className="w-full px-[18px] py-3.5 rounded-xl border border-white/[0.08] bg-white/[0.04] text-[#f1f5f9] text-[15px] outline-none transition-[border-color] duration-200 focus:border-violet-500/50 "
                         value={form.budget} onChange={(e) => setForm({ ...form, budget: e.target.value })}
                       >
                         <option value="">Select budget</option>
@@ -175,9 +172,9 @@ export default function ContactPage() {
                   </div>
 
                   {/* Message */}
-                  <div style={{ marginBottom: "32px" }}>
-                    <label style={labelStyle}>Tell Us About Your Project *</label>
-                    <textarea style={{ ...inputStyle, minHeight: "140px", resize: "vertical" }} required
+                  <div className="mb-8">
+                    <label className="block text-[13px] font-semibold text-slate-600 mb-2 uppercase tracking-wider">Tell Us About Your Project *</label>
+                    <textarea className="min-h-[140px]" style={{resize: "vertical"}} required
                       placeholder="Give us an overview of what you're looking to build, your timeline, and any other relevant details..."
                       value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })}
                       onFocus={(e) => { e.currentTarget.style.borderColor = "rgba(124,58,237,0.5)"; }}
@@ -186,25 +183,12 @@ export default function ContactPage() {
                   </div>
 
                   {status === "error" && (
-                    <div style={{ padding: "14px 20px", borderRadius: "12px", background: "rgba(239,68,68,0.1)", border: "1px solid rgba(239,68,68,0.2)", color: "#fca5a5", fontSize: "14px", marginBottom: "20px" }}>
+                    <div className="py-3.5 px-5 rounded-xl bg-[rgba(239,68,68,0.1)] border border-[rgba(239,68,68,0.2)] text-[#fca5a5] text-sm mb-5">
                       Something went wrong. Please try again or email us directly.
                     </div>
                   )}
 
-                  <button type="submit" disabled={status === "sending"} style={{
-                    width: "100%",
-                    padding: "16px 32px",
-                    borderRadius: "14px",
-                    fontWeight: 700,
-                    fontSize: "16px",
-                    background: "linear-gradient(135deg, #7c3aed, #4f46e5)",
-                    color: "#fff",
-                    border: "none",
-                    cursor: status === "sending" ? "not-allowed" : "pointer",
-                    opacity: status === "sending" ? 0.7 : 1,
-                    boxShadow: "0 0 30px rgba(124,58,237,0.4)",
-                    transition: "all 0.2s ease",
-                  }}>
+                  <button className="w-full py-4 px-8 rounded-[14px] font-bold text-base bg-gradient-to-br from-violet-600 to-indigo-600 text-[#fff] border-[none]" type="submit" disabled={status === "sending"} style={{cursor: status === "sending" ? "not-allowed" : "pointer", opacity: status === "sending" ? 0.7 : 1, boxShadow: "0 0 30px rgba(124,58,237,0.4)", transition: "all 0.2s ease"}}>
                     {status === "sending" ? "Sending…" : "Send Message →"}
                   </button>
                 </form>
@@ -212,25 +196,25 @@ export default function ContactPage() {
             </div>
 
             {/* Info sidebar */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+            <div className="flex flex-col gap-5">
               {contactInfo.map((info) => (
-                <a key={info.label} href={info.href} style={{ display: "block" }}>
-                  <div className="glass" style={{ padding: "24px 28px", borderRadius: "var(--radius-md)", display: "flex", alignItems: "center", gap: "16px", transition: "all 0.2s ease" }}
+                <a className="block" key={info.label} href={info.href}>
+                  <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 py-6 px-7 rounded-[14px] flex items-center gap-4" style={{transition: "all 0.2s ease"}}
                     onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(124,58,237,0.25)"; }}
                     onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.08)"; }}
                   >
-                    <div style={{ fontSize: "28px" }}>{info.icon}</div>
+                    <div className="text-[28px]">{info.icon}</div>
                     <div>
-                      <p style={{ fontSize: "12px", color: "var(--text-muted)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "4px" }}>{info.label}</p>
-                      <p style={{ fontSize: "15px", fontWeight: 600 }}>{info.value}</p>
+                      <p className="text-xs text-slate-400 font-semibold uppercase tracking-wider mb-1">{info.label}</p>
+                      <p className="text-[15px] font-semibold">{info.value}</p>
                     </div>
                   </div>
                 </a>
               ))}
 
               {/* Trust badges */}
-              <div className="glass" style={{ padding: "28px", borderRadius: "var(--radius-md)", marginTop: "8px" }}>
-                <h4 style={{ fontSize: "15px", fontWeight: 700, marginBottom: "16px" }}>Why Work With Us?</h4>
+              <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 p-7 rounded-[14px] mt-2">
+                <h4 className="text-[15px] font-bold mb-4">Why Work With Us?</h4>
                 {[
                   "Free 30-min discovery call",
                   "No obligation quote within 48h",
@@ -238,9 +222,9 @@ export default function ContactPage() {
                   "Dedicated project manager",
                   "100% satisfaction guarantee",
                 ].map((item) => (
-                  <div key={item} style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "12px" }}>
-                    <div style={{ width: "18px", height: "18px", borderRadius: "50%", background: "rgba(52,211,153,0.2)", border: "1px solid rgba(52,211,153,0.4)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "10px", color: "#34d399", flexShrink: 0 }}>✓</div>
-                    <span style={{ color: "var(--text-secondary)", fontSize: "14px" }}>{item}</span>
+                  <div className="flex items-center gap-2.5 mb-3" key={item}>
+                    <div className="w-[18px] h-[18px] rounded-full bg-[rgba(52,211,153,0.2)] border border-[rgba(52,211,153,0.4)] flex items-center justify-center text-[10px] text-[#34d399]" style={{flexShrink: 0}}>✓</div>
+                    <span className="text-slate-600 text-sm">{item}</span>
                   </div>
                 ))}
               </div>

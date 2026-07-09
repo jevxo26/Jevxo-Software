@@ -29,36 +29,42 @@ export default function ClientBillingPage() {
   };
 
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "1.8fr 1.2fr", gap: "28px" }} className="admin-grid-top">
+    <div className="grid grid-cols-1 lg:grid-cols-[1.8fr_1.2fr] gap-7">
       
       {/* Billing Invoice history table */}
-      <div className="glass" style={{ padding: "28px", borderRadius: "16px" }}>
-        <h3 style={{ fontSize: "16px", fontWeight: 700, marginBottom: "16px" }}>Invoice Billing History</h3>
+      <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-7 rounded-2xl">
+        <h3 className="text-base font-bold text-slate-900 mb-4">Invoice Billing History</h3>
         
-        <div style={{ overflowX: "auto" }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "13px", textAlign: "left" }}>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse text-sm text-left">
             <thead>
-              <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.06)", color: "var(--text-secondary)" }}>
-                <th style={{ padding: "10px" }}>Invoice ID</th>
-                <th style={{ padding: "10px" }}>Billing Date</th>
-                <th style={{ padding: "10px" }}>Amount Paid</th>
-                <th style={{ padding: "10px" }}>Status</th>
-                <th style={{ padding: "10px", textAlign: "right" }}>Receipt</th>
+              <tr className="border-b border-slate-900/10 text-slate-400 font-medium">
+                <th className="p-2.5">Invoice ID</th>
+                <th className="p-2.5">Billing Date</th>
+                <th className="p-2.5">Amount Paid</th>
+                <th className="p-2.5">Status</th>
+                <th className="p-2.5 text-right">Receipt</th>
               </tr>
             </thead>
             <tbody>
               {invoices.map((inv) => (
-                <tr key={inv.id} style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
-                  <td style={{ padding: "12px 10px", fontWeight: 700 }}>{inv.id}</td>
-                  <td style={{ padding: "12px 10px" }}>{inv.date}</td>
-                  <td style={{ padding: "12px 10px" }}>{inv.amount}</td>
-                  <td style={{ padding: "12px 10px" }}>
-                    <span style={{ fontSize: "11px", fontWeight: 700, padding: "2px 6px", borderRadius: "4px", background: inv.status === "Paid" ? "rgba(16,185,129,0.12)" : "rgba(239,68,68,0.12)", color: inv.status === "Paid" ? "#10b981" : "#ef4444" }}>{inv.status}</span>
+                <tr key={inv.id} className="border-b border-slate-900/5 hover:bg-slate-50/50 transition-colors">
+                  <td className="py-3 px-2.5 font-bold text-slate-900">{inv.id}</td>
+                  <td className="py-3 px-2.5 text-slate-600">{inv.date}</td>
+                  <td className="py-3 px-2.5 text-slate-600">{inv.amount}</td>
+                  <td className="py-3 px-2.5">
+                    <span className={`text-[11px] font-bold py-0.5 px-2 rounded-full inline-block ${
+                      inv.status === "Paid"
+                        ? "bg-emerald-500/10 text-emerald-600"
+                        : "bg-red-500/10 text-red-600"
+                    }`}>
+                      {inv.status}
+                    </span>
                   </td>
-                  <td style={{ padding: "12px 10px", textAlign: "right" }}>
+                  <td className="py-3 px-2.5 text-right">
                     <button
                       onClick={() => handleDownloadInvoice(inv.id)}
-                      style={{ padding: "4px 8px", background: "rgba(255,255,255,0.04)", border: "1px solid var(--border)", color: "#a78bfa", fontSize: "11px", borderRadius: "4px", cursor: "pointer" }}
+                      className="py-1 px-2.5 rounded bg-slate-900/5 border border-slate-900/[0.08] text-violet-600 text-xs font-semibold hover:bg-slate-900/10 transition-colors"
                     >
                       Download PDF
                     </button>
@@ -71,27 +77,27 @@ export default function ClientBillingPage() {
       </div>
 
       {/* support Desk Form */}
-      <div className="glass" style={{ padding: "28px", borderRadius: "16px" }}>
-        <h3 style={{ fontSize: "16px", fontWeight: 700, marginBottom: "16px" }}>Open Billing Support Ticket</h3>
-        <form onSubmit={handleCreateTicket}>
-          <div style={{ marginBottom: "12px" }}>
-            <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "6px" }}>Ticket Title</label>
+      <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-7 rounded-2xl">
+        <h3 className="text-base font-bold text-slate-900 mb-4">Open Billing Support Ticket</h3>
+        <form onSubmit={handleCreateTicket} className="space-y-4">
+          <div>
+            <label className="block text-[11px] text-slate-500 font-semibold uppercase tracking-wider mb-1.5">Ticket Title</label>
             <input
               type="text"
               placeholder="e.g. Failed transaction refund query"
               required
               value={supportTicket.title}
               onChange={(e) => setSupportTicket({ ...supportTicket, title: e.target.value })}
-              style={{ width: "100%", padding: "10px", borderRadius: "6px", background: "rgba(0,0,0,0.2)", border: "1px solid var(--border)", color: "#fff", fontSize: "13px" }}
+              className="w-full p-2.5 rounded-lg border border-slate-900/[0.08] bg-slate-900/5 text-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-violet-600 placeholder:text-slate-400"
             />
           </div>
 
-          <div style={{ marginBottom: "12px" }}>
-            <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "6px" }}>Priority Rating</label>
+          <div>
+            <label className="block text-[11px] text-slate-500 font-semibold uppercase tracking-wider mb-1.5">Priority Rating</label>
             <select
               value={supportTicket.priority}
               onChange={(e) => setSupportTicket({ ...supportTicket, priority: e.target.value })}
-              style={{ width: "100%", padding: "10px", borderRadius: "6px", background: "rgba(8,13,26,0.9)", border: "1px solid var(--border)", color: "#fff", fontSize: "13px" }}
+              className="w-full p-2.5 rounded-lg border border-slate-900/[0.08] bg-slate-900/5 text-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-violet-600"
             >
               <option value="High">🚨 High priority</option>
               <option value="Medium">⚡ Medium priority</option>
@@ -99,27 +105,27 @@ export default function ClientBillingPage() {
             </select>
           </div>
 
-          <div style={{ marginBottom: "20px" }}>
-            <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "6px" }}>Detailed Message</label>
+          <div>
+            <label className="block text-[11px] text-slate-500 font-semibold uppercase tracking-wider mb-1.5">Detailed Message</label>
             <textarea
               rows={3}
               placeholder="Explain the problem..."
               value={supportTicket.message}
               onChange={(e) => setSupportTicket({ ...supportTicket, message: e.target.value })}
-              style={{ width: "100%", padding: "10px", borderRadius: "6px", background: "rgba(0,0,0,0.2)", border: "1px solid var(--border)", color: "#fff", fontSize: "13px" }}
+              className="w-full p-2.5 rounded-lg border border-slate-900/[0.08] bg-slate-900/5 text-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-violet-600 placeholder:text-slate-400"
             />
           </div>
 
-          <button type="submit" style={{ width: "100%", padding: "10px", borderRadius: "6px", background: "linear-gradient(135deg, #7c3aed, #4f46e5)", color: "#fff", fontWeight: 700, border: "none", cursor: "pointer" }}>Submit Ticket</button>
+          <button type="submit" className="w-full py-2.5 px-4 rounded-lg bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white font-bold text-sm shadow-md transition-all duration-150 cursor-pointer">Submit Ticket</button>
         </form>
 
         {/* Existing tickets list */}
-        <div style={{ marginTop: "24px", borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "16px" }}>
-          <div style={{ fontSize: "11px", color: "var(--text-muted)", fontWeight: 700, marginBottom: "8px" }}>YOUR ACTIVE TICKETS</div>
+        <div className="mt-6 border-t border-slate-900/10 pt-4">
+          <div className="text-[11px] text-slate-400 font-bold tracking-wider uppercase mb-2">YOUR ACTIVE TICKETS</div>
           {ticketsList.map(t => (
-            <div key={t.id} style={{ fontSize: "12px", background: "rgba(255,255,255,0.02)", padding: "8px 12px", borderRadius: "4px", display: "flex", justifyContent: "space-between", marginBottom: "6px" }}>
-              <span>{t.title}</span>
-              <span style={{ color: "#a78bfa", fontWeight: 700 }}>{t.status}</span>
+            <div key={t.id} className="text-xs bg-slate-900/5 border border-slate-900/5 p-2 px-3 rounded-lg flex justify-between items-center mb-1.5">
+              <span className="text-slate-700 font-medium">{t.title}</span>
+              <span className="text-violet-600 font-bold">{t.status}</span>
             </div>
           ))}
         </div>

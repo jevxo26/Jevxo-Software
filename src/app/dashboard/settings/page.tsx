@@ -48,55 +48,32 @@ export default function SettingsPage() {
     setTimeout(() => setSaveStatus("idle"), 3000);
   };
 
-  const inputStyle: React.CSSProperties = {
-    width: "100%",
-    padding: "12px 16px",
-    borderRadius: "8px",
-    border: "1px solid rgba(255,255,255,0.08)",
-    background: "rgba(255,255,255,0.03)",
-    color: "#fff",
-    fontSize: "14px",
-    outline: "none",
-    marginTop: "6px",
-  };
-
-  const selectStyle: React.CSSProperties = {
-    ...inputStyle,
-    cursor: "pointer",
-  };
-
   return (
-    <div style={{ maxWidth: "800px", margin: "0 auto" }}>
-      <div style={{ marginBottom: "32px" }}>
-        <h2 style={{ fontSize: "24px", fontWeight: 800 }}>Profile & System Settings</h2>
-        <p style={{ fontSize: "13px", color: "var(--text-secondary)", marginTop: "4px" }}>
+    <div className="max-w-3xl mx-auto">
+      <div className="mb-8">
+        <h2 className="text-xl font-extrabold text-slate-900 mb-1">Profile & System Settings</h2>
+        <p className="text-xs text-slate-500">
           Manage your Jevxo node profile settings, account security preferences, and dashboard interface options.
         </p>
       </div>
 
       {saveStatus === "saved" && (
-        <div className="glass" style={{ padding: "12px 18px", borderRadius: "8px", background: "rgba(16,185,129,0.15)", border: "1px solid #10b981", color: "#10b981", fontSize: "13px", fontWeight: 600, marginBottom: "24px" }}>
+        <div className="p-3 px-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 text-xs font-semibold mb-6">
           ✓ Profile settings saved and applied to your current active session!
         </div>
       )}
 
       {/* Tabs */}
-      <div style={{ display: "flex", gap: "8px", borderBottom: "1px solid rgba(255,255,255,0.06)", paddingBottom: "12px", marginBottom: "32px" }}>
+      <div className="flex flex-wrap gap-2 border-b border-slate-900/10 pb-3 mb-8">
         {(["profile", "security", "preferences"] as const).map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            style={{
-              padding: "10px 20px",
-              borderRadius: "6px",
-              border: "none",
-              background: activeTab === tab ? "rgba(124,58,237,0.15)" : "transparent",
-              color: activeTab === tab ? "#a78bfa" : "var(--text-secondary)",
-              fontWeight: activeTab === tab ? 700 : 500,
-              cursor: "pointer",
-              textTransform: "capitalize",
-              fontSize: "13px",
-            }}
+            className={`py-2 px-4 rounded-lg text-xs font-semibold border transition-all cursor-pointer capitalize ${
+              activeTab === tab
+                ? "border-violet-600/30 bg-violet-600/10 text-violet-600"
+                : "border-transparent text-slate-500 hover:text-slate-700"
+            }`}
           >
             {tab === "profile" && "👤 Profile Details"}
             {tab === "security" && "🔒 Account Security"}
@@ -105,32 +82,28 @@ export default function SettingsPage() {
         ))}
       </div>
 
-      <form onSubmit={handleSave} className="glass" style={{ padding: "32px", borderRadius: "16px", background: "rgba(255,255,255,0.01)", border: "1px solid rgba(255,255,255,0.06)" }}>
+      <form onSubmit={handleSave} className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-8 rounded-2xl">
         
         {/* PROFILE TAB */}
         {activeTab === "profile" && (
-          <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "20px", paddingBottom: "16px", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
-              <div style={{ width: "64px", height: "64px", borderRadius: "50%", background: "linear-gradient(135deg, #7c3aed, #4f46e5)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "32px" }}>
+          <div className="flex flex-col gap-6">
+            <div className="flex items-center gap-5 pb-5 border-b border-slate-900/10">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-violet-600 to-indigo-600 text-white flex items-center justify-center text-3xl">
                 {profile.avatarEmoji}
               </div>
               <div>
-                <h4 style={{ fontSize: "16px", fontWeight: 700 }}>Profile Avatar</h4>
-                <div style={{ display: "flex", gap: "8px", marginTop: "8px" }}>
+                <h4 className="text-sm font-bold text-slate-900">Profile Avatar</h4>
+                <div className="flex gap-2 mt-2">
                   {["👨‍💻", "👩‍💻", "👑", "🚀", "⚡", "🤖"].map((emoji) => (
                     <button
                       key={emoji}
                       type="button"
                       onClick={() => setProfile({ ...profile, avatarEmoji: emoji })}
-                      style={{
-                        padding: "6px 10px",
-                        fontSize: "18px",
-                        border: "1px solid",
-                        borderColor: profile.avatarEmoji === emoji ? "rgba(124,58,237,0.5)" : "rgba(255,255,255,0.08)",
-                        background: profile.avatarEmoji === emoji ? "rgba(124,58,237,0.15)" : "rgba(255,255,255,0.02)",
-                        borderRadius: "6px",
-                        cursor: "pointer",
-                      }}
+                      className={`p-1.5 px-2.5 text-lg border rounded-lg cursor-pointer transition-all ${
+                        profile.avatarEmoji === emoji
+                          ? "border-violet-600/30 bg-violet-600/10"
+                          : "border-slate-900/[0.08] bg-slate-900/5 hover:bg-slate-900/10"
+                      }`}
                     >
                       {emoji}
                     </button>
@@ -139,45 +112,45 @@ export default function SettingsPage() {
               </div>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
-              <div>
-                <label style={{ fontSize: "12px", color: "var(--text-secondary)", fontWeight: 600 }}>Full Name</label>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="flex flex-col">
+                <label className="text-[10px] text-slate-400 font-bold tracking-wider uppercase mb-1.5">Full Name</label>
                 <input
                   type="text"
                   value={profile.name}
                   onChange={(e) => setProfile({ ...profile, name: e.target.value })}
-                  style={inputStyle}
+                  className="w-full p-2.5 px-4 rounded-lg border border-slate-900/[0.08] bg-white text-slate-900 text-xs focus:outline-none focus:ring-1 focus:ring-violet-600 placeholder:text-slate-400"
                   required
                 />
               </div>
-              <div>
-                <label style={{ fontSize: "12px", color: "var(--text-secondary)", fontWeight: 600 }}>Email Address</label>
+              <div className="flex flex-col">
+                <label className="text-[10px] text-slate-400 font-bold tracking-wider uppercase mb-1.5">Email Address</label>
                 <input
                   type="email"
                   value={profile.email}
                   onChange={(e) => setProfile({ ...profile, email: e.target.value })}
-                  style={inputStyle}
+                  className="w-full p-2.5 px-4 rounded-lg border border-slate-900/[0.08] bg-white text-slate-900 text-xs focus:outline-none focus:ring-1 focus:ring-violet-600 placeholder:text-slate-400"
                   required
                 />
               </div>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
-              <div>
-                <label style={{ fontSize: "12px", color: "var(--text-secondary)", fontWeight: 600 }}>Phone Number</label>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="flex flex-col">
+                <label className="text-[10px] text-slate-400 font-bold tracking-wider uppercase mb-1.5">Phone Number</label>
                 <input
                   type="text"
                   value={profile.phone}
                   onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
-                  style={inputStyle}
+                  className="w-full p-2.5 px-4 rounded-lg border border-slate-900/[0.08] bg-white text-slate-900 text-xs focus:outline-none focus:ring-1 focus:ring-violet-600 placeholder:text-slate-400"
                 />
               </div>
-              <div>
-                <label style={{ fontSize: "12px", color: "var(--text-secondary)", fontWeight: 600 }}>System Language</label>
+              <div className="flex flex-col">
+                <label className="text-[10px] text-slate-400 font-bold tracking-wider uppercase mb-1.5">System Language</label>
                 <select
                   value={profile.language}
                   onChange={(e) => setProfile({ ...profile, language: e.target.value })}
-                  style={selectStyle}
+                  className="w-full p-2.5 px-4 rounded-lg border border-slate-900/[0.08] bg-white text-slate-900 text-xs focus:outline-none focus:ring-1 focus:ring-violet-600"
                 >
                   <option value="English (US)">English (US)</option>
                   <option value="English (UK)">English (UK)</option>
@@ -191,36 +164,44 @@ export default function SettingsPage() {
 
         {/* SECURITY TAB */}
         {activeTab === "security" && (
-          <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+          <div className="flex flex-col gap-6">
             <div>
-              <h4 style={{ fontSize: "15px", fontWeight: 700, marginBottom: "8px" }}>Two-Factor Authentication (2FA)</h4>
-              <p style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "16px" }}>
+              <h4 className="text-sm font-bold text-slate-900 mb-1">Two-Factor Authentication (2FA)</h4>
+              <p className="text-xs text-slate-500 mb-4">
                 Add an extra layer of security to your account by requiring a code from an authenticator app.
               </p>
-              <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+              <div className="flex items-center gap-3">
                 <input
                   type="checkbox"
                   id="twoFactor"
                   checked={profile.twoFactor}
                   onChange={(e) => setProfile({ ...profile, twoFactor: e.target.checked })}
-                  style={{ width: "20px", height: "20px", cursor: "pointer" }}
+                  className="w-5 h-5 cursor-pointer rounded border-slate-900/[0.08] text-violet-600 focus:ring-violet-600"
                 />
-                <label htmlFor="twoFactor" style={{ fontSize: "13px", fontWeight: 600, cursor: "pointer" }}>
+                <label htmlFor="twoFactor" className="text-xs font-semibold text-slate-700 cursor-pointer">
                   Enable authenticator verification codes on login
                 </label>
               </div>
             </div>
 
-            <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "24px" }}>
-              <h4 style={{ fontSize: "15px", fontWeight: 700, marginBottom: "16px" }}>Change Account Password</h4>
-              <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+            <div className="border-t border-slate-900/10 pt-6">
+              <h4 className="text-sm font-bold text-slate-900 mb-4">Change Account Password</h4>
+              <div className="flex flex-col gap-4">
                 <div>
-                  <label style={{ fontSize: "12px", color: "var(--text-secondary)", fontWeight: 600 }}>Current Password</label>
-                  <input type="password" placeholder="••••••••" style={inputStyle} />
+                  <label className="text-[10px] text-slate-400 font-bold tracking-wider uppercase mb-1.5">Current Password</label>
+                  <input
+                    type="password"
+                    placeholder="••••••••"
+                    className="w-full p-2.5 px-4 rounded-lg border border-slate-900/[0.08] bg-white text-slate-900 text-xs focus:outline-none focus:ring-1 focus:ring-violet-600 placeholder:text-slate-400"
+                  />
                 </div>
                 <div>
-                  <label style={{ fontSize: "12px", color: "var(--text-secondary)", fontWeight: 600 }}>New Password</label>
-                  <input type="password" placeholder="••••••••" style={inputStyle} />
+                  <label className="text-[10px] text-slate-400 font-bold tracking-wider uppercase mb-1.5">New Password</label>
+                  <input
+                    type="password"
+                    placeholder="••••••••"
+                    className="w-full p-2.5 px-4 rounded-lg border border-slate-900/[0.08] bg-white text-slate-900 text-xs focus:outline-none focus:ring-1 focus:ring-violet-600 placeholder:text-slate-400"
+                  />
                 </div>
               </div>
             </div>
@@ -229,26 +210,26 @@ export default function SettingsPage() {
 
         {/* PREFERENCES TAB */}
         {activeTab === "preferences" && (
-          <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
-              <div>
-                <label style={{ fontSize: "12px", color: "var(--text-secondary)", fontWeight: 600 }}>Preferred Theme Mode</label>
+          <div className="flex flex-col gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="flex flex-col">
+                <label className="text-[10px] text-slate-400 font-bold tracking-wider uppercase mb-1.5">Preferred Theme Mode</label>
                 <select
                   value={profile.theme}
                   onChange={(e) => setProfile({ ...profile, theme: e.target.value })}
-                  style={selectStyle}
+                  className="w-full p-2.5 px-4 rounded-lg border border-slate-900/[0.08] bg-white text-slate-900 text-xs focus:outline-none focus:ring-1 focus:ring-violet-600"
                 >
                   <option value="Dark Purple Glass">Dark Purple Glass (Default)</option>
                   <option value="Cyberpunk Teal">Cyberpunk Teal</option>
                   <option value="AMOLED Pitch Black">AMOLED Pitch Black</option>
                 </select>
               </div>
-              <div>
-                <label style={{ fontSize: "12px", color: "var(--text-secondary)", fontWeight: 600 }}>System Layout Density</label>
+              <div className="flex flex-col">
+                <label className="text-[10px] text-slate-400 font-bold tracking-wider uppercase mb-1.5">System Layout Density</label>
                 <select
                   value={profile.density}
                   onChange={(e) => setProfile({ ...profile, density: e.target.value as any })}
-                  style={selectStyle}
+                  className="w-full p-2.5 px-4 rounded-lg border border-slate-900/[0.08] bg-white text-slate-900 text-xs focus:outline-none focus:ring-1 focus:ring-violet-600"
                 >
                   <option value="comfortable">Comfortable Grid (Normal)</option>
                   <option value="compact">Compact Grid (Data-heavy)</option>
@@ -256,12 +237,12 @@ export default function SettingsPage() {
               </div>
             </div>
 
-            <div>
-              <label style={{ fontSize: "12px", color: "var(--text-secondary)", fontWeight: 600 }}>Active Timezone</label>
+            <div className="flex flex-col">
+              <label className="text-[10px] text-slate-400 font-bold tracking-wider uppercase mb-1.5">Active Timezone</label>
               <select
                 value={profile.timezone}
                 onChange={(e) => setProfile({ ...profile, timezone: e.target.value })}
-                style={selectStyle}
+                className="w-full p-2.5 px-4 rounded-lg border border-slate-900/[0.08] bg-white text-slate-900 text-xs focus:outline-none focus:ring-1 focus:ring-violet-600"
               >
                 <option value="UTC+6 (Asia/Dhaka)">UTC+6 (Asia/Dhaka)</option>
                 <option value="UTC+0 (Europe/London)">UTC+0 (Europe/London)</option>
@@ -274,20 +255,10 @@ export default function SettingsPage() {
         )}
 
         {/* Form Action */}
-        <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "32px", borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "24px" }}>
+        <div className="flex justify-end mt-8 border-t border-slate-900/10 pt-6">
           <button
             type="submit"
-            style={{
-              padding: "12px 28px",
-              borderRadius: "8px",
-              background: "linear-gradient(135deg, #7c3aed, #4f46e5)",
-              border: "none",
-              color: "#fff",
-              fontSize: "14px",
-              fontWeight: 700,
-              cursor: "pointer",
-              boxShadow: "0 4px 15px rgba(124,58,237,0.2)",
-            }}
+            className="py-2.5 px-6 rounded-lg bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white font-bold text-xs shadow-md transition-all cursor-pointer"
           >
             Apply Changes
           </button>

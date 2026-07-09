@@ -25,48 +25,40 @@ export default function HrOverviewPage() {
   );
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "28px" }}>
+    <div className="flex flex-col gap-7">
       
       {/* Attendance console & Logs */}
-      <div style={{ display: "grid", gridTemplateColumns: "1.4fr 1.6fr", gap: "28px" }} className="admin-grid-top">
+      <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1.6fr] gap-7">
         
         {/* Check in Console */}
-        <div className="glass" style={{ padding: "28px", borderRadius: "16px" }}>
-          <h3 style={{ fontSize: "16px", fontWeight: 700, marginBottom: "8px" }}>Check In / Out Console</h3>
-          <p style={{ fontSize: "12px", color: "var(--text-secondary)", marginBottom: "20px" }}>Log daily attendance records directly into the workspace node.</p>
+        <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-7 rounded-2xl">
+          <h3 className="text-sm font-bold text-slate-900">Check In / Out Console</h3>
+          <p className="text-xs text-slate-500 mt-1 mb-5">Log daily attendance records directly into the workspace node.</p>
           
           <button
             onClick={handleCheckInToggle}
-            style={{
-              width: "100%",
-              padding: "16px",
-              borderRadius: "10px",
-              background: isCheckedIn ? "linear-gradient(135deg, #ef4444, #dc2626)" : "linear-gradient(135deg, #10b981, #059669)",
-              color: "#fff",
-              fontWeight: 700,
-              fontSize: "16px",
-              border: "none",
-              cursor: "pointer",
-              boxShadow: isCheckedIn ? "0 0 15px rgba(239,68,68,0.25)" : "0 0 15px rgba(16,185,129,0.25)",
-              transition: "all 0.2s"
-            }}
+            className={`w-full p-4 rounded-xl text-white font-bold text-sm border-0 cursor-pointer shadow-md transition-all ${
+              isCheckedIn
+                ? "bg-gradient-to-r from-red-500 to-rose-600 hover:from-red-600 hover:to-rose-700 shadow-rose-500/20"
+                : "bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 shadow-emerald-500/20"
+            }`}
           >
             {isCheckedIn ? "🔴 Check Out of Node" : "🟢 Check In to Node"}
           </button>
         </div>
 
         {/* Timelog records */}
-        <div className="glass" style={{ padding: "28px", borderRadius: "16px" }}>
-          <h3 style={{ fontSize: "15px", fontWeight: 700, marginBottom: "12px" }}>Session Attendance Logs</h3>
-          <div style={{ display: "flex", flexDirection: "column", gap: "8px", maxHeight: "120px", overflowY: "auto" }}>
+        <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-7 rounded-2xl">
+          <h3 className="text-sm font-bold text-slate-900 mb-4">Session Attendance Logs</h3>
+          <div className="flex flex-col gap-2 max-h-[120px] overflow-y-auto">
             {attendanceLogs.length > 0 ? (
               attendanceLogs.map((log, idx) => (
-                <div key={idx} style={{ fontSize: "12px", background: "rgba(255,255,255,0.02)", padding: "8px 12px", borderRadius: "4px", border: "1px solid rgba(255,255,255,0.04)" }}>
+                <div key={idx} className="text-xs bg-slate-900/5 border border-slate-900/5 p-2 px-3 rounded-lg text-slate-700">
                   ⏳ {log}
                 </div>
               ))
             ) : (
-              <div style={{ fontSize: "12px", color: "var(--text-muted)", padding: "10px 0" }}>No check-in session logged today.</div>
+              <div className="text-xs text-slate-400 py-2.5">No check-in session logged today.</div>
             )}
           </div>
         </div>
@@ -74,14 +66,14 @@ export default function HrOverviewPage() {
       </div>
 
       {/* Staff directory */}
-      <div className="glass" style={{ padding: "28px", borderRadius: "16px" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px", flexWrap: "wrap", gap: "16px" }}>
-          <h3 style={{ fontSize: "16px", fontWeight: 700 }}>Department Staff & Interns</h3>
+      <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-7 rounded-2xl">
+        <div className="flex justify-between items-center mb-5 flex-wrap gap-4">
+          <h3 className="text-sm font-bold text-slate-900">Department Staff & Interns</h3>
           
           <select
             value={departmentFilter}
             onChange={(e) => setDepartmentFilter(e.target.value)}
-            style={{ padding: "8px 12px", borderRadius: "6px", border: "1px solid var(--border)", background: "rgba(8,13,26,0.9)", color: "#fff", fontSize: "13px" }}
+            className="p-2 px-3 rounded-lg border border-slate-900/[0.08] bg-white text-slate-900 text-xs focus:outline-none focus:ring-1 focus:ring-violet-600"
           >
             <option value="All">All Departments</option>
             <option value="Engineering">Engineering</option>
@@ -91,35 +83,35 @@ export default function HrOverviewPage() {
           </select>
         </div>
 
-        <div style={{ overflowX: "auto" }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "13px" }}>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse text-xs text-left">
             <thead>
-              <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.06)", color: "var(--text-secondary)", textAlign: "left" }}>
-                <th style={{ padding: "10px" }}>Employee</th>
-                <th style={{ padding: "10px" }}>Department</th>
-                <th style={{ padding: "10px" }}>Status</th>
-                <th style={{ padding: "10px" }}>Leave Balance</th>
-                <th style={{ padding: "10px" }}>Performance</th>
+              <tr className="border-b border-slate-900/10 text-slate-500">
+                <th className="p-2.5 font-semibold">Employee</th>
+                <th className="p-2.5 font-semibold">Department</th>
+                <th className="p-2.5 font-semibold">Status</th>
+                <th className="p-2.5 font-semibold">Leave Balance</th>
+                <th className="p-2.5 font-semibold">Performance</th>
               </tr>
             </thead>
             <tbody>
               {filteredEmployees.map((e) => (
-                <tr key={e.id} style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
-                  <td style={{ padding: "12px 10px" }}>
-                    <div style={{ fontWeight: 700, color: "#fff" }}>{e.name}</div>
-                    <div style={{ fontSize: "11px", color: "var(--text-muted)", marginTop: "2px" }}>{e.role}</div>
+                <tr key={e.id} className="border-b border-slate-900/5 hover:bg-slate-50/50 transition-colors">
+                  <td className="p-3">
+                    <div className="font-bold text-slate-950">{e.name}</div>
+                    <div className="text-[10px] text-slate-400 mt-0.5">{e.role}</div>
                   </td>
-                  <td style={{ padding: "12px 10px" }}>{e.dept}</td>
-                  <td style={{ padding: "12px 10px" }}>
-                    <span style={{ color: e.attendance === "Present" ? "#10b981" : "#f59e0b", fontWeight: 600 }}>{e.attendance}</span>
+                  <td className="p-3 text-slate-600">{e.dept}</td>
+                  <td className="p-3">
+                    <span className={`font-semibold ${e.attendance === "Present" ? "text-emerald-600" : "text-amber-600"}`}>{e.attendance}</span>
                   </td>
-                  <td style={{ padding: "12px 10px" }}>{e.leaveBalance} days</td>
-                  <td style={{ padding: "12px 10px" }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                      <div style={{ flex: 1, height: "4px", background: "rgba(255,255,255,0.06)", borderRadius: "2px", minWidth: "60px" }}>
-                        <div style={{ width: `${e.performance}%`, height: "4px", background: "#7c3aed", borderRadius: "2px" }} />
+                  <td className="p-3 text-slate-600">{e.leaveBalance} days</td>
+                  <td className="p-3">
+                    <div className="flex items-center gap-2">
+                      <div className="flex-1 h-1 bg-slate-900/5 rounded-full min-w-[60px] overflow-hidden">
+                        <div style={{ width: `${e.performance}%` }} className="h-full bg-violet-600 rounded-full" />
                       </div>
-                      <span>{e.performance}%</span>
+                      <span className="text-slate-600">{e.performance}%</span>
                     </div>
                   </td>
                 </tr>
@@ -128,7 +120,6 @@ export default function HrOverviewPage() {
           </table>
         </div>
       </div>
-
     </div>
   );
 }

@@ -20,20 +20,20 @@ export default function AdminRevenuePage() {
   ];
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "28px" }}>
+    <div className="flex flex-col gap-7">
       
       {/* Date Range Selector Header */}
-      <div className="glass" style={{ padding: "24px", borderRadius: "16px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "16px" }}>
+      <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] p-6 rounded-2xl flex justify-between items-center flex-wrap gap-4">
         <div>
-          <h3 style={{ fontSize: "16px", fontWeight: 700 }}>Financial Command Center</h3>
-          <p style={{ fontSize: "12px", color: "var(--text-secondary)" }}>Ecosystem sales, renewals, and partner commissions auditing.</p>
+          <h3 className="text-base font-bold text-slate-900">Financial Command Center</h3>
+          <p className="text-xs text-slate-500">Ecosystem sales, renewals, and partner commissions auditing.</p>
         </div>
         
         <div>
           <select
             value={selectedRange}
             onChange={(e) => setSelectedRange(e.target.value)}
-            style={{ padding: "8px 12px", borderRadius: "6px", border: "1px solid var(--border)", background: "rgba(8,13,26,0.9)", color: "#fff", fontSize: "13px" }}
+            className="py-2 px-3 rounded-lg border border-slate-900/[0.08] bg-slate-900/5 text-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-violet-600"
           >
             <option value="7">Last 7 Days</option>
             <option value="30">Last 30 Days</option>
@@ -44,40 +44,38 @@ export default function AdminRevenuePage() {
       </div>
 
       {/* Primary Charts */}
-      <div style={{ display: "grid", gridTemplateColumns: "1.8fr 1.2fr", gap: "28px" }} className="admin-grid-top">
+      <div className="grid grid-cols-1 lg:grid-cols-[1.8fr_1.2fr] gap-7">
         
         {/* Daily Sales Graph Card */}
-        <div className="glass" style={{ padding: "28px", borderRadius: "16px" }}>
-          <h4 style={{ fontSize: "15px", fontWeight: 700, marginBottom: "20px" }}>Daily Sales Performance</h4>
-          <div style={{ height: "200px", display: "flex", alignItems: "flex-end", gap: "24px", paddingBottom: "10px" }}>
+        <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-7 rounded-2xl">
+          <h4 className="text-[15px] font-bold text-slate-900 mb-5">Daily Sales Performance</h4>
+          <div className="h-48 flex items-end gap-6 pb-2">
             {[
               { label: "W1", height: "45%" },
               { label: "W2", height: "60%" },
               { label: "W3", height: "78%" },
               { label: "W4", height: "92%" }
             ].map((chart, i) => (
-              <div key={i} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
-                <div style={{ position: "relative", width: "100%" }}>
-                  <div style={{ width: "100%", height: chart.height, background: "linear-gradient(135deg, #10b981, #059669)", borderRadius: "6px" }} />
-                </div>
-                <span style={{ fontSize: "12px", color: "var(--text-secondary)", fontWeight: 600 }}>{chart.label}</span>
+              <div key={i} className="flex-1 flex flex-col items-center gap-3 h-full justify-end">
+                <div style={{ height: chart.height }} className="w-full bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-md hover:opacity-90 transition-all duration-200" />
+                <span className="text-xs text-slate-500 font-semibold">{chart.label}</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* Regional Share list */}
-        <div className="glass" style={{ padding: "28px", borderRadius: "16px" }}>
-          <h4 style={{ fontSize: "15px", fontWeight: 700, marginBottom: "20px" }}>Regional Revenue Breakdown</h4>
-          <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+        <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-7 rounded-2xl">
+          <h4 className="text-[15px] font-bold text-slate-900 mb-5">Regional Revenue Breakdown</h4>
+          <div className="flex flex-col gap-4">
             {countryRevenue.map((item, idx) => (
               <div key={idx}>
-                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "13px", marginBottom: "6px" }}>
-                  <span style={{ fontWeight: 600 }}>{item.country}</span>
-                  <span style={{ color: "var(--text-muted)" }}>{item.amount} ({item.percentage})</span>
+                <div className="flex justify-between text-sm mb-1.5">
+                  <span className="font-semibold text-slate-700">{item.country}</span>
+                  <span className="text-slate-500 text-xs">{item.amount} ({item.percentage})</span>
                 </div>
-                <div style={{ width: "100%", height: "4px", background: "rgba(255,255,255,0.06)", borderRadius: "2px" }}>
-                  <div style={{ width: item.percentage, height: "4px", background: "#10b981", borderRadius: "2px" }} />
+                <div className="w-full h-1 bg-slate-900/5 rounded-full overflow-hidden">
+                  <div style={{ width: item.percentage }} className="h-full bg-emerald-500 rounded-full" />
                 </div>
               </div>
             ))}
@@ -86,15 +84,15 @@ export default function AdminRevenuePage() {
 
       </div>
 
-      {/* Product Share & Date range list */}
-      <div className="glass" style={{ padding: "28px", borderRadius: "16px" }}>
-        <h4 style={{ fontSize: "15px", fontWeight: 700, marginBottom: "16px" }}>Ecosystem Product Contribution</h4>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "20px" }} className="dashboard-kpis">
+      {/* Product Share & Contribution list */}
+      <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-7 rounded-2xl">
+        <h4 className="text-[15px] font-bold text-slate-900 mb-4">Ecosystem Product Contribution</h4>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {productRevenue.map((p, idx) => (
-            <div key={idx} style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", padding: "20px", borderRadius: "10px" }}>
-              <div style={{ fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase" }}>{p.name}</div>
-              <div style={{ fontSize: "20px", fontWeight: 800, marginTop: "8px", color: "#60a5fa" }}>{p.amount}</div>
-              <div style={{ fontSize: "11px", color: "#10b981", marginTop: "4px" }}>📈 Share of sales: {p.share}</div>
+            <div key={idx} className="bg-slate-900/5 border border-slate-900/[0.04] p-5 rounded-xl">
+              <div className="text-[11px] text-slate-500 uppercase tracking-wider">{p.name}</div>
+              <div className="text-xl font-extrabold mt-2 text-blue-600">{p.amount}</div>
+              <div className="text-[11px] text-emerald-600 mt-1">📈 Share of sales: {p.share}</div>
             </div>
           ))}
         </div>

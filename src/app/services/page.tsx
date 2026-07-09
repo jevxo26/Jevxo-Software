@@ -21,92 +21,61 @@ export default function ServicesPage() {
     }
   }, []);
   return (
-    <div style={{ background: "#080d1a", color: "#f1f5f9", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+    <div className="bg-[#080d1a] text-[#f1f5f9] min-h-screen flex flex-col">
       <Navbar />
-      <div style={{ flex: 1, paddingTop: "80px" }}>
+      <div className="flex-1 pt-20">
         {/* ── Hero ─────────────────────────────────────────────── */}
-        <section className="bg-hero-gradient section" style={{ position: "relative", overflow: "hidden" }}>
-        <div className="orb orb-violet" style={{ width: "500px", height: "500px", top: "-200px", right: "-100px" }} />
-        <div className="orb orb-cyan"   style={{ width: "350px", height: "350px", bottom: "-100px", left: "-80px" }} />
-        <div className="container" style={{ position: "relative", zIndex: 1, textAlign: "center" }}>
-          <div style={{ display: "inline-block", padding: "4px 14px", borderRadius: "100px", border: "1px solid rgba(124,58,237,0.3)", background: "rgba(124,58,237,0.08)", fontSize: "12px", fontWeight: 600, color: "#a78bfa", marginBottom: "24px", textTransform: "uppercase", letterSpacing: "0.1em" }}>
+        <section className="bg-hero-gradient py-[100px] md:py-[70px] relative overflow-hidden">
+        <div className="rounded-full blur-[80px] pointer-events-none absolute bg-violet-600/[0.07] w-[500px] h-[500px] -top-[200px] -right-[100px]" />
+        <div className="rounded-full blur-[80px] pointer-events-none absolute bg-cyan-500/[0.06] w-[350px] h-[350px] -bottom-[100px] -left-[80px]" />
+        <div className="w-11/12 max-w-[1400px] mx-auto relative z-[1] text-center">
+          <div className="inline-block py-1 px-3.5 rounded-full border border-violet-600/[0.3] bg-violet-600/[0.08] text-xs font-semibold text-[#a78bfa] mb-6 uppercase tracking-widest">
             What We Offer
           </div>
-          <h1 style={{ fontSize: "clamp(36px, 6vw, 72px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: "24px" }}>
-            Services Built for<br /><span className="gradient-text">Ambitious Companies</span>
+          <h1 className="text-[clamp(36px,6vw,72px)] font-black tracking-tight mb-6">
+            Services Built for<br /><span className="bg-gradient-to-br from-violet-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent">Ambitious Companies</span>
           </h1>
-          <p style={{ fontSize: "18px", color: "var(--text-secondary)", maxWidth: "560px", margin: "0 auto", lineHeight: 1.8 }}>
+          <p className="text-lg text-slate-600 max-w-[560px] mx-auto leading-relaxed">
             End-to-end digital capabilities under one roof. From strategy and design to engineering, deployment, and beyond.
           </p>
         </div>
       </section>
 
       {/* ── Services Grid ─────────────────────────────────────── */}
-      <section className="section">
-        <div className="container">
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "28px" }} className="services-list">
+      <section className="py-[100px] md:py-[70px]">
+        <div className="w-11/12 max-w-[1400px] mx-auto">
+          <div className="services-list grid grid-cols-2 gap-7">
             {servicesList.map((service, i) => (
-              <Link key={service.id} href={`/services/${service.slug}`} style={{ display: "block" }}>
-                <div className="glass service-card" style={{
-                  padding: "40px", borderRadius: "var(--radius-xl)",
-                  transition: "all 0.3s ease",
-                  height: "100%",
-                  display: "flex", flexDirection: "column",
-                  animationDelay: `${i * 0.08}s`,
-                  border: "1px solid rgba(255,255,255,0.08)",
-                }}
+              <Link className="block" key={service.id} href={`/services/${service.slug}`}>
+                <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 service-card p-10 rounded-[28px] h-full flex flex-col border-white/[0.08]" style={{transition: "all 0.3s ease", animationDelay: `${i * 0.08}s`}}
                 >
-                  <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "24px" }}>
-                    <div style={{
-                      width: "60px", height: "60px",
-                      borderRadius: "16px",
-                      background: `linear-gradient(135deg, ${service.color.replace("from-","").replace("to-","").split(" ").map((c) => {
-                        const map: Record<string, string> = {
-                          "violet-500": "#8b5cf6",
-                          "indigo-600": "#4f46e5",
-                          "pink-500":   "#ec4899",
-                          "rose-600":   "#e11d48",
-                          "cyan-500":   "#06b6d4",
-                          "blue-600":   "#2563eb",
-                          "emerald-500":"#10b981",
-                          "teal-600":   "#0d9488",
-                          "amber-500":  "#f59e0b",
-                          "orange-600": "#ea580c",
-                          "purple-500": "#a855f7",
-                          "violet-600": "#7c3aed",
-                        };
-                        return map[c] || c;
-                      }).join(", ")})`,
-                      display: "flex", alignItems: "center", justifyContent: "center",
-                      fontSize: "28px",
-                      boxShadow: "0 8px 24px rgba(124,58,237,0.25)",
-                      flexShrink: 0,
-                    }}>
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-[60px] h-[60px] rounded-2xl bg-gradient-to-br from-violet-600 to-indigo-600 flex items-center justify-center text-[28px]" style={{boxShadow: "0 8px 24px rgba(124,58,237,0.25)", flexShrink: 0}}>
                       {service.icon}
                     </div>
                     <div>
-                      <h2 style={{ fontSize: "22px", fontWeight: 700, marginBottom: "4px" }}>{service.title}</h2>
-                      <p style={{ color: "#a78bfa", fontSize: "14px", fontWeight: 500 }}>Starting from {service.startingPrice}</p>
+                      <h2 className="text-[22px] font-bold mb-1">{service.title}</h2>
+                      <p className="text-[#a78bfa] text-sm font-medium">Starting from {service.startingPrice}</p>
                     </div>
                   </div>
 
-                  <p style={{ color: "var(--text-secondary)", fontSize: "15px", lineHeight: 1.7, marginBottom: "24px", flex: 1 }}>
+                  <p className="text-slate-600 text-[15px] leading-relaxed mb-6 flex-1">
                     {service.description}
                   </p>
 
-                  <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginBottom: "24px" }}>
+                  <div className="flex gap-2 mb-6" style={{flexWrap: "wrap"}}>
                     {service.features.slice(0, 4).map((f) => (
-                      <span key={f} style={{ padding: "4px 12px", borderRadius: "100px", fontSize: "12px", fontWeight: 500, background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)", color: "var(--text-secondary)" }}>
+                      <span className="py-1 px-3 rounded-full text-xs font-medium bg-white/[0.05] border border-white/[0.08] text-slate-600" key={f}>
                         {f}
                       </span>
                     ))}
                   </div>
 
-                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "20px" }}>
-                    <div style={{ display: "flex", gap: "20px" }}>
-                      <span style={{ color: "var(--text-muted)", fontSize: "13px" }}>⏱ {service.duration}</span>
+                  <div className="flex items-center justify-between border-t border-[1px solid rgba(255,255,255,0.06)] pt-5">
+                    <div className="flex gap-5">
+                      <span className="text-slate-400 text-[13px]">⏱ {service.duration}</span>
                     </div>
-                    <span style={{ color: "#a78bfa", fontSize: "14px", fontWeight: 600 }}>View details →</span>
+                    <span className="text-[#a78bfa] text-sm font-semibold">View details →</span>
                   </div>
                 </div>
               </Link>
@@ -116,15 +85,15 @@ export default function ServicesPage() {
       </section>
 
       {/* ── CTA ──────────────────────────────────────────────── */}
-      <section className="section-sm" style={{ borderTop: "1px solid var(--border)" }}>
-        <div className="container" style={{ textAlign: "center" }}>
-          <h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "16px" }}>
+      <section className="py-[60px] md:py-[40px] border-t border-slate-900/[0.08]">
+        <div className="w-11/12 max-w-[1400px] mx-auto text-center">
+          <h2 className="text-[clamp(28px,4vw,44px)] font-extrabold tracking-[-0.02em] mb-4">
             Not sure which service you need?
           </h2>
-          <p style={{ color: "var(--text-secondary)", fontSize: "17px", marginBottom: "36px" }}>
+          <p className="text-slate-600 text-[17px] mb-9">
             Book a free 30-minute discovery call and we&apos;ll help you find the right solution.
           </p>
-          <Link href="/contact" style={{ padding: "16px 40px", borderRadius: "14px", fontWeight: 700, fontSize: "17px", background: "linear-gradient(135deg, #7c3aed, #4f46e5)", color: "#fff", boxShadow: "0 0 40px rgba(124,58,237,0.4)", display: "inline-block" }}>
+          <Link className="py-4 px-10 rounded-[14px] font-bold text-[17px] bg-gradient-to-br from-violet-600 to-indigo-600 text-[#fff] inline-block" href="/contact" style={{boxShadow: "0 0 40px rgba(124,58,237,0.4)"}}>
             Book a Free Call →
           </Link>
         </div>

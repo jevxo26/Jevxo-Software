@@ -7,79 +7,79 @@ import { teamMembers, stats } from "@/lib/data/team";
 
 export default function AboutPage() {
   return (
-    <div style={{ background: "#080d1a", color: "#f1f5f9", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+    <div className="bg-[#080d1a] text-[#f1f5f9] min-h-screen flex flex-col">
       <Navbar />
       
       {/* Hero Section */}
-      <section className="bg-hero-gradient section" style={{ position: "relative", overflow: "hidden", textAlign: "center", paddingTop: "140px", paddingBottom: "60px" }}>
-        <div className="orb orb-violet" style={{ width: "500px", height: "500px", top: "-200px", right: "-100px" }} />
-        <div className="orb orb-cyan" style={{ width: "350px", height: "350px", bottom: "-100px", left: "-80px" }} />
-        <div className="container" style={{ position: "relative", zIndex: 1 }}>
-          <div style={{ display: "inline-block", padding: "4px 14px", borderRadius: "100px", border: "1px solid rgba(124,58,237,0.3)", background: "rgba(124,58,237,0.08)", fontSize: "12px", fontWeight: 600, color: "#a78bfa", marginBottom: "24px", textTransform: "uppercase", letterSpacing: "0.1em" }}>
+      <section className="bg-hero-gradient py-[100px] md:py-[70px] relative overflow-hidden text-center pt-[140px] pb-[60px]">
+        <div className="rounded-full blur-[80px] pointer-events-none absolute bg-violet-600/[0.07] w-[500px] h-[500px] -top-[200px] -right-[100px]" />
+        <div className="rounded-full blur-[80px] pointer-events-none absolute bg-cyan-500/[0.06] w-[350px] h-[350px] -bottom-[100px] -left-[80px]" />
+        <div className="w-11/12 max-w-[1400px] mx-auto relative z-[1]">
+          <div className="inline-block py-1 px-3.5 rounded-full border border-violet-600/[0.3] bg-violet-600/[0.08] text-xs font-semibold text-[#a78bfa] mb-6 uppercase tracking-widest">
             Our Story
           </div>
-          <h1 style={{ fontSize: "clamp(36px, 6vw, 72px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: "24px" }}>
-            Engineering the <br /><span className="gradient-text">Future of SaaS Platforms</span>
+          <h1 className="text-[clamp(36px,6vw,72px)] font-black tracking-tight mb-6">
+            Engineering the <br /><span className="bg-gradient-to-br from-violet-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent">Future of SaaS Platforms</span>
           </h1>
-          <p style={{ fontSize: "18px", color: "var(--text-secondary)", maxWidth: "560px", margin: "0 auto", lineHeight: 1.8 }}>
+          <p className="text-lg text-slate-600 max-w-[560px] mx-auto leading-relaxed">
             Jevxo is a global digital software studio creating robust operating ecosystems for companies of all sizes.
           </p>
         </div>
       </section>
 
       {/* Core Values Section */}
-      <section className="section" style={{ borderTop: "1px solid var(--border)" }}>
-        <div className="container">
-          <div style={{ textAlign: "center", marginBottom: "60px" }}>
-            <h2 style={{ fontSize: "36px", fontWeight: 800 }}>Our Core Beliefs</h2>
-            <p style={{ color: "var(--text-secondary)", fontSize: "15px", marginTop: "8px" }}>These principles guide our product designs and network expansions.</p>
+      <section className="py-[100px] md:py-[70px] border-t border-slate-900/[0.08]">
+        <div className="w-11/12 max-w-[1400px] mx-auto">
+          <div className="text-center mb-[60px]">
+            <h2 className="text-4xl font-extrabold">Our Core Beliefs</h2>
+            <p className="text-slate-600 text-[15px] mt-2">These principles guide our product designs and network expansions.</p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "28px" }} className="about-grid">
-            <div className="glass" style={{ padding: "32px", borderRadius: "16px", background: "rgba(255,255,255,0.01)", border: "1px solid rgba(255,255,255,0.06)" }}>
-              <div style={{ fontSize: "32px", marginBottom: "16px" }}>💡</div>
-              <h3 style={{ fontSize: "18px", fontWeight: 700, marginBottom: "12px" }}>Continuous Innovation</h3>
-              <p style={{ fontSize: "14px", color: "var(--text-secondary)", lineHeight: 1.6 }}>We continuously build, optimize, and iterate our SaaS engines to leverage the newest web advancements.</p>
+          <div className="about-grid grid grid-cols-3 gap-7">
+            <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 p-8 rounded-2xl bg-white/[0.01] border-white/[0.06]">
+              <div className="text-3xl mb-4">💡</div>
+              <h3 className="text-lg font-bold mb-3">Continuous Innovation</h3>
+              <p className="text-sm text-slate-600 leading-normal">We continuously build, optimize, and iterate our SaaS engines to leverage the newest web advancements.</p>
             </div>
-            <div className="glass" style={{ padding: "32px", borderRadius: "16px", background: "rgba(255,255,255,0.01)", border: "1px solid rgba(255,255,255,0.06)" }}>
-              <div style={{ fontSize: "32px", marginBottom: "16px" }}>🛡️</div>
-              <h3 style={{ fontSize: "18px", fontWeight: 700, marginBottom: "12px" }}>Reliable Performance</h3>
-              <p style={{ fontSize: "14px", color: "var(--text-secondary)", lineHeight: 1.6 }}>Our nodes are built to guarantee 99.99% uptime with enterprise DDoS protection and SSL defaults.</p>
+            <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 p-8 rounded-2xl bg-white/[0.01] border-white/[0.06]">
+              <div className="text-3xl mb-4">🛡️</div>
+              <h3 className="text-lg font-bold mb-3">Reliable Performance</h3>
+              <p className="text-sm text-slate-600 leading-normal">Our nodes are built to guarantee 99.99% uptime with enterprise DDoS protection and SSL defaults.</p>
             </div>
-            <div className="glass" style={{ padding: "32px", borderRadius: "16px", background: "rgba(255,255,255,0.01)", border: "1px solid rgba(255,255,255,0.06)" }}>
-              <div style={{ fontSize: "32px", marginBottom: "16px" }}>🤝</div>
-              <h3 style={{ fontSize: "18px", fontWeight: 700, marginBottom: "12px" }}>Ecosystem Collaboration</h3>
-              <p style={{ fontSize: "14px", color: "var(--text-secondary)", lineHeight: 1.6 }}>We scale via partnerships, White-labeling programs, and gamified sales networks to reward regional leaders.</p>
+            <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 p-8 rounded-2xl bg-white/[0.01] border-white/[0.06]">
+              <div className="text-3xl mb-4">🤝</div>
+              <h3 className="text-lg font-bold mb-3">Ecosystem Collaboration</h3>
+              <p className="text-sm text-slate-600 leading-normal">We scale via partnerships, White-labeling programs, and gamified sales networks to reward regional leaders.</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Country Sales Network Highlight */}
-      <section className="section bg-section-gradient" style={{ borderTop: "1px solid var(--border)" }}>
-        <div className="container" style={{ textAlign: "center" }}>
-          <h2 style={{ fontSize: "32px", fontWeight: 800, marginBottom: "16px" }}>Our Country Sales Network</h2>
-          <p style={{ color: "var(--text-secondary)", fontSize: "15px", maxWidth: "560px", margin: "0 auto 36px", lineHeight: 1.7 }}>
+      <section className="py-[100px] md:py-[70px] bg-section-gradient border-t border-slate-900/[0.08]">
+        <div className="w-11/12 max-w-[1400px] mx-auto text-center">
+          <h2 className="text-3xl font-extrabold mb-4">Our Country Sales Network</h2>
+          <p className="text-slate-600 text-[15px] max-w-[560px] mx-auto mb-9 leading-relaxed">
             Jevxo operates across distinct regional nodes governed by local Country Partner Directors. We empower localized teams to handle software sales and service integration.
           </p>
 
-          <Link href="/partners" style={{ display: "inline-block", padding: "14px 30px", borderRadius: "10px", background: "linear-gradient(135deg, #7c3aed, #4f46e5)", color: "#fff", fontWeight: 700, fontSize: "14px" }}>
+          <Link className="inline-block py-3.5 px-[30px] rounded-[10px] bg-gradient-to-br from-violet-600 to-indigo-600 text-[#fff] font-bold text-sm" href="/partners">
             View Our Country Sales Partners
           </Link>
         </div>
       </section>
 
       {/* Stats Section */}
-      <section className="section" style={{ borderTop: "1px solid var(--border)" }}>
-        <div className="container">
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "24px" }} className="about-stats-grid">
+      <section className="py-[100px] md:py-[70px] border-t border-slate-900/[0.08]">
+        <div className="w-11/12 max-w-[1400px] mx-auto">
+          <div className="about-stats-grid grid grid-cols-4 gap-6">
             {stats.map((st, idx) => (
-              <div key={idx} className="glass" style={{ padding: "30px 24px", borderRadius: "12px", textAlign: "center", background: "rgba(255,255,255,0.01)", border: "1px solid rgba(255,255,255,0.06)" }}>
-                <div style={{ fontSize: "40px", fontWeight: 900, color: "#a78bfa", marginBottom: "8px" }}>
+              <div key={idx} className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 py-[30px] px-6 rounded-xl text-center bg-white/[0.01] border-white/[0.06]">
+                <div className="text-[40px] font-black text-[#a78bfa] mb-2">
                   {st.value}{st.suffix}
                 </div>
-                <div style={{ fontSize: "15px", fontWeight: 700, color: "#fff", marginBottom: "4px" }}>{st.label}</div>
-                <p style={{ fontSize: "12px", color: "var(--text-secondary)", lineHeight: 1.4 }}>{st.description}</p>
+                <div className="text-[15px] font-bold text-[#fff] mb-1">{st.label}</div>
+                <p className="text-xs text-slate-600 leading-normal">{st.description}</p>
               </div>
             ))}
           </div>
@@ -87,29 +87,22 @@ export default function AboutPage() {
       </section>
 
       {/* Team Grid */}
-      <section className="section bg-section-gradient" style={{ borderTop: "1px solid var(--border)", paddingBottom: "100px" }}>
-        <div className="container">
-          <div style={{ textAlign: "center", marginBottom: "60px" }}>
-            <h2 style={{ fontSize: "36px", fontWeight: 800 }}>Ecosystem Leadership Team</h2>
-            <p style={{ color: "var(--text-secondary)", fontSize: "15px", marginTop: "8px" }}>The engineers and system architects behind the Jevxo framework.</p>
+      <section className="py-[100px] md:py-[70px] bg-section-gradient border-t border-slate-900/[0.08] pb-[100px]">
+        <div className="w-11/12 max-w-[1400px] mx-auto">
+          <div className="text-center mb-[60px]">
+            <h2 className="text-4xl font-extrabold">Ecosystem Leadership Team</h2>
+            <p className="text-slate-600 text-[15px] mt-2">The engineers and system architects behind the Jevxo framework.</p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: "28px" }}>
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] gap-7">
             {teamMembers.map((m) => (
-              <div key={m.id} className="glass" style={{ padding: "30px", borderRadius: "16px", textAlign: "center", background: "rgba(255,255,255,0.01)", border: "1px solid rgba(255,255,255,0.06)" }}>
-                <div style={{
-                  width: "80px", height: "80px",
-                  borderRadius: "50%",
-                  background: "linear-gradient(135deg, #7c3aed, #06b6d4)",
-                  margin: "0 auto 16px",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: "32px", fontWeight: 700, color: "#fff"
-                }}>
+              <div key={m.id} className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 p-[30px] rounded-2xl text-center bg-white/[0.01] border-white/[0.06]">
+                <div className="w-[80px] h-[80px] rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-bold text-[#fff]" style={{background: "linear-gradient(135deg, #7c3aed, #06b6d4)"}}>
                   {m.name.charAt(0)}
                 </div>
-                <h3 style={{ fontSize: "18px", fontWeight: 700, marginBottom: "4px" }}>{m.name}</h3>
-                <div style={{ fontSize: "12px", fontWeight: 600, color: "#06b6d4", marginBottom: "12px", textTransform: "uppercase" }}>{m.role}</div>
-                <p style={{ fontSize: "13px", color: "var(--text-secondary)", lineHeight: 1.5 }}>{m.bio}</p>
+                <h3 className="text-lg font-bold mb-1">{m.name}</h3>
+                <div className="text-xs font-semibold text-[#06b6d4] mb-3 uppercase">{m.role}</div>
+                <p className="text-[13px] text-slate-600 leading-normal">{m.bio}</p>
               </div>
             ))}
           </div>

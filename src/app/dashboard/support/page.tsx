@@ -129,33 +129,29 @@ export default function HelpSupportPage() {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "28px", height: "calc(100vh - 160px)" }}>
+    <div className="flex flex-col gap-7 h-[calc(100vh-160px)]">
       <div>
-        <h2 style={{ fontSize: "22px", fontWeight: 800 }}>Jevxo Help Center & Live Chat</h2>
-        <p style={{ fontSize: "13px", color: "var(--text-secondary)", marginTop: "2px" }}>Find answers or speak directly with our automated virtual assistance center.</p>
+        <h2 className="text-xl font-extrabold text-slate-900">Jevxo Help Center & Live Chat</h2>
+        <p className="text-xs text-slate-500 mt-1">Find answers or speak directly with our automated virtual assistance center.</p>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "3fr 4fr", gap: "32px", flex: 1, minHeight: 0 }}>
+      <div className="grid grid-cols-1 lg:grid-cols-[3fr_4fr] gap-8 flex-1 min-h-0">
         
         {/* LEFT: FAQ ACCORDIONS */}
-        <div className="glass" style={{ padding: "30px", borderRadius: "16px", background: "rgba(255,255,255,0.01)", border: "1px solid rgba(255,255,255,0.06)", overflowY: "auto" }}>
-          <h3 style={{ fontSize: "16px", fontWeight: 700, marginBottom: "20px", color: "#a78bfa" }}>💡 Frequently Asked Questions</h3>
-          <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+        <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] p-7 rounded-2xl overflow-y-auto">
+          <h3 className="text-sm font-bold text-violet-600 mb-5">💡 Frequently Asked Questions</h3>
+          <div className="flex flex-col gap-3">
             {faqs.map((faq, index) => (
-              <div key={index} style={{ borderBottom: "1px solid rgba(255,255,255,0.05)", paddingBottom: "12px" }}>
+              <div key={index} className="border-b border-slate-900/5 pb-3">
                 <button
                   onClick={() => setActiveFaq(activeFaq === index ? null : index)}
-                  style={{
-                    width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center",
-                    background: "none", border: "none", color: "#fff", fontWeight: 600, fontSize: "13px",
-                    textAlign: "left", cursor: "pointer", padding: "8px 0"
-                  }}
+                  className="w-full flex justify-between items-center bg-transparent border-0 text-slate-800 font-semibold text-xs text-left cursor-pointer py-2"
                 >
                   <span>{faq.q}</span>
-                  <span style={{ fontSize: "12px", color: "#a78bfa" }}>{activeFaq === index ? "▼" : "▶"}</span>
+                  <span className="text-xs text-violet-600">{activeFaq === index ? "▼" : "▶"}</span>
                 </button>
                 {activeFaq === index && (
-                  <p style={{ color: "var(--text-secondary)", fontSize: "12px", lineHeight: 1.6, padding: "8px 0 4px", margin: 0 }}>
+                  <p className="text-xs text-slate-500 leading-relaxed pt-2 pb-1">
                     {faq.a}
                   </p>
                 )}
@@ -165,60 +161,49 @@ export default function HelpSupportPage() {
         </div>
 
         {/* RIGHT: LIVE CHAT SIMULATOR */}
-        <div className="glass" style={{ borderRadius: "16px", background: "rgba(255,255,255,0.01)", border: "1px solid rgba(255,255,255,0.06)", display: "flex", flexDirection: "column", height: "100%", overflow: "hidden" }}>
+        <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] rounded-2xl flex flex-col h-full overflow-hidden">
           {/* Header */}
-          <div style={{ padding: "16px 24px", borderBottom: "1px solid rgba(255,255,255,0.06)", display: "flex", justifyContent: "space-between", alignItems: "center", background: "rgba(124,58,237,0.04)" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-              <div style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#10b981", boxShadow: "0 0 6px #10b981" }} />
+          <div className="p-4 px-6 border-b border-slate-900/10 flex justify-between items-center bg-violet-600/5">
+            <div className="flex items-center gap-2.5">
+              <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981]" />
               <div>
-                <strong style={{ fontSize: "13px", color: "#fff", display: "block" }}>Jevxo Assistant</strong>
-                <span style={{ fontSize: "10px", color: "var(--text-secondary)" }}>Uptime Node: virtual_agent_01</span>
+                <strong className="text-xs font-bold text-slate-900 block">Jevxo Assistant</strong>
+                <span className="text-[10px] text-slate-500">Uptime Node: virtual_agent_01</span>
               </div>
             </div>
             <button
               onClick={clearChat}
-              style={{ background: "none", border: "none", color: "var(--text-muted)", fontSize: "11px", cursor: "pointer", textDecoration: "underline" }}
+              className="bg-transparent border-0 text-slate-400 hover:text-slate-600 text-[11px] cursor-pointer underline"
             >
               Clear
             </button>
           </div>
 
           {/* Messages list */}
-          <div style={{ flex: 1, padding: "24px", overflowY: "auto", display: "flex", flexDirection: "column", gap: "16px" }}>
+          <div className="flex-1 p-6 overflow-y-auto flex flex-col gap-4">
             {messages.map((msg) => {
               const isUser = msg.sender === "user";
               return (
                 <div
                   key={msg.id}
-                  style={{
-                    display: "flex",
-                    justifyContent: isUser ? "flex-end" : "flex-start",
-                    alignItems: "flex-end",
-                    gap: "8px"
-                  }}
+                  className={`flex items-end gap-2 ${isUser ? "justify-end" : "justify-start"}`}
                 >
                   {!isUser && (
-                    <div style={{ width: "28px", height: "28px", borderRadius: "50%", background: "#7c3aed", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "12px", flexShrink: 0 }}>
+                    <div className="w-7 h-7 rounded-full bg-violet-600 text-white flex items-center justify-center text-xs flex-shrink-0">
                       🤖
                     </div>
                   )}
-                  <div style={{ maxWidth: "75%" }}>
+                  <div className="max-w-[75%]">
                     <div
-                      style={{
-                        padding: "10px 14px",
-                        borderRadius: "12px",
-                        borderTopRightRadius: isUser ? "2px" : "12px",
-                        borderTopLeftRadius: !isUser ? "2px" : "12px",
-                        background: isUser ? "linear-gradient(135deg, #7c3aed, #4f46e5)" : "rgba(255,255,255,0.03)",
-                        border: isUser ? "none" : "1px solid rgba(255,255,255,0.06)",
-                        color: "#fff",
-                        fontSize: "13px",
-                        lineHeight: 1.5,
-                      }}
+                      className={`p-2.5 px-3.5 rounded-2xl text-xs leading-relaxed ${
+                        isUser
+                          ? "bg-gradient-to-br from-violet-600 to-indigo-600 text-white rounded-br-none"
+                          : "bg-slate-900/5 border border-slate-900/5 text-slate-800 rounded-bl-none"
+                      }`}
                     >
                       {msg.text}
                     </div>
-                    <span style={{ fontSize: "9px", color: "var(--text-muted)", marginTop: "4px", display: "block", textAlign: isUser ? "right" : "left" }}>
+                    <span className={`text-[9px] text-slate-400 mt-1 block ${isUser ? "text-right" : "text-left"}`}>
                       {msg.timestamp}
                     </span>
                   </div>
@@ -227,15 +212,15 @@ export default function HelpSupportPage() {
             })}
             
             {isTyping && (
-              <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                <div style={{ width: "28px", height: "28px", borderRadius: "50%", background: "#7c3aed", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "12px" }}>
+              <div className="flex items-center gap-2">
+                <div className="w-7 h-7 rounded-full bg-violet-600 text-white flex items-center justify-center text-xs flex-shrink-0">
                   🤖
                 </div>
-                <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)", padding: "10px 16px", borderRadius: "12px", borderTopLeftRadius: "2px" }}>
-                  <div style={{ display: "flex", gap: "4px" }}>
-                    <span className="dot" style={{ animation: "pulse 1s infinite alternate" }}>•</span>
-                    <span className="dot" style={{ animation: "pulse 1s infinite alternate 0.2s" }}>•</span>
-                    <span className="dot" style={{ animation: "pulse 1s infinite alternate 0.4s" }}>•</span>
+                <div className="bg-slate-900/5 border border-slate-900/5 p-2.5 px-4 rounded-2xl rounded-bl-none">
+                  <div className="flex gap-1 text-slate-400 font-bold">
+                    <span className="dot animate-pulse">•</span>
+                    <span className="dot animate-pulse [animation-delay:0.2s]">•</span>
+                    <span className="dot animate-pulse [animation-delay:0.4s]">•</span>
                   </div>
                 </div>
               </div>
@@ -244,23 +229,17 @@ export default function HelpSupportPage() {
           </div>
 
           {/* Form Input */}
-          <form onSubmit={handleSendMessage} style={{ padding: "16px 20px", borderTop: "1px solid rgba(255,255,255,0.06)", display: "flex", gap: "10px", background: "rgba(0,0,0,0.15)" }}>
+          <form onSubmit={handleSendMessage} className="p-4 px-5 border-t border-slate-900/10 flex gap-2.5 bg-slate-50">
             <input
               type="text"
               placeholder="Ask anything about Jevxo dashboard..."
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
-              style={{
-                flex: 1, padding: "10px 16px", borderRadius: "8px", border: "1px solid rgba(255,255,255,0.08)",
-                background: "rgba(255,255,255,0.03)", color: "#fff", fontSize: "13px", outline: "none"
-              }}
+              className="flex-1 p-2.5 px-4 rounded-lg border border-slate-900/[0.08] bg-white text-slate-900 text-xs outline-none focus:ring-1 focus:ring-violet-600"
             />
             <button
               type="submit"
-              style={{
-                padding: "10px 18px", borderRadius: "8px", background: "linear-gradient(135deg, #7c3aed, #4f46e5)",
-                border: "none", color: "#fff", fontWeight: 700, fontSize: "12px", cursor: "pointer"
-              }}
+              className="py-2.5 px-4 rounded-lg bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white font-bold text-xs shadow-md transition-all cursor-pointer"
             >
               Send
             </button>
@@ -269,13 +248,6 @@ export default function HelpSupportPage() {
         </div>
 
       </div>
-
-      <style>{`
-        @keyframes pulse {
-          0% { opacity: 0.3; }
-          100% { opacity: 1; }
-        }
-      `}</style>
     </div>
   );
 }

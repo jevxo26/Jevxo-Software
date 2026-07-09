@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+@source "../**/*.{js,ts,jsx,tsx}";
+@source "../../src/**/*.{js,ts,jsx,tsx}";
+@source "../components/**/*.{js,ts,jsx,tsx}";
+@source "../app/**/*.{js,ts,jsx,tsx}";
+
 /* ── Design Tokens ─────────────────────────────────────────── */
 :root {
   --bg-primary:    #f8fafc;

@@ -11,24 +11,11 @@ export default function DashboardPage() {
   }, [router]);
 
   return (
-    <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#080d1a", color: "#f1f5f9" }}>
-      <div style={{ textAlign: "center" }}>
-        <div style={{
-          width: "40px",
-          height: "40px",
-          border: "3px solid rgba(124,58,237,0.3)",
-          borderTopColor: "#7c3aed",
-          borderRadius: "50%",
-          animation: "spin 1s linear infinite",
-          margin: "0 auto 16px"
-        }} />
-        <div style={{ fontSize: "14px", color: "var(--text-secondary)", fontWeight: 500 }}>Redirecting to Jevxo Node...</div>
+    <div className="min-h-screen flex items-center justify-center bg-[#080d1a] text-[#f1f5f9]">
+      <div className="text-center">
+        <div className="w-10 h-10 border-3 border-violet-600/30 border-t-violet-600 rounded-full animate-spin mx-auto mb-4" />
+        <div className="text-sm text-slate-400 font-medium">Redirecting to Jevxo Node...</div>
       </div>
-      <style>{`
-        @keyframes spin {
-          to { transform: rotate(360deg); }
-        }
-      `}</style>
     </div>
   );
 }

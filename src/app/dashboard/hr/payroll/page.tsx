@@ -34,33 +34,33 @@ export default function HrPayrollPage() {
   };
 
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "1.8fr 1.2fr", gap: "28px" }} className="admin-grid-top">
+    <div className="grid grid-cols-1 lg:grid-cols-[1.8fr_1.2fr] gap-7">
       
       {/* Payroll calculations list */}
-      <div className="glass" style={{ padding: "28px", borderRadius: "16px" }}>
-        <h3 style={{ fontSize: "16px", fontWeight: 700, marginBottom: "16px" }}>Staff Salary Breakdown</h3>
-        <div style={{ overflowX: "auto" }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "13px", textAlign: "left" }}>
+      <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-7 rounded-2xl">
+        <h3 className="text-sm font-bold text-slate-900 mb-4">Staff Salary Breakdown</h3>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse text-xs text-left">
             <thead>
-              <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.06)", color: "var(--text-secondary)" }}>
-                <th style={{ padding: "10px" }}>Employee</th>
-                <th style={{ padding: "10px" }}>Base Salary</th>
-                <th style={{ padding: "10px" }}>Bonuses</th>
-                <th style={{ padding: "10px" }}>Commissions</th>
-                <th style={{ padding: "10px", textAlign: "right" }}>Net Payout</th>
+              <tr className="border-b border-slate-900/10 text-slate-500">
+                <th className="p-2.5 font-semibold">Employee</th>
+                <th className="p-2.5 font-semibold">Base Salary</th>
+                <th className="p-2.5 font-semibold">Bonuses</th>
+                <th className="p-2.5 font-semibold">Commissions</th>
+                <th className="p-2.5 font-semibold text-right">Net Payout</th>
               </tr>
             </thead>
             <tbody>
               {payrolls.map((p) => (
-                <tr key={p.id} style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
-                  <td style={{ padding: "12px 10px" }}>
-                    <div style={{ fontWeight: 700, color: "#fff" }}>{p.name}</div>
-                    <div style={{ fontSize: "11px", color: "var(--text-muted)", marginTop: "2px" }}>{p.role}</div>
+                <tr key={p.id} className="border-b border-slate-900/5 hover:bg-slate-50/50 transition-colors">
+                  <td className="p-3">
+                    <div className="font-bold text-slate-950">{p.name}</div>
+                    <div className="text-[10px] text-slate-400 mt-0.5">{p.role}</div>
                   </td>
-                  <td style={{ padding: "12px 10px" }}>{p.base}</td>
-                  <td style={{ padding: "12px 10px", color: "#10b981" }}>{p.bonus}</td>
-                  <td style={{ padding: "12px 10px", color: "#06b6d4" }}>{p.commission}</td>
-                  <td style={{ padding: "12px 10px", textAlign: "right", fontWeight: 700, color: "#fff" }}>{p.net}</td>
+                  <td className="p-3 text-slate-600">{p.base}</td>
+                  <td className="p-3 text-emerald-600 font-semibold">{p.bonus}</td>
+                  <td className="p-3 text-cyan-600 font-semibold">{p.commission}</td>
+                  <td className="p-3 text-right font-bold text-slate-950">{p.net}</td>
                 </tr>
               ))}
             </tbody>
@@ -69,15 +69,15 @@ export default function HrPayrollPage() {
       </div>
 
       {/* Bonus Entry Form */}
-      <div className="glass" style={{ padding: "28px", borderRadius: "16px" }}>
-        <h3 style={{ fontSize: "16px", fontWeight: 700, marginBottom: "16px" }}>Credit Bonus Reward</h3>
+      <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-7 rounded-2xl">
+        <h3 className="text-sm font-bold text-slate-900 mb-4">Credit Bonus Reward</h3>
         <form onSubmit={handleAddBonus}>
-          <div style={{ marginBottom: "12px" }}>
-            <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "6px" }}>Select Employee</label>
+          <div className="mb-3">
+            <label className="block text-[10px] text-slate-400 font-bold tracking-wider uppercase mb-1.5">Select Employee</label>
             <select
               value={bonusForm.employeeId}
               onChange={(e) => setBonusForm({ ...bonusForm, employeeId: e.target.value })}
-              style={{ width: "100%", padding: "10px", borderRadius: "6px", background: "rgba(8,13,26,0.9)", border: "1px solid var(--border)", color: "#fff", fontSize: "13px" }}
+              className="w-full p-2 px-3 rounded-lg border border-slate-900/[0.08] bg-white text-slate-900 text-xs focus:outline-none focus:ring-1 focus:ring-violet-600"
             >
               {payrolls.map(p => (
                 <option key={p.id} value={p.id}>{p.name} ({p.role})</option>
@@ -85,30 +85,35 @@ export default function HrPayrollPage() {
             </select>
           </div>
 
-          <div style={{ marginBottom: "12px" }}>
-            <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "6px" }}>Bonus Amount (USD)</label>
+          <div className="mb-3">
+            <label className="block text-[10px] text-slate-400 font-bold tracking-wider uppercase mb-1.5">Bonus Amount (USD)</label>
             <input
               type="number"
               placeholder="e.g. 150"
               required
               value={bonusForm.amount}
               onChange={(e) => setBonusForm({ ...bonusForm, amount: e.target.value })}
-              style={{ width: "100%", padding: "10px", borderRadius: "6px", background: "rgba(0,0,0,0.2)", border: "1px solid var(--border)", color: "#fff", fontSize: "13px" }}
+              className="w-full p-2 px-3 rounded-lg border border-slate-900/[0.08] bg-white text-slate-900 text-xs focus:outline-none focus:ring-1 focus:ring-violet-600"
             />
           </div>
 
-          <div style={{ marginBottom: "20px" }}>
-            <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "6px" }}>Calculation Reference Note</label>
+          <div className="mb-5">
+            <label className="block text-[10px] text-slate-400 font-bold tracking-wider uppercase mb-1.5">Calculation Reference Note</label>
             <textarea
               rows={2}
               placeholder="e.g. Q2 performance target bonus"
               value={bonusForm.note}
               onChange={(e) => setBonusForm({ ...bonusForm, note: e.target.value })}
-              style={{ width: "100%", padding: "10px", borderRadius: "6px", background: "rgba(0,0,0,0.2)", border: "1px solid var(--border)", color: "#fff", fontSize: "13px" }}
+              className="w-full p-2.5 px-3.5 rounded-lg border border-slate-900/[0.08] bg-white text-slate-900 text-xs focus:outline-none focus:ring-1 focus:ring-violet-600 placeholder:text-slate-400"
             />
           </div>
 
-          <button type="submit" style={{ width: "100%", padding: "10px", borderRadius: "6px", background: "linear-gradient(135deg, #7c3aed, #4f46e5)", color: "#fff", fontWeight: 700, border: "none", cursor: "pointer" }}>Commit Bonus</button>
+          <button
+            type="submit"
+            className="w-full py-2.5 px-4 rounded-lg bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white font-bold text-xs shadow-md transition-all cursor-pointer"
+          >
+            Commit Bonus
+          </button>
         </form>
       </div>
 

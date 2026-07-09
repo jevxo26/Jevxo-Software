@@ -11,42 +11,42 @@ export default function CrmReportsPage() {
   ];
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "28px" }}>
+    <div className="flex flex-col gap-7">
       
       {/* Analytics KPI Row */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
-        <div className="glass" style={{ padding: "24px", borderRadius: "12px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }}>
-          <div style={{ fontSize: "12px", color: "var(--text-secondary)", fontWeight: 600, textTransform: "uppercase" }}>Overall Conversion Rate</div>
-          <div style={{ fontSize: "28px", fontWeight: 800, marginTop: "8px", color: "#10b981" }}>14.8%</div>
-          <div style={{ fontSize: "11px", color: "#10b981", marginTop: "4px" }}>📈 +2.1% improvement this quarter</div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-6 rounded-2xl">
+          <div className="text-xs text-slate-400 font-bold tracking-wider uppercase">Overall Conversion Rate</div>
+          <div className="text-2xl font-extrabold mt-2 text-emerald-600">14.8%</div>
+          <div className="text-[11px] text-emerald-600 font-semibold mt-1">📈 +2.1% improvement this quarter</div>
         </div>
-        <div className="glass" style={{ padding: "24px", borderRadius: "12px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }}>
-          <div style={{ fontSize: "12px", color: "var(--text-secondary)", fontWeight: 600, textTransform: "uppercase" }}>Qualified Leads</div>
-          <div style={{ fontSize: "28px", fontWeight: 800, marginTop: "8px", color: "#a78bfa" }}>377</div>
-          <div style={{ fontSize: "11px", color: "var(--text-muted)", marginTop: "4px" }}>Across 6 custom business funnels</div>
+        <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-6 rounded-2xl">
+          <div className="text-xs text-slate-400 font-bold tracking-wider uppercase">Qualified Leads</div>
+          <div className="text-2xl font-extrabold mt-2 text-violet-600">377</div>
+          <div className="text-[11px] text-slate-400 font-semibold mt-1">Across 6 custom business funnels</div>
         </div>
-        <div className="glass" style={{ padding: "24px", borderRadius: "12px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }}>
-          <div style={{ fontSize: "12px", color: "var(--text-secondary)", fontWeight: 600, textTransform: "uppercase" }}>Total Deal Value</div>
-          <div style={{ fontSize: "28px", fontWeight: 800, marginTop: "8px", color: "#06b6d4" }}>$48,700</div>
-          <div style={{ fontSize: "11px", color: "var(--text-secondary)", marginTop: "4px" }}>Pipeline active balance</div>
+        <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-6 rounded-2xl">
+          <div className="text-xs text-slate-400 font-bold tracking-wider uppercase">Total Deal Value</div>
+          <div className="text-2xl font-extrabold mt-2 text-cyan-600">$48,700</div>
+          <div className="text-[11px] text-slate-400 font-semibold mt-1">Pipeline active balance</div>
         </div>
       </div>
 
       {/* Charts & Lead Sources */}
-      <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1.8fr", gap: "28px" }} className="admin-grid-top">
+      <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1.8fr] gap-7">
         
         {/* Lead Sources */}
-        <div className="glass" style={{ padding: "28px", borderRadius: "16px" }}>
-          <h4 style={{ fontSize: "15px", fontWeight: 700, marginBottom: "20px" }}>Lead Ingestion Sources</h4>
-          <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+        <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-7 rounded-2xl">
+          <h4 className="text-sm font-bold text-slate-900 mb-5">Lead Ingestion Sources</h4>
+          <div className="flex flex-col gap-4">
             {leadSources.map((item, idx) => (
               <div key={idx}>
-                <div style={{ display: "flex", justifyItems: "space-between", justifyContent: "space-between", fontSize: "13px", marginBottom: "6px" }}>
-                  <span style={{ fontWeight: 600 }}>{item.source}</span>
-                  <span style={{ color: "var(--text-muted)" }}>{item.leads} leads</span>
+                <div className="flex justify-between text-xs mb-1.5">
+                  <span className="font-semibold text-slate-700">{item.source}</span>
+                  <span className="text-slate-500">{item.leads} leads</span>
                 </div>
-                <div style={{ width: "100%", height: "4px", background: "rgba(255,255,255,0.06)", borderRadius: "2px" }}>
-                  <div style={{ width: `${(item.leads / 200) * 100}%`, height: "4px", background: "#06b6d4", borderRadius: "2px" }} />
+                <div className="w-full h-1 bg-slate-900/5 rounded-full overflow-hidden">
+                  <div style={{ width: `${(item.leads / 200) * 100}%` }} className="h-full bg-cyan-500 rounded-full" />
                 </div>
               </div>
             ))}
@@ -54,32 +54,32 @@ export default function CrmReportsPage() {
         </div>
 
         {/* Agent leaderboard */}
-        <div className="glass" style={{ padding: "28px", borderRadius: "16px" }}>
-          <h4 style={{ fontSize: "15px", fontWeight: 700, marginBottom: "16px" }}>Sales Team Performance</h4>
-          <div style={{ overflowX: "auto" }}>
-            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "13px", textAlign: "left" }}>
+        <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-7 rounded-2xl">
+          <h4 className="text-sm font-bold text-slate-900 mb-4">Sales Team Performance</h4>
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse text-xs text-left">
               <thead>
-                <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.06)", color: "var(--text-secondary)" }}>
-                  <th style={{ padding: "10px" }}>Agent</th>
-                  <th style={{ padding: "10px" }}>Deals Closed</th>
-                  <th style={{ padding: "10px" }}>Target Progress</th>
-                  <th style={{ padding: "10px", textAlign: "right" }}>XP points</th>
+                <tr className="border-b border-slate-900/10 text-slate-500">
+                  <th className="p-2.5 font-semibold">Agent</th>
+                  <th className="p-2.5 font-semibold">Deals Closed</th>
+                  <th className="p-2.5 font-semibold">Target Progress</th>
+                  <th className="p-2.5 font-semibold text-right">XP points</th>
                 </tr>
               </thead>
               <tbody>
                 {salesLeaderboard.map((item, idx) => (
-                  <tr key={idx} style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
-                    <td style={{ padding: "12px 10px", fontWeight: 700 }}>{item.name}</td>
-                    <td style={{ padding: "12px 10px" }}>{item.deals} deals</td>
-                    <td style={{ padding: "12px 10px" }}>
-                      <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                        <div style={{ flex: 1, height: "4px", background: "rgba(255,255,255,0.06)", borderRadius: "2px", minWidth: "60px" }}>
-                          <div style={{ width: `${item.targetProgress}%`, height: "4px", background: "#7c3aed", borderRadius: "2px" }} />
+                  <tr key={idx} className="border-b border-slate-900/5 hover:bg-slate-50/50 transition-colors">
+                    <td className="p-3 font-bold text-slate-900">{item.name}</td>
+                    <td className="p-3 text-slate-600">{item.deals} deals</td>
+                    <td className="p-3">
+                      <div className="flex items-center gap-2">
+                        <div className="flex-1 h-1 bg-slate-900/5 rounded-full min-w-[60px] overflow-hidden">
+                          <div style={{ width: `${item.targetProgress}%` }} className="h-full bg-violet-600 rounded-full" />
                         </div>
-                        <span>{item.targetProgress}%</span>
+                        <span className="text-slate-600">{item.targetProgress}%</span>
                       </div>
                     </td>
-                    <td style={{ padding: "12px 10px", textAlign: "right", color: "#a78bfa", fontWeight: 700 }}>{item.xp} XP</td>
+                    <td className="p-3 text-right text-violet-600 font-bold">{item.xp} XP</td>
                   </tr>
                 ))}
               </tbody>

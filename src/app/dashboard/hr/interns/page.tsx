@@ -27,45 +27,35 @@ export default function HrInternsPage() {
   };
 
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "1.6fr 1.4fr", gap: "28px" }} className="admin-grid-top">
+    <div className="grid grid-cols-1 lg:grid-cols-[1.6fr_1.4fr] gap-7">
       
       {/* Intern lists and Certs */}
-      <div className="glass" style={{ padding: "28px", borderRadius: "16px" }}>
-        <h3 style={{ fontSize: "16px", fontWeight: 700, marginBottom: "16px" }}>Intern Performance Tracker</h3>
+      <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-7 rounded-2xl">
+        <h3 className="text-sm font-bold text-slate-900 mb-4">Intern Performance Tracker</h3>
         
-        <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+        <div className="flex flex-col gap-4">
           {interns.map((intern) => (
-            <div key={intern.id} style={{ background: "rgba(255,255,255,0.01)", border: "1px solid rgba(255,255,255,0.05)", padding: "20px", borderRadius: "8px" }}>
-              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "8px" }}>
+            <div key={intern.id} className="bg-slate-900/5 border border-slate-900/5 p-5 rounded-2xl">
+              <div className="flex justify-between items-start mb-2">
                 <div>
-                  <h4 style={{ fontSize: "15px", fontWeight: 700, color: "#fff" }}>{intern.name}</h4>
-                  <div style={{ fontSize: "12px", color: "var(--text-secondary)" }}>{intern.role}</div>
+                  <h4 className="text-sm font-bold text-slate-950">{intern.name}</h4>
+                  <div className="text-[11px] text-slate-400 mt-0.5">{intern.role}</div>
                 </div>
                 
-                <span style={{ fontSize: "14px", fontWeight: 800, color: "#a78bfa" }}>Grade: {intern.score}</span>
+                <span className="text-xs font-bold text-violet-600">Grade: {intern.score}</span>
               </div>
 
-              <div style={{ display: "flex", alignItems: "center", gap: "10px", marginTop: "12px", fontSize: "12px", color: "var(--text-secondary)" }}>
+              <div className="flex items-center gap-2.5 mt-3 text-xs text-slate-500">
                 <span>Skill Growth Index:</span>
-                <div style={{ flex: 1, height: "4px", background: "rgba(255,255,255,0.06)", borderRadius: "2px" }}>
-                  <div style={{ width: `${intern.growth}%`, height: "4px", background: "#7c3aed", borderRadius: "2px" }} />
+                <div className="flex-1 h-1 bg-slate-900/5 rounded-full overflow-hidden">
+                  <div style={{ width: `${intern.growth}%` }} className="h-full bg-violet-600 rounded-full" />
                 </div>
                 <span>{intern.growth}%</span>
               </div>
 
               <button
                 onClick={() => handleDownloadCertificate(intern.name, intern.role)}
-                style={{
-                  marginTop: "16px",
-                  padding: "6px 12px",
-                  background: "rgba(124,58,237,0.12)",
-                  border: "1px solid rgba(124,58,237,0.3)",
-                  color: "#a78bfa",
-                  borderRadius: "4px",
-                  fontSize: "11px",
-                  fontWeight: 700,
-                  cursor: "pointer"
-                }}
+                className="mt-4 p-1.5 px-3 bg-violet-600/10 hover:bg-violet-600/15 border border-violet-600/20 text-violet-600 rounded-lg text-xs font-bold transition-all cursor-pointer"
               >
                 🎓 Generate Certificate (PDF)
               </button>
@@ -75,15 +65,15 @@ export default function HrInternsPage() {
       </div>
 
       {/* Intern evaluation scoring form */}
-      <div className="glass" style={{ padding: "28px", borderRadius: "16px" }}>
-        <h3 style={{ fontSize: "16px", fontWeight: 700, marginBottom: "16px" }}>Internship Appraisal Review</h3>
+      <div className="bg-white border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 transition-all duration-200 p-7 rounded-2xl">
+        <h3 className="text-sm font-bold text-slate-900 mb-4">Internship Appraisal Review</h3>
         <form onSubmit={handleEvaluate}>
-          <div style={{ marginBottom: "12px" }}>
-            <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "6px" }}>Select Intern</label>
+          <div className="mb-3">
+            <label className="block text-[10px] text-slate-400 font-bold tracking-wider uppercase mb-1.5">Select Intern</label>
             <select
               value={evaluation.internId}
               onChange={(e) => setEvaluation({ ...evaluation, internId: e.target.value })}
-              style={{ width: "100%", padding: "10px", borderRadius: "6px", background: "rgba(8,13,26,0.9)", border: "1px solid var(--border)", color: "#fff", fontSize: "13px" }}
+              className="w-full p-2 px-3 rounded-lg border border-slate-900/[0.08] bg-white text-slate-900 text-xs focus:outline-none focus:ring-1 focus:ring-violet-600"
             >
               {interns.map(i => (
                 <option key={i.id} value={i.id}>{i.name}</option>
@@ -91,12 +81,12 @@ export default function HrInternsPage() {
             </select>
           </div>
 
-          <div style={{ marginBottom: "12px" }}>
-            <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "6px" }}>Evaluation Grade</label>
+          <div className="mb-3">
+            <label className="block text-[10px] text-slate-400 font-bold tracking-wider uppercase mb-1.5">Evaluation Grade</label>
             <select
               value={evaluation.score}
               onChange={(e) => setEvaluation({ ...evaluation, score: e.target.value })}
-              style={{ width: "100%", padding: "10px", borderRadius: "6px", background: "rgba(8,13,26,0.9)", border: "1px solid var(--border)", color: "#fff", fontSize: "13px" }}
+              className="w-full p-2 px-3 rounded-lg border border-slate-900/[0.08] bg-white text-slate-900 text-xs focus:outline-none focus:ring-1 focus:ring-violet-600"
             >
               <option value="A+">A+ Exceptional</option>
               <option value="A">A Outstanding</option>
@@ -105,18 +95,23 @@ export default function HrInternsPage() {
             </select>
           </div>
 
-          <div style={{ marginBottom: "20px" }}>
-            <label style={{ display: "block", fontSize: "11px", color: "var(--text-secondary)", marginBottom: "6px" }}>Skill Growth Feedback</label>
+          <div className="mb-5">
+            <label className="block text-[10px] text-slate-400 font-bold tracking-wider uppercase mb-1.5">Skill Growth Feedback</label>
             <textarea
               rows={3}
               placeholder="Appraisal details..."
               value={evaluation.comment}
               onChange={(e) => setEvaluation({ ...evaluation, comment: e.target.value })}
-              style={{ width: "100%", padding: "10px", borderRadius: "6px", background: "rgba(0,0,0,0.2)", border: "1px solid var(--border)", color: "#fff", fontSize: "13px" }}
+              className="w-full p-2.5 px-3.5 rounded-lg border border-slate-900/[0.08] bg-white text-slate-900 text-xs focus:outline-none focus:ring-1 focus:ring-violet-600 placeholder:text-slate-400"
             />
           </div>
 
-          <button type="submit" style={{ width: "100%", padding: "10px", borderRadius: "6px", background: "linear-gradient(135deg, #7c3aed, #4f46e5)", color: "#fff", fontWeight: 700, border: "none", cursor: "pointer" }}>Submit Appraisal</button>
+          <button
+            type="submit"
+            className="w-full py-2.5 px-4 rounded-lg bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white font-bold text-xs shadow-md transition-all cursor-pointer"
+          >
+            Submit Appraisal
+          </button>
         </form>
       </div>
 

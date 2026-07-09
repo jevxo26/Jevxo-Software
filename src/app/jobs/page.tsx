@@ -36,88 +36,85 @@ export default function JobsPage() {
   }, []);
 
   return (
-    <div style={{ background: "#080d1a", color: "#f1f5f9", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+    <div className="bg-[#080d1a] text-[#f1f5f9] min-h-screen flex flex-col">
       <Navbar />
-      <div style={{ flex: 1, paddingTop: "80px" }}>
+      <div className="flex-1 pt-20">
         {/* Hero */}
-        <section className="bg-hero-gradient section" style={{ position: "relative", overflow: "hidden", textAlign: "center", paddingTop: "120px" }}>
-          <div className="orb orb-violet" style={{ width: "500px", height: "500px", top: "-200px", right: "-100px" }} />
-          <div className="orb orb-cyan" style={{ width: "350px", height: "350px", bottom: "-100px", left: "-80px" }} />
-          <div className="container" style={{ position: "relative", zIndex: 1 }}>
-          <div style={{ display: "inline-block", padding: "4px 14px", borderRadius: "100px", border: "1px solid rgba(124,58,237,0.3)", background: "rgba(124,58,237,0.08)", fontSize: "12px", fontWeight: 600, color: "#a78bfa", marginBottom: "24px", textTransform: "uppercase", letterSpacing: "0.1em" }}>
+        <section className="bg-hero-gradient py-[100px] md:py-[70px] relative overflow-hidden text-center pt-[120px]">
+          <div className="rounded-full blur-[80px] pointer-events-none absolute bg-violet-600/[0.07] w-[500px] h-[500px] -top-[200px] -right-[100px]" />
+          <div className="rounded-full blur-[80px] pointer-events-none absolute bg-cyan-500/[0.06] w-[350px] h-[350px] -bottom-[100px] -left-[80px]" />
+          <div className="w-11/12 max-w-[1400px] mx-auto relative z-[1]">
+          <div className="inline-block py-1 px-3.5 rounded-full border border-violet-600/[0.3] bg-violet-600/[0.08] text-xs font-semibold text-[#a78bfa] mb-6 uppercase tracking-widest">
             Careers
           </div>
-          <h1 style={{ fontSize: "clamp(36px, 6vw, 72px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: "24px" }}>
-            Join the <span className="gradient-text">Jevxo Crew</span>
+          <h1 className="text-[clamp(36px,6vw,72px)] font-black tracking-tight mb-6">
+            Join the <span className="bg-gradient-to-br from-violet-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent">Jevxo Crew</span>
           </h1>
-          <p style={{ fontSize: "18px", color: "var(--text-secondary)", maxWidth: "560px", margin: "0 auto", lineHeight: 1.8 }}>
+          <p className="text-lg text-slate-600 max-w-[560px] mx-auto leading-relaxed">
             Help us engineer the next generation of SaaS business automation operating systems.
           </p>
         </div>
       </section>
 
       {/* Main Grid */}
-      <section className="section" style={{ borderTop: "1px solid var(--border)" }}>
-        <div className="container">
-          <div style={{ display: "grid", gridTemplateColumns: "1.6fr 1.4fr", gap: "40px" }} className="jobs-container">
+      <section className="py-[100px] md:py-[70px] border-t border-slate-900/[0.08]">
+        <div className="w-11/12 max-w-[1400px] mx-auto">
+          <div className="jobs-container grid grid-cols-[1.6fr_1.4fr] gap-10">
             
             {/* Openings list */}
             <div>
-              <h2 style={{ fontSize: "24px", fontWeight: 800, marginBottom: "24px" }}>Open Positions</h2>
-              <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+              <h2 className="text-2xl font-extrabold mb-6">Open Positions</h2>
+              <div className="flex flex-col gap-5">
                 {jobOpenings.map((job, idx) => (
-                  <div key={idx} className="glass" style={{ padding: "28px", borderRadius: "16px" }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "12px", marginBottom: "8px" }}>
-                      <h3 style={{ fontSize: "18px", fontWeight: 700, color: "#fff" }}>{job.title}</h3>
-                      <span style={{ fontSize: "12px", fontWeight: 700, color: "#a78bfa" }}>{job.salary}</span>
+                  <div key={idx} className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 p-7 rounded-2xl">
+                    <div className="flex justify-between gap-3 mb-2" style={{flexWrap: "wrap"}}>
+                      <h3 className="text-lg font-bold text-[#fff]">{job.title}</h3>
+                      <span className="text-xs font-bold text-[#a78bfa]">{job.salary}</span>
                     </div>
-                    <div style={{ fontSize: "12px", color: "var(--text-secondary)", marginBottom: "14px" }}>{job.type}</div>
-                    <p style={{ fontSize: "14px", color: "var(--text-muted)", lineHeight: 1.6 }}>{job.desc}</p>
+                    <div className="text-xs text-slate-600 mb-3.5">{job.type}</div>
+                    <p className="text-sm text-slate-400 leading-normal">{job.desc}</p>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Application form */}
-            <div className="glass" style={{ padding: "40px", borderRadius: "16px", height: "fit-content" }}>
+            <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 p-10 rounded-2xl h-[fit-content]">
               {success ? (
-                <div style={{ textAlign: "center", padding: "40px 0" }}>
-                  <div style={{ fontSize: "48px", marginBottom: "16px" }}>🎉</div>
-                  <h3 style={{ fontSize: "22px", fontWeight: 700, marginBottom: "8px", color: "#10b981" }}>Application Logged!</h3>
-                  <p style={{ color: "var(--text-secondary)", fontSize: "14px" }}>Thank you. Our HR panel recruitment team will review your credentials.</p>
+                <div className="text-center py-10 px-0">
+                  <div className="text-[48px] mb-4">🎉</div>
+                  <h3 className="text-[22px] font-bold mb-2 text-[#10b981]">Application Logged!</h3>
+                  <p className="text-slate-600 text-sm">Thank you. Our HR panel recruitment team will review your credentials.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmitApply}>
-                  <h3 style={{ fontSize: "20px", fontWeight: 800, marginBottom: "24px" }}>Submit Application</h3>
+                  <h3 className="text-xl font-extrabold mb-6">Submit Application</h3>
                   
-                  <div style={{ marginBottom: "16px" }}>
-                    <label style={{ display: "block", fontSize: "12px", fontWeight: 700, color: "#a78bfa", textTransform: "uppercase", marginBottom: "8px" }}>Full Name</label>
-                    <input
+                  <div className="mb-4">
+                    <label className="block text-xs font-bold text-[#a78bfa] uppercase mb-2">Full Name</label>
+                    <input className="w-full py-3 px-4 rounded-lg border border-[var(--border)] bg-white/[0.03] text-[#fff] text-sm"
                       type="text"
                       required
                       value={applyForm.name}
                       onChange={(e) => setApplyForm({ ...applyForm, name: e.target.value })}
-                      style={{ width: "100%", padding: "12px 16px", borderRadius: "8px", border: "1px solid var(--border)", background: "rgba(255,255,255,0.03)", color: "#fff", fontSize: "14px" }}
                     />
                   </div>
 
-                  <div style={{ marginBottom: "16px" }}>
-                    <label style={{ display: "block", fontSize: "12px", fontWeight: 700, color: "#a78bfa", textTransform: "uppercase", marginBottom: "8px" }}>Email Address</label>
-                    <input
+                  <div className="mb-4">
+                    <label className="block text-xs font-bold text-[#a78bfa] uppercase mb-2">Email Address</label>
+                    <input className="w-full py-3 px-4 rounded-lg border border-[var(--border)] bg-white/[0.03] text-[#fff] text-sm"
                       type="email"
                       required
                       value={applyForm.email}
                       onChange={(e) => setApplyForm({ ...applyForm, email: e.target.value })}
-                      style={{ width: "100%", padding: "12px 16px", borderRadius: "8px", border: "1px solid var(--border)", background: "rgba(255,255,255,0.03)", color: "#fff", fontSize: "14px" }}
                     />
                   </div>
 
-                  <div style={{ marginBottom: "16px" }}>
-                    <label style={{ display: "block", fontSize: "12px", fontWeight: 700, color: "#a78bfa", textTransform: "uppercase", marginBottom: "8px" }}>Position Applying For</label>
-                    <select
+                  <div className="mb-4">
+                    <label className="block text-xs font-bold text-[#a78bfa] uppercase mb-2">Position Applying For</label>
+                    <select className="w-full py-3 px-4 rounded-lg border border-[var(--border)] bg-[rgba(8,13,26,0.9)] text-[#fff] text-sm"
                       value={applyForm.position}
                       onChange={(e) => setApplyForm({ ...applyForm, position: e.target.value })}
-                      style={{ width: "100%", padding: "12px 16px", borderRadius: "8px", border: "1px solid var(--border)", background: "rgba(8,13,26,0.9)", color: "#fff", fontSize: "14px" }}
                     >
                       <option value="NextJS Dev">Senior Next.js Developer</option>
                       <option value="UI/UX Designer">Lead UI/UX Designer</option>
@@ -125,41 +122,29 @@ export default function JobsPage() {
                     </select>
                   </div>
 
-                  <div style={{ marginBottom: "16px" }}>
-                    <label style={{ display: "block", fontSize: "12px", fontWeight: 700, color: "#a78bfa", textTransform: "uppercase", marginBottom: "8px" }}>Portfolio / Resume Link</label>
-                    <input
+                  <div className="mb-4">
+                    <label className="block text-xs font-bold text-[#a78bfa] uppercase mb-2">Portfolio / Resume Link</label>
+                    <input className="w-full py-3 px-4 rounded-lg border border-[var(--border)] bg-white/[0.03] text-[#fff] text-sm"
                       type="url"
                       placeholder="https://..."
                       required
                       value={applyForm.portfolio}
                       onChange={(e) => setApplyForm({ ...applyForm, portfolio: e.target.value })}
-                      style={{ width: "100%", padding: "12px 16px", borderRadius: "8px", border: "1px solid var(--border)", background: "rgba(255,255,255,0.03)", color: "#fff", fontSize: "14px" }}
                     />
                   </div>
 
-                  <div style={{ marginBottom: "24px" }}>
-                    <label style={{ display: "block", fontSize: "12px", fontWeight: 700, color: "#a78bfa", textTransform: "uppercase", marginBottom: "8px" }}>Cover Letter Notes</label>
-                    <textarea
+                  <div className="mb-6">
+                    <label className="block text-xs font-bold text-[#a78bfa] uppercase mb-2">Cover Letter Notes</label>
+                    <textarea className="w-full py-3 px-4 rounded-lg border border-[var(--border)] bg-white/[0.03] text-[#fff] text-sm"
                       rows={4}
                       value={applyForm.message}
                       onChange={(e) => setApplyForm({ ...applyForm, message: e.target.value })}
-                      style={{ width: "100%", padding: "12px 16px", borderRadius: "8px", border: "1px solid var(--border)", background: "rgba(255,255,255,0.03)", color: "#fff", fontSize: "14px" }}
                     />
                   </div>
 
-                  <button
+                  <button className="w-full p-4 rounded-[10px] bg-gradient-to-br from-violet-600 to-indigo-600 text-[#fff] text-[15px] font-bold border-[none]"
                     type="submit"
-                    style={{
-                      width: "100%",
-                      padding: "16px",
-                      borderRadius: "10px",
-                      background: "linear-gradient(135deg, #7c3aed, #4f46e5)",
-                      color: "#fff",
-                      fontSize: "15px",
-                      fontWeight: 700,
-                      border: "none",
-                      cursor: "pointer"
-                    }}
+                    style={{cursor: "pointer"}}
                   >
                     Submit Application
                   </button>

@@ -25,120 +25,107 @@ export default function PortfolioPage() {
   const filtered = active === "All" ? portfolioList : portfolioList.filter((p) => p.category === active);
 
   return (
-    <div style={{ background: "#080d1a", color: "#f1f5f9", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+    <div className="bg-[#080d1a] text-[#f1f5f9] min-h-screen flex flex-col">
       <Navbar />
-      <div style={{ flex: 1, paddingTop: "80px" }}>
+      <div className="flex-1 pt-20">
         {/* ── Hero ─────────────────────────────────────────────── */}
-        <section className="bg-hero-gradient section" style={{ position: "relative", overflow: "hidden" }}>
-        <div className="orb orb-cyan"   style={{ width: "450px", height: "450px", top: "-150px", right: "-80px" }} />
-        <div className="orb orb-violet" style={{ width: "300px", height: "300px", bottom: "-80px", left: "-60px" }} />
-        <div className="container" style={{ position: "relative", zIndex: 1, textAlign: "center" }}>
-          <div style={{ display: "inline-block", padding: "4px 14px", borderRadius: "100px", border: "1px solid rgba(6,182,212,0.3)", background: "rgba(6,182,212,0.08)", fontSize: "12px", fontWeight: 600, color: "#67e8f9", marginBottom: "24px", textTransform: "uppercase", letterSpacing: "0.1em" }}>
-            Our Work
-          </div>
-          <h1 style={{ fontSize: "clamp(36px, 6vw, 72px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: "24px" }}>
-            Projects That <span className="gradient-text">Move Needles</span>
-          </h1>
-          <p style={{ fontSize: "18px", color: "var(--text-secondary)", maxWidth: "540px", margin: "0 auto", lineHeight: 1.8 }}>
-            A curated selection of the work we&apos;re most proud of — real projects with real outcomes for real businesses.
-          </p>
-        </div>
-      </section>
-
-      {/* ── Filter + Grid ─────────────────────────────────────── */}
-      <section className="section">
-        <div className="container">
-          {/* Category filter */}
-          <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", justifyContent: "center", marginBottom: "56px" }}>
-            {portfolioCategories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActive(cat)}
-                style={{
-                  padding: "8px 20px", borderRadius: "100px", fontSize: "14px", fontWeight: 500,
-                  border: "1px solid",
-                  cursor: "pointer",
-                  transition: "all 0.2s ease",
-                  borderColor: active === cat ? "rgba(124,58,237,0.5)" : "rgba(255,255,255,0.08)",
-                  background:  active === cat ? "rgba(124,58,237,0.15)"  : "rgba(255,255,255,0.03)",
-                  color:       active === cat ? "#a78bfa" : "var(--text-secondary)",
-                }}
-              >{cat}</button>
-            ))}
-          </div>
-
-          {/* Grid */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px" }} className="portfolio-grid">
-            {filtered.map((item) => (
-              <Link key={item.id} href={`/portfolio/${item.slug}`} style={{ display: "block" }}>
-                <div className="glass" style={{ borderRadius: "var(--radius-lg)", overflow: "hidden", transition: "all 0.3s ease", height: "100%" }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.transform = "translateY(-6px)";
-                    (e.currentTarget as HTMLElement).style.boxShadow = "0 20px 60px rgba(0,0,0,0.3)";
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
-                    (e.currentTarget as HTMLElement).style.boxShadow = "none";
-                  }}
-                >
-                  {/* Thumbnail */}
-                  <div style={{ height: "220px", background: "linear-gradient(135deg, rgba(124,58,237,0.25), rgba(6,182,212,0.18))", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "64px", position: "relative" }}>
-                    {item.category === "Web Development" && "🖥️"}
-                    {item.category === "E-Commerce"      && "🛍️"}
-                    {item.category === "Mobile Apps"     && "📱"}
-                    {item.category === "UI/UX Design"    && "🎨"}
-                    {item.category === "AI Integration"  && "🤖"}
-                    {item.category === "Cloud & DevOps"  && "☁️"}
-                    {item.featured && (
-                      <div style={{ position: "absolute", top: "16px", right: "16px", padding: "4px 12px", borderRadius: "100px", background: "rgba(124,58,237,0.8)", fontSize: "11px", fontWeight: 700, color: "#fff" }}>
-                        Featured
-                      </div>
-                    )}
-                  </div>
-                  <div style={{ padding: "28px" }}>
-                    <div style={{ display: "flex", gap: "8px", marginBottom: "14px", flexWrap: "wrap" }}>
-                      <span style={{ padding: "3px 10px", borderRadius: "100px", fontSize: "11px", fontWeight: 600, background: "rgba(124,58,237,0.12)", color: "#a78bfa" }}>{item.category}</span>
-                      <span style={{ padding: "3px 10px", borderRadius: "100px", fontSize: "11px", color: "var(--text-muted)", border: "1px solid rgba(255,255,255,0.06)" }}>{item.year}</span>
-                    </div>
-                    <h3 style={{ fontSize: "20px", fontWeight: 700, marginBottom: "8px" }}>{item.title}</h3>
-                    <p style={{ color: "var(--text-muted)", fontSize: "13px", marginBottom: "12px" }}>Client: {item.client}</p>
-                    <p style={{ color: "var(--text-secondary)", fontSize: "14px", lineHeight: 1.6, marginBottom: "20px" }}>{item.description}</p>
-                    <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
-                      {item.tags.slice(0, 3).map((tag) => (
-                        <span key={tag} style={{ padding: "2px 10px", borderRadius: "100px", fontSize: "11px", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)", color: "var(--text-muted)" }}>{tag}</span>
-                      ))}
-                    </div>
-                    <div style={{ marginTop: "20px", color: "#a78bfa", fontSize: "14px", fontWeight: 600 }}>
-                      View Case Study →
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-
-          {filtered.length === 0 && (
-            <div style={{ textAlign: "center", padding: "80px 0", color: "var(--text-muted)" }}>
-              No projects in this category yet.
+        <section className="bg-hero-gradient py-[100px] md:py-[70px] relative overflow-hidden">
+          <div className="rounded-full blur-[80px] pointer-events-none absolute bg-cyan-500/[0.06] w-[450px] h-[450px] -top-[150px] -right-[80px]" />
+          <div className="rounded-full blur-[80px] pointer-events-none absolute bg-violet-600/[0.07] w-[300px] h-[300px] -bottom-[80px] -left-[60px]" />
+          <div className="w-11/12 max-w-[1400px] mx-auto relative z-[1] text-center">
+            <div className="inline-block py-1 px-3.5 rounded-full border border-cyan-500/30 bg-cyan-500/8 text-xs font-semibold text-[#67e8f9] mb-6 uppercase tracking-widest">
+              Our Work
             </div>
-          )}
-        </div>
-      </section>
+            <h1 className="text-[clamp(36px,6vw,72px)] font-black tracking-tight mb-6">
+              Projects That <span className="bg-gradient-to-br from-violet-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent">Move Needles</span>
+            </h1>
+            <p className="text-lg text-slate-600 max-w-[540px] mx-auto leading-relaxed">
+              A curated selection of the work we&apos;re most proud of — real projects with real outcomes for real businesses.
+            </p>
+          </div>
+        </section>
 
-      {/* ── CTA ──────────────────────────────────────────────── */}
-      <section className="section-sm" style={{ borderTop: "1px solid var(--border)", paddingTop: "60px", paddingBottom: "80px" }}>
-        <div className="container" style={{ textAlign: "center" }}>
-          <h2 style={{ fontSize: "clamp(26px, 4vw, 42px)", fontWeight: 800, marginBottom: "16px" }}>
-            Want to Be Our Next <span className="gradient-text">Success Story?</span>
-          </h2>
-          <p style={{ color: "var(--text-secondary)", fontSize: "17px", marginBottom: "36px" }}>
-            Tell us about your project and let&apos;s create something remarkable together.
-          </p>
-          <Link href="/contact" style={{ padding: "16px 40px", borderRadius: "14px", fontWeight: 700, fontSize: "17px", background: "linear-gradient(135deg, #7c3aed, #4f46e5)", color: "#fff", boxShadow: "0 0 40px rgba(124,58,237,0.4)", display: "inline-block" }}>
-            Start a Project →
-          </Link>
-        </div>
-      </section>
+        {/* ── Filter + Grid ─────────────────────────────────────── */}
+        <section className="py-[100px] md:py-[70px]">
+          <div className="w-11/12 max-w-[1400px] mx-auto">
+            {/* Category filter */}
+            <div className="flex gap-2 flex-wrap justify-center mb-14">
+              {portfolioCategories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActive(cat)}
+                  className={`py-2 px-5 rounded-full text-sm font-medium border cursor-pointer transition-all duration-200 ${
+                    active === cat
+                      ? "border-violet-600/50 bg-violet-600/15 text-violet-400"
+                      : "border-white/8 bg-white/3 text-slate-600 hover:border-white/15"
+                  }`}
+                >{cat}</button>
+              ))}
+            </div>
+
+            {/* Grid */}
+            <div className="portfolio-grid grid grid-cols-3 gap-6">
+              {filtered.map((item) => (
+                <Link key={item.id} href={`/portfolio/${item.slug}`} className="block">
+                  <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-300 rounded-[20px] overflow-hidden h-full hover:-translate-y-1.5 hover:shadow-[0_20px_60px_rgba(0,0,0,0.3)] bg-white/[0.01] border-white/[0.06]">
+                    {/* Thumbnail */}
+                    <div className="h-[220px] bg-gradient-to-br from-violet-600/25 to-cyan-500/18 flex items-center justify-center text-6xl relative">
+                      {item.category === "Web Development" && "🖥️"}
+                      {item.category === "E-Commerce"      && "🛍️"}
+                      {item.category === "Mobile Apps"     && "📱"}
+                      {item.category === "UI/UX Design"    && "🎨"}
+                      {item.category === "AI Integration"  && "🤖"}
+                      {item.category === "Cloud & DevOps"  && "☁️"}
+                      {item.featured && (
+                        <div className="absolute top-4 right-4 py-1 px-3 rounded-full bg-violet-600/80 text-[11px] font-bold text-white">
+                          Featured
+                        </div>
+                      )}
+                    </div>
+                    <div className="p-7">
+                      <div className="flex gap-2 mb-3.5 flex-wrap">
+                        <span className="py-1 px-2.5 rounded-full text-[11px] font-semibold bg-violet-600/12 text-[#a78bfa]">{item.category}</span>
+                        <span className="py-1 px-2.5 rounded-full text-[11px] text-slate-400 border border-white/6">{item.year}</span>
+                      </div>
+                      <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+                      <p className="text-slate-400 text-[13px] mb-3">Client: {item.client}</p>
+                      <p className="text-slate-600 text-sm leading-normal mb-5">{item.description}</p>
+                      <div className="flex gap-1.5 flex-wrap">
+                        {item.tags.slice(0, 3).map((tag) => (
+                          <span key={tag} className="py-0.5 px-2.5 rounded-full text-[11px] bg-white/4 border border-white/7 text-slate-400">{tag}</span>
+                        ))}
+                      </div>
+                      <div className="mt-5 text-[#a78bfa] text-sm font-semibold">
+                        View Case Study →
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+
+            {filtered.length === 0 && (
+              <div className="text-center py-20 text-slate-400">
+                No projects in this category yet.
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* ── CTA ──────────────────────────────────────────────── */}
+        <section className="py-[60px] md:py-[40px] border-t border-slate-900/[0.08] pt-15 pb-20">
+          <div className="w-11/12 max-w-[1400px] mx-auto text-center">
+            <h2 className="text-[clamp(26px,4vw,42px)] font-bold mb-4">
+              Want to Be Our Next <span className="bg-gradient-to-br from-violet-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent">Success Story?</span>
+            </h2>
+            <p className="text-slate-600 text-[17px] mb-9">
+              Tell us about your project and let&apos;s create something remarkable together.
+            </p>
+            <Link href="/contact" className="py-4 px-10 rounded-[14px] font-bold text-[17px] bg-gradient-to-br from-violet-600 to-indigo-600 text-white shadow-[0_0_40px_rgba(124,58,237,0.4)] inline-block">
+              Start a Project →
+            </Link>
+          </div>
+        </section>
 
       </div>
 
