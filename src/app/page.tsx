@@ -6,6 +6,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import Counter from "@/components/ui/Counter";
+import { motion } from "framer-motion";
 import { 
   Globe, 
   ShoppingCart, 
@@ -69,6 +70,298 @@ const partnerPrograms = [
   { role: "Sales Partner", description: "Refer clients, manage regional sales agent pools, and win high-ticket incentives through gamified ranks.", commission: "15% per Conversion", icon: Handshake },
   { role: "Technology Partner", description: "Integrate your APIs, plugins, and hosting nodes directly into Jevxo's global application catalog.", commission: "Co-selling Support", icon: Plug },
 ];
+
+const technologies = [
+  {
+    name: "JavaScript",
+    color: "bg-[#f7df1e] hover:shadow-[#f7df1e]/30",
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-8 h-8 fill-[#323330]">
+        <path d="M1.9 1.9v20.2h20.2V1.9H1.9zm13.1 14.8c.3.9.9 1.5 2.1 1.5 1.1 0 1.8-.6 1.8-1.4 0-1-.8-1.3-2.1-1.9-1.9-.8-3.1-1.5-3.1-3.6 0-2 1.6-3.4 3.9-3.4 2 0 3.3.9 3.8 2.2l-1.8 1.1c-.3-.7-.9-1.1-1.9-1.1-1 0-1.5.5-1.5 1.1 0 .7.5 1 1.6 1.5 2.1.9 3.6 1.7 3.6 4.1 0 2.2-1.7 3.7-4.4 3.7-2.7 0-4.2-1.2-4.8-2.6l1.8-1.2zm-7.6 2.5c-.3.7-.8 1.1-1.7 1.1-1.1 0-1.8-.7-1.8-2.4V9.6H6.1v6c0 2.9 1.5 4.1 3.9 4.1 1 0 1.8-.3 2.3-.9l-.6-1.5c-.3.4-.6.6-1 .6z"/>
+      </svg>
+    )
+  },
+  {
+    name: "Next.js",
+    color: "bg-[#ffffff] hover:shadow-[#ffffff]/40 border border-slate-200",
+    icon: (
+      <svg viewBox="0 0 128 128" className="w-8 h-8 fill-black">
+        <path d="M106.1 106.1L64.3 54.3H49.5v39.4h9.9V67.8l32.9 44.9c4.2-3.1 8-6.9 11-11.2zM87.3 34.3h9.9v57.8L87.3 78.4V34.3z" />
+      </svg>
+    )
+  },
+  {
+    name: "NestJS",
+    color: "bg-[#ea2845] hover:shadow-[#ea2845]/30",
+    icon: (
+      <svg viewBox="0 0 256 255" className="w-8 h-8 fill-white">
+        <path d="M128 0L24 54v70c0 68 44 131 104 148 60-17 104-80 104-148V54L128 0zm68 124c0 30-18 57-46 67v-38c16-5 28-20 28-38 0-22-18-40-40-40-40 0-40 18-40 40 0 18 12 33 28 38v38c-28-10-46-37-46-67 0-41 33-74 74-74s74 33 74 74z" />
+      </svg>
+    )
+  },
+  {
+    name: "Tailwind CSS",
+    color: "bg-[#38bdf8] hover:shadow-[#38bdf8]/30",
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-8 h-8 fill-white">
+        <path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.337 6.182 14.976 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.337 13.382 8.976 12 6.001 12z"/>
+      </svg>
+    )
+  },
+  {
+    name: "Docker",
+    color: "bg-[#0db7ed] hover:shadow-[#0db7ed]/30",
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-8 h-8 fill-white">
+        <path d="M13.983 11.078h2.119c.102 0 .186-.083.186-.185V9.006a.185.185 0 0 0-.186-.186h-2.119a.185.185 0 0 0-.185.186v1.887c0 .102.083.185.185.185m-2.954-5.43h2.118a.185.185 0 0 0 .186-.186V3.574a.186.186 0 0 0-.186-.185h-2.118a.185.185 0 0 0-.185.185v1.888c0 .102.082.185.185.185m0 2.716h2.118a.185.185 0 0 0 .186-.186V6.29a.185.185 0 0 0-.186-.185h-2.118a.185.185 0 0 0-.185.186v1.887c0 .102.082.185.185.185m-2.953 2.715h2.119c.102 0 .185-.083.185-.185V9.006a.186.186 0 0 0-.185-.186h-2.119a.186.186 0 0 0-.186.186v1.887c0 .102.084.185.186.185m-2.954 0h2.119c.102 0 .185-.083.185-.185V9.006a.186.186 0 0 0-.185-.186H5.122a.186.186 0 0 0-.186.186v1.887c0 .102.084.185.186.185m-2.954 0h2.119c.101 0 .185-.083.185-.185V9.006a.185.185 0 0 0-.185-.186H2.168a.186.186 0 0 0-.186.186v1.887c0 .102.084.185.186.185m-2.954-2.716h2.119c.101 0 .185-.083.185-.185V6.29a.185.185 0 0 0-.185-.185H2.168a.185.185 0 0 0-.186.185v1.887c0 .102.084.185.186.185m5.908 0h2.119c.102 0 .185-.083.185-.185V6.29a.185.185 0 0 0-.185-.185H5.122a.185.185 0 0 0-.186.185v1.887c0 .102.084.185.186.185m-2.954-2.715h2.119c.102 0 .185-.083.185-.186V3.574a.186.186 0 0 0-.185-.185H2.168a.186.186 0 0 0-.186.185v1.888c0 .102.084.185.186.185m-2.213 11.23c-.116 0-.231.006-.345.018-.01.001-.018.01-.018.02v.759c0 .012.01.022.022.02.597-.044 1.189-.133 1.764-.265.011-.003.018-.013.016-.024l-.135-.506a.023.023 0 0 0-.022-.017c-.424.01-.851.015-1.282.015m21.037-3.112c-.522-.721-1.344-1.282-2.18-1.57a.126.126 0 0 0-.147.05c-.092.146-.178.29-.257.43a.126.126 0 0 0 .025.155c.677.587 1.127 1.298 1.344 2.118a.126.126 0 0 0 .121.094h1.026a.126.126 0 0 0 .123-.153 6.945 6.945 0 0 0-.055-1.124M23.991 12.63c-.1-.706-.525-2.228-2.23-3.17a.127.127 0 0 0-.174.053c-.118.204-.23.414-.336.63a.126.126 0 0 0 .034.156c1.37.973 1.637 2.21 1.69 2.766a.127.127 0 0 0 .126.115h1.017a.127.127 0 0 0 .125-.138c-.015-.145-.029-.283-.048-.422M8.887 17.206c-1.344 0-2.617-.291-3.69-.817a.026.026 0 0 0-.037.017l-.547.781a.026.026 0 0 0 .01.038c1.353.774 2.923 1.205 4.542 1.205 5.568 0 10.098-3.486 10.098-7.768v-.125c0-.014-.011-.025-.025-.025h-1.025a.025.025 0 0 0-.025.025v.062c0 3.733-4.148 6.643-9.301 6.643M1.144 14.51c.24 1.488.945 2.764 1.977 3.666a.026.026 0 0 0 .037-.004l.582-.58a.026.026 0 0 0 0-.037c-.822-.767-1.365-1.74-1.57-2.824a.026.026 0 0 0-.023-.021l-.98-.109a.027.027 0 0 0-.023.009z"/>
+      </svg>
+    )
+  },
+  {
+    name: "Go Language",
+    color: "bg-[#00acd7] hover:shadow-[#00acd7]/30",
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-8 h-8 fill-white font-black">
+        <text x="50%" y="62%" dominantBaseline="middle" textAnchor="middle" fontSize="11" fontFamily="sans-serif">GO</text>
+      </svg>
+    )
+  },
+  {
+    name: "Amazon Web Services",
+    color: "bg-[#232f3e] hover:shadow-[#232f3e]/30",
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-8 h-8 fill-white">
+        <path d="M12.04 12.01c-.13-.39-.38-.72-.75-.98-.37-.26-.81-.39-1.32-.39-.52 0-.96.12-1.33.36-.37.24-.62.59-.75 1.04v.05c.13.43.39.76.77.99.38.23.82.35 1.32.35.53 0 .97-.13 1.32-.38.35-.25.59-.6.72-1.04zm7.98-2.61c-.55 0-1.05.15-1.51.45s-.77.72-.94 1.26v-1.5h-1.89v5.99h1.89v-3.15c0-.52.12-.92.36-1.18.24-.26.56-.39.95-.39.42 0 .72.13.91.4.19.27.28.66.28 1.17v3.16h1.91v-3.41c0-.98-.22-1.74-.67-2.28-.45-.55-1.05-.83-1.79-.83zm-14.86.37l1.09 3.03.95-3.03h2.02l-2.02 5.99h-1.93l-2.12-5.99h2.01zm4.84-.37c-.77 0-1.42.19-1.95.58-.53.39-.88.94-1.05 1.65h1.98c.09-.28.24-.49.46-.64.22-.15.48-.23.77-.23.36 0 .63.1.81.3.18.2.27.49.27.87v.34c-.38.01-.84.04-1.38.09-.64.06-1.17.21-1.59.45s-.63.63-.63 1.17c0 .52.18.92.54 1.21.36.29.84.44 1.44.44.59 0 1.09-.16 1.51-.48.42-.32.68-.78.78-1.38h.04v1.65h1.89v-3.87c0-1-.28-1.76-.84-2.27-.56-.52-1.35-.78-2.38-.78z"/>
+        <path d="M2.57 19.34c4.01 2.37 9.38 2.65 14.15 1.04.53-.18.33-.94-.2-.8-.43.11-4.48.98-8.91-.49-3.23-1.07-5.99-3.26-6.68-4.23-.27-.38-.83.05-.36.48z" fill="#FF9900" />
+        <path d="M17.26 18.06c-.19-.24-.65-.07-.56.24.23.83.47 1.83.21 2.62-.09.28.24.47.45.24.52-.57 1.22-1.63 1.04-2.8-.02-.12-.13-.23-.21-.3-.21-.19-.74-.23-.93 0z" fill="#FF9900" />
+      </svg>
+    )
+  },
+  {
+    name: "Git & Version Control",
+    color: "bg-[#f05032] hover:shadow-[#f05032]/40 shadow-lg shadow-[#f05032]/25 scale-110 relative z-10",
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-8 h-8 fill-white">
+        <path d="M23.384 11.616L12.384.616a1.077 1.077 0 0 0-1.52 0l-2.616 2.616a.224.224 0 0 0 0 .316l2.126 2.126c.4-.2.8-.3 1.3-.3.9 0 1.7.5 2.1 1.3.4.4.6.9.6 1.5 0 .6-.2 1.1-.6 1.5l2.408 2.408c.5-.2 1.1-.2 1.6.1.7.4 1.1 1.1 1.1 2 0 .9-.4 1.6-1.1 2-.7.4-1.6.4-2.2 0-.7-.4-1.1-1.1-1.1-2 0-.5.1-1 .4-1.4l-2.428-2.428c-.4.3-.9.4-1.4.4-.5 0-1-.1-1.4-.4L8.334 14.8c.2.4.3.9.3 1.4 0 .9-.4 1.6-1.1 2-.7.4-1.6.4-2.2 0-.7-.4-1.1-1.1-1.1-2 0-.9.4-1.6 1.1-2 .5-.3 1-.3 1.5-.1l3.284-3.284c-.2-.4-.3-.9-.3-1.4 0-.6.2-1.1.6-1.5L8.134 6.2a.224.224 0 0 0-.316 0L.618 11.384a1.077 1.077 0 0 0 0 1.52l11 11a1.077 1.077 0 0 0 1.52 0l10.246-10.246a1.08 1.08 0 0 0 0-1.522z"/>
+      </svg>
+    ),
+    isHighlighted: true
+  },
+  {
+    name: "Terraform",
+    color: "bg-[#7b42bc] hover:shadow-[#7b42bc]/30",
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-8 h-8 fill-white">
+        <path d="M1.44 0v7.575L8 11.36V3.785L1.44 0zm0 8.71v7.575L8 20.07v-7.576L1.44 8.71zm14.56-4.925V11.36L22.56 7.575V0L16 3.785zm-7.28 6.335v7.576l6.56 3.784v-7.575l-6.56-3.785z"/>
+      </svg>
+    )
+  },
+  {
+    name: "React",
+    color: "bg-[#20232a] hover:shadow-[#61dafb]/30",
+    icon: (
+      <svg viewBox="-11.5 -10.23174 23 20.46348" className="w-8 h-8 fill-none stroke-[#61dafb] stroke-[1.2]">
+        <circle cx="0" cy="0" r="2.05" fill="#61dafb" />
+        <g stroke="#61dafb" strokeWidth="1" fill="none">
+          <ellipse rx="11" ry="4.2" />
+          <ellipse rx="11" ry="4.2" transform="rotate(60)" />
+          <ellipse rx="11" ry="4.2" transform="rotate(120)" />
+        </g>
+      </svg>
+    )
+  }
+];
+
+// DevOps Workflow Animated Sub-components
+function TerminalSnippet() {
+  const [step, setStep] = useState(0);
+  useEffect(() => {
+    const timer1 = setTimeout(() => setStep(1), 1500);
+    const timer2 = setTimeout(() => setStep(2), 3000);
+    const timer3 = setTimeout(() => setStep(3), 4500);
+    const timerReset = setTimeout(() => setStep(0), 8000);
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+      clearTimeout(timer3);
+      clearTimeout(timerReset);
+    };
+  }, [step]);
+
+  return (
+    <div className="bg-slate-950 rounded-xl p-4 text-[11px] font-mono text-slate-300 border border-slate-800 shadow-inner h-28 flex flex-col justify-between">
+      <div>
+        <div className="flex gap-1.5 mb-2">
+          <span className="w-2 h-2 rounded-full bg-[#ef4444]" />
+          <span className="w-2 h-2 rounded-full bg-[#eab308]" />
+          <span className="w-2 h-2 rounded-full bg-[#22c55e]" />
+        </div>
+        <p className="text-slate-400">
+          <span className="text-pink-500">$</span> {step >= 0 ? "terraform init" : ""}
+        </p>
+        {step >= 1 && (
+          <p className="text-emerald-400 ml-2 animate-pulse">
+            Initializing the backend... Done.
+          </p>
+        )}
+        {step >= 2 && (
+          <p className="text-slate-400">
+            <span className="text-pink-500">$</span> terraform apply
+          </p>
+        )}
+        {step >= 3 && (
+          <p className="text-emerald-400 ml-2">
+            Apply complete! Resources: 3 added, 0 changed.
+          </p>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function PipelineVisualizer() {
+  return (
+    <div className="bg-slate-900/5 border border-slate-900/10 rounded-xl p-4 h-28 flex flex-col justify-center gap-3">
+      <div>
+        <div className="flex justify-between text-[11px] font-bold text-slate-700 mb-1">
+          <span>Build</span>
+          <span className="text-violet-600">Complete</span>
+        </div>
+        <div className="w-full h-1.5 bg-slate-900/5 rounded-full overflow-hidden">
+          <motion.div
+            className="h-full bg-gradient-to-r from-violet-600 to-pink-500"
+            initial={{ width: 0 }}
+            animate={{ width: "100%" }}
+            transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+          />
+        </div>
+      </div>
+      <div>
+        <div className="flex justify-between text-[11px] font-bold text-slate-700 mb-1">
+          <span>Test</span>
+          <span className="text-pink-500">Success</span>
+        </div>
+        <div className="w-full h-1.5 bg-slate-900/5 rounded-full overflow-hidden">
+          <motion.div
+            className="h-full bg-gradient-to-r from-pink-500 to-cyan-400"
+            initial={{ width: 0 }}
+            animate={{ width: "100%" }}
+            transition={{ duration: 2, delay: 1, repeat: Infinity, repeatDelay: 3 }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function RealTimeMonitoring() {
+  const barHeights = [40, 65, 35, 80, 50, 75, 60];
+  return (
+    <div className="bg-slate-900/5 border border-slate-900/10 rounded-xl p-4 h-28 flex items-end justify-between relative overflow-hidden">
+      <div className="absolute top-2 right-3 flex items-center gap-1.5">
+        <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e] animate-ping" />
+        <span className="text-[10px] font-bold text-cyan-600">99.9% UP</span>
+      </div>
+      {barHeights.map((h, i) => (
+        <motion.div
+          key={i}
+          className="w-[10%] bg-gradient-to-t from-violet-600 to-pink-500 rounded-t-sm"
+          initial={{ height: 0 }}
+          animate={{ height: `${h}%` }}
+          transition={{
+            duration: 0.8,
+            repeat: Infinity,
+            repeatType: "reverse",
+            delay: i * 0.15
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+function SecurityScanner() {
+  return (
+    <div className="bg-slate-900/5 border border-slate-900/10 rounded-xl p-4 h-28 flex items-center gap-4">
+      <div className="relative w-14 h-14 rounded-full border border-violet-600/20 flex items-center justify-center overflow-hidden">
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-violet-600/30 to-transparent"
+          style={{ originX: 0.5, originY: 0.5 }}
+          animate={{ rotate: 360 }}
+          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+        />
+        <motion.div
+          className="w-7 h-7 rounded-full border-2 border-pink-500"
+          animate={{ scale: [0.8, 1.2, 0.8], opacity: [0.5, 1, 0.5] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+        />
+      </div>
+      <div className="flex flex-col gap-0.5">
+        <div className="text-xs font-bold text-slate-800">Scanner Engine</div>
+        <div className="text-[10px] text-violet-600 font-semibold uppercase tracking-wider animate-pulse">Scanning...</div>
+      </div>
+    </div>
+  );
+}
+
+function DeploymentConsole() {
+  return (
+    <div className="bg-slate-900/5 border border-slate-900/10 rounded-xl p-3.5 h-28 flex flex-col justify-between">
+      <div className="flex justify-between items-center text-[10px]">
+        <span className="flex items-center gap-1 text-slate-600">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e]" />
+          Production
+        </span>
+        <span className="text-slate-500 font-semibold">v2.4.0</span>
+      </div>
+      <motion.button
+        className="w-full py-2 rounded-lg bg-gradient-to-r from-violet-600 to-pink-500 text-white font-bold text-xs shadow-md hover:shadow-violet-600/15 cursor-pointer"
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        animate={{ boxShadow: ["0 0 0px rgba(124,58,237,0)", "0 0 10px rgba(124,58,237,0.3)", "0 0 0px rgba(124,58,237,0)"] }}
+        transition={{ duration: 2, repeat: Infinity }}
+      >
+        Deploy Now
+      </motion.button>
+    </div>
+  );
+}
+
+function ScalableArchitecture() {
+  return (
+    <div className="bg-slate-900/5 border border-slate-900/10 rounded-xl p-4 h-28 flex items-center justify-around relative">
+      <div className="flex flex-col items-center gap-1 z-10">
+        <div className="w-7 h-7 rounded-lg bg-violet-600/10 border border-violet-600/30 flex items-center justify-center">
+          <svg className="w-3.5 h-3.5 text-violet-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <ellipse cx="12" cy="5" rx="9" ry="3" />
+            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+            <path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3" />
+          </svg>
+        </div>
+        <span className="text-[9px] font-bold text-slate-600">Primary</span>
+      </div>
+
+      <div className="absolute left-[35%] right-[35%] top-[42%] h-0.5 bg-slate-900/10 z-0">
+        <motion.div
+          className="w-1.5 h-1.5 rounded-full bg-pink-500 absolute top-[-2.5px]"
+          animate={{ left: ["0%", "100%", "0%"] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
+
+      <div className="flex flex-col items-center gap-1 z-10">
+        <div className="w-7 h-7 rounded-lg bg-pink-500/10 border border-pink-500/30 flex items-center justify-center">
+          <svg className="w-3.5 h-3.5 text-pink-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <ellipse cx="12" cy="5" rx="9" ry="3" />
+            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+            <path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3" />
+          </svg>
+        </div>
+        <span className="text-[9px] font-bold text-slate-600">Replica</span>
+      </div>
+    </div>
+  );
+}
 
 export default function HomePage() {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -294,6 +587,257 @@ export default function HomePage() {
               </Link>
             </div>
           </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ── 3.5. INTEGRATIONS & TECH STACK ─────────────────────────────── */}
+      <section className="py-24 border-t border-slate-900/10 bg-gradient-to-b from-white via-violet-50/20 to-white relative overflow-hidden" id="tech-stack">
+        <div className="absolute w-[400px] h-[400px] -top-24 -left-24 rounded-full bg-violet-600/5 blur-[100px] pointer-events-none" />
+        <div className="absolute w-[400px] h-[400px] -bottom-24 -right-24 rounded-full bg-cyan-500/5 blur-[100px] pointer-events-none" />
+        
+        <div className="w-11/12 max-w-[1400px] mx-auto text-center relative z-10">
+          <ScrollReveal variant="slideUp">
+            <div className="inline-block py-1.5 px-4 rounded-full border border-violet-600/20 bg-violet-600/[0.04] text-xs font-bold text-violet-700 mb-7 uppercase tracking-wider">
+              Integrations
+            </div>
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-6">
+              Technology Stack for <span className="bg-gradient-to-br from-violet-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent">Maximum Efficiency</span>
+            </h2>
+            <p className="text-slate-600 max-w-[620px] mx-auto mt-4 text-base leading-relaxed mb-10">
+              Jevxo leverages leading technologies and platforms, ensuring robust, high-performance, and scalable solutions for modern enterprises.
+            </p>
+            
+            <div className="mb-14">
+              <Link href="/about" className="inline-block py-4 px-10 rounded-[14px] font-bold text-[17px] bg-gradient-to-br from-violet-600 to-indigo-600 text-white shadow-lg shadow-violet-600/20 hover:shadow-violet-600/30 hover:-translate-y-0.5 transition-all duration-200">
+                View About Jevxo
+              </Link>
+            </div>
+          </ScrollReveal>
+
+          {/* Row of Technology Circles */}
+          <ScrollReveal variant="scaleUp" delay={200}>
+            <div className="flex items-center justify-center gap-6 md:gap-7 flex-wrap max-w-5xl mx-auto px-4 py-8">
+              {technologies.map((tech) => (
+                <div
+                  key={tech.name}
+                  className="group relative flex flex-col items-center"
+                >
+                  <div
+                    className={`w-[68px] h-[68px] md:w-[76px] md:h-[76px] rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 transform hover:scale-125 hover:-translate-y-2 select-none ${tech.color} ${
+                      tech.isHighlighted 
+                        ? "shadow-[0_0_25px_rgba(240,80,50,0.4)] animate-pulse" 
+                        : "shadow-[0_4px_16px_rgba(15,23,42,0.06)] hover:shadow-lg"
+                    }`}
+                  >
+                    <div className="transform transition-transform duration-300 group-hover:rotate-12">
+                      {tech.icon}
+                    </div>
+                  </div>
+                  
+                  {/* Tooltip */}
+                  <span className="absolute bottom-full mb-3 scale-0 group-hover:scale-100 transition-all duration-150 bg-slate-900 text-white text-[11px] font-bold py-1.5 px-3 rounded-lg shadow-xl whitespace-nowrap z-30">
+                    {tech.name}
+                    {/* Tooltip Arrow */}
+                    <span className="absolute top-full left-1/2 -translate-x-1/2 border-[5px] border-transparent border-t-slate-900" />
+                  </span>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
+
+          {/* Bridge link to Our Process */}
+          <ScrollReveal variant="slideUp" delay={400} className="mt-14">
+            <Link
+              href="/process"
+              className="inline-flex items-center gap-2.5 py-2.5 px-6 rounded-full border border-slate-900/10 bg-slate-900/[0.03] text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-900/[0.06] hover:border-slate-900/25 transition-all duration-200"
+            >
+              <svg className="w-4 h-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+                <line x1="16" y1="13" x2="8" y2="13" />
+                <line x1="16" y1="17" x2="8" y2="17" />
+                <polyline points="10 9 9 9 8 9" />
+              </svg>
+              Our Process
+            </Link>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ── 3.6. DEVOPS WORKFLOW ────────────────────────────────────────── */}
+      <section className="py-24 border-t border-slate-900/10 bg-gradient-to-b from-white via-slate-50/50 to-white relative overflow-hidden" id="devops-workflow">
+        <div className="absolute w-[500px] h-[500px] -top-36 -right-24 rounded-full bg-pink-500/5 blur-[120px] pointer-events-none" />
+        <div className="absolute w-[500px] h-[500px] -bottom-36 -left-24 rounded-full bg-violet-600/5 blur-[120px] pointer-events-none" />
+        
+        <div className="w-11/12 max-w-[1400px] mx-auto relative z-10">
+          <ScrollReveal variant="slideUp">
+            <div className="text-center mb-16">
+              <div className="inline-block py-1.5 px-4 rounded-full border border-pink-500/20 bg-pink-500/[0.04] text-xs font-bold text-pink-700 mb-6 uppercase tracking-wider">
+                DevOps Workflow
+              </div>
+              <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-6">
+                Smarter Dev, <span className="bg-gradient-to-br from-violet-600 via-pink-500 to-orange-500 bg-clip-text text-transparent">Supercharged By DevOps</span>
+              </h2>
+              <p className="text-slate-600 max-w-[620px] mx-auto mt-4 text-base leading-relaxed">
+                From code to cloud, we optimize every step of your software lifecycle for speed, security, and scalability.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          {/* Top Row Grid (3 cards) */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Card 1: Infrastructure */}
+            <ScrollReveal variant="slideUp" delay={100} className="h-full">
+              <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] hover:-translate-y-1.5 transition-all duration-300 rounded-2xl p-7 flex flex-col justify-between h-full">
+                <div>
+                  <h3 className="text-lg font-bold text-slate-900 mb-1">
+                    Infrastructure <span className="italic font-serif text-violet-600 font-normal">As Code</span>
+                  </h3>
+                  <p className="text-xs text-slate-500 mb-6 leading-relaxed">
+                    Provision resources instantly with terraform blueprints.
+                  </p>
+                </div>
+                <TerminalSnippet />
+              </div>
+            </ScrollReveal>
+
+            {/* Card 2: CI/CD */}
+            <ScrollReveal variant="slideUp" delay={200} className="h-full">
+              <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] hover:-translate-y-1.5 transition-all duration-300 rounded-2xl p-7 flex flex-col justify-between h-full">
+                <div>
+                  <h3 className="text-lg font-bold text-slate-900 mb-1">
+                    CI/CD <span className="italic font-serif text-pink-500 font-normal">Automated Pipelines</span>
+                  </h3>
+                  <p className="text-xs text-slate-500 mb-6 leading-relaxed">
+                    Ship features faster with automated test and deploy workflows.
+                  </p>
+                </div>
+                <PipelineVisualizer />
+              </div>
+            </ScrollReveal>
+
+            {/* Card 3: Monitoring */}
+            <ScrollReveal variant="slideUp" delay={300} className="h-full">
+              <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] hover:-translate-y-1.5 transition-all duration-300 rounded-2xl p-7 flex flex-col justify-between h-full">
+                <div>
+                  <h3 className="text-lg font-bold text-slate-900 mb-1">
+                    Real-time <span className="italic font-serif text-cyan-600 font-normal">Monitoring</span>
+                  </h3>
+                  <p className="text-xs text-slate-500 mb-6 leading-relaxed">
+                    Gain deep insights into system health and performance.
+                  </p>
+                </div>
+                <RealTimeMonitoring />
+              </div>
+            </ScrollReveal>
+          </div>
+
+          {/* Central Connecting Hub */}
+          <div className="hidden md:flex items-center justify-center py-8 my-4 relative">
+            {/* Left Curve SVG */}
+            <div className="absolute right-[50%] left-0 h-16 flex items-center">
+              <svg className="w-full h-full" viewBox="0 0 500 64" fill="none" preserveAspectRatio="none">
+                <path d="M 0,0 Q 200,32 460,32" stroke="#7c3aed" strokeWidth="1.5" strokeOpacity="0.3" />
+                <path d="M 0,64 Q 200,32 460,32" stroke="#7c3aed" strokeWidth="1.5" strokeOpacity="0.3" />
+                {/* Moving dot */}
+                <motion.circle
+                  r="3.5"
+                  fill="#7c3aed"
+                  animate={{ cx: [0, 460], cy: [0, 32] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                />
+                <motion.circle
+                  r="3.5"
+                  fill="#db2777"
+                  animate={{ cx: [0, 460], cy: [64, 32] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                />
+              </svg>
+            </div>
+            
+            {/* Central Rocket Orb */}
+            <motion.div 
+              className="w-16 h-16 rounded-full bg-gradient-to-r from-violet-600 to-pink-500 flex items-center justify-center text-white shadow-xl shadow-violet-600/30 z-10 relative"
+              animate={{ boxShadow: ["0 0 15px rgba(124,58,237,0.3)", "0 0 30px rgba(124,58,237,0.6)", "0 0 15px rgba(124,58,237,0.3)"] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4.5 16.5c-1.5 1.25-2.5 3.5-2.5 3.5s2.25-1 3.5-2.5" />
+                <path d="M12 2C6.5 2 2 6.5 2 12c0 2.5 1 4.5 2.5 6l1.5-1.5C5.5 15.5 5 14 5 12c0-4 3-7 7-7s7 3 7 7c0 2-.5 3.5-1 4.5l1.5 1.5c1.5-1.5 2.5-3.5 2.5-6 0-5.5-4.5-10-10-10z" />
+                <path d="M16.5 4.5c1.25-1.5 3.5-2.5 3.5-2.5s-1 2.25-2.5 3.5" />
+                <circle cx="12" cy="12" r="2" />
+              </svg>
+            </motion.div>
+
+            {/* Right Curve SVG */}
+            <div className="absolute left-[50%] right-0 h-16 flex items-center">
+              <svg className="w-full h-full" viewBox="0 0 500 64" fill="none" preserveAspectRatio="none">
+                <path d="M 40,32 Q 300,32 500,0" stroke="#db2777" strokeWidth="1.5" strokeOpacity="0.3" />
+                <path d="M 40,32 Q 300,32 500,64" stroke="#db2777" strokeWidth="1.5" strokeOpacity="0.3" />
+                {/* Moving dot */}
+                <motion.circle
+                  r="3.5"
+                  fill="#db2777"
+                  animate={{ cx: [40, 500], cy: [32, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+                />
+                <motion.circle
+                  r="3.5"
+                  fill="#7c3aed"
+                  animate={{ cx: [40, 500], cy: [32, 64] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+                />
+              </svg>
+            </div>
+          </div>
+
+          {/* Bottom Row Grid (3 cards) */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Card 4: Security */}
+            <ScrollReveal variant="slideUp" delay={100} className="h-full">
+              <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] hover:-translate-y-1.5 transition-all duration-300 rounded-2xl p-7 flex flex-col justify-between h-full">
+                <div>
+                  <h3 className="text-lg font-bold text-slate-900 mb-1">
+                    Security <span className="italic font-serif text-violet-600 font-normal">DevSecOps</span>
+                  </h3>
+                  <p className="text-xs text-slate-500 mb-6 leading-relaxed">
+                    Automated vulnerability scanning at every commit.
+                  </p>
+                </div>
+                <SecurityScanner />
+              </div>
+            </ScrollReveal>
+
+            {/* Card 5: Rapid Deployment */}
+            <ScrollReveal variant="slideUp" delay={200} className="h-full">
+              <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] hover:-translate-y-1.5 transition-all duration-300 rounded-2xl p-7 flex flex-col justify-between h-full">
+                <div>
+                  <h3 className="text-lg font-bold text-slate-900 mb-1">
+                    Rapid <span className="italic font-serif text-pink-500 font-normal">Deployment</span>
+                  </h3>
+                  <p className="text-xs text-slate-500 mb-6 leading-relaxed">
+                    Zero-downtime deployments to production environments.
+                  </p>
+                </div>
+                <DeploymentConsole />
+              </div>
+            </ScrollReveal>
+
+            {/* Card 6: Scalable Architecture */}
+            <ScrollReveal variant="slideUp" delay={300} className="h-full">
+              <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] hover:-translate-y-1.5 transition-all duration-300 rounded-2xl p-7 flex flex-col justify-between h-full">
+                <div>
+                  <h3 className="text-lg font-bold text-slate-900 mb-1">
+                    Scalable <span className="italic font-serif text-cyan-600 font-normal">Architecture</span>
+                  </h3>
+                  <p className="text-xs text-slate-500 mb-6 leading-relaxed">
+                    Database and service scaling that grows with you.
+                  </p>
+                </div>
+                <ScalableArchitecture />
+              </div>
+            </ScrollReveal>
+          </div>
         </div>
       </section>
 
