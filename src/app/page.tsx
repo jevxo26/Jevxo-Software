@@ -229,7 +229,7 @@ function PipelineVisualizer() {
         </div>
         <div className="w-full h-1.5 bg-slate-900/5 rounded-full overflow-hidden">
           <motion.div
-            className="h-full bg-gradient-to-r from-violet-600 to-pink-500"
+            className="h-full bg-gradient-to-r from-violet-600 to-indigo-500"
             initial={{ width: 0 }}
             animate={{ width: "100%" }}
             transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
@@ -239,11 +239,11 @@ function PipelineVisualizer() {
       <div>
         <div className="flex justify-between text-[11px] font-bold text-slate-700 mb-1">
           <span>Test</span>
-          <span className="text-pink-500">Success</span>
+          <span className="text-cyan-600">Success</span>
         </div>
         <div className="w-full h-1.5 bg-slate-900/5 rounded-full overflow-hidden">
           <motion.div
-            className="h-full bg-gradient-to-r from-pink-500 to-cyan-400"
+            className="h-full bg-gradient-to-r from-indigo-500 to-cyan-500"
             initial={{ width: 0 }}
             animate={{ width: "100%" }}
             transition={{ duration: 2, delay: 1, repeat: Infinity, repeatDelay: 3 }}
@@ -265,7 +265,7 @@ function RealTimeMonitoring() {
       {barHeights.map((h, i) => (
         <motion.div
           key={i}
-          className="w-[10%] bg-gradient-to-t from-violet-600 to-pink-500 rounded-t-sm"
+          className="w-[10%] bg-gradient-to-t from-violet-600 to-cyan-500"
           initial={{ height: 0 }}
           animate={{ height: `${h}%` }}
           transition={{
@@ -291,7 +291,7 @@ function SecurityScanner() {
           transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
         />
         <motion.div
-          className="w-7 h-7 rounded-full border-2 border-pink-500"
+          className="w-7 h-7 rounded-full border-2 border-cyan-500"
           animate={{ scale: [0.8, 1.2, 0.8], opacity: [0.5, 1, 0.5] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         />
@@ -315,7 +315,7 @@ function DeploymentConsole() {
         <span className="text-slate-500 font-semibold">v2.4.0</span>
       </div>
       <motion.button
-        className="w-full py-2 rounded-lg bg-gradient-to-r from-violet-600 to-pink-500 text-white font-bold text-xs shadow-md hover:shadow-violet-600/15 cursor-pointer"
+        className="w-full py-2 rounded-lg bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-bold text-xs shadow-md hover:shadow-violet-600/20 cursor-pointer"
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
         animate={{ boxShadow: ["0 0 0px rgba(124,58,237,0)", "0 0 10px rgba(124,58,237,0.3)", "0 0 0px rgba(124,58,237,0)"] }}
@@ -343,15 +343,15 @@ function ScalableArchitecture() {
 
       <div className="absolute left-[35%] right-[35%] top-[42%] h-0.5 bg-slate-900/10 z-0">
         <motion.div
-          className="w-1.5 h-1.5 rounded-full bg-pink-500 absolute top-[-2.5px]"
+          className="w-1.5 h-1.5 rounded-full bg-cyan-500 absolute top-[-2.5px]"
           animate={{ left: ["0%", "100%", "0%"] }}
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
         />
       </div>
 
       <div className="flex flex-col items-center gap-1 z-10">
-        <div className="w-7 h-7 rounded-lg bg-pink-500/10 border border-pink-500/30 flex items-center justify-center">
-          <svg className="w-3.5 h-3.5 text-pink-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <div className="w-7 h-7 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center">
+          <svg className="w-3.5 h-3.5 text-cyan-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <ellipse cx="12" cy="5" rx="9" ry="3" />
             <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
             <path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3" />
@@ -666,17 +666,17 @@ export default function HomePage() {
 
       {/* ── 3.6. DEVOPS WORKFLOW ────────────────────────────────────────── */}
       <section className="py-24 border-t border-slate-900/10 bg-gradient-to-b from-white via-slate-50/50 to-white relative overflow-hidden" id="devops-workflow">
-        <div className="absolute w-[500px] h-[500px] -top-36 -right-24 rounded-full bg-pink-500/5 blur-[120px] pointer-events-none" />
+        <div className="absolute w-[500px] h-[500px] -top-36 -right-24 rounded-full bg-cyan-500/5 blur-[120px] pointer-events-none" />
         <div className="absolute w-[500px] h-[500px] -bottom-36 -left-24 rounded-full bg-violet-600/5 blur-[120px] pointer-events-none" />
         
         <div className="w-11/12 max-w-[1400px] mx-auto relative z-10">
           <ScrollReveal variant="slideUp">
             <div className="text-center mb-16">
-              <div className="inline-block py-1.5 px-4 rounded-full border border-pink-500/20 bg-pink-500/[0.04] text-xs font-bold text-pink-700 mb-6 uppercase tracking-wider">
+              <div className="inline-block py-1.5 px-4 rounded-full border border-violet-600/20 bg-violet-600/[0.04] text-xs font-bold text-violet-700 mb-6 uppercase tracking-wider">
                 DevOps Workflow
               </div>
               <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-6">
-                Smarter Dev, <span className="bg-gradient-to-br from-violet-600 via-pink-500 to-orange-500 bg-clip-text text-transparent">Supercharged By DevOps</span>
+                Smarter Dev, <span className="bg-gradient-to-br from-violet-600 via-blue-500 to-cyan-500 bg-clip-text text-transparent">Supercharged By DevOps</span>
               </h2>
               <p className="text-slate-600 max-w-[620px] mx-auto mt-4 text-base leading-relaxed">
                 From code to cloud, we optimize every step of your software lifecycle for speed, security, and scalability.
@@ -706,7 +706,7 @@ export default function HomePage() {
               <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] hover:-translate-y-1.5 transition-all duration-300 rounded-2xl p-7 flex flex-col justify-between h-full">
                 <div>
                   <h3 className="text-lg font-bold text-slate-900 mb-1">
-                    CI/CD <span className="italic font-serif text-pink-500 font-normal">Automated Pipelines</span>
+                    CI/CD <span className="italic font-serif text-cyan-600 font-normal">Automated Pipelines</span>
                   </h3>
                   <p className="text-xs text-slate-500 mb-6 leading-relaxed">
                     Ship features faster with automated test and deploy workflows.
@@ -748,7 +748,7 @@ export default function HomePage() {
                 />
                 <motion.circle
                   r="3.5"
-                  fill="#db2777"
+                  fill="#06b6d4"
                   animate={{ cx: [0, 460], cy: [64, 32] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
                 />
@@ -757,7 +757,7 @@ export default function HomePage() {
             
             {/* Central Rocket Orb */}
             <motion.div 
-              className="w-16 h-16 rounded-full bg-gradient-to-r from-violet-600 to-pink-500 flex items-center justify-center text-white shadow-xl shadow-violet-600/30 z-10 relative"
+              className="w-16 h-16 rounded-full bg-gradient-to-r from-violet-600 to-cyan-500 flex items-center justify-center text-white shadow-xl shadow-violet-600/30 z-10 relative"
               animate={{ boxShadow: ["0 0 15px rgba(124,58,237,0.3)", "0 0 30px rgba(124,58,237,0.6)", "0 0 15px rgba(124,58,237,0.3)"] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
@@ -772,12 +772,12 @@ export default function HomePage() {
             {/* Right Curve SVG */}
             <div className="absolute left-[50%] right-0 h-16 flex items-center">
               <svg className="w-full h-full" viewBox="0 0 500 64" fill="none" preserveAspectRatio="none">
-                <path d="M 40,32 Q 300,32 500,0" stroke="#db2777" strokeWidth="1.5" strokeOpacity="0.3" />
-                <path d="M 40,32 Q 300,32 500,64" stroke="#db2777" strokeWidth="1.5" strokeOpacity="0.3" />
+                <path d="M 40,32 Q 300,32 500,0" stroke="#06b6d4" strokeWidth="1.5" strokeOpacity="0.3" />
+                <path d="M 40,32 Q 300,32 500,64" stroke="#06b6d4" strokeWidth="1.5" strokeOpacity="0.3" />
                 {/* Moving dot */}
                 <motion.circle
                   r="3.5"
-                  fill="#db2777"
+                  fill="#06b6d4"
                   animate={{ cx: [40, 500], cy: [32, 0] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 }}
                 />
@@ -813,7 +813,7 @@ export default function HomePage() {
               <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] hover:-translate-y-1.5 transition-all duration-300 rounded-2xl p-7 flex flex-col justify-between h-full">
                 <div>
                   <h3 className="text-lg font-bold text-slate-900 mb-1">
-                    Rapid <span className="italic font-serif text-pink-500 font-normal">Deployment</span>
+                    Rapid <span className="italic font-serif text-cyan-600 font-normal">Deployment</span>
                   </h3>
                   <p className="text-xs text-slate-500 mb-6 leading-relaxed">
                     Zero-downtime deployments to production environments.
