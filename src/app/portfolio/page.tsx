@@ -5,6 +5,7 @@ import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { portfolioItems as defaultPortfolioItems, portfolioCategories } from "@/lib/data/portfolio";
+import { Monitor, ShoppingCart, Smartphone, Palette, BrainCircuit, Cloud } from "lucide-react";
 
 export default function PortfolioPage() {
   const [active, setActive] = useState("All");
@@ -25,7 +26,7 @@ export default function PortfolioPage() {
   const filtered = active === "All" ? portfolioList : portfolioList.filter((p) => p.category === active);
 
   return (
-    <div className="bg-[#080d1a] text-[#f1f5f9] min-h-screen flex flex-col">
+    <div className="bg-white text-slate-900 min-h-screen flex flex-col">
       <Navbar />
       <div className="flex-1 pt-20">
         {/* ── Hero ─────────────────────────────────────────────── */}
@@ -56,8 +57,8 @@ export default function PortfolioPage() {
                   onClick={() => setActive(cat)}
                   className={`py-2 px-5 rounded-full text-sm font-medium border cursor-pointer transition-all duration-200 ${
                     active === cat
-                      ? "border-violet-600/50 bg-violet-600/15 text-violet-400"
-                      : "border-white/8 bg-white/3 text-slate-600 hover:border-white/15"
+                      ? "border-violet-600/50 bg-violet-600/15 text-violet-500"
+                      : "border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100 hover:border-slate-300"
                   }`}
                 >{cat}</button>
               ))}
@@ -67,35 +68,35 @@ export default function PortfolioPage() {
             <div className="portfolio-grid grid grid-cols-3 gap-6">
               {filtered.map((item) => (
                 <Link key={item.id} href={`/portfolio/${item.slug}`} className="block">
-                  <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-300 rounded-[20px] overflow-hidden h-full hover:-translate-y-1.5 hover:shadow-[0_20px_60px_rgba(0,0,0,0.3)] bg-white/[0.01] border-white/[0.06]">
+                  <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-300 rounded-[20px] overflow-hidden h-full hover:-translate-y-1.5 hover:shadow-[0_20px_60px_rgba(0,0,0,0.15)]  ">
                     {/* Thumbnail */}
-                    <div className="h-[220px] bg-gradient-to-br from-violet-600/25 to-cyan-500/18 flex items-center justify-center text-6xl relative">
-                      {item.category === "Web Development" && "🖥️"}
-                      {item.category === "E-Commerce"      && "🛍️"}
-                      {item.category === "Mobile Apps"     && "📱"}
-                      {item.category === "UI/UX Design"    && "🎨"}
-                      {item.category === "AI Integration"  && "🤖"}
-                      {item.category === "Cloud & DevOps"  && "☁️"}
+                    <div className="h-[220px] bg-gradient-to-br from-violet-600/10 to-cyan-500/10 flex items-center justify-center relative">
+                      {item.category === "Web Development" && <Monitor className="w-16 h-16 text-violet-600/70" />}
+                      {item.category === "E-Commerce"      && <ShoppingCart className="w-16 h-16 text-violet-600/70" />}
+                      {item.category === "Mobile Apps"     && <Smartphone className="w-16 h-16 text-violet-600/70" />}
+                      {item.category === "UI/UX Design"    && <Palette className="w-16 h-16 text-violet-600/70" />}
+                      {item.category === "AI Integration"  && <BrainCircuit className="w-16 h-16 text-violet-600/70" />}
+                      {item.category === "Cloud & DevOps"  && <Cloud className="w-16 h-16 text-violet-600/70" />}
                       {item.featured && (
-                        <div className="absolute top-4 right-4 py-1 px-3 rounded-full bg-violet-600/80 text-[11px] font-bold text-white">
+                        <div className="absolute top-4 right-4 py-1 px-3 rounded-full bg-violet-600 text-[11px] font-bold text-white">
                           Featured
                         </div>
                       )}
                     </div>
                     <div className="p-7">
                       <div className="flex gap-2 mb-3.5 flex-wrap">
-                        <span className="py-1 px-2.5 rounded-full text-[11px] font-semibold bg-violet-600/12 text-[#a78bfa]">{item.category}</span>
-                        <span className="py-1 px-2.5 rounded-full text-[11px] text-slate-400 border border-white/6">{item.year}</span>
+                        <span className="py-1 px-2.5 rounded-full text-[11px] font-semibold bg-violet-600/12 text-violet-600">{item.category}</span>
+                        <span className="py-1 px-2.5 rounded-full text-[11px] text-slate-500 border border-slate-100">{item.year}</span>
                       </div>
                       <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                      <p className="text-slate-400 text-[13px] mb-3">Client: {item.client}</p>
+                      <p className="text-slate-500 text-[13px] mb-3">Client: {item.client}</p>
                       <p className="text-slate-600 text-sm leading-normal mb-5">{item.description}</p>
                       <div className="flex gap-1.5 flex-wrap">
                         {item.tags.slice(0, 3).map((tag) => (
-                          <span key={tag} className="py-0.5 px-2.5 rounded-full text-[11px] bg-white/4 border border-white/7 text-slate-400">{tag}</span>
+                          <span key={tag} className="py-0.5 px-2.5 rounded-full text-[11px] bg-slate-50 border border-slate-100 text-slate-600">{tag}</span>
                         ))}
                       </div>
-                      <div className="mt-5 text-[#a78bfa] text-sm font-semibold">
+                      <div className="mt-5 text-violet-600 text-sm font-semibold">
                         View Case Study →
                       </div>
                     </div>

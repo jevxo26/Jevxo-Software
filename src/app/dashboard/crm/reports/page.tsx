@@ -68,7 +68,7 @@ export default function CrmReportsPage() {
               </thead>
               <tbody>
                 {salesLeaderboard.map((item, idx) => (
-                  <tr key={idx} className="border-b border-slate-900/5 hover:bg-slate-50/50 transition-colors">
+                  <tr key={idx} className="border-b border-slate-900/5 hover:bg-white/50 transition-colors">
                     <td className="p-3 font-bold text-slate-900">{item.name}</td>
                     <td className="p-3 text-slate-600">{item.deals} deals</td>
                     <td className="p-3">

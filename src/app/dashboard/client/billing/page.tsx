@@ -48,7 +48,7 @@ export default function ClientBillingPage() {
             </thead>
             <tbody>
               {invoices.map((inv) => (
-                <tr key={inv.id} className="border-b border-slate-900/5 hover:bg-slate-50/50 transition-colors">
+                <tr key={inv.id} className="border-b border-slate-900/5 hover:bg-white/50 transition-colors">
                   <td className="py-3 px-2.5 font-bold text-slate-900">{inv.id}</td>
                   <td className="py-3 px-2.5 text-slate-600">{inv.date}</td>
                   <td className="py-3 px-2.5 text-slate-600">{inv.amount}</td>

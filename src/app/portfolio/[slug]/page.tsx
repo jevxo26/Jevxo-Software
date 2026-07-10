@@ -6,16 +6,20 @@ import { notFound } from "next/navigation";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { portfolioItems, getPortfolioBySlug } from "@/lib/data/portfolio";
+import { Monitor, ShoppingCart, Smartphone, Palette, BrainCircuit, Cloud, ArrowLeft } from "lucide-react";
 
 type Props = { params: Promise<{ slug: string }> };
 
-const categoryIcon: Record<string, string> = {
-  "Web Development": "🖥️",
-  "E-Commerce":      "🛍️",
-  "Mobile Apps":     "📱",
-  "UI/UX Design":    "🎨",
-  "AI Integration":  "🤖",
-  "Cloud & DevOps":  "☁️",
+const getCategoryIcon = (category: string) => {
+  switch (category) {
+    case "Web Development": return <Monitor className="w-24 h-24 text-violet-600/70" />;
+    case "E-Commerce":      return <ShoppingCart className="w-24 h-24 text-violet-600/70" />;
+    case "Mobile Apps":     return <Smartphone className="w-24 h-24 text-violet-600/70" />;
+    case "UI/UX Design":    return <Palette className="w-24 h-24 text-violet-600/70" />;
+    case "AI Integration":  return <BrainCircuit className="w-24 h-24 text-violet-600/70" />;
+    case "Cloud & DevOps":  return <Cloud className="w-24 h-24 text-violet-600/70" />;
+    default:                return <Monitor className="w-24 h-24 text-violet-600/70" />;
+  }
 };
 
 export default function PortfolioDetailPage({ params }: Props) {
@@ -45,7 +49,7 @@ export default function PortfolioDetailPage({ params }: Props) {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#080d1a] text-[#fff]">
+      <div className="min-h-screen flex items-center justify-center bg-white text-slate-900">
         Loading project details...
       </div>
     );
@@ -54,7 +58,7 @@ export default function PortfolioDetailPage({ params }: Props) {
   if (!item) notFound();
 
   return (
-    <div className="bg-[#080d1a] text-[#f1f5f9] min-h-screen flex flex-col">
+    <div className="bg-white text-slate-900 min-h-screen flex flex-col">
       <Navbar />
       <div className="flex-1 pt-20">
         {/* ── Hero ─────────────────────────────────────────────── */}
@@ -62,22 +66,22 @@ export default function PortfolioDetailPage({ params }: Props) {
         <div className="rounded-full blur-[80px] pointer-events-none absolute bg-cyan-500/[0.06] w-[500px] h-[500px] -top-[150px] -right-[120px]" />
         <div className="rounded-full blur-[80px] pointer-events-none absolute bg-violet-600/[0.07] w-[300px] h-[300px] -bottom-[60px] -left-[60px]" />
         <div className="w-11/12 max-w-[1400px] mx-auto relative z-[1]">
-          <Link className="items-center gap-2 text-slate-400 text-sm mb-8" href="/portfolio" style={{display: "inline-flex"}}>
-            ← Back to Portfolio
+          <Link className="items-center gap-2 text-slate-600 text-sm mb-8 hover:text-violet-600 transition-colors" href="/portfolio" style={{display: "inline-flex"}}>
+            <ArrowLeft className="w-4 h-4" /> Back to Portfolio
           </Link>
           <div className="flex gap-3 mb-5" style={{flexWrap: "wrap"}}>
-            <span className="py-1 px-3.5 rounded-full text-xs font-semibold bg-violet-600/[0.12] text-[#a78bfa]">{item.category}</span>
-            <span className="py-1 px-3.5 rounded-full text-xs text-slate-400 border border-white/[0.06]">{item.year}</span>
+            <span className="py-1 px-3.5 rounded-full text-xs font-semibold bg-violet-600/[0.12] text-violet-600">{item.category}</span>
+            <span className="py-1 px-3.5 rounded-full text-xs text-slate-500 border border-slate-100">{item.year}</span>
           </div>
           <h1 className="text-[clamp(32px,5vw,64px)] font-black tracking-tight mb-4">{item.title}</h1>
-          <p className="text-slate-600 text-lg mb-0">Client: <strong className="text-[#f1f5f9]">{item.client}</strong></p>
+          <p className="text-slate-600 text-lg mb-0">Client: <strong className="text-slate-950">{item.client}</strong></p>
         </div>
       </section>
 
       {/* ── Thumbnail ─────────────────────────────────────────── */}
       <div className="w-11/12 max-w-[1400px] mx-auto mt-[-40px] relative z-[2]">
-        <div className="h-[360px] rounded-[24px] bg-[linear-gradient(135deg,rgba(124,58,237,0.25),rgba(6,182,212,0.2))] flex items-center justify-center text-[100px] border border-white/[0.06]">
-          {categoryIcon[item.category] ?? "📁"}
+        <div className="h-[360px] rounded-[24px] bg-[linear-gradient(135deg,rgba(124,58,237,0.1),rgba(6,182,212,0.08))] flex items-center justify-center border border-slate-900/[0.08]">
+          {getCategoryIcon(item.category)}
         </div>
       </div>
 
@@ -112,8 +116,8 @@ export default function PortfolioDetailPage({ params }: Props) {
             <div>
               {/* Result card */}
               <div className="p-8 rounded-[20px] bg-[linear-gradient(135deg,rgba(52,211,153,0.1),rgba(6,182,212,0.08))] border border-[rgba(52,211,153,0.2)] mb-6">
-                <p className="text-slate-400 text-xs font-semibold uppercase tracking-[0.08em] mb-3">Result</p>
-                <p className="text-[17px] font-bold text-[#34d399] leading-normal">{item.result}</p>
+                <p className="text-slate-500 text-xs font-semibold uppercase tracking-[0.08em] mb-3">Result</p>
+                <p className="text-[17px] font-bold text-[#10b981] leading-normal">{item.result}</p>
               </div>
 
               {/* Details card */}
@@ -124,14 +128,14 @@ export default function PortfolioDetailPage({ params }: Props) {
                   { label: "Category", value: item.category },
                   { label: "Year",     value: item.year },
                 ].map((row) => (
-                  <div className="flex justify-between py-3 px-0" key={row.label} style={{borderBottom: "1px solid rgba(255,255,255,0.05)"}}>
+                  <div className="flex justify-between py-3 px-0" key={row.label} style={{borderBottom: "1px solid rgba(15,23,42,0.05)"}}>
                     <span className="text-slate-400 text-sm">{row.label}</span>
-                    <span className="font-semibold text-sm">{row.value}</span>
+                    <span className="font-semibold text-slate-800 text-sm">{row.value}</span>
                   </div>
                 ))}
               </div>
 
-              <Link className="block text-center py-3.5 px-6 rounded-xl font-bold text-[15px] bg-gradient-to-br from-violet-600 to-indigo-600 text-[#fff]" href="/contact" style={{boxShadow: "0 0 30px rgba(124,58,237,0.4)"}}>
+              <Link className="block text-center py-3.5 px-6 rounded-xl font-bold text-[15px] bg-gradient-to-br from-violet-600 to-indigo-600 text-white shadow-lg shadow-violet-600/20 hover:shadow-violet-600/30 transition-all duration-200" href="/contact">
                 Start a Similar Project →
               </Link>
             </div>

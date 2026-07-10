@@ -59,7 +59,7 @@ const categories = [
 
 export default function TechnologiesPage() {
   return (
-    <div className="bg-[#080d1a] text-[#f1f5f9] min-h-screen flex flex-col">
+    <div className="bg-white text-slate-900 min-h-screen flex flex-col">
       <Navbar />
 
       {/* Hero */}
@@ -83,26 +83,26 @@ export default function TechnologiesPage() {
         <div className="w-11/12 max-w-[1400px] mx-auto">
           <div className="flex flex-col gap-[50px]">
             {categories.map((cat) => (
-              <div key={cat.title} className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 p-10 rounded-[20px] bg-white/[0.01] border-white/[0.06]">
+              <div key={cat.title} className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 p-10 rounded-[20px]  ">
                 <div className="tech-row-grid grid grid-cols-[1fr_2fr] gap-10">
                   
                   {/* Left Column */}
                   <div>
-                    <h3 className="text-[22px] font-extrabold text-[#fff] mb-3">{cat.title}</h3>
+                    <h3 className="text-[22px] font-extrabold text-slate-900 mb-3">{cat.title}</h3>
                     <p className="text-slate-600 text-sm leading-normal">{cat.desc}</p>
                   </div>
 
                   {/* Right Column (Tools Grid) */}
                   <div className="tools-subgrid grid grid-cols-[1fr_1fr] gap-5">
                     {cat.tools.map((tool) => (
-                      <div className="bg-white/[0.02] border border-white/[0.04] p-5 rounded-xl" key={tool.name}>
+                      <div className="bg-slate-50 border border-slate-900/[0.06] p-5 rounded-xl" key={tool.name}>
                         <div className="flex justify-between items-baseline mb-2">
-                          <strong className="text-[15px] text-[#fff]">{tool.name}</strong>
+                          <strong className="text-[15px] text-slate-900">{tool.name}</strong>
                           <span className="text-[10px] font-bold py-0.5 px-2 rounded-full bg-[rgba(167,139,250,0.1)] text-[#a78bfa] border border-[rgba(167,139,250,0.2)]">
                             {tool.level}
                           </span>
                         </div>
-                        <p className="text-slate-400 text-xs leading-normal m-[0]">{tool.desc}</p>
+                        <p className="text-slate-600 text-xs leading-normal m-[0]">{tool.desc}</p>
                       </div>
                     ))}
                   </div>
@@ -113,7 +113,7 @@ export default function TechnologiesPage() {
           </div>
 
           <div className="text-center mt-[60px]">
-            <Link className="inline-block py-3.5 px-8 rounded-[10px] text-sm font-bold bg-gradient-to-br from-violet-600 to-indigo-600 text-[#fff]"
+            <Link className="inline-block py-3.5 px-8 rounded-[10px] text-sm font-bold bg-gradient-to-br from-violet-600 to-indigo-600 text-white"
               href="/services"
               style={{boxShadow: "0 4px 20px rgba(124,58,237,0.3)"}}
             >

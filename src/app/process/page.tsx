@@ -44,7 +44,7 @@ const steps = [
 
 export default function ProcessPage() {
   return (
-    <div className="bg-[#080d1a] text-[#f1f5f9] min-h-screen flex flex-col">
+    <div className="bg-white text-slate-900 min-h-screen flex flex-col">
       <Navbar />
 
       {/* Hero */}
@@ -73,12 +73,12 @@ export default function ProcessPage() {
             {steps.map((step) => (
               <div className="flex gap-6 relative" key={step.num}>
                 {/* Number bullet */}
-                <div className="w-[42px] h-[42px] rounded-full bg-gradient-to-br from-violet-600 to-indigo-600 flex items-center justify-center text-sm font-extrabold text-[#fff] z-[2]" style={{boxShadow: "0 0 15px rgba(124,58,237,0.4)", flexShrink: 0}}>
+                <div className="w-[42px] h-[42px] rounded-full bg-gradient-to-br from-violet-600 to-indigo-600 flex items-center justify-center text-sm font-extrabold text-white z-[2]" style={{boxShadow: "0 0 15px rgba(124,58,237,0.4)", flexShrink: 0}}>
                   {step.num}
                 </div>
 
                 {/* Content card */}
-                <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 flex-1 p-[30px] rounded-2xl bg-white/[0.01] border-white/[0.06]">
+                <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 flex-1 p-[30px] rounded-2xl  ">
                   <div className="flex justify-between items-baseline gap-2.5 mb-4" style={{flexWrap: "wrap"}}>
                     <h3 className="text-xl font-bold m-[0]">{step.title}</h3>
                     <span className="text-xs text-[#a78bfa] font-bold py-0.5 px-2.5 rounded-full bg-violet-600/[0.08] border border-violet-600/[0.2]">
@@ -88,7 +88,7 @@ export default function ProcessPage() {
 
                   <p className="text-slate-600 text-sm leading-relaxed mb-5">{step.desc}</p>
 
-                  <div className="border-t border-[1px solid rgba(255,255,255,0.05)] pt-4">
+                  <div className="border-t border-[1px solid rgba(15,23,42,0.05)] pt-4">
                     <h4 className="text-xs font-semibold text-slate-400 uppercase mb-2.5 tracking-[0.05em]">Key Deliverables:</h4>
                     <div className="flex flex-col gap-1.5">
                       {step.deliverables.map((del) => (
@@ -106,7 +106,7 @@ export default function ProcessPage() {
 
           <div className="text-center mt-20">
             <h3 className="text-[22px] font-extrabold mb-4">Ready to build your system?</h3>
-            <Link className="inline-block py-3.5 px-8 rounded-[10px] text-sm font-bold bg-gradient-to-br from-violet-600 to-indigo-600 text-[#fff]"
+            <Link className="inline-block py-3.5 px-8 rounded-[10px] text-sm font-bold bg-gradient-to-br from-violet-600 to-indigo-600 text-white"
               href="/contact"
               style={{boxShadow: "0 4px 20px rgba(124,58,237,0.3)"}}
             >

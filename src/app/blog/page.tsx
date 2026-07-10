@@ -6,6 +6,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { blogPosts as defaultBlogPosts, blogCategories } from "@/lib/data/blog";
 import { formatDate } from "@/lib/utils";
+import { Settings, Palette, Cpu, Smartphone, Cloud, FileText, ArrowRight } from "lucide-react";
 
 export default function BlogPage() {
   const [posts, setPosts] = useState(defaultBlogPosts);
@@ -26,7 +27,7 @@ export default function BlogPage() {
   const rest     = posts.filter((p) => !p.featured);
 
   return (
-    <div className="bg-[#080d1a] text-[#f1f5f9] min-h-screen flex flex-col">
+    <div className="bg-white text-slate-900 min-h-screen flex flex-col">
       <Navbar />
       <div className="flex-1 pt-20">
         {/* ── Hero ─────────────────────────────────────────────── */}
@@ -64,12 +65,12 @@ export default function BlogPage() {
               {featured.map((post) => (
                 <Link className="block" key={post.id} href={`/blog/${post.slug}`}>
                   <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 blog-card rounded-[20px] overflow-hidden h-full" style={{transition: "all 0.3s ease"}}>
-                    <div className="h-[180px] bg-[linear-gradient(135deg,rgba(236,72,153,0.2),rgba(124,58,237,0.2))] flex items-center justify-center text-[56px]">
-                      {post.category === "Engineering" && "⚙️"}
-                      {post.category === "Design"      && "🎨"}
-                      {post.category === "AI"          && "🤖"}
-                      {post.category === "Mobile"      && "📱"}
-                      {post.category === "DevOps"      && "☁️"}
+                    <div className="h-[180px] bg-[linear-gradient(135deg,rgba(236,72,153,0.1),rgba(124,58,237,0.1))] flex items-center justify-center">
+                      {post.category === "Engineering" && <Settings className="w-12 h-12 text-violet-600 animate-[spin_10s_linear_infinite]" />}
+                      {post.category === "Design"      && <Palette className="w-12 h-12 text-violet-600" />}
+                      {post.category === "AI"          && <Cpu className="w-12 h-12 text-violet-600" />}
+                      {post.category === "Mobile"      && <Smartphone className="w-12 h-12 text-violet-600" />}
+                      {post.category === "DevOps"      && <Cloud className="w-12 h-12 text-violet-600" />}
                     </div>
                     <div className="p-6">
                       <div className="flex gap-2 mb-3">
@@ -99,24 +100,26 @@ export default function BlogPage() {
             <h2 className="text-[22px] font-bold mb-7 text-slate-600">More Articles</h2>
             <div className="flex flex-col gap-4">
               {rest.map((post) => (
-                <Link className="block" key={post.id} href={`/blog/${post.slug}`}>
-                  <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 blog-row py-7 px-8 rounded-[14px] flex items-center gap-6 bg-white/[0.04] border-white/[0.08]" style={{transition: "all 0.2s ease"}}>
-                    <div className="w-[56px] h-[56px] rounded-xl bg-white/[0.04] border border-white/[0.06] flex items-center justify-center text-[28px]" style={{flexShrink: 0}}>
-                      {post.category === "Mobile" ? "📱" : post.category === "DevOps" ? "☁️" : "📝"}
+                <Link className="block group" key={post.id} href={`/blog/${post.slug}`}>
+                  <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 blog-row py-7 px-8 rounded-[14px] flex items-center gap-6" style={{transition: "all 0.2s ease"}}>
+                    <div className="w-[56px] h-[56px] rounded-xl bg-violet-600/5 border border-violet-600/10 flex items-center justify-center text-violet-600" style={{flexShrink: 0}}>
+                      {post.category === "Mobile" ? <Smartphone className="w-6 h-6" /> : post.category === "DevOps" ? <Cloud className="w-6 h-6" /> : <FileText className="w-6 h-6" />}
                     </div>
                     <div className="flex-1">
                       <div className="flex gap-2 mb-1.5">
-                        <span className="text-[11px] font-semibold text-[#a78bfa]">{post.category}</span>
+                        <span className="text-[11px] font-semibold text-violet-600">{post.category}</span>
                         <span className="text-[11px] text-slate-400">· {post.readTime}</span>
                       </div>
                       <h3 className="text-[17px] font-bold mb-1.5">{post.title}</h3>
                       <p className="text-slate-600 text-sm">{post.excerpt}</p>
                     </div>
                     <div className="text-slate-400 text-[13px] text-right" style={{flexShrink: 0}}>
-                      <div className="mb-1">{post.author.name}</div>
+                      <div className="mb-1 text-slate-600 font-medium">{post.author.name}</div>
                       <div>{formatDate(post.publishedAt)}</div>
                     </div>
-                    <div className="text-[#a78bfa] text-xl" style={{flexShrink: 0}}>→</div>
+                    <div className="text-violet-600 transition-transform duration-200 group-hover:translate-x-1" style={{flexShrink: 0}}>
+                      <ArrowRight className="w-5 h-5" />
+                    </div>
                   </div>
                 </Link>
               ))}

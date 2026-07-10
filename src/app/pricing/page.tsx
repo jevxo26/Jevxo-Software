@@ -36,7 +36,7 @@ export default function PricingPage() {
   }, []);
 
   return (
-    <div className="bg-[#080d1a] text-[#f1f5f9] min-h-screen flex flex-col">
+    <div className="bg-white text-slate-900 min-h-screen flex flex-col">
       <Navbar />
 
       {/* Hero */}
@@ -92,7 +92,7 @@ export default function PricingPage() {
               return (
                 <div
                   key={plan.name}
-                  className={`bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 py-9 px-[30px] rounded-[20px] bg-white/[0.01] border-white/[0.06] flex flex-col justify-between relative ${
+                  className={`bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 py-9 px-[30px] rounded-[20px]   flex flex-col justify-between relative ${
                     plan.name === "Growth" ? "scale-[1.03] shadow-[0_10px_30px_rgba(124,58,237,0.15)] border-violet-600/40" : "border-white/6"
                   }`}
                 >
@@ -107,11 +107,11 @@ export default function PricingPage() {
                     <p className="text-slate-600 text-[13px] min-h-9 mb-6">{plan.desc}</p>
                     
                     <div className="flex items-baseline gap-1.5 mb-7">
-                      <span className="text-[40px] font-extrabold text-white">${calculatedPrice}</span>
+                      <span className="text-[40px] font-extrabold text-slate-900">${calculatedPrice}</span>
                       <span className="text-slate-400 text-sm">/{isYearly ? "yr" : "mo"}</span>
                     </div>
 
-                    <div className="flex flex-col gap-3 border-t border-white/6 pt-6 mb-8">
+                    <div className="flex flex-col gap-3 border-t border-slate-100 pt-6 mb-8">
                       {plan.features.map((feat) => (
                         <div key={feat} className="flex gap-2.5 items-center">
                           <span className="text-[#a78bfa] text-[13px]">✓</span>
@@ -125,8 +125,8 @@ export default function PricingPage() {
                     href="/contact"
                     className={`block text-center p-3 rounded-lg text-sm font-bold transition-all duration-200 ${
                       plan.name === "Growth"
-                        ? "bg-gradient-to-br from-violet-600 to-indigo-600 text-white"
-                        : "bg-white/3 text-white border border-white/8"
+                        ? "bg-gradient-to-br from-violet-600 to-indigo-600 text-white shadow-lg shadow-violet-600/20"
+                        : "bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200"
                     }`}
                   >
                     Select Plan

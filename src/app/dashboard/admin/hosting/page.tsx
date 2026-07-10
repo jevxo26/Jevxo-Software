@@ -97,7 +97,7 @@ export default function AdminHostingPage() {
             </thead>
             <tbody>
               {domainsList.map((item, index) => (
-                <tr key={index} className="border-b border-slate-900/5 hover:bg-slate-50/50 transition-colors">
+                <tr key={index} className="border-b border-slate-900/5 hover:bg-white/50 transition-colors">
                   <td className="py-3 px-2.5 font-bold text-slate-900">{item.domain}</td>
                   <td className="py-3 px-2.5 text-slate-500">{item.ip}</td>
                   <td className="py-3 px-2.5 text-slate-600">{item.bandwidth}</td>

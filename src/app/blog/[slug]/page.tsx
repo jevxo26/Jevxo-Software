@@ -46,7 +46,7 @@ export default function BlogPostPage({ params }: Props) {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#080d1a] text-[#fff]">
+      <div className="min-h-screen flex items-center justify-center bg-white text-slate-900">
         Loading article...
       </div>
     );
@@ -55,7 +55,7 @@ export default function BlogPostPage({ params }: Props) {
   if (!post) notFound();
 
   return (
-    <div className="bg-[#080d1a] text-[#f1f5f9] min-h-screen flex flex-col">
+    <div className="bg-white text-slate-900 min-h-screen flex flex-col">
       <Navbar />
       <div className="flex-1 pt-20">
         {/* ── Hero ─────────────────────────────────────────────── */}
@@ -67,7 +67,7 @@ export default function BlogPostPage({ params }: Props) {
           </Link>
           <div className="flex gap-2.5 mb-5" style={{flexWrap: "wrap"}}>
             <span className="py-1 px-3.5 rounded-full text-xs font-semibold bg-[rgba(236,72,153,0.12)] text-[#f472b6]">{post.category}</span>
-            <span className="py-1 px-3.5 rounded-full text-xs text-slate-400 border border-white/[0.06]">{post.readTime}</span>
+            <span className="py-1 px-3.5 rounded-full text-xs text-slate-400 border ">{post.readTime}</span>
           </div>
           <h1 className="text-[clamp(28px,4.5vw,54px)] font-black tracking-[-0.025em] mb-6 leading-[1.15]">
             {post.title}
@@ -92,7 +92,7 @@ export default function BlogPostPage({ params }: Props) {
 
       {/* ── Cover ─────────────────────────────────────────────── */}
       <div className="w-11/12 max-w-[1400px] mx-auto mt-[-40px] relative z-[2] max-w-[900px]">
-        <div className="h-[400px] rounded-[24px] bg-[linear-gradient(135deg,rgba(236,72,153,0.2),rgba(124,58,237,0.2))] flex items-center justify-center text-[100px] border border-white/[0.06]">
+        <div className="h-[400px] rounded-[24px] bg-[linear-gradient(135deg,rgba(236,72,153,0.2),rgba(124,58,237,0.2))] flex items-center justify-center text-[100px] border ">
           {post.category === "Engineering" && "⚙️"}
           {post.category === "Design"      && "🎨"}
           {post.category === "AI"          && "🤖"}

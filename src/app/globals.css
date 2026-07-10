@@ -2,6 +2,22 @@
 
 @theme {
   --font-sans: var(--font-bai-jamjuree), ui-sans-serif, system-ui, sans-serif;
+  --animate-pulse-glow: pulse-glow 2s ease-in-out infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-radar: radar 2s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+  
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(124, 58, 237, 0.3); }
+    50% { box-shadow: 0 0 40px rgba(124, 58, 237, 0.6); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  @keyframes radar {
+    0% { transform: scale(0.8); opacity: 0.8; }
+    100% { transform: scale(2.4); opacity: 0; }
+  }
 }
 
 @layer base {
@@ -29,9 +45,4 @@
     background: #7c3aed; /* violet-600 */
     border-radius: 3px;
   }
-}
-
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(124, 58, 237, 0.3); }
-  50% { box-shadow: 0 0 40px rgba(124, 58, 237, 0.6); }
 }

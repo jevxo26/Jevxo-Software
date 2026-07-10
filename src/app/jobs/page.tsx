@@ -36,7 +36,7 @@ export default function JobsPage() {
   }, []);
 
   return (
-    <div className="bg-[#080d1a] text-[#f1f5f9] min-h-screen flex flex-col">
+    <div className="bg-white text-slate-900 min-h-screen flex flex-col">
       <Navbar />
       <div className="flex-1 pt-20">
         {/* Hero */}
@@ -68,11 +68,11 @@ export default function JobsPage() {
                 {jobOpenings.map((job, idx) => (
                   <div key={idx} className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 p-7 rounded-2xl">
                     <div className="flex justify-between gap-3 mb-2" style={{flexWrap: "wrap"}}>
-                      <h3 className="text-lg font-bold text-[#fff]">{job.title}</h3>
+                      <h3 className="text-lg font-bold text-slate-900">{job.title}</h3>
                       <span className="text-xs font-bold text-[#a78bfa]">{job.salary}</span>
                     </div>
                     <div className="text-xs text-slate-600 mb-3.5">{job.type}</div>
-                    <p className="text-sm text-slate-400 leading-normal">{job.desc}</p>
+                    <p className="text-sm text-slate-600 leading-normal">{job.desc}</p>
                   </div>
                 ))}
               </div>
@@ -92,7 +92,7 @@ export default function JobsPage() {
                   
                   <div className="mb-4">
                     <label className="block text-xs font-bold text-[#a78bfa] uppercase mb-2">Full Name</label>
-                    <input className="w-full py-3 px-4 rounded-lg border border-[var(--border)] bg-white/[0.03] text-[#fff] text-sm"
+                    <input className="w-full py-3 px-4 rounded-lg border border-slate-200 bg-slate-50 text-slate-900 text-sm"
                       type="text"
                       required
                       value={applyForm.name}
@@ -102,7 +102,7 @@ export default function JobsPage() {
 
                   <div className="mb-4">
                     <label className="block text-xs font-bold text-[#a78bfa] uppercase mb-2">Email Address</label>
-                    <input className="w-full py-3 px-4 rounded-lg border border-[var(--border)] bg-white/[0.03] text-[#fff] text-sm"
+                    <input className="w-full py-3 px-4 rounded-lg border border-slate-200 bg-slate-50 text-slate-900 text-sm"
                       type="email"
                       required
                       value={applyForm.email}
@@ -112,7 +112,7 @@ export default function JobsPage() {
 
                   <div className="mb-4">
                     <label className="block text-xs font-bold text-[#a78bfa] uppercase mb-2">Position Applying For</label>
-                    <select className="w-full py-3 px-4 rounded-lg border border-[var(--border)] bg-[rgba(8,13,26,0.9)] text-[#fff] text-sm"
+                    <select className="w-full py-3 px-4 rounded-lg border border-slate-200 bg-slate-50 text-slate-900 text-sm"
                       value={applyForm.position}
                       onChange={(e) => setApplyForm({ ...applyForm, position: e.target.value })}
                     >
@@ -124,7 +124,7 @@ export default function JobsPage() {
 
                   <div className="mb-4">
                     <label className="block text-xs font-bold text-[#a78bfa] uppercase mb-2">Portfolio / Resume Link</label>
-                    <input className="w-full py-3 px-4 rounded-lg border border-[var(--border)] bg-white/[0.03] text-[#fff] text-sm"
+                    <input className="w-full py-3 px-4 rounded-lg border border-slate-200 bg-slate-50 text-slate-900 text-sm"
                       type="url"
                       placeholder="https://..."
                       required
@@ -135,14 +135,14 @@ export default function JobsPage() {
 
                   <div className="mb-6">
                     <label className="block text-xs font-bold text-[#a78bfa] uppercase mb-2">Cover Letter Notes</label>
-                    <textarea className="w-full py-3 px-4 rounded-lg border border-[var(--border)] bg-white/[0.03] text-[#fff] text-sm"
+                    <textarea className="w-full py-3 px-4 rounded-lg border border-slate-200 bg-slate-50 text-slate-900 text-sm"
                       rows={4}
                       value={applyForm.message}
                       onChange={(e) => setApplyForm({ ...applyForm, message: e.target.value })}
                     />
                   </div>
 
-                  <button className="w-full p-4 rounded-[10px] bg-gradient-to-br from-violet-600 to-indigo-600 text-[#fff] text-[15px] font-bold border-[none]"
+                  <button className="w-full p-4 rounded-[10px] bg-gradient-to-br from-violet-600 to-indigo-600 text-white text-[15px] font-bold border-[none] shadow-lg shadow-violet-600/20"
                     type="submit"
                     style={{cursor: "pointer"}}
                   >

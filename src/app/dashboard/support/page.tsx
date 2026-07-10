@@ -229,7 +229,7 @@ export default function HelpSupportPage() {
           </div>
 
           {/* Form Input */}
-          <form onSubmit={handleSendMessage} className="p-4 px-5 border-t border-slate-900/10 flex gap-2.5 bg-slate-50">
+          <form onSubmit={handleSendMessage} className="p-4 px-5 border-t border-slate-900/10 flex gap-2.5 bg-white">
             <input
               type="text"
               placeholder="Ask anything about Jevxo dashboard..."

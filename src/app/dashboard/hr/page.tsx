@@ -96,7 +96,7 @@ export default function HrOverviewPage() {
             </thead>
             <tbody>
               {filteredEmployees.map((e) => (
-                <tr key={e.id} className="border-b border-slate-900/5 hover:bg-slate-50/50 transition-colors">
+                <tr key={e.id} className="border-b border-slate-900/5 hover:bg-white/50 transition-colors">
                   <td className="p-3">
                     <div className="font-bold text-slate-950">{e.name}</div>
                     <div className="text-[10px] text-slate-400 mt-0.5">{e.role}</div>

@@ -5,6 +5,19 @@ import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { services as defaultServices } from "@/lib/data/services";
+import { Laptop, Palette, Smartphone, Cloud, Cpu, BarChart3, Clock } from "lucide-react";
+
+const getServiceIcon = (slug: string) => {
+  switch (slug) {
+    case "web-development": return <Laptop className="w-7 h-7 text-white" />;
+    case "ui-ux-design":    return <Palette className="w-7 h-7 text-white" />;
+    case "mobile-apps":     return <Smartphone className="w-7 h-7 text-white" />;
+    case "cloud-devops":    return <Cloud className="w-7 h-7 text-white" />;
+    case "ai-integration":  return <Cpu className="w-7 h-7 text-white" />;
+    case "digital-strategy": return <BarChart3 className="w-7 h-7 text-white" />;
+    default:                return <Laptop className="w-7 h-7 text-white" />;
+  }
+};
 
 export default function ServicesPage() {
   const [servicesList, setServicesList] = useState(defaultServices);
@@ -21,7 +34,7 @@ export default function ServicesPage() {
     }
   }, []);
   return (
-    <div className="bg-[#080d1a] text-[#f1f5f9] min-h-screen flex flex-col">
+    <div className="bg-white text-slate-900 min-h-screen flex flex-col">
       <Navbar />
       <div className="flex-1 pt-20">
         {/* ── Hero ─────────────────────────────────────────────── */}
@@ -47,15 +60,15 @@ export default function ServicesPage() {
           <div className="services-list grid grid-cols-2 gap-7">
             {servicesList.map((service, i) => (
               <Link className="block" key={service.id} href={`/services/${service.slug}`}>
-                <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 service-card p-10 rounded-[28px] h-full flex flex-col border-white/[0.08]" style={{transition: "all 0.3s ease", animationDelay: `${i * 0.08}s`}}
+                <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 service-card p-10 rounded-[28px] h-full flex flex-col" style={{transition: "all 0.3s ease", animationDelay: `${i * 0.08}s`}}
                 >
                   <div className="flex items-center gap-4 mb-6">
-                    <div className="w-[60px] h-[60px] rounded-2xl bg-gradient-to-br from-violet-600 to-indigo-600 flex items-center justify-center text-[28px]" style={{boxShadow: "0 8px 24px rgba(124,58,237,0.25)", flexShrink: 0}}>
-                      {service.icon}
+                    <div className="w-[60px] h-[60px] rounded-2xl bg-gradient-to-br from-violet-600 to-indigo-600 flex items-center justify-center" style={{boxShadow: "0 8px 24px rgba(124,58,237,0.25)", flexShrink: 0}}>
+                      {getServiceIcon(service.slug)}
                     </div>
                     <div>
                       <h2 className="text-[22px] font-bold mb-1">{service.title}</h2>
-                      <p className="text-[#a78bfa] text-sm font-medium">Starting from {service.startingPrice}</p>
+                      <p className="text-violet-600 text-sm font-medium">Starting from {service.startingPrice}</p>
                     </div>
                   </div>
 
@@ -65,17 +78,19 @@ export default function ServicesPage() {
 
                   <div className="flex gap-2 mb-6" style={{flexWrap: "wrap"}}>
                     {service.features.slice(0, 4).map((f) => (
-                      <span className="py-1 px-3 rounded-full text-xs font-medium bg-white/[0.05] border border-white/[0.08] text-slate-600" key={f}>
+                      <span className="py-1 px-3 rounded-full text-xs font-medium bg-slate-50 border border-slate-100 text-slate-600" key={f}>
                         {f}
                       </span>
                     ))}
                   </div>
 
-                  <div className="flex items-center justify-between border-t border-[1px solid rgba(255,255,255,0.06)] pt-5">
+                  <div className="flex items-center justify-between border-t border-slate-100 pt-5">
                     <div className="flex gap-5">
-                      <span className="text-slate-400 text-[13px]">⏱ {service.duration}</span>
+                      <span className="text-slate-500 text-[13px] flex items-center gap-1.5">
+                        <Clock className="w-4 h-4 text-slate-400" /> {service.duration}
+                      </span>
                     </div>
-                    <span className="text-[#a78bfa] text-sm font-semibold">View details →</span>
+                    <span className="text-violet-600 text-sm font-semibold">View details →</span>
                   </div>
                 </div>
               </Link>
@@ -93,7 +108,7 @@ export default function ServicesPage() {
           <p className="text-slate-600 text-[17px] mb-9">
             Book a free 30-minute discovery call and we&apos;ll help you find the right solution.
           </p>
-          <Link className="py-4 px-10 rounded-[14px] font-bold text-[17px] bg-gradient-to-br from-violet-600 to-indigo-600 text-[#fff] inline-block" href="/contact" style={{boxShadow: "0 0 40px rgba(124,58,237,0.4)"}}>
+          <Link className="py-4 px-10 rounded-[14px] font-bold text-[17px] bg-gradient-to-br from-violet-600 to-indigo-600 text-white inline-block shadow-lg shadow-violet-600/20 hover:shadow-violet-600/30 hover:-translate-y-0.5 transition-all" href="/contact">
             Book a Free Call →
           </Link>
         </div>

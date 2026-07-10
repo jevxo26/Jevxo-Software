@@ -4,6 +4,7 @@ import { useState } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Link from "next/link";
+import { Folder, Settings, CircleDollarSign, ChevronRight, HelpCircle } from "lucide-react";
 
 interface FAQItem {
   q: string;
@@ -51,7 +52,7 @@ export default function FAQPage() {
   const filteredFaqs = activeFilter === "all" ? faqs : faqs.filter(f => f.cat === activeFilter);
 
   return (
-    <div className="bg-[#080d1a] text-[#f1f5f9] min-h-screen flex flex-col">
+    <div className="bg-white text-slate-900 min-h-screen flex flex-col">
       <Navbar />
 
       {/* Hero */}
@@ -74,16 +75,16 @@ export default function FAQPage() {
               <button
                 key={filter}
                 onClick={() => { setActiveFilter(filter); setActiveFaq(null); }}
-                className={`py-2 px-5 rounded-lg text-[13px] font-semibold cursor-pointer border border-solid transition-all duration-200 ${
+                className={`py-2 px-5 rounded-lg text-[13px] font-semibold cursor-pointer border border-solid transition-all duration-200 flex items-center gap-2 ${
                   activeFilter === filter
                     ? "bg-violet-600/15 text-violet-400 border-violet-600/30"
                     : "bg-white/3 text-slate-600 border-white/6"
                 }`}
               >
-                {filter === "all" && "✨ Show All"}
-                {filter === "general" && "📁 General Info"}
-                {filter === "process" && "⚙️ Our Process"}
-                {filter === "billing" && "💰 Billing & Support"}
+                {filter === "all" && <><HelpCircle className="w-4 h-4" /> Show All</>}
+                {filter === "general" && <><Folder className="w-4 h-4" /> General Info</>}
+                {filter === "process" && <><Settings className="w-4 h-4" /> Our Process</>}
+                {filter === "billing" && <><CircleDollarSign className="w-4 h-4" /> Billing & Support</>}
               </button>
             ))}
           </div>
@@ -99,14 +100,14 @@ export default function FAQPage() {
               return (
                 <div
                   key={faq.q}
-                  className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 rounded-xl bg-white/[0.01] border-white/[0.06] overflow-hidden"
+                  className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 rounded-xl   overflow-hidden"
                 >
                   <button
                     onClick={() => setActiveFaq(isSelected ? null : index)}
-                    className="w-full py-5 px-6 flex justify-between items-center bg-transparent border-none text-white font-bold text-[15px] text-left cursor-pointer"
+                    className="w-full py-5 px-6 flex justify-between items-center bg-transparent border-none text-slate-800 font-bold text-[15px] text-left cursor-pointer hover:text-violet-600 transition-colors"
                   >
                     <span>{faq.q}</span>
-                    <span className={`text-xs text-[#a78bfa] transition-transform duration-200 ${isSelected ? "rotate-90" : ""}`}>▶</span>
+                    <ChevronRight className={`w-4 h-4 text-violet-600 transition-transform duration-200 ${isSelected ? "rotate-90" : ""}`} />
                   </button>
                   {isSelected && (
                     <div className="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-white/[0.04] pt-4">
@@ -122,7 +123,7 @@ export default function FAQPage() {
             <p className="text-slate-600 text-sm mb-4">Still have questions?</p>
             <Link
               href="/contact"
-              className="inline-block py-3 px-7 rounded-[10px] text-sm font-bold bg-gradient-to-br from-violet-600 to-indigo-600 text-[#fff]"
+              className="inline-block py-3 px-7 rounded-[10px] text-sm font-bold bg-gradient-to-br from-violet-600 to-indigo-600 text-white shadow-lg shadow-violet-600/20 hover:shadow-violet-600/30 hover:-translate-y-0.5 transition-all"
             >
               Get in Touch
             </Link>

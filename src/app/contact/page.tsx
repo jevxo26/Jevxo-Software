@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { Mail, MapPin, Clock, Check } from "lucide-react";
 
 const services = [
   "Web Development",
@@ -23,9 +24,9 @@ const budgets = [
 ];
 
 const contactInfo = [
-  { icon: "✉️", label: "Email",    value: "hello@jevxo.com",     href: "mailto:hello@jevxo.com" },
-  { icon: "📍", label: "Location", value: "Remote-first · Worldwide", href: "#" },
-  { icon: "🕐", label: "Response", value: "Within 24 hours",     href: "#" },
+  { icon: <Mail className="w-6 h-6 text-violet-600" />, label: "Email",    value: "hello@jevxo.com",     href: "mailto:hello@jevxo.com" },
+  { icon: <MapPin className="w-6 h-6 text-violet-600" />, label: "Location", value: "Remote-first · Worldwide", href: "#" },
+  { icon: <Clock className="w-6 h-6 text-violet-600" />, label: "Response", value: "Within 24 hours",     href: "#" },
 ];
 
 export default function ContactPage() {
@@ -61,9 +62,9 @@ export default function ContactPage() {
     width: "100%",
     padding: "14px 18px",
     borderRadius: "12px",
-    border: "1px solid rgba(255,255,255,0.08)",
-    background: "rgba(255,255,255,0.04)",
-    color: "#f1f5f9",
+    border: "1px solid rgba(15, 23, 42, 0.08)",
+    background: "#f8fafc",
+    color: "#0f172a",
     fontSize: "15px",
     outline: "none",
     transition: "border-color 0.2s",
@@ -81,7 +82,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="bg-[#080d1a] text-[#f1f5f9] min-h-screen flex flex-col">
+    <div className="bg-white text-slate-900 min-h-screen flex flex-col">
       <Navbar />
       <div className="flex-1 pt-20">
         {/* ── Hero ─────────────────────────────────────────────── */}
@@ -123,18 +124,18 @@ export default function ContactPage() {
                   <div className="form-row grid grid-cols-[1fr_1fr] gap-5 mb-5">
                     <div>
                       <label className="block text-[13px] font-semibold text-slate-600 mb-2 uppercase tracking-wider">Your Name *</label>
-                      <input className="w-full px-[18px] py-3.5 rounded-xl border border-white/[0.08] bg-white/[0.04] text-[#f1f5f9] text-[15px] outline-none transition-[border-color] duration-200 focus:border-violet-500/50" type="text" required placeholder="Alex Johnson"
+                      <input className="w-full px-[18px] py-3.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-[15px] outline-none transition-[border-color] duration-200 focus:border-violet-500/50" type="text" required placeholder="Alex Johnson"
                         value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })}
                         onFocus={(e) => { e.currentTarget.style.borderColor = "rgba(124,58,237,0.5)"; }}
-                        onBlur={(e)  => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; }}
+                        onBlur={(e)  => { e.currentTarget.style.borderColor = "rgba(15, 23, 42, 0.08)"; }}
                       />
                     </div>
                     <div>
                       <label className="block text-[13px] font-semibold text-slate-600 mb-2 uppercase tracking-wider">Email Address *</label>
-                      <input className="w-full px-[18px] py-3.5 rounded-xl border border-white/[0.08] bg-white/[0.04] text-[#f1f5f9] text-[15px] outline-none transition-[border-color] duration-200 focus:border-violet-500/50" type="email" required placeholder="alex@company.com"
+                      <input className="w-full px-[18px] py-3.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-[15px] outline-none transition-[border-color] duration-200 focus:border-violet-500/50" type="email" required placeholder="alex@company.com"
                         value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })}
                         onFocus={(e) => { e.currentTarget.style.borderColor = "rgba(124,58,237,0.5)"; }}
-                        onBlur={(e)  => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; }}
+                        onBlur={(e)  => { e.currentTarget.style.borderColor = "rgba(15, 23, 42, 0.08)"; }}
                       />
                     </div>
                   </div>
@@ -142,10 +143,10 @@ export default function ContactPage() {
                   {/* Company */}
                   <div className="mb-5">
                     <label className="block text-[13px] font-semibold text-slate-600 mb-2 uppercase tracking-wider">Company (optional)</label>
-                    <input className="w-full px-[18px] py-3.5 rounded-xl border border-white/[0.08] bg-white/[0.04] text-[#f1f5f9] text-[15px] outline-none transition-[border-color] duration-200 focus:border-violet-500/50" type="text" placeholder="Acme Corp"
+                    <input className="w-full px-[18px] py-3.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-[15px] outline-none transition-[border-color] duration-200 focus:border-violet-500/50" type="text" placeholder="Acme Corp"
                       value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })}
                       onFocus={(e) => { e.currentTarget.style.borderColor = "rgba(124,58,237,0.5)"; }}
-                      onBlur={(e)  => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; }}
+                      onBlur={(e)  => { e.currentTarget.style.borderColor = "rgba(15, 23, 42, 0.08)"; }}
                     />
                   </div>
 
@@ -153,7 +154,7 @@ export default function ContactPage() {
                   <div className="form-row grid grid-cols-[1fr_1fr] gap-5 mb-5">
                     <div>
                       <label className="block text-[13px] font-semibold text-slate-600 mb-2 uppercase tracking-wider">Service Needed</label>
-                      <select className="w-full px-[18px] py-3.5 rounded-xl border border-white/[0.08] bg-white/[0.04] text-[#f1f5f9] text-[15px] outline-none transition-[border-color] duration-200 focus:border-violet-500/50 "
+                      <select className="w-full px-[18px] py-3.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-[15px] outline-none transition-[border-color] duration-200 focus:border-violet-500/50 "
                         value={form.service} onChange={(e) => setForm({ ...form, service: e.target.value })}
                       >
                         <option value="">Select a service</option>
@@ -162,7 +163,7 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <label className="block text-[13px] font-semibold text-slate-600 mb-2 uppercase tracking-wider">Budget Range</label>
-                      <select className="w-full px-[18px] py-3.5 rounded-xl border border-white/[0.08] bg-white/[0.04] text-[#f1f5f9] text-[15px] outline-none transition-[border-color] duration-200 focus:border-violet-500/50 "
+                      <select className="w-full px-[18px] py-3.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-[15px] outline-none transition-[border-color] duration-200 focus:border-violet-500/50 "
                         value={form.budget} onChange={(e) => setForm({ ...form, budget: e.target.value })}
                       >
                         <option value="">Select budget</option>
@@ -174,11 +175,14 @@ export default function ContactPage() {
                   {/* Message */}
                   <div className="mb-8">
                     <label className="block text-[13px] font-semibold text-slate-600 mb-2 uppercase tracking-wider">Tell Us About Your Project *</label>
-                    <textarea className="min-h-[140px]" style={{resize: "vertical"}} required
+                    <textarea 
+                      className="w-full px-[18px] py-3.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-[15px] outline-none transition-[border-color] duration-200 focus:border-violet-500/50 min-h-[140px]" 
+                      style={{resize: "vertical"}} 
+                      required
                       placeholder="Give us an overview of what you're looking to build, your timeline, and any other relevant details..."
                       value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })}
                       onFocus={(e) => { e.currentTarget.style.borderColor = "rgba(124,58,237,0.5)"; }}
-                      onBlur={(e)  => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; }}
+                      onBlur={(e)  => { e.currentTarget.style.borderColor = "rgba(15, 23, 42, 0.08)"; }}
                     />
                   </div>
 
@@ -188,7 +192,7 @@ export default function ContactPage() {
                     </div>
                   )}
 
-                  <button className="w-full py-4 px-8 rounded-[14px] font-bold text-base bg-gradient-to-br from-violet-600 to-indigo-600 text-[#fff] border-[none]" type="submit" disabled={status === "sending"} style={{cursor: status === "sending" ? "not-allowed" : "pointer", opacity: status === "sending" ? 0.7 : 1, boxShadow: "0 0 30px rgba(124,58,237,0.4)", transition: "all 0.2s ease"}}>
+                  <button className="w-full py-4 px-8 rounded-[14px] font-bold text-base bg-gradient-to-br from-violet-600 to-indigo-600 text-white border-[none]" type="submit" disabled={status === "sending"} style={{cursor: status === "sending" ? "not-allowed" : "pointer", opacity: status === "sending" ? 0.7 : 1, boxShadow: "0 0 30px rgba(124,58,237,0.4)", transition: "all 0.2s ease"}}>
                     {status === "sending" ? "Sending…" : "Send Message →"}
                   </button>
                 </form>
@@ -201,7 +205,7 @@ export default function ContactPage() {
                 <a className="block" key={info.label} href={info.href}>
                   <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 py-6 px-7 rounded-[14px] flex items-center gap-4" style={{transition: "all 0.2s ease"}}
                     onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(124,58,237,0.25)"; }}
-                    onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.08)"; }}
+                    onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(15, 23, 42, 0.08)"; }}
                   >
                     <div className="text-[28px]">{info.icon}</div>
                     <div>

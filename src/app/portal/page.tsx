@@ -3,23 +3,34 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { Shield, Handshake, Users, Briefcase, Rocket, Laptop, ArrowLeft, Key } from "lucide-react";
 
-const rolesList = [
-  { id: "admin", name: "Global Admin", desc: "Command center for regional websites, pricing, and client suspension.", icon: "🛡️", username: "admin@jevxo.com", badge: "Superuser" },
-  { id: "crm", name: "CRM Lead Manager", desc: "Kanban pipeline, auto reminders, and lead scoring dashboard.", icon: "🤝", username: "crm@jevxo.com", badge: "Operations" },
-  { id: "hr", name: "HR & Intern Manager", desc: "Employee tracking, check-in log, payroll, and certificates.", icon: "👥", username: "hr@jevxo.com", badge: "Management" },
-  { id: "partner", name: "Country Partner", desc: "Commission balances, regional stats, and marketing assets.", icon: "💼", username: "partner_bd@jevxo.com", badge: "Partner" },
-  { id: "sales", name: "Sales Agent Arena", desc: "Target progress bars, badges, and the Sales Battle leaderboard.", icon: "🚀", username: "agent_09@jevxo.com", badge: "Sales Agent" },
-  { id: "client", name: "Client & Marketing Hub", desc: "Manage website health, storage, and access the 13 Marketing Hub modules.", icon: "💻", username: "client_client@jevxo.com", badge: "Business Owner" },
-];
+interface RoleItem {
+  id: string;
+  name: string;
+  desc: string;
+  icon: React.ReactNode;
+  username: string;
+  badge: string;
+}
 
 export default function PortalPage() {
   const router = useRouter();
-  const [selectedRole, setSelectedRole] = useState(rolesList[0]);
+
+  const rolesList: RoleItem[] = [
+    { id: "admin", name: "Global Admin", desc: "Command center for regional websites, pricing, and client suspension.", icon: <Shield className="w-6 h-6" />, username: "admin@jevxo.com", badge: "Superuser" },
+    { id: "crm", name: "CRM Lead Manager", desc: "Kanban pipeline, auto reminders, and lead scoring dashboard.", icon: <Handshake className="w-6 h-6" />, username: "crm@jevxo.com", badge: "Operations" },
+    { id: "hr", name: "HR & Intern Manager", desc: "Employee tracking, check-in log, payroll, and certificates.", icon: <Users className="w-6 h-6" />, username: "hr@jevxo.com", badge: "Management" },
+    { id: "partner", name: "Country Partner", desc: "Commission balances, regional stats, and marketing assets.", icon: <Briefcase className="w-6 h-6" />, username: "partner_bd@jevxo.com", badge: "Partner" },
+    { id: "sales", name: "Sales Agent Arena", desc: "Target progress bars, badges, and the Sales Battle leaderboard.", icon: <Rocket className="w-6 h-6" />, username: "agent_09@jevxo.com", badge: "Sales Agent" },
+    { id: "client", name: "Client & Marketing Hub", desc: "Manage website health, storage, and access the 13 Marketing Hub modules.", icon: <Laptop className="w-6 h-6" />, username: "client_client@jevxo.com", badge: "Business Owner" },
+  ];
+
+  const [selectedRole, setSelectedRole] = useState<RoleItem>(rolesList[0]);
   const [password, setPassword] = useState("••••••••");
   const [isLoggingIn, setIsLoggingIn] = useState(false);
 
-  const handleRoleSelect = (role: typeof rolesList[0]) => {
+  const handleRoleSelect = (role: RoleItem) => {
     setSelectedRole(role);
   };
 
@@ -33,7 +44,7 @@ export default function PortalPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(ellipse_at_center,#0d1530_0%,#080d1a_100%)] flex flex-col items-center justify-center py-20 px-5 pb-10 relative overflow-hidden">
+    <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center py-20 px-5 pb-10 relative overflow-hidden text-slate-900">
       {/* Decorative Orbs */}
       <div className="rounded-full blur-[80px] pointer-events-none absolute bg-violet-600/[0.07] w-[400px] h-[400px] -top-[100px] -left-[50px] opacity-40" />
       <div className="rounded-full blur-[80px] pointer-events-none absolute bg-cyan-500/[0.06] w-[350px] h-[350px] -bottom-[100px] -right-[50px] opacity-30" />
@@ -41,8 +52,8 @@ export default function PortalPage() {
       <div className="relative z-10 w-full max-w-[980px]">
         
         {/* Back Link */}
-        <Link href="/" className="inline-flex items-center gap-2 text-slate-600 text-sm font-semibold mb-8 hover:text-violet-400 transition-colors duration-200">
-          ← Return to Public Site
+        <Link href="/" className="inline-flex items-center gap-2 text-slate-600 text-sm font-semibold mb-8 hover:text-violet-600 transition-colors duration-200">
+          <ArrowLeft className="w-4 h-4" /> Return to Public Site
         </Link>
 
         <div className="portal-grid grid grid-cols-[1.2fr_1fr] gap-10">
@@ -50,7 +61,7 @@ export default function PortalPage() {
           {/* Left Column: Role Selector Info */}
           <div>
             <div className="mb-7">
-              <div className="text-[28px] font-extrabold text-white flex items-center gap-2.5 mb-2">
+              <div className="text-[28px] font-extrabold text-slate-900 flex items-center gap-2.5 mb-2">
                 <div className="w-8 h-8 bg-gradient-to-br from-violet-600 to-indigo-600 rounded-lg flex items-center justify-center text-base font-extrabold text-white">J</div>
                 Jevxo Ecosystem
               </div>
@@ -69,17 +80,19 @@ export default function PortalPage() {
                     onClick={() => handleRoleSelect(role)}
                     className={`text-left w-full p-5 rounded-xl border flex items-center gap-4 cursor-pointer transition-all duration-200 ${
                       isActive
-                        ? "border-violet-600/30 bg-violet-600/8"
-                        : "border-white/6 bg-white/2 hover:border-white/12"
+                        ? "border-violet-600/30 bg-violet-600/10 shadow-sm"
+                        : "border-slate-200 bg-white hover:bg-slate-100"
                     }`}
                   >
-                    <div className="text-2xl">{role.icon}</div>
+                    <div className={isActive ? "text-violet-600" : "text-slate-400"}>
+                      {role.icon}
+                    </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-2">
-                        <span className={`text-[15px] font-bold ${isActive ? "text-violet-400" : "text-[#f1f5f9]"}`}>{role.name}</span>
-                        <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${isActive ? "bg-violet-600/20 text-violet-400" : "bg-white/6 text-slate-600"}`}>{role.badge}</span>
+                        <span className={`text-[15px] font-bold ${isActive ? "text-violet-700" : "text-slate-800"}`}>{role.name}</span>
+                        <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${isActive ? "bg-violet-600/20 text-violet-700" : "bg-slate-100 text-slate-500"}`}>{role.badge}</span>
                       </div>
-                      <p className="text-xs text-slate-600 mt-0.5 leading-normal">{role.desc}</p>
+                      <p className="text-xs text-slate-500 mt-0.5 leading-normal">{role.desc}</p>
                     </div>
                   </button>
                 );
@@ -89,51 +102,55 @@ export default function PortalPage() {
 
           {/* Right Column: Portal Login Form */}
           <div className="flex items-center">
-            <div className="w-full py-10 px-8 rounded-[20px] border border-violet-600/20 bg-[#080d1a]/65 shadow-[0_20px_50px_rgba(8,13,26,0.5)] backdrop-blur-md">
-              <h3 className="text-xl font-bold mb-6 text-[#f1f5f9]">Portal Authenticator</h3>
+            <div className="w-full py-10 px-8 rounded-[20px] border border-slate-200 bg-white shadow-[0_20px_50px_rgba(15,23,42,0.06)] backdrop-blur-md">
+              <h3 className="text-xl font-bold mb-6 text-slate-800 flex items-center gap-2">
+                <Key className="w-5 h-5 text-violet-600" /> Portal Authenticator
+              </h3>
 
               <form onSubmit={handleSubmit}>
                 <div className="mb-5">
-                  <label className="block text-[11px] font-bold text-violet-400 uppercase mb-2 tracking-wider">Workspace Account ID</label>
+                  <label className="block text-[11px] font-bold text-violet-700 uppercase mb-2 tracking-wider">Workspace Account ID</label>
                   <input
                     type="text"
                     disabled
                     value={selectedRole.username}
-                    className="w-full py-3 px-4 rounded-lg border border-slate-900/[0.08] bg-white/2 text-slate-600 text-sm cursor-not-allowed"
+                    className="w-full py-3 px-4 rounded-lg border border-slate-200 bg-slate-100 text-slate-500 text-sm cursor-not-allowed"
                   />
                 </div>
 
                 <div className="mb-7">
                   <div className="flex justify-between mb-2">
-                    <label className="block text-[11px] font-bold text-violet-400 uppercase tracking-wider">Access Pin / Password</label>
+                    <label className="block text-[11px] font-bold text-violet-700 uppercase tracking-wider">Access Pin / Password</label>
                     <span className="text-xs text-slate-400">Auto-filled</span>
                   </div>
                   <input
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full py-3 px-4 rounded-lg border border-slate-900/[0.08] bg-white/3 text-white text-sm"
+                    className="w-full py-3 px-4 rounded-lg border border-slate-200 bg-slate-50 text-slate-900 text-sm focus:border-violet-500/50 outline-none"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={isLoggingIn}
-                  className="w-full p-3.5 rounded-lg bg-gradient-to-br from-violet-600 to-indigo-600 text-white text-[15px] font-bold border-none shadow-[0_0_20px_rgba(124,58,237,0.3)] transition-all duration-200 flex items-center justify-center gap-2.5 cursor-pointer"
+                  className="w-full p-3.5 rounded-lg bg-gradient-to-br from-violet-600 to-indigo-600 text-white text-[15px] font-bold border-none shadow-[0_4px_20px_rgba(124,58,237,0.25)] hover:shadow-[0_4px_20px_rgba(124,58,237,0.35)] transition-all duration-200 flex items-center justify-center gap-2.5 cursor-pointer"
                 >
                   {isLoggingIn ? (
                     <>
-                      <span className="inline-block w-4 h-4 border-2 border-solid border-white/30 border-t-white rounded-full animate-[spin-slow_1s_linear_infinite]" />
+                      <span className="inline-block w-4 h-4 border-2 border-solid border-white/30 border-t-white rounded-full animate-spin" />
                       Verifying Node...
                     </>
                   ) : (
-                    <>Enter Workspace Portal {selectedRole.icon}</>
+                    <div className="flex items-center gap-2">
+                      Enter Workspace Portal {selectedRole.icon}
+                    </div>
                   )}
                 </button>
               </form>
 
-              <div className="mt-6 pt-5 border-t border-white/6 text-[11px] text-slate-400 leading-normal">
-                🔒 This is a secure Next.js 16 endpoint. Selecting a workspace role automatically provisions a secure session token redirecting you to your Jevxo node.
+              <div className="mt-6 pt-5 border-t border-slate-200 text-[11px] text-slate-400 leading-normal">
+                🔒 Secure endpoint. Selecting a workspace role automatically provisions a secure session token redirecting you to your Jevxo node.
               </div>
             </div>
           </div>
