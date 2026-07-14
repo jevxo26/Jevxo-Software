@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeUp, scaleIn, viewportSettings, hoverLift } from "@/lib/animations";
@@ -90,11 +88,10 @@ export default function FAQPage() {
 
   return (
     <div className="bg-transparent text-slate-900 min-h-screen flex flex-col">
-      <Navbar />
 
       {/* Hero */}
       <section className="py-24 relative overflow-hidden text-center">
-        <div className="w-11/12 max-w-[1400px] mx-auto relative z-10">
+        <div className="w-11/12 max-w-[1700px] mx-auto relative z-10">
           <motion.div
             initial="hidden"
             animate="visible"
@@ -203,7 +200,6 @@ export default function FAQPage() {
         </div>
       </section>
 
-      <Footer />
     </div>
   );
 }

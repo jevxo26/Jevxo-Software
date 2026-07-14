@@ -24,7 +24,7 @@ interface NetworkSectionProps {
 export default function NetworkSection({ nodes, selectedNode, setSelectedNode }: NetworkSectionProps) {
   return (
     <section className="py-24 border-t border-slate-900/10 overflow-hidden bg-transparent" id="network">
-      <div className="w-11/12 max-w-[1400px] mx-auto">
+      <div className="w-11/12 max-w-[1700px] mx-auto">
         
         <div className="text-center mb-16">
           <motion.div

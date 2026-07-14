@@ -439,7 +439,7 @@ export default function HeroSection() {
           transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         />
         
-        <div className="w-11/12 max-w-[1400px] mx-auto relative z-10">
+        <div className="w-11/12 max-w-[1700px] mx-auto relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
             {/* Left Column: Heading and CTAs */}
             <div className="lg:col-span-6 xl:col-span-7 text-center lg:text-left max-w-[650px] mx-auto lg:mx-0">
@@ -557,7 +557,7 @@ export default function HeroSection() {
 
       {/* ── 2. THE HUB (STATISTICS) SECTION ── */}
       <section className="py-24 border-t border-slate-900/10 bg-transparent" id="the-hub">
-        <div className="w-11/12 max-w-[1400px] mx-auto">
+        <div className="w-11/12 max-w-[1700px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <motion.div

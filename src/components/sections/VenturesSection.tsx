@@ -56,7 +56,7 @@ const ventures = [
 export default function VenturesSection() {
   return (
     <section className="py-24 border-t border-slate-900/10 bg-transparent relative" id="ventures">
-      <div className="w-11/12 max-w-[1400px] mx-auto">
+      <div className="w-11/12 max-w-[1700px] mx-auto">
         
         <div className="text-center mb-16">
           <motion.div

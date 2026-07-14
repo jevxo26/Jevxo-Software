@@ -1,8 +1,8 @@
 "use client";
 
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import { fadeUp, scaleIn, viewportSettings, hoverLift } from "@/lib/animations";
 
 const steps = [
   {
@@ -44,79 +44,130 @@ const steps = [
 
 export default function ProcessPage() {
   return (
-    <div className="bg-white text-slate-900 min-h-screen flex flex-col">
-      <Navbar />
+    <div className="bg-transparent text-slate-900 min-h-screen flex flex-col">
+      <div className="flex-1 pt-20">
 
-      {/* Hero */}
-      <section className="bg-hero-gradient py-[100px] md:py-[70px] relative overflow-hidden pt-[140px] pb-[60px]">
-        <div className="rounded-full blur-[80px] pointer-events-none absolute bg-violet-600/[0.07] w-[500px] h-[500px] -top-[200px] -left-[100px]" />
-        <div className="w-11/12 max-w-[1400px] mx-auto relative z-[1] text-center">
-          <div className="inline-block py-1 px-3.5 rounded-full border border-violet-600/[0.3] bg-violet-600/[0.08] text-xs font-semibold text-violet-750 mb-6 uppercase tracking-widest">
-            Our Workflow
-          </div>
-          <h1 className="text-[clamp(36px,6vw,64px)] font-black tracking-tight mb-5">
-            The blueprint of our<br /><span className="bg-gradient-to-br from-violet-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent">Engineering Lifecycle</span>
-          </h1>
-          <p className="text-[17px] text-slate-600 max-w-[580px] mx-auto leading-relaxed">
-            How we take your product from early wireframe requirements all the way to secure, globally replicated cloud node launches.
-          </p>
-        </div>
-      </section>
-
-      {/* Timeline Section */}
-      <section className="py-[100px] md:py-[70px] pb-[100px]">
-        <div className="w-11/12 max-w-[1400px] mx-auto max-w-[800px]">
-          <div className="flex flex-col gap-[60px] relative">
-            {/* Center line decoration for timeline */}
-            <div className="absolute left-[20px] top-[20px] bottom-[20px] w-[2px] bg-[linear-gradient(tobottom,#7c3aed,rgba(124,58,237,0.05))]" />
-
-            {steps.map((step) => (
-              <div className="flex gap-6 relative" key={step.num}>
-                {/* Number bullet */}
-                <div className="w-[42px] h-[42px] rounded-full bg-gradient-to-br from-violet-600 to-indigo-600 flex items-center justify-center text-sm font-extrabold text-white z-[2]" style={{boxShadow: "0 0 15px rgba(124,58,237,0.4)", flexShrink: 0}}>
-                  {step.num}
-                </div>
-
-                {/* Content card */}
-                <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 flex-1 p-[30px] rounded-2xl  ">
-                  <div className="flex justify-between items-baseline gap-2.5 mb-4" style={{flexWrap: "wrap"}}>
-                    <h3 className="text-xl font-bold m-[0]">{step.title}</h3>
-                    <span className="text-xs text-violet-700 font-bold py-0.5 px-2.5 rounded-full bg-violet-600/[0.08] border border-violet-600/[0.2]">
-                      {step.duration}
-                    </span>
-                  </div>
-
-                  <p className="text-slate-600 text-sm leading-relaxed mb-5">{step.desc}</p>
-
-                  <div className="border-t border-[1px solid rgba(15,23,42,0.05)] pt-4">
-                    <h4 className="text-xs font-semibold text-slate-400 uppercase mb-2.5 tracking-[0.05em]">Key Deliverables:</h4>
-                    <div className="flex flex-col gap-1.5">
-                      {step.deliverables.map((del) => (
-                        <div className="flex gap-2 items-center text-[13px] text-slate-600" key={del}>
-                          <span className="text-violet-600 font-bold">↳</span>
-                          <span>{del}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center mt-20">
-            <h3 className="text-[22px] font-extrabold mb-4">Ready to build your system?</h3>
-            <Link className="inline-block py-3.5 px-8 rounded-[10px] text-sm font-bold bg-gradient-to-br from-violet-600 to-indigo-600 text-white"
-              href="/contact"
-              style={{boxShadow: "0 4px 20px rgba(124,58,237,0.3)"}}
+        {/* Hero */}
+        <section className="py-24 relative overflow-hidden text-center">
+          <div className="w-11/12 max-w-[1700px] mx-auto relative z-10">
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
+              custom={0.05}
+              className="inline-flex items-center gap-1.5 py-1.5 px-4 rounded-full border border-violet-600/20 bg-violet-600/[0.04] text-xs font-bold text-violet-750 mb-5 uppercase tracking-wider"
             >
-              Start Project Discovery
-            </Link>
+              Our Workflow
+            </motion.div>
+            <motion.h1
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
+              custom={0.15}
+              className="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 leading-tight mb-6"
+            >
+              The blueprint of our<br /><span className="bg-gradient-to-br from-violet-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent">Engineering Lifecycle</span>
+            </motion.h1>
+            <motion.p
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
+              custom={0.25}
+              className="text-slate-505 max-w-[620px] mx-auto text-base leading-relaxed"
+            >
+              How we take your product from early wireframe requirements all the way to secure, globally replicated cloud node launches.
+            </motion.p>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <Footer />
+        {/* Timeline Section */}
+        <section className="py-12 border-t border-slate-900/10">
+          <div className="w-11/12 max-w-[1700px] mx-auto max-w-[800px]">
+            <div className="flex flex-col gap-10 relative">
+              {/* Center line decoration for timeline */}
+              <div className="absolute left-[20px] top-[20px] bottom-[20px] w-[2px] bg-[linear-gradient(to_bottom,#7c3aed,rgba(124,58,237,0.05))]" />
+
+              {steps.map((step, idx) => (
+                <motion.div 
+                  className="flex gap-6 relative" 
+                  key={step.num}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={viewportSettings}
+                  variants={fadeUp}
+                  custom={idx * 0.08}
+                >
+                  {/* Number bullet */}
+                  <div className="w-[42px] h-[42px] rounded-full bg-gradient-to-br from-violet-600 to-indigo-600 flex items-center justify-center text-sm font-extrabold text-white z-[2] shrink-0 shadow-md shadow-violet-650/30">
+                    {step.num}
+                  </div>
+
+                  {/* Content card */}
+                  <motion.div 
+                    whileHover="hover"
+                    className="flex-1"
+                  >
+                    <motion.div
+                      variants={hoverLift}
+                      className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-300 p-8 rounded-2xl h-full flex flex-col justify-between"
+                    >
+                      <div>
+                        <div className="flex justify-between items-baseline gap-2.5 mb-4 flex-wrap">
+                          <h3 className="text-xl font-bold text-slate-900">{step.title}</h3>
+                          <span className="text-xs text-violet-700 font-bold py-0.5 px-2.5 rounded-full bg-violet-600/[0.08] border border-violet-600/[0.2]">
+                            {step.duration}
+                          </span>
+                        </div>
+
+                        <p className="text-slate-505 text-sm leading-relaxed mb-5">{step.desc}</p>
+                      </div>
+
+                      <div className="border-t border-slate-900/5 pt-4 mt-2">
+                        <h4 className="text-[10px] font-bold text-slate-400 uppercase mb-2.5 tracking-wider">Key Deliverables:</h4>
+                        <div className="flex flex-col gap-1.5">
+                          {step.deliverables.map((del) => (
+                            <div className="flex gap-2 items-center text-xs text-slate-505" key={del}>
+                              <span className="text-violet-600 font-bold">↳</span>
+                              <span>{del}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="text-center mt-20">
+              <motion.h3 
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportSettings}
+                variants={fadeUp}
+                custom={0.05}
+                className="text-2xl font-extrabold text-slate-900 mb-4"
+              >
+                Ready to build your system?
+              </motion.h3>
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportSettings}
+                variants={fadeUp}
+                custom={0.15}
+              >
+                <Link className="inline-block py-3.5 px-8 rounded-xl text-xs font-bold bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:shadow-violet-600/20 hover:-translate-y-0.5 transition-all"
+                  href="/contact"
+                >
+                  Start Project Discovery
+                </Link>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+      </div>
     </div>
   );
 }

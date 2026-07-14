@@ -200,7 +200,7 @@ export default function DevOpsSection() {
       <div className="absolute w-[500px] h-[500px] -top-36 -right-24 rounded-full bg-cyan-500/5 blur-[120px] pointer-events-none" />
       <div className="absolute w-[500px] h-[500px] -bottom-36 -left-24 rounded-full bg-violet-600/5 blur-[120px] pointer-events-none" />
       
-      <div className="w-11/12 max-w-[1400px] mx-auto relative z-10">
+      <div className="w-11/12 max-w-[1700px] mx-auto relative z-10">
         
         <div className="text-center mb-16">
           <motion.div

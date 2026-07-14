@@ -2,8 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import { motion } from "framer-motion";
 import { fadeUp, scaleIn, viewportSettings, hoverLift } from "@/lib/animations";
 import { services as defaultServices } from "@/lib/data/services";
@@ -91,12 +89,11 @@ export default function ServicesPage() {
 
   return (
     <div className="bg-transparent text-slate-900 min-h-screen flex flex-col">
-      <Navbar />
       <div className="flex-1 pt-20">
         
         {/* Hero Section */}
         <section className="py-24 relative overflow-hidden text-center">
-          <div className="w-11/12 max-w-[1400px] mx-auto relative z-10">
+          <div className="w-11/12 max-w-[1700px] mx-auto relative z-10">
             <motion.div
               initial="hidden"
               animate="visible"
@@ -129,7 +126,7 @@ export default function ServicesPage() {
 
         {/* Services Grid */}
         <section className="py-12 border-t border-slate-900/10">
-          <div className="w-11/12 max-w-[1400px] mx-auto">
+          <div className="w-11/12 max-w-[1700px] mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {servicesList.map((service, idx) => (
                 <motion.div
@@ -187,7 +184,7 @@ export default function ServicesPage() {
 
         {/* CTA */}
         <section className="py-16 border-t border-slate-900/10">
-          <div className="w-11/12 max-w-[1400px] mx-auto text-center">
+          <div className="w-11/12 max-w-[1700px] mx-auto text-center">
             <motion.h2 
               initial="hidden"
               whileInView="visible"
@@ -223,7 +220,6 @@ export default function ServicesPage() {
         </section>
 
       </div>
-      <Footer />
     </div>
   );
 }

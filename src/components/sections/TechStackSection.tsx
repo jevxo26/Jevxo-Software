@@ -111,7 +111,7 @@ export default function TechStackSection() {
       <div className="absolute w-[400px] h-[400px] -top-24 -left-24 rounded-full bg-violet-600/5 blur-[100px] pointer-events-none" />
       <div className="absolute w-[400px] h-[400px] -bottom-24 -right-24 rounded-full bg-cyan-500/5 blur-[100px] pointer-events-none" />
       
-      <div className="w-11/12 max-w-[1400px] mx-auto text-center relative z-10">
+      <div className="w-11/12 max-w-[1700px] mx-auto text-center relative z-10">
         <div>
           <motion.div
             initial="hidden"

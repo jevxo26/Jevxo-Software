@@ -1,7 +1,5 @@
 "use client";
 
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { fadeUp, scaleIn, viewportSettings, hoverLift } from "@/lib/animations";
@@ -62,11 +60,10 @@ const categories = [
 export default function TechnologiesPage() {
   return (
     <div className="bg-transparent text-slate-900 min-h-screen flex flex-col">
-      <Navbar />
 
       {/* Hero */}
       <section className="py-24 relative overflow-hidden text-center">
-        <div className="w-11/12 max-w-[1400px] mx-auto relative z-10">
+        <div className="w-11/12 max-w-[1700px] mx-auto relative z-10">
           <motion.div
             initial="hidden"
             animate="visible"
@@ -99,7 +96,7 @@ export default function TechnologiesPage() {
 
       {/* Stack List */}
       <section className="py-12 border-t border-slate-900/10">
-        <div className="w-11/12 max-w-[1400px] mx-auto">
+        <div className="w-11/12 max-w-[1700px] mx-auto">
           <div className="flex flex-col gap-10">
             {categories.map((cat, idx) => (
               <motion.div 
@@ -163,7 +160,6 @@ export default function TechnologiesPage() {
         </div>
       </section>
 
-      <Footer />
     </div>
   );
 }
