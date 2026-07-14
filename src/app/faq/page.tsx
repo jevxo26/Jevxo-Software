@@ -4,7 +4,44 @@ import { useState } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Link from "next/link";
-import { Folder, Settings, CircleDollarSign, ChevronRight, HelpCircle } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { fadeUp, scaleIn, viewportSettings, hoverLift } from "@/lib/animations";
+
+// Custom Premium SVGs
+const IconHelp = () => (
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="10" />
+    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+    <line x1="12" y1="17" x2="12.01" y2="17" />
+  </svg>
+);
+
+const IconFolder = () => (
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+  </svg>
+);
+
+const IconSettings = () => (
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="3" />
+    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+  </svg>
+);
+
+const IconDollar = () => (
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="10" />
+    <line x1="12" y1="8" x2="12" y2="16" />
+    <path d="M17 9H13.5a1.5 1.5 0 0 0 0 3h3a1.5 1.5 0 0 1 0 3H12" />
+  </svg>
+);
+
+const IconChevronRight = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <polyline points="9 18 15 12 9 6" />
+  </svg>
+);
 
 interface FAQItem {
   q: string;
@@ -52,78 +89,113 @@ export default function FAQPage() {
   const filteredFaqs = activeFilter === "all" ? faqs : faqs.filter(f => f.cat === activeFilter);
 
   return (
-    <div className="bg-white text-slate-900 min-h-screen flex flex-col">
+    <div className="bg-transparent text-slate-900 min-h-screen flex flex-col">
       <Navbar />
 
       {/* Hero */}
-      <section className="bg-hero-gradient py-[100px] md:py-[70px] relative overflow-hidden pt-[140px] pb-[60px]">
-        <div className="rounded-full blur-[80px] pointer-events-none absolute bg-violet-600/[0.07] w-[500px] h-[500px] -top-[200px] -right-[100px]" />
-        <div className="w-11/12 max-w-[1400px] mx-auto relative z-[1] text-center">
-          <div className="inline-block py-1 px-3.5 rounded-full border border-violet-600/30 bg-violet-600/8 text-xs font-semibold text-violet-700 mb-6 uppercase tracking-widest">
+      <section className="py-24 relative overflow-hidden text-center">
+        <div className="w-11/12 max-w-[1400px] mx-auto relative z-10">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            custom={0.05}
+            className="inline-flex items-center gap-1.5 py-1.5 px-4 rounded-full border border-violet-600/20 bg-violet-600/[0.04] text-xs font-bold text-violet-700 uppercase tracking-wider mb-5"
+          >
             FAQ Center
-          </div>
-          <h1 className="text-[clamp(36px,6vw,64px)] font-black tracking-tight mb-5">
+          </motion.div>
+          <motion.h1
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            custom={0.15}
+            className="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 leading-tight mb-6"
+          >
             Frequently Asked<br /><span className="bg-gradient-to-br from-violet-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent">Questions</span>
-          </h1>
-          <p className="text-[17px] text-slate-600 max-w-[580px] mx-auto mb-10 leading-relaxed">
+          </motion.h1>
+          <motion.p
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            custom={0.25}
+            className="text-slate-505 max-w-[620px] mx-auto text-base leading-relaxed mb-10"
+          >
             Find immediate answers regarding pricing, project timelines, security audits, and our software engineering methods.
-          </p>
+          </motion.p>
 
           {/* Filters */}
-          <div className="flex gap-2.5 justify-center flex-wrap">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            custom={0.35}
+            className="flex gap-2 justify-center flex-wrap"
+          >
             {(["all", "general", "process", "billing"] as const).map((filter) => (
               <button
                 key={filter}
                 onClick={() => { setActiveFilter(filter); setActiveFaq(null); }}
-                className={`py-2.5 px-6 rounded-xl text-[13px] font-bold cursor-pointer border border-solid transition-all duration-200 flex items-center gap-2 ${
+                className={`py-2 px-5 rounded-lg text-xs font-semibold cursor-pointer border transition-all duration-205 flex items-center gap-2 ${
                   activeFilter === filter
-                    ? "bg-violet-600/15 text-violet-750 border-violet-600/30"
-                    : "bg-slate-100 text-slate-750 border-slate-200 hover:bg-slate-200 hover:border-slate-350"
+                    ? "bg-violet-600/10 text-violet-700 border-violet-600/30 shadow-sm"
+                    : "bg-slate-900/5 text-slate-650 border-slate-900/10 hover:text-slate-950"
                 }`}
               >
-                {filter === "all" && <><HelpCircle className="w-4 h-4" /> Show All</>}
-                {filter === "general" && <><Folder className="w-4 h-4" /> General Info</>}
-                {filter === "process" && <><Settings className="w-4 h-4" /> Our Process</>}
-                {filter === "billing" && <><CircleDollarSign className="w-4 h-4" /> Billing & Support</>}
+                {filter === "all" && <><IconHelp /> Show All</>}
+                {filter === "general" && <><IconFolder /> General Info</>}
+                {filter === "process" && <><IconSettings /> Our Process</>}
+                {filter === "billing" && <><IconDollar /> Billing & Support</>}
               </button>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Accordions */}
-      <section className="py-[100px] md:py-[70px] pb-25">
-        <div className="w-11/12 max-w-[1400px] mx-auto max-w-[720px]">
+      <section className="py-12 border-t border-slate-900/10">
+        <div className="w-11/12 max-w-[760px] mx-auto">
           <div className="flex flex-col gap-4">
-            {filteredFaqs.map((faq, index) => {
-              const isSelected = activeFaq === index;
-              return (
-                <div
-                  key={faq.q}
-                  className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 rounded-xl   overflow-hidden"
-                >
-                  <button
-                    onClick={() => setActiveFaq(isSelected ? null : index)}
-                    className="w-full py-5 px-6 flex justify-between items-center bg-transparent border-none text-slate-800 font-bold text-[15px] text-left cursor-pointer hover:text-violet-600 transition-colors"
+            <AnimatePresence mode="popLayout">
+              {filteredFaqs.map((faq, index) => {
+                const isSelected = activeFaq === index;
+                return (
+                  <motion.div
+                    key={faq.q}
+                    layout
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.25 }}
+                    className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-300 rounded-2xl overflow-hidden"
                   >
-                    <span>{faq.q}</span>
-                    <ChevronRight className={`w-4 h-4 text-violet-600 transition-transform duration-200 ${isSelected ? "rotate-90" : ""}`} />
-                  </button>
-                  {isSelected && (
-                    <div className="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-white/[0.04] pt-4">
-                      {faq.a}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
+                    <button
+                      onClick={() => setActiveFaq(isSelected ? null : index)}
+                      className="w-full py-5 px-6 flex justify-between items-center bg-transparent border-none text-slate-800 font-bold text-sm text-left cursor-pointer hover:text-violet-600 transition-colors"
+                    >
+                      <span>{faq.q}</span>
+                      <IconChevronRight className={`w-4 h-4 text-violet-600 transition-transform duration-200 ${isSelected ? "rotate-90" : ""}`} />
+                    </button>
+                    {isSelected && (
+                      <motion.div 
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="px-6 pb-6 text-slate-505 text-xs leading-relaxed border-t border-slate-900/5 pt-4"
+                      >
+                        {faq.a}
+                      </motion.div>
+                    )}
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
           </div>
 
-          <div className="text-center mt-[60px]">
-            <p className="text-slate-600 text-sm mb-4">Still have questions?</p>
+          <div className="text-center mt-16">
+            <p className="text-slate-505 text-xs mb-4">Still have questions?</p>
             <Link
               href="/contact"
-              className="inline-block py-3 px-7 rounded-[10px] text-sm font-bold bg-gradient-to-br from-violet-600 to-indigo-600 text-white shadow-lg shadow-violet-600/20 hover:shadow-violet-600/30 hover:-translate-y-0.5 transition-all"
+              className="inline-block py-3 px-8 rounded-xl text-xs font-bold bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-lg shadow-violet-600/20 hover:shadow-violet-600/30 hover:-translate-y-0.5 transition-all"
             >
               Get in Touch
             </Link>

@@ -3,6 +3,8 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import { fadeUp, scaleIn, viewportSettings, hoverLift } from "@/lib/animations";
 
 const categories = [
   {
@@ -59,63 +61,101 @@ const categories = [
 
 export default function TechnologiesPage() {
   return (
-    <div className="bg-white text-slate-900 min-h-screen flex flex-col">
+    <div className="bg-transparent text-slate-900 min-h-screen flex flex-col">
       <Navbar />
 
       {/* Hero */}
-      <section className="bg-hero-gradient py-[100px] md:py-[70px] relative overflow-hidden pt-[140px] pb-[60px]">
-        <div className="rounded-full blur-[80px] pointer-events-none absolute bg-cyan-500/[0.06] w-[500px] h-[500px] -top-[200px] -right-[100px]" />
-        <div className="w-11/12 max-w-[1400px] mx-auto relative z-[1] text-center">
-          <div className="inline-block py-1 px-3.5 rounded-full border border-violet-600/[0.3] bg-violet-600/[0.08] text-xs font-semibold text-violet-750 mb-6 uppercase tracking-widest">
+      <section className="py-24 relative overflow-hidden text-center">
+        <div className="w-11/12 max-w-[1400px] mx-auto relative z-10">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            custom={0.05}
+            className="inline-flex items-center gap-1.5 py-1.5 px-4 rounded-full border border-violet-600/20 bg-violet-600/[0.04] text-xs font-bold text-violet-700 uppercase tracking-wider mb-5"
+          >
             Our Stack
-          </div>
-          <h1 className="text-[clamp(36px,6vw,64px)] font-black tracking-tight mb-5">
+          </motion.div>
+          <motion.h1
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            custom={0.15}
+            className="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 leading-tight mb-6"
+          >
             The technologies that power<br /><span className="bg-gradient-to-br from-violet-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent">Jevxo Platforms</span>
-          </h1>
-          <p className="text-[17px] text-slate-600 max-w-[580px] mx-auto leading-relaxed">
+          </motion.h1>
+          <motion.p
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            custom={0.25}
+            className="text-slate-505 max-w-[620px] mx-auto text-base leading-relaxed"
+          >
             We select tools focused on performance, modularity, scale, and long-term codebase maintenance.
-          </p>
+          </motion.p>
         </div>
       </section>
 
       {/* Stack List */}
-      <section className="py-[100px] md:py-[70px] pb-[100px]">
+      <section className="py-12 border-t border-slate-900/10">
         <div className="w-11/12 max-w-[1400px] mx-auto">
-          <div className="flex flex-col gap-[50px]">
-            {categories.map((cat) => (
-              <div key={cat.title} className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 p-10 rounded-[20px]  ">
-                <div className="tech-row-grid grid grid-cols-[1fr_2fr] gap-10">
+          <div className="flex flex-col gap-10">
+            {categories.map((cat, idx) => (
+              <motion.div 
+                key={cat.title}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportSettings}
+                variants={fadeUp}
+                custom={idx * 0.08}
+                className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-300 p-8 rounded-2xl"
+              >
+                <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
                   
                   {/* Left Column */}
-                  <div>
-                    <h3 className="text-[22px] font-extrabold text-slate-900 mb-3">{cat.title}</h3>
-                    <p className="text-slate-600 text-sm leading-normal">{cat.desc}</p>
+                  <div className="lg:col-span-2">
+                    <h3 className="text-xl font-bold text-slate-900 mb-3">{cat.title}</h3>
+                    <p className="text-slate-505 text-xs leading-relaxed">{cat.desc}</p>
                   </div>
 
                   {/* Right Column (Tools Grid) */}
-                  <div className="tools-subgrid grid grid-cols-[1fr_1fr] gap-5">
-                    {cat.tools.map((tool) => (
-                      <div className="bg-slate-50 border border-slate-900/[0.06] p-5 rounded-xl" key={tool.name}>
-                        <div className="flex justify-between items-baseline mb-2">
-                          <strong className="text-[15px] text-slate-900">{tool.name}</strong>
-                          <span className="text-[10px] font-bold py-0.5 px-2 rounded-full bg-violet-50 text-violet-700 border border-violet-100">
-                            {tool.level}
-                          </span>
-                        </div>
-                        <p className="text-slate-600 text-xs leading-normal m-[0]">{tool.desc}</p>
-                      </div>
+                  <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {cat.tools.map((tool, toolIdx) => (
+                      <motion.div 
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={viewportSettings}
+                        variants={scaleIn}
+                        custom={toolIdx * 0.05}
+                        whileHover="hover"
+                        key={tool.name}
+                        className="h-full"
+                      >
+                        <motion.div
+                          variants={hoverLift}
+                          className="bg-slate-900/5 border border-slate-900/10 p-5 rounded-xl h-full flex flex-col justify-between"
+                        >
+                          <div className="flex justify-between items-baseline mb-2 gap-2 flex-wrap">
+                            <strong className="text-sm text-slate-900">{tool.name}</strong>
+                            <span className="text-[9px] font-bold py-0.5 px-2 rounded-full bg-violet-600/10 text-violet-750 border border-violet-600/20">
+                              {tool.level}
+                            </span>
+                          </div>
+                          <p className="text-slate-505 text-xs leading-relaxed">{tool.desc}</p>
+                        </motion.div>
+                      </motion.div>
                     ))}
                   </div>
 
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
 
-          <div className="text-center mt-[60px]">
-            <Link className="inline-block py-3.5 px-8 rounded-[10px] text-sm font-bold bg-gradient-to-br from-violet-600 to-indigo-600 text-white"
+          <div className="text-center mt-16">
+            <Link className="inline-block py-3.5 px-8 rounded-xl text-xs font-bold bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:shadow-violet-600/20 hover:-translate-y-0.5 transition-all"
               href="/services"
-              style={{boxShadow: "0 4px 20px rgba(124,58,237,0.3)"}}
             >
               Explore Services
             </Link>
@@ -124,19 +164,6 @@ export default function TechnologiesPage() {
       </section>
 
       <Footer />
-      <style>{`
-        @media (max-width: 800px) {
-          .tech-row-grid {
-            grid-template-columns: 1fr !important;
-            gap: 24px !important;
-          }
-        }
-        @media (max-width: 500px) {
-          .tools-subgrid {
-            grid-template-columns: 1fr !important;
-          }
-        }
-      `}</style>
     </div>
   );
 }
