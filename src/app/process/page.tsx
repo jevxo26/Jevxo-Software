@@ -51,7 +51,7 @@ export default function ProcessPage() {
       <section className="bg-hero-gradient py-[100px] md:py-[70px] relative overflow-hidden pt-[140px] pb-[60px]">
         <div className="rounded-full blur-[80px] pointer-events-none absolute bg-violet-600/[0.07] w-[500px] h-[500px] -top-[200px] -left-[100px]" />
         <div className="w-11/12 max-w-[1400px] mx-auto relative z-[1] text-center">
-          <div className="inline-block py-1 px-3.5 rounded-full border border-violet-600/[0.3] bg-violet-600/[0.08] text-xs font-semibold text-[#a78bfa] mb-6 uppercase tracking-widest">
+          <div className="inline-block py-1 px-3.5 rounded-full border border-violet-600/[0.3] bg-violet-600/[0.08] text-xs font-semibold text-violet-750 mb-6 uppercase tracking-widest">
             Our Workflow
           </div>
           <h1 className="text-[clamp(36px,6vw,64px)] font-black tracking-tight mb-5">
@@ -81,7 +81,7 @@ export default function ProcessPage() {
                 <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 flex-1 p-[30px] rounded-2xl  ">
                   <div className="flex justify-between items-baseline gap-2.5 mb-4" style={{flexWrap: "wrap"}}>
                     <h3 className="text-xl font-bold m-[0]">{step.title}</h3>
-                    <span className="text-xs text-[#a78bfa] font-bold py-0.5 px-2.5 rounded-full bg-violet-600/[0.08] border border-violet-600/[0.2]">
+                    <span className="text-xs text-violet-700 font-bold py-0.5 px-2.5 rounded-full bg-violet-600/[0.08] border border-violet-600/[0.2]">
                       {step.duration}
                     </span>
                   </div>
@@ -93,7 +93,7 @@ export default function ProcessPage() {
                     <div className="flex flex-col gap-1.5">
                       {step.deliverables.map((del) => (
                         <div className="flex gap-2 items-center text-[13px] text-slate-600" key={del}>
-                          <span className="text-[#a78bfa]">↳</span>
+                          <span className="text-violet-600 font-bold">↳</span>
                           <span>{del}</span>
                         </div>
                       ))}

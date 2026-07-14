@@ -106,7 +106,7 @@ export default function PortfolioDetailPage({ params }: Props) {
                 <h3 className="text-lg font-semibold mb-4">Technologies Used</h3>
                 <div className="flex gap-2.5" style={{flexWrap: "wrap"}}>
                   {item.tags.map((tag: string) => (
-                    <span className="py-1.5 px-4 rounded-full text-[13px] font-medium bg-violet-600/[0.1] border border-violet-600/[0.2] text-[#a78bfa]" key={tag}>{tag}</span>
+                    <span className="py-1.5 px-4 rounded-full text-[13px] font-medium bg-violet-600/[0.1] border border-violet-600/[0.2] text-violet-700" key={tag}>{tag}</span>
                   ))}
                 </div>
               </div>

@@ -34,7 +34,7 @@ export default function PortfolioPage() {
           <div className="rounded-full blur-[80px] pointer-events-none absolute bg-cyan-500/[0.06] w-[450px] h-[450px] -top-[150px] -right-[80px]" />
           <div className="rounded-full blur-[80px] pointer-events-none absolute bg-violet-600/[0.07] w-[300px] h-[300px] -bottom-[80px] -left-[60px]" />
           <div className="w-11/12 max-w-[1400px] mx-auto relative z-[1] text-center">
-            <div className="inline-block py-1 px-3.5 rounded-full border border-cyan-500/30 bg-cyan-500/8 text-xs font-semibold text-[#67e8f9] mb-6 uppercase tracking-widest">
+            <div className="inline-block py-1 px-3.5 rounded-full border border-cyan-500/30 bg-cyan-500/8 text-xs font-semibold text-cyan-700 mb-6 uppercase tracking-widest">
               Our Work
             </div>
             <h1 className="text-[clamp(36px,6vw,72px)] font-black tracking-tight mb-6">
@@ -57,7 +57,7 @@ export default function PortfolioPage() {
                   onClick={() => setActive(cat)}
                   className={`py-2 px-5 rounded-full text-sm font-medium border cursor-pointer transition-all duration-200 ${
                     active === cat
-                      ? "border-violet-600/50 bg-violet-600/15 text-violet-500"
+                      ? "border-violet-600/50 bg-violet-600/15 text-violet-700"
                       : "border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100 hover:border-slate-300"
                   }`}
                 >{cat}</button>

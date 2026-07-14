@@ -45,7 +45,7 @@ export default function PartnersPage() {
       <section className="bg-hero-gradient py-[100px] md:py-[70px] relative overflow-hidden pt-[140px] pb-[60px]">
         <div className="rounded-full blur-[80px] pointer-events-none absolute bg-violet-600/[0.07] w-[500px] h-[500px] -top-[200px] -left-[100px]" />
         <div className="w-11/12 max-w-[1400px] mx-auto relative z-[1] text-center">
-          <div className="inline-block py-1 px-3.5 rounded-full border border-violet-600/[0.3] bg-violet-600/[0.08] text-xs font-semibold text-[#a78bfa] mb-6 uppercase tracking-widest">
+          <div className="inline-block py-1 px-3.5 rounded-full border border-violet-600/[0.3] bg-violet-600/[0.08] text-xs font-semibold text-violet-700 mb-6 uppercase tracking-widest">
             Global Networks
           </div>
           <h1 className="text-[clamp(36px,6vw,64px)] font-black tracking-tight mb-5">
@@ -76,7 +76,7 @@ export default function PartnersPage() {
                 <div className="pb-4 mb-4" style={{borderBottom: "1px solid rgba(15,23,42,0.06)"}}>
                   <span className="block text-[11px] text-slate-400 uppercase font-semibold">Partner Director</span>
                   <strong className="text-[15px] text-slate-900">{p.partnerName}</strong>
-                  <span className="block text-xs text-[#a78bfa] mt-0.5">{p.rank}</span>
+                  <span className="block text-xs text-violet-600 mt-0.5">{p.rank}</span>
                 </div>
 
                 <div className="grid grid-cols-[1fr_1fr] gap-3">
@@ -117,7 +117,7 @@ export default function PartnersPage() {
             ) : (
               <form className="flex flex-col gap-5" onSubmit={handleApply}>
                 <div>
-                  <label className="block text-xs font-bold text-[#a78bfa] uppercase mb-2">Full Name</label>
+                  <label className="block text-xs font-bold text-violet-700 uppercase mb-2">Full Name</label>
                   <input className="w-full p-3 rounded-lg border border-slate-200 bg-slate-50 text-slate-900 text-sm"
                     type="text"
                     required
@@ -127,7 +127,7 @@ export default function PartnersPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-[#a78bfa] uppercase mb-2">Email Address</label>
+                  <label className="block text-xs font-bold text-violet-700 uppercase mb-2">Email Address</label>
                   <input className="w-full p-3 rounded-lg border border-slate-200 bg-slate-50 text-slate-900 text-sm"
                     type="email"
                     required
@@ -138,7 +138,7 @@ export default function PartnersPage() {
 
                 <div className="grid grid-cols-[1fr_1fr] gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-[#a78bfa] uppercase mb-2">Target Country</label>
+                    <label className="block text-xs font-bold text-violet-700 uppercase mb-2">Target Country</label>
                     <select className="w-full p-3 rounded-lg border border-slate-200 bg-slate-50 text-slate-900 text-sm"
                       value={formData.country}
                       onChange={(e) => setFormData({ ...formData, country: e.target.value })}
@@ -153,7 +153,7 @@ export default function PartnersPage() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-[#a78bfa] uppercase mb-2">Current Domain</label>
+                    <label className="block text-xs font-bold text-violet-700 uppercase mb-2">Current Domain</label>
                     <select className="w-full p-3 rounded-lg border border-slate-200 bg-slate-50 text-slate-900 text-sm"
                       value={formData.experience}
                       onChange={(e) => setFormData({ ...formData, experience: e.target.value })}

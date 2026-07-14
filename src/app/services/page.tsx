@@ -42,7 +42,7 @@ export default function ServicesPage() {
         <div className="rounded-full blur-[80px] pointer-events-none absolute bg-violet-600/[0.07] w-[500px] h-[500px] -top-[200px] -right-[100px]" />
         <div className="rounded-full blur-[80px] pointer-events-none absolute bg-cyan-500/[0.06] w-[350px] h-[350px] -bottom-[100px] -left-[80px]" />
         <div className="w-11/12 max-w-[1400px] mx-auto relative z-[1] text-center">
-          <div className="inline-block py-1 px-3.5 rounded-full border border-violet-600/[0.3] bg-violet-600/[0.08] text-xs font-semibold text-[#a78bfa] mb-6 uppercase tracking-widest">
+          <div className="inline-block py-1 px-3.5 rounded-full border border-violet-600/[0.3] bg-violet-600/[0.08] text-xs font-semibold text-violet-700 mb-6 uppercase tracking-widest">
             What We Offer
           </div>
           <h1 className="text-[clamp(36px,6vw,72px)] font-black tracking-tight mb-6">

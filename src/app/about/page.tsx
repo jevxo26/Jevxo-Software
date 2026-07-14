@@ -16,7 +16,7 @@ export default function AboutPage() {
         <div className="rounded-full blur-[80px] pointer-events-none absolute bg-violet-600/[0.07] w-[500px] h-[500px] -top-[200px] -right-[100px]" />
         <div className="rounded-full blur-[80px] pointer-events-none absolute bg-cyan-500/[0.06] w-[350px] h-[350px] -bottom-[100px] -left-[80px]" />
         <div className="w-11/12 max-w-[1400px] mx-auto relative z-[1]">
-          <div className="inline-block py-1 px-3.5 rounded-full border border-violet-600/[0.3] bg-violet-600/[0.08] text-xs font-semibold text-[#a78bfa] mb-6 uppercase tracking-widest">
+          <div className="inline-block py-1 px-3.5 rounded-full border border-violet-600/[0.3] bg-violet-600/[0.08] text-xs font-semibold text-violet-700 mb-6 uppercase tracking-widest">
             Our Story
           </div>
           <h1 className="text-[clamp(36px,6vw,72px)] font-black tracking-tight mb-6">
@@ -76,7 +76,7 @@ export default function AboutPage() {
           <div className="about-stats-grid grid grid-cols-4 gap-6">
             {stats.map((st, idx) => (
               <div key={idx} className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 py-[30px] px-6 rounded-xl text-center  ">
-                <div className="text-[40px] font-black text-[#a78bfa] mb-2">
+                <div className="text-[40px] font-black text-violet-600 mb-2">
                   {st.value}{st.suffix}
                 </div>
                 <div className="text-[15px] font-bold text-slate-900 mb-1">{st.label}</div>

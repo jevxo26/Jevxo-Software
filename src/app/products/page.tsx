@@ -94,7 +94,7 @@ export default function ProductsPage() {
         <div className="rounded-full blur-[80px] pointer-events-none absolute bg-cyan-500/[0.06] w-[350px] h-[350px] -bottom-[100px] -right-[80px]" />
         
         <div className="w-11/12 max-w-[1400px] mx-auto relative z-[1] text-center">
-          <div className="inline-block py-1 px-3.5 rounded-full border border-violet-600/30 bg-violet-600/8 text-xs font-semibold text-violet-400 mb-6 uppercase tracking-widest">
+          <div className="inline-block py-1 px-3.5 rounded-full border border-violet-600/30 bg-violet-600/8 text-xs font-semibold text-violet-750 mb-6 uppercase tracking-widest">
             Software Catalog
           </div>
           <h1 className="text-[clamp(36px,6vw,64px)] font-black tracking-tight mb-5">
@@ -110,10 +110,10 @@ export default function ProductsPage() {
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`py-2 px-5 rounded-lg text-[13px] font-semibold cursor-pointer border border-solid transition-all duration-200 flex items-center gap-2 ${
+                className={`py-2.5 px-6 rounded-xl text-[13px] font-bold cursor-pointer border border-solid transition-all duration-200 flex items-center gap-2 ${
                   activeTab === tab
-                    ? "bg-violet-600/15 text-violet-400 border-violet-600/30"
-                    : "bg-white/3 text-slate-600 border-white/6"
+                    ? "bg-violet-600/15 text-violet-750 border-violet-600/30"
+                    : "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200 hover:border-slate-350"
                 }`}
               >
                 {tab === "All" ? <><ShoppingBag className="w-4 h-4" /> All Products</> : tab}
@@ -147,7 +147,7 @@ export default function ProductsPage() {
                   <div className="flex flex-col gap-2.5 mb-7">
                     {prod.features.slice(0, 3).map((f) => (
                       <div key={f} className="flex gap-2 items-center text-[13px] text-slate-600">
-                        <span className="text-[#a78bfa]">✓</span>
+                        <span className="text-violet-650 font-bold">✓</span>
                         <span>{f}</span>
                       </div>
                     ))}
@@ -201,7 +201,7 @@ export default function ProductsPage() {
                 <div className="flex flex-col gap-2">
                   {selectedProduct.features.map(f => (
                     <div key={f} className="flex gap-2 items-center text-[13px] text-slate-600">
-                      <span className="text-[#a78bfa]">✓</span>
+                      <span className="text-violet-650 font-bold">✓</span>
                       <span>{f}</span>
                     </div>
                   ))}

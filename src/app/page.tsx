@@ -741,12 +741,16 @@ export default function HomePage() {
                 <path d="M 0,64 Q 200,32 460,32" stroke="#7c3aed" strokeWidth="1.5" strokeOpacity="0.3" />
                 {/* Moving dot */}
                 <motion.circle
+                  cx={0}
+                  cy={0}
                   r="3.5"
                   fill="#7c3aed"
                   animate={{ cx: [0, 460], cy: [0, 32] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                 />
                 <motion.circle
+                  cx={0}
+                  cy={64}
                   r="3.5"
                   fill="#06b6d4"
                   animate={{ cx: [0, 460], cy: [64, 32] }}
@@ -776,12 +780,16 @@ export default function HomePage() {
                 <path d="M 40,32 Q 300,32 500,64" stroke="#06b6d4" strokeWidth="1.5" strokeOpacity="0.3" />
                 {/* Moving dot */}
                 <motion.circle
+                  cx={40}
+                  cy={32}
                   r="3.5"
                   fill="#06b6d4"
                   animate={{ cx: [40, 500], cy: [32, 0] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 }}
                 />
                 <motion.circle
+                  cx={40}
+                  cy={32}
                   r="3.5"
                   fill="#7c3aed"
                   animate={{ cx: [40, 500], cy: [32, 64] }}

@@ -44,7 +44,7 @@ export default function JobsPage() {
           <div className="rounded-full blur-[80px] pointer-events-none absolute bg-violet-600/[0.07] w-[500px] h-[500px] -top-[200px] -right-[100px]" />
           <div className="rounded-full blur-[80px] pointer-events-none absolute bg-cyan-500/[0.06] w-[350px] h-[350px] -bottom-[100px] -left-[80px]" />
           <div className="w-11/12 max-w-[1400px] mx-auto relative z-[1]">
-          <div className="inline-block py-1 px-3.5 rounded-full border border-violet-600/[0.3] bg-violet-600/[0.08] text-xs font-semibold text-[#a78bfa] mb-6 uppercase tracking-widest">
+          <div className="inline-block py-1 px-3.5 rounded-full border border-violet-600/[0.3] bg-violet-600/[0.08] text-xs font-semibold text-violet-700 mb-6 uppercase tracking-widest">
             Careers
           </div>
           <h1 className="text-[clamp(36px,6vw,72px)] font-black tracking-tight mb-6">
@@ -69,7 +69,7 @@ export default function JobsPage() {
                   <div key={idx} className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 p-7 rounded-2xl">
                     <div className="flex justify-between gap-3 mb-2" style={{flexWrap: "wrap"}}>
                       <h3 className="text-lg font-bold text-slate-900">{job.title}</h3>
-                      <span className="text-xs font-bold text-[#a78bfa]">{job.salary}</span>
+                      <span className="text-xs font-bold text-violet-700">{job.salary}</span>
                     </div>
                     <div className="text-xs text-slate-600 mb-3.5">{job.type}</div>
                     <p className="text-sm text-slate-600 leading-normal">{job.desc}</p>
@@ -91,7 +91,7 @@ export default function JobsPage() {
                   <h3 className="text-xl font-extrabold mb-6">Submit Application</h3>
                   
                   <div className="mb-4">
-                    <label className="block text-xs font-bold text-[#a78bfa] uppercase mb-2">Full Name</label>
+                    <label className="block text-xs font-bold text-violet-700 uppercase mb-2">Full Name</label>
                     <input className="w-full py-3 px-4 rounded-lg border border-slate-200 bg-slate-50 text-slate-900 text-sm"
                       type="text"
                       required
@@ -101,7 +101,7 @@ export default function JobsPage() {
                   </div>
 
                   <div className="mb-4">
-                    <label className="block text-xs font-bold text-[#a78bfa] uppercase mb-2">Email Address</label>
+                    <label className="block text-xs font-bold text-violet-700 uppercase mb-2">Email Address</label>
                     <input className="w-full py-3 px-4 rounded-lg border border-slate-200 bg-slate-50 text-slate-900 text-sm"
                       type="email"
                       required
@@ -111,7 +111,7 @@ export default function JobsPage() {
                   </div>
 
                   <div className="mb-4">
-                    <label className="block text-xs font-bold text-[#a78bfa] uppercase mb-2">Position Applying For</label>
+                    <label className="block text-xs font-bold text-violet-700 uppercase mb-2">Position Applying For</label>
                     <select className="w-full py-3 px-4 rounded-lg border border-slate-200 bg-slate-50 text-slate-900 text-sm"
                       value={applyForm.position}
                       onChange={(e) => setApplyForm({ ...applyForm, position: e.target.value })}
@@ -123,7 +123,7 @@ export default function JobsPage() {
                   </div>
 
                   <div className="mb-4">
-                    <label className="block text-xs font-bold text-[#a78bfa] uppercase mb-2">Portfolio / Resume Link</label>
+                    <label className="block text-xs font-bold text-violet-700 uppercase mb-2">Portfolio / Resume Link</label>
                     <input className="w-full py-3 px-4 rounded-lg border border-slate-200 bg-slate-50 text-slate-900 text-sm"
                       type="url"
                       placeholder="https://..."
@@ -134,7 +134,7 @@ export default function JobsPage() {
                   </div>
 
                   <div className="mb-6">
-                    <label className="block text-xs font-bold text-[#a78bfa] uppercase mb-2">Cover Letter Notes</label>
+                    <label className="block text-xs font-bold text-violet-700 uppercase mb-2">Cover Letter Notes</label>
                     <textarea className="w-full py-3 px-4 rounded-lg border border-slate-200 bg-slate-50 text-slate-900 text-sm"
                       rows={4}
                       value={applyForm.message}

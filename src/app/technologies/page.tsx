@@ -66,7 +66,7 @@ export default function TechnologiesPage() {
       <section className="bg-hero-gradient py-[100px] md:py-[70px] relative overflow-hidden pt-[140px] pb-[60px]">
         <div className="rounded-full blur-[80px] pointer-events-none absolute bg-cyan-500/[0.06] w-[500px] h-[500px] -top-[200px] -right-[100px]" />
         <div className="w-11/12 max-w-[1400px] mx-auto relative z-[1] text-center">
-          <div className="inline-block py-1 px-3.5 rounded-full border border-violet-600/[0.3] bg-violet-600/[0.08] text-xs font-semibold text-[#a78bfa] mb-6 uppercase tracking-widest">
+          <div className="inline-block py-1 px-3.5 rounded-full border border-violet-600/[0.3] bg-violet-600/[0.08] text-xs font-semibold text-violet-750 mb-6 uppercase tracking-widest">
             Our Stack
           </div>
           <h1 className="text-[clamp(36px,6vw,64px)] font-black tracking-tight mb-5">
@@ -98,7 +98,7 @@ export default function TechnologiesPage() {
                       <div className="bg-slate-50 border border-slate-900/[0.06] p-5 rounded-xl" key={tool.name}>
                         <div className="flex justify-between items-baseline mb-2">
                           <strong className="text-[15px] text-slate-900">{tool.name}</strong>
-                          <span className="text-[10px] font-bold py-0.5 px-2 rounded-full bg-[rgba(167,139,250,0.1)] text-[#a78bfa] border border-[rgba(167,139,250,0.2)]">
+                          <span className="text-[10px] font-bold py-0.5 px-2 rounded-full bg-violet-50 text-violet-700 border border-violet-100">
                             {tool.level}
                           </span>
                         </div>

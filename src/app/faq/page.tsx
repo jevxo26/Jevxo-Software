@@ -59,7 +59,7 @@ export default function FAQPage() {
       <section className="bg-hero-gradient py-[100px] md:py-[70px] relative overflow-hidden pt-[140px] pb-[60px]">
         <div className="rounded-full blur-[80px] pointer-events-none absolute bg-violet-600/[0.07] w-[500px] h-[500px] -top-[200px] -right-[100px]" />
         <div className="w-11/12 max-w-[1400px] mx-auto relative z-[1] text-center">
-          <div className="inline-block py-1 px-3.5 rounded-full border border-violet-600/30 bg-violet-600/8 text-xs font-semibold text-violet-400 mb-6 uppercase tracking-widest">
+          <div className="inline-block py-1 px-3.5 rounded-full border border-violet-600/30 bg-violet-600/8 text-xs font-semibold text-violet-700 mb-6 uppercase tracking-widest">
             FAQ Center
           </div>
           <h1 className="text-[clamp(36px,6vw,64px)] font-black tracking-tight mb-5">
@@ -75,10 +75,10 @@ export default function FAQPage() {
               <button
                 key={filter}
                 onClick={() => { setActiveFilter(filter); setActiveFaq(null); }}
-                className={`py-2 px-5 rounded-lg text-[13px] font-semibold cursor-pointer border border-solid transition-all duration-200 flex items-center gap-2 ${
+                className={`py-2.5 px-6 rounded-xl text-[13px] font-bold cursor-pointer border border-solid transition-all duration-200 flex items-center gap-2 ${
                   activeFilter === filter
-                    ? "bg-violet-600/15 text-violet-400 border-violet-600/30"
-                    : "bg-white/3 text-slate-600 border-white/6"
+                    ? "bg-violet-600/15 text-violet-750 border-violet-600/30"
+                    : "bg-slate-100 text-slate-750 border-slate-200 hover:bg-slate-200 hover:border-slate-350"
                 }`}
               >
                 {filter === "all" && <><HelpCircle className="w-4 h-4" /> Show All</>}

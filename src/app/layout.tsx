@@ -11,15 +11,15 @@ const baiJamjuree = Bai_Jamjuree({
 
 export const metadata: Metadata = {
   title: {
-    default: "Jevxo — Digital Agency & Software Studio",
+    default: "Jevxo — B2B B2C Enterprise Software Company",
     template: "%s | Jevxo",
   },
   description:
-    "Jevxo is a full-service digital agency building high-performance web applications, mobile apps, and AI-powered products for ambitious companies worldwide.",
-  keywords: ["digital agency", "web development", "UI/UX design", "mobile apps", "AI integration", "Next.js"],
+    "Jevxo is a premium enterprise software company building high-performance B2B SaaS tools, custom business operating platforms, and corporate cloud software systems.",
+  keywords: ["enterprise software", "B2B SaaS", "business management", "custom CRM", "school ERP", "Next.js"],
   openGraph: {
-    title: "Jevxo — Digital Agency & Software Studio",
-    description: "Building the digital products of tomorrow, today.",
+    title: "Jevxo — Enterprise Software Company & B2B SaaS Suite",
+    description: "Engineering robust operating ecosystems for modern businesses.",
     url: "https://jevxo.com",
     siteName: "Jevxo",
     type: "website",

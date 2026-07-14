@@ -45,7 +45,7 @@ export default function PricingPage() {
         <div className="rounded-full blur-[80px] pointer-events-none absolute bg-cyan-500/[0.06] w-[350px] h-[350px] -bottom-[100px] -left-[80px]" />
         
         <div className="w-11/12 max-w-[1400px] mx-auto relative z-[1] text-center">
-          <div className="inline-block py-1 px-3.5 rounded-full border border-violet-600/30 bg-violet-600/8 text-xs font-semibold text-violet-400 mb-6 uppercase tracking-widest">
+          <div className="inline-block py-1 px-3.5 rounded-full border border-violet-600/30 bg-violet-600/8 text-xs font-semibold text-violet-700 mb-6 uppercase tracking-widest">
             Pricing Plans
           </div>
           <h1 className="text-[clamp(36px,6vw,64px)] font-black tracking-tight mb-5">
@@ -56,23 +56,23 @@ export default function PricingPage() {
           </p>
 
           {/* Toggle */}
-          <div className="inline-flex items-center bg-white/3 border border-white/8 p-1 rounded-full">
+          <div className="inline-flex items-center bg-slate-100 border border-slate-200 p-1.5 rounded-full shadow-[0_2px_8px_rgba(15,23,42,0.03)]">
             <button
               onClick={() => setIsYearly(false)}
-              className={`py-2 px-5 rounded-full text-[13px] font-semibold cursor-pointer transition-all duration-300 ${
+              className={`py-2.5 px-6 rounded-full text-[13px] font-bold cursor-pointer transition-all duration-300 ${
                 !isYearly
-                  ? "bg-gradient-to-br from-violet-600 to-indigo-600 text-white"
-                  : "bg-transparent text-slate-600"
+                  ? "bg-gradient-to-br from-violet-600 to-indigo-600 text-white shadow-md shadow-violet-600/20"
+                  : "bg-transparent text-slate-650 hover:text-slate-850"
               }`}
             >
               Monthly billing
             </button>
             <button
               onClick={() => setIsYearly(true)}
-              className={`py-2 px-5 rounded-full text-[13px] font-semibold cursor-pointer transition-all duration-300 ${
+              className={`py-2.5 px-6 rounded-full text-[13px] font-bold cursor-pointer transition-all duration-300 ${
                 isYearly
-                  ? "bg-gradient-to-br from-violet-600 to-indigo-600 text-white"
-                  : "bg-transparent text-slate-600"
+                  ? "bg-gradient-to-br from-violet-600 to-indigo-600 text-white shadow-md shadow-violet-600/20"
+                  : "bg-transparent text-slate-650 hover:text-slate-850"
               }`}
             >
               Yearly (Save 20%)
@@ -114,7 +114,7 @@ export default function PricingPage() {
                     <div className="flex flex-col gap-3 border-t border-slate-100 pt-6 mb-8">
                       {plan.features.map((feat) => (
                         <div key={feat} className="flex gap-2.5 items-center">
-                          <span className="text-[#a78bfa] text-[13px]">✓</span>
+                          <span className="text-violet-600 font-bold text-[13px]">✓</span>
                           <span className="text-[13px] text-slate-600">{feat}</span>
                         </div>
                       ))}
@@ -125,8 +125,8 @@ export default function PricingPage() {
                     href="/contact"
                     className={`block text-center p-3 rounded-lg text-sm font-bold transition-all duration-200 ${
                       plan.name === "Growth"
-                        ? "bg-gradient-to-br from-violet-600 to-indigo-600 text-white shadow-lg shadow-violet-600/20"
-                        : "bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200"
+                        ? "bg-gradient-to-br from-violet-600 to-indigo-600 text-white shadow-lg shadow-violet-600/20 hover:shadow-violet-600/30"
+                        : "bg-slate-50 border border-slate-300 text-slate-700 hover:bg-slate-100 hover:border-slate-400 hover:text-slate-900"
                     }`}
                   >
                     Select Plan
