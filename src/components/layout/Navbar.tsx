@@ -120,7 +120,7 @@ export default function Navbar() {
                     <div className="rounded-2xl bg-white border border-slate-200 shadow-[0_20px_50px_rgba(15,23,42,0.08)] p-2 w-60">
                       {link.subLinks.map((sub) => (
                         <Link
-                          key={sub.href}
+                          key={sub.label}
                           href={sub.href}
                           className={`block px-4 py-2.5 rounded-xl text-[13px] font-semibold transition-colors duration-150 ${pathname === sub.href
                               ? "text-violet-700 bg-violet-600/5"
@@ -239,7 +239,7 @@ export default function Navbar() {
               >
                 {link.subLinks.map((sub) => (
                   <Link
-                    key={sub.href}
+                    key={sub.label}
                     href={sub.href}
                     className={`flex items-center gap-2 text-[15px] font-semibold px-6 py-2 rounded-lg transition-colors duration-150 ${pathname === sub.href
                         ? "text-violet-750"
