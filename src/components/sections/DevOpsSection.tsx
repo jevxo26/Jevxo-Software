@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import ScrollReveal from "@/components/ui/ScrollReveal";
+import { fadeUp, scaleIn, viewportSettings, hoverLift } from "@/lib/animations";
 
 function TerminalSnippet() {
   const [step, setStep] = useState(0);
@@ -181,7 +181,7 @@ function ScalableArchitecture() {
       </div>
 
       <div className="flex flex-col items-center gap-1 z-10">
-        <div className="w-7 h-7 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center">
+        <div className="w-7 h-7 rounded-lg bg-cyan-505/10 border border-cyan-500/30 flex items-center justify-center">
           <svg className="w-3.5 h-3.5 text-cyan-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <ellipse cx="12" cy="5" rx="9" ry="3" />
             <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
@@ -196,30 +196,61 @@ function ScalableArchitecture() {
 
 export default function DevOpsSection() {
   return (
-    <section className="py-24 border-t border-slate-900/10 bg-gradient-to-b from-white via-slate-50/50 to-white relative overflow-hidden" id="devops-workflow">
+    <section className="py-24 border-t border-slate-900/10 bg-transparent relative overflow-hidden" id="devops-workflow">
       <div className="absolute w-[500px] h-[500px] -top-36 -right-24 rounded-full bg-cyan-500/5 blur-[120px] pointer-events-none" />
       <div className="absolute w-[500px] h-[500px] -bottom-36 -left-24 rounded-full bg-violet-600/5 blur-[120px] pointer-events-none" />
       
       <div className="w-11/12 max-w-[1400px] mx-auto relative z-10">
-        <ScrollReveal variant="slideUp">
-          <div className="text-center mb-16">
-            <div className="inline-block py-1.5 px-4 rounded-full border border-violet-600/20 bg-violet-600/[0.04] text-xs font-bold text-violet-700 mb-6 uppercase tracking-wider">
-              DevOps Workflow
-            </div>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-6">
-              Smarter Dev, <span className="bg-gradient-to-br from-violet-600 via-blue-500 to-cyan-500 bg-clip-text text-transparent">Supercharged By DevOps</span>
-            </h2>
-            <p className="text-slate-600 max-w-[620px] mx-auto mt-4 text-base leading-relaxed">
-              From code to cloud, we optimize every step of your software lifecycle for speed, security, and scalability.
-            </p>
-          </div>
-        </ScrollReveal>
+        
+        <div className="text-center mb-16">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            variants={fadeUp}
+            custom={0.05}
+            className="inline-flex items-center gap-1.5 py-1.5 px-4 rounded-full border border-violet-600/20 bg-violet-600/[0.04] text-xs font-bold text-violet-700 uppercase tracking-wider mb-5"
+          >
+            DevOps Workflow
+          </motion.div>
+          <motion.h2
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            variants={fadeUp}
+            custom={0.15}
+            className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight"
+          >
+            Smarter Dev, <span className="bg-gradient-to-br from-violet-600 via-blue-500 to-cyan-500 bg-clip-text text-transparent">Supercharged By DevOps</span>
+          </motion.h2>
+          <motion.p
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            variants={fadeUp}
+            custom={0.25}
+            className="text-slate-505 max-w-[620px] mx-auto mt-4 text-base leading-relaxed"
+          >
+            From code to cloud, we optimize every step of your software lifecycle for speed, security, and scalability.
+          </motion.p>
+        </div>
 
         {/* Top Row Grid (3 cards) */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Card 1: Infrastructure */}
-          <ScrollReveal variant="slideUp" delay={100} className="h-full">
-            <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] hover:-translate-y-1.5 transition-all duration-300 rounded-2xl p-7 flex flex-col justify-between h-full">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            variants={scaleIn}
+            custom={0.1}
+            whileHover="hover"
+            className="h-full"
+          >
+            <motion.div
+              variants={hoverLift}
+              className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-300 rounded-2xl p-7 flex flex-col justify-between h-full"
+            >
               <div>
                 <h3 className="text-lg font-bold text-slate-900 mb-1">
                   Infrastructure <span className="italic font-serif text-violet-600 font-normal">As Code</span>
@@ -229,12 +260,23 @@ export default function DevOpsSection() {
                 </p>
               </div>
               <TerminalSnippet />
-            </div>
-          </ScrollReveal>
+            </motion.div>
+          </motion.div>
 
           {/* Card 2: CI/CD */}
-          <ScrollReveal variant="slideUp" delay={200} className="h-full">
-            <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] hover:-translate-y-1.5 transition-all duration-300 rounded-2xl p-7 flex flex-col justify-between h-full">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            variants={scaleIn}
+            custom={0.2}
+            whileHover="hover"
+            className="h-full"
+          >
+            <motion.div
+              variants={hoverLift}
+              className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-300 rounded-2xl p-7 flex flex-col justify-between h-full"
+            >
               <div>
                 <h3 className="text-lg font-bold text-slate-900 mb-1">
                   CI/CD <span className="italic font-serif text-cyan-600 font-normal">Automated Pipelines</span>
@@ -244,12 +286,23 @@ export default function DevOpsSection() {
                 </p>
               </div>
               <PipelineVisualizer />
-            </div>
-          </ScrollReveal>
+            </motion.div>
+          </motion.div>
 
           {/* Card 3: Monitoring */}
-          <ScrollReveal variant="slideUp" delay={300} className="h-full">
-            <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] hover:-translate-y-1.5 transition-all duration-300 rounded-2xl p-7 flex flex-col justify-between h-full">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            variants={scaleIn}
+            custom={0.3}
+            whileHover="hover"
+            className="h-full"
+          >
+            <motion.div
+              variants={hoverLift}
+              className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-300 rounded-2xl p-7 flex flex-col justify-between h-full"
+            >
               <div>
                 <h3 className="text-lg font-bold text-slate-900 mb-1">
                   Real-time <span className="italic font-serif text-cyan-600 font-normal">Monitoring</span>
@@ -259,8 +312,8 @@ export default function DevOpsSection() {
                 </p>
               </div>
               <RealTimeMonitoring />
-            </div>
-          </ScrollReveal>
+            </motion.div>
+          </motion.div>
         </div>
 
         {/* Central Connecting Hub */}
@@ -333,49 +386,82 @@ export default function DevOpsSection() {
         {/* Bottom Row Grid (3 cards) */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Card 4: Security */}
-          <ScrollReveal variant="slideUp" delay={100} className="h-full">
-            <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] hover:-translate-y-1.5 transition-all duration-300 rounded-2xl p-7 flex flex-col justify-between h-full">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            variants={scaleIn}
+            custom={0.4}
+            whileHover="hover"
+            className="h-full"
+          >
+            <motion.div
+              variants={hoverLift}
+              className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-300 rounded-2xl p-7 flex flex-col justify-between h-full"
+            >
               <div>
                 <h3 className="text-lg font-bold text-slate-900 mb-1">
                   Security <span className="italic font-serif text-violet-600 font-normal">DevSecOps</span>
                 </h3>
-                <p className="text-xs text-slate-500 mb-6 leading-relaxed">
+                <p className="text-xs text-slate-505 mb-6 leading-relaxed">
                   Automated vulnerability scanning at every commit.
                 </p>
               </div>
               <SecurityScanner />
-            </div>
-          </ScrollReveal>
+            </motion.div>
+          </motion.div>
 
           {/* Card 5: Rapid Deployment */}
-          <ScrollReveal variant="slideUp" delay={200} className="h-full">
-            <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] hover:-translate-y-1.5 transition-all duration-300 rounded-2xl p-7 flex flex-col justify-between h-full">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            variants={scaleIn}
+            custom={0.5}
+            whileHover="hover"
+            className="h-full"
+          >
+            <motion.div
+              variants={hoverLift}
+              className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-300 rounded-2xl p-7 flex flex-col justify-between h-full"
+            >
               <div>
                 <h3 className="text-lg font-bold text-slate-900 mb-1">
                   Rapid <span className="italic font-serif text-cyan-600 font-normal">Deployment</span>
                 </h3>
-                <p className="text-xs text-slate-500 mb-6 leading-relaxed">
+                <p className="text-xs text-slate-505 mb-6 leading-relaxed">
                   Zero-downtime deployments to production environments.
                 </p>
               </div>
               <DeploymentConsole />
-            </div>
-          </ScrollReveal>
+            </motion.div>
+          </motion.div>
 
           {/* Card 6: Scalable Architecture */}
-          <ScrollReveal variant="slideUp" delay={300} className="h-full">
-            <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] hover:-translate-y-1.5 transition-all duration-300 rounded-2xl p-7 flex flex-col justify-between h-full">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            variants={scaleIn}
+            custom={0.6}
+            whileHover="hover"
+            className="h-full"
+          >
+            <motion.div
+              variants={hoverLift}
+              className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-300 rounded-2xl p-7 flex flex-col justify-between h-full"
+            >
               <div>
                 <h3 className="text-lg font-bold text-slate-900 mb-1">
                   Scalable <span className="italic font-serif text-cyan-600 font-normal">Architecture</span>
                 </h3>
-                <p className="text-xs text-slate-500 mb-6 leading-relaxed">
+                <p className="text-xs text-slate-505 mb-6 leading-relaxed">
                   Database and service scaling that grows with you.
                 </p>
               </div>
               <ScalableArchitecture />
-            </div>
-          </ScrollReveal>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </section>

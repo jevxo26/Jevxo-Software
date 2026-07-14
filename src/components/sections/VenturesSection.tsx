@@ -1,56 +1,122 @@
 "use client";
 
-import ScrollReveal from "@/components/ui/ScrollReveal";
-import { 
-  Zap, 
-  GraduationCap, 
-  Utensils, 
-  Briefcase, 
-  Target, 
-  Sparkles 
-} from "lucide-react";
+import { motion } from "framer-motion";
+import { fadeUp, scaleIn, viewportSettings, hoverLift } from "@/lib/animations";
+
+// Premium Custom SVGs
+const IconZap = () => (
+  <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+  </svg>
+);
+
+const IconGraduation = () => (
+  <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+    <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5" />
+  </svg>
+);
+
+const IconUtensils = () => (
+  <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2M7 2v4M21 15V2v0a5 5 0 0 0-5 5v8h5zm0 0v6h-2v-6" />
+  </svg>
+);
+
+const IconBriefcase = () => (
+  <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+  </svg>
+);
+
+const IconTarget = () => (
+  <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="10" />
+    <circle cx="12" cy="12" r="6" />
+    <circle cx="12" cy="12" r="2" />
+  </svg>
+);
+
+const IconSparkles = () => (
+  <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m11.314 11.314l.707-.707M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z" />
+  </svg>
+);
 
 const ventures = [
-  { title: "Jevxo Web", desc: "Global design & engineering studio crafting high-end SaaS applications and experiences.", icon: Zap, focus: "UI/UX & Engineering" },
-  { title: "Jevxo School", desc: "E-learning and educational administrative networks serving institutions worldwide.", icon: GraduationCap, focus: "EdTech Systems" },
-  { title: "Jevxo Restaurant", desc: "Unified kitchen management, order tracking, and table optimization platforms.", icon: Utensils, focus: "F&B SaaS Solutions" },
-  { title: "Jevxo Business", desc: "Comprehensive Enterprise Resource Planning and logistics operating suites.", icon: Briefcase, focus: "Corporate ERP" },
-  { title: "Jevxo Marketing", desc: "AI-driven automated marketing campaigns, SEO auditing, and ad management hubs.", icon: Target, focus: "Growth Automation" },
-  { title: "Future Ventures", desc: "Investing in next-generation decentralized databases and AI-agent business systems.", icon: Sparkles, focus: "R&D and Ventures" },
+  { title: "Jevxo Web", desc: "Global design & engineering studio crafting high-end SaaS applications and experiences.", Icon: IconZap, focus: "UI/UX & Engineering" },
+  { title: "Jevxo School", desc: "E-learning and educational administrative networks serving institutions worldwide.", Icon: IconGraduation, focus: "EdTech Systems" },
+  { title: "Jevxo Restaurant", desc: "Unified kitchen management, order tracking, and table optimization platforms.", Icon: IconUtensils, focus: "F&B SaaS Solutions" },
+  { title: "Jevxo Business", desc: "Comprehensive Enterprise Resource Planning and logistics operating suites.", Icon: IconBriefcase, focus: "Corporate ERP" },
+  { title: "Jevxo Marketing", desc: "AI-driven automated marketing campaigns, SEO auditing, and ad management hubs.", Icon: IconTarget, focus: "Growth Automation" },
+  { title: "Future Ventures", desc: "Investing in next-generation decentralized databases and AI-agent business systems.", Icon: IconSparkles, focus: "R&D and Ventures" },
 ];
 
 export default function VenturesSection() {
   return (
-    <section className="py-24 border-t border-slate-900/10 bg-white/50 relative" id="ventures">
+    <section className="py-24 border-t border-slate-900/10 bg-transparent relative" id="ventures">
       <div className="w-11/12 max-w-[1400px] mx-auto">
-        <ScrollReveal variant="slideUp">
-          <div className="text-center mb-16">
-            <div className="text-violet-600 text-sm font-bold uppercase tracking-wider mb-3">
-              Ventures
-            </div>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900">
-              Our Ecosystem of <span className="bg-gradient-to-br from-pink-500 via-violet-500 to-blue-500 bg-clip-text text-transparent">Active Enterprises</span>
-            </h2>
-            <p className="text-slate-600 max-w-[580px] mx-auto mt-4 text-base">
-              Jevxo operates specialized subsidiary companies, each dedicated to engineering and managing specific industries.
-            </p>
-          </div>
-        </ScrollReveal>
+        
+        <div className="text-center mb-16">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            variants={fadeUp}
+            custom={0.05}
+            className="inline-flex items-center gap-1.5 py-1.5 px-4 rounded-full border border-violet-600/20 bg-violet-600/[0.04] text-xs font-bold text-violet-700 uppercase tracking-wider mb-5"
+          >
+            Ventures
+          </motion.div>
+          <motion.h2
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            variants={fadeUp}
+            custom={0.15}
+            className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight"
+          >
+            Our Ecosystem of <span className="bg-gradient-to-br from-violet-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent">Active Enterprises</span>
+          </motion.h2>
+          <motion.p
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            variants={fadeUp}
+            custom={0.25}
+            className="text-slate-505 max-w-[620px] mx-auto mt-4 text-base leading-relaxed"
+          >
+            Jevxo operates specialized subsidiary companies, each dedicated to engineering and managing specific industries.
+          </motion.p>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
           {ventures.map((v, idx) => (
-            <ScrollReveal key={idx} variant="slideUp" delay={idx * 150} duration={600} className="h-full">
-              <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] hover:border-violet-600/40 hover:shadow-xl hover:shadow-violet-600/10 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300 p-8 rounded-2xl flex gap-5 group h-full">
+            <motion.div
+              key={idx}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportSettings}
+              variants={scaleIn}
+              custom={idx * 0.08}
+              whileHover="hover"
+              className="h-full"
+            >
+              <motion.div
+                variants={hoverLift}
+                className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-300 p-8 rounded-2xl flex gap-5 group h-full"
+              >
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-600 to-indigo-600 flex items-center justify-center shrink-0 text-white shadow-md shadow-violet-600/20 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
-                  <v.icon className="w-6 h-6" />
+                  <v.Icon />
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-slate-900 mb-1">{v.title}</h3>
                   <div className="text-xs font-semibold text-cyan-600 uppercase tracking-wider mb-3">{v.focus}</div>
-                  <p className="text-sm text-slate-600 leading-relaxed">{v.desc}</p>
+                  <p className="text-sm text-slate-505 leading-relaxed">{v.desc}</p>
                 </div>
-              </div>
-            </ScrollReveal>
+              </motion.div>
+            </motion.div>
           ))}
         </div>
       </div>

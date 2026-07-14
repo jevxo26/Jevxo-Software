@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import ScrollReveal from "@/components/ui/ScrollReveal";
+import { motion } from "framer-motion";
+import { fadeUp, scaleIn, viewportSettings, hoverLift } from "@/lib/animations";
 
 const technologies = [
   {
@@ -106,65 +107,105 @@ const technologies = [
 
 export default function TechStackSection() {
   return (
-    <section className="py-24 border-t border-slate-900/10 bg-gradient-to-b from-white via-violet-50/20 to-white relative overflow-hidden" id="tech-stack">
+    <section className="py-24 border-t border-slate-900/10 bg-transparent relative overflow-hidden" id="tech-stack">
       <div className="absolute w-[400px] h-[400px] -top-24 -left-24 rounded-full bg-violet-600/5 blur-[100px] pointer-events-none" />
       <div className="absolute w-[400px] h-[400px] -bottom-24 -right-24 rounded-full bg-cyan-500/5 blur-[100px] pointer-events-none" />
       
       <div className="w-11/12 max-w-[1400px] mx-auto text-center relative z-10">
-        <ScrollReveal variant="slideUp">
-          <div className="inline-block py-1.5 px-4 rounded-full border border-violet-600/20 bg-violet-600/[0.04] text-xs font-bold text-violet-700 mb-7 uppercase tracking-wider">
+        <div>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            variants={fadeUp}
+            custom={0.05}
+            className="inline-flex items-center gap-1.5 py-1.5 px-4 rounded-full border border-violet-600/20 bg-violet-600/[0.04] text-xs font-bold text-violet-700 uppercase tracking-wider mb-5"
+          >
             Integrations
-          </div>
-          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-6">
+          </motion.div>
+          <motion.h2
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            variants={fadeUp}
+            custom={0.15}
+            className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight"
+          >
             Technology Stack for <span className="bg-gradient-to-br from-violet-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent">Maximum Efficiency</span>
-          </h2>
-          <p className="text-slate-600 max-w-[620px] mx-auto mt-4 text-base leading-relaxed mb-10">
+          </motion.h2>
+          <motion.p
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            variants={fadeUp}
+            custom={0.25}
+            className="text-slate-500 max-w-[620px] mx-auto mt-4 text-base leading-relaxed mb-10"
+          >
             Jevxo leverages leading technologies and platforms, ensuring robust, high-performance, and scalable solutions for modern enterprises.
-          </p>
+          </motion.p>
           
-          <div className="mb-14">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            variants={fadeUp}
+            custom={0.35}
+            className="mb-14"
+          >
             <Link href="/about" className="inline-block py-4 px-10 rounded-[14px] font-bold text-[17px] bg-gradient-to-br from-violet-600 to-indigo-600 text-white shadow-lg shadow-violet-600/20 hover:shadow-violet-600/30 hover:-translate-y-0.5 transition-all duration-200">
               View About Jevxo
             </Link>
-          </div>
-        </ScrollReveal>
+          </motion.div>
+        </div>
 
         {/* Row of Technology Circles */}
-        <ScrollReveal variant="scaleUp" delay={200}>
-          <div className="flex items-center justify-center gap-6 md:gap-7 flex-wrap max-w-5xl mx-auto px-4 py-8">
-            {technologies.map((tech) => (
-              <div
-                key={tech.name}
-                className="group relative flex flex-col items-center"
+        <div className="flex items-center justify-center gap-6 md:gap-7 flex-wrap max-w-5xl mx-auto px-4 py-8">
+          {technologies.map((tech, idx) => (
+            <motion.div
+              key={tech.name}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportSettings}
+              variants={scaleIn}
+              custom={idx * 0.05 + 0.3}
+              whileHover="hover"
+              className="group relative flex flex-col items-center"
+            >
+              <motion.div
+                variants={hoverLift}
+                className={`w-[68px] h-[68px] md:w-[76px] md:h-[76px] rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 ${tech.color} ${
+                  tech.isHighlighted 
+                    ? "shadow-[0_0_25px_rgba(240,80,50,0.4)] animate-pulse" 
+                    : "shadow-[0_4px_16px_rgba(15,23,42,0.06)] hover:shadow-lg"
+                }`}
               >
-                <div
-                  className={`w-[68px] h-[68px] md:w-[76px] md:h-[76px] rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 transform hover:scale-125 hover:-translate-y-2 select-none ${tech.color} ${
-                    tech.isHighlighted 
-                      ? "shadow-[0_0_25px_rgba(240,80,50,0.4)] animate-pulse" 
-                      : "shadow-[0_4px_16px_rgba(15,23,42,0.06)] hover:shadow-lg"
-                  }`}
-                >
-                  <div className="transform transition-transform duration-300 group-hover:rotate-12">
-                    {tech.icon}
-                  </div>
+                <div className="transform transition-transform duration-300 group-hover:rotate-12">
+                  {tech.icon}
                 </div>
-                
-                {/* Tooltip */}
-                <span className="absolute bottom-full mb-3 scale-0 group-hover:scale-100 transition-all duration-150 bg-slate-900 text-white text-[11px] font-bold py-1.5 px-3 rounded-lg shadow-xl whitespace-nowrap z-30">
-                  {tech.name}
-                  {/* Tooltip Arrow */}
-                  <span className="absolute top-full left-1/2 -translate-x-1/2 border-[5px] border-transparent border-t-slate-900" />
-                </span>
-              </div>
-            ))}
-          </div>
-        </ScrollReveal>
+              </motion.div>
+              
+              {/* Tooltip */}
+              <span className="absolute bottom-full mb-3 scale-0 group-hover:scale-100 transition-all duration-150 bg-slate-900 text-white text-[11px] font-bold py-1.5 px-3 rounded-lg shadow-xl whitespace-nowrap z-30">
+                {tech.name}
+                {/* Tooltip Arrow */}
+                <span className="absolute top-full left-1/2 -translate-x-1/2 border-[5px] border-transparent border-t-slate-900" />
+              </span>
+            </motion.div>
+          ))}
+        </div>
 
         {/* Bridge link to Our Process */}
-        <ScrollReveal variant="slideUp" delay={400} className="mt-14">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportSettings}
+          variants={fadeUp}
+          custom={0.55}
+          className="mt-14"
+        >
           <Link
             href="/process"
-            className="inline-flex items-center gap-2.5 py-2.5 px-6 rounded-full border border-slate-900/10 bg-slate-900/[0.03] text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-900/[0.06] hover:border-slate-900/25 transition-all duration-200"
+            className="inline-flex items-center gap-2.5 py-2.5 px-6 rounded-full border border-slate-900/10 bg-slate-900/[0.03] text-xs font-semibold text-slate-605 hover:text-slate-900 hover:bg-slate-900/[0.06] hover:border-slate-900/25 transition-all duration-200"
           >
             <svg className="w-4 h-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -175,7 +216,7 @@ export default function TechStackSection() {
             </svg>
             Our Process
           </Link>
-        </ScrollReveal>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import ScrollReveal from "@/components/ui/ScrollReveal";
+import { motion } from "framer-motion";
+import { fadeUp, scaleIn, viewportSettings, hoverLift } from "@/lib/animations";
 
 const partnerPrograms = [
   { name: "White-label Reseller", percent: "40%", description: "Fully white-labeled client portals. Sell Jevxo solutions under your agency brand name, keep 40% of recurrent subscription revenues." },
@@ -11,26 +12,58 @@ const partnerPrograms = [
 
 export default function PartnersSection() {
   return (
-    <section className="py-24 border-t border-slate-900/10 bg-white/50 relative" id="partners">
+    <section className="py-24 border-t border-slate-900/10 bg-transparent relative" id="partners">
       <div className="w-11/12 max-w-[1400px] mx-auto">
-        <ScrollReveal variant="slideUp">
-          <div className="text-center mb-16">
-            <div className="text-violet-600 text-sm font-bold uppercase tracking-wider mb-3">
-              Partners
-            </div>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900">
-              Agency &amp; Affiliate <span className="bg-gradient-to-br from-violet-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent">Partnership Hub</span>
-            </h2>
-            <p className="text-slate-600 max-w-[580px] mx-auto mt-4 text-base">
-              Partner with Jevxo to scale software distributions inside your regional or developer networks.
-            </p>
-          </div>
-        </ScrollReveal>
+        
+        <div className="text-center mb-16">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            variants={fadeUp}
+            custom={0.05}
+            className="inline-flex items-center gap-1.5 py-1.5 px-4 rounded-full border border-violet-600/20 bg-violet-600/[0.04] text-xs font-bold text-violet-700 uppercase tracking-wider mb-5"
+          >
+            Partners
+          </motion.div>
+          <motion.h2
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            variants={fadeUp}
+            custom={0.15}
+            className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight"
+          >
+            Agency &amp; Affiliate <span className="bg-gradient-to-br from-violet-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent">Partnership Hub</span>
+          </motion.h2>
+          <motion.p
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            variants={fadeUp}
+            custom={0.25}
+            className="text-slate-505 max-w-[620px] mx-auto mt-4 text-base leading-relaxed"
+          >
+            Partner with Jevxo to scale software distributions inside your regional or developer networks.
+          </motion.p>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {partnerPrograms.map((p, idx) => (
-            <ScrollReveal key={idx} variant="slideUp" delay={idx * 150} duration={600} className="h-full">
-              <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] hover:border-violet-600/40 hover:shadow-xl hover:shadow-violet-600/10 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300 p-8 rounded-2xl flex flex-col justify-between h-full">
+            <motion.div
+              key={idx}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportSettings}
+              variants={scaleIn}
+              custom={idx * 0.08}
+              whileHover="hover"
+              className="h-full"
+            >
+              <motion.div
+                variants={hoverLift}
+                className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-300 p-8 rounded-2xl flex flex-col justify-between h-full"
+              >
                 <div>
                   <div className="flex justify-between items-start mb-6">
                     <h3 className="text-lg font-bold text-slate-900">{p.name}</h3>
@@ -38,14 +71,21 @@ export default function PartnersSection() {
                       {p.percent}
                     </span>
                   </div>
-                  <p className="text-sm text-slate-600 leading-relaxed mb-8">{p.description}</p>
+                  <p className="text-sm text-slate-505 leading-relaxed mb-8">{p.description}</p>
                 </div>
 
-                <Link href="#contact" onClick={(e) => { e.preventDefault(); document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }} className="block text-center py-2.5 rounded-lg bg-slate-900/5 border border-slate-900/10 font-bold text-xs text-slate-700 hover:bg-slate-900/10 transition-colors">
+                <Link 
+                  href="#contact" 
+                  onClick={(e) => { 
+                    e.preventDefault(); 
+                    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); 
+                  }} 
+                  className="block text-center py-3 rounded-xl bg-slate-900/5 border border-slate-900/10 font-bold text-xs text-slate-700 hover:bg-slate-900/10 transition-colors"
+                >
                   Join Program
                 </Link>
-              </div>
-            </ScrollReveal>
+              </motion.div>
+            </motion.div>
           ))}
         </div>
       </div>

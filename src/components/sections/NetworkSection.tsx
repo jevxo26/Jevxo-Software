@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import ScrollReveal from "@/components/ui/ScrollReveal";
+import { motion, AnimatePresence } from "framer-motion";
+import { fadeUp, scaleIn, viewportSettings, hoverLift } from "@/lib/animations";
 
 interface NetworkNode {
   id: string;
@@ -22,25 +23,52 @@ interface NetworkSectionProps {
 
 export default function NetworkSection({ nodes, selectedNode, setSelectedNode }: NetworkSectionProps) {
   return (
-    <section className="py-24 border-t border-slate-900/10 overflow-hidden" id="network">
+    <section className="py-24 border-t border-slate-900/10 overflow-hidden bg-transparent" id="network">
       <div className="w-11/12 max-w-[1400px] mx-auto">
-        <ScrollReveal variant="slideUp">
-          <div className="text-center mb-16">
-            <div className="text-violet-600 text-sm font-bold uppercase tracking-wider mb-3">
-              Global Network
-            </div>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900">
-              Active Jevxo <span className="bg-gradient-to-br from-violet-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent">Ecosystem Map</span>
-            </h2>
-            <p className="text-slate-600 max-w-[580px] mx-auto mt-4 text-base">
-              Hover over or click on our operational centers to see active statistics and client volumes.
-            </p>
-          </div>
-        </ScrollReveal>
+        
+        <div className="text-center mb-16">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            variants={fadeUp}
+            custom={0.05}
+            className="inline-flex items-center gap-1.5 py-1.5 px-4 rounded-full border border-violet-600/20 bg-violet-600/[0.04] text-xs font-bold text-violet-700 uppercase tracking-wider mb-5"
+          >
+            Global Network
+          </motion.div>
+          <motion.h2
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            variants={fadeUp}
+            custom={0.15}
+            className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight"
+          >
+            Active Jevxo <span className="bg-gradient-to-br from-violet-600 via-blue-500 to-cyan-400 bg-clip-text text-transparent">Ecosystem Map</span>
+          </motion.h2>
+          <motion.p
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            variants={fadeUp}
+            custom={0.25}
+            className="text-slate-505 max-w-[620px] mx-auto mt-4 text-base leading-relaxed"
+          >
+            Hover over or click on our operational centers to see active statistics and client volumes.
+          </motion.p>
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 items-center">
           {/* SVG Map Container */}
-          <ScrollReveal variant="slideLeft" duration={800} className="lg:col-span-3">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            variants={fadeUp}
+            custom={0.3}
+            className="lg:col-span-3"
+          >
             <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 relative p-5 rounded-2xl h-[420px] overflow-hidden flex items-center justify-center">
               {/* Fake SVG World Map Background */}
               <svg viewBox="0 0 1000 500" className="w-full h-full opacity-15 pointer-events-none">
@@ -83,7 +111,7 @@ export default function NetworkSection({ nodes, selectedNode, setSelectedNode }:
                     <span className={`absolute top-full left-1/2 -translate-x-1/2 whitespace-nowrap text-[11px] font-semibold mt-1.5 transition-all duration-300 ${
                       isSelected 
                         ? "opacity-100 text-violet-700 font-bold translate-y-0.5" 
-                        : "opacity-60 text-slate-500 translate-y-0"
+                        : "opacity-60 text-slate-505 translate-y-0"
                     }`}>
                       {node.name.split(" ")[0]}
                     </span>
@@ -91,13 +119,27 @@ export default function NetworkSection({ nodes, selectedNode, setSelectedNode }:
                 );
               })}
             </div>
-          </ScrollReveal>
+          </motion.div>
 
           {/* Selected Node Details Card */}
-          <ScrollReveal variant="slideRight" duration={800} className="lg:col-span-2">
-            <div>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            variants={fadeUp}
+            custom={0.4}
+            className="lg:col-span-2"
+          >
+            <AnimatePresence mode="wait">
               {selectedNode ? (
-                <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-300 p-10 rounded-2xl border-violet-600/20">
+                <motion.div
+                  key={selectedNode.id}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ duration: 0.25 }}
+                  className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-300 p-10 rounded-2xl border-violet-600/20"
+                >
                   <div className="flex items-center gap-2.5 mb-5">
                     <span className="w-2 h-2 rounded-full bg-cyan-500 shadow-[0_0_10px_#06b6d4]" />
                     <span className="text-xs font-bold text-violet-700 uppercase tracking-wider">Node Statistics</span>
@@ -110,30 +152,30 @@ export default function NetworkSection({ nodes, selectedNode, setSelectedNode }:
                       <div className="text-2xl font-bold text-slate-900">{selectedNode.websites}</div>
                     </div>
                     <div>
-                      <div className="text-xs text-slate-500">Clients Base</div>
+                      <div className="text-xs text-slate-505">Clients Base</div>
                       <div className="text-2xl font-bold text-slate-900">{selectedNode.clients}</div>
                     </div>
                     <div>
-                      <div className="text-xs text-slate-500">Country Partners</div>
+                      <div className="text-xs text-slate-505">Country Partners</div>
                       <div className="text-2xl font-bold text-slate-900">{selectedNode.partners}</div>
                     </div>
                     <div>
-                      <div className="text-xs text-slate-500">Annual Revenue</div>
+                      <div className="text-xs text-slate-505">Annual Revenue</div>
                       <div className="text-2xl font-bold text-cyan-600">{selectedNode.revenue}</div>
                     </div>
                   </div>
 
-                  <Link href="/portal" className="block text-center py-3.5 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 font-bold text-sm text-white shadow-md hover:shadow-violet-600/20 hover:-translate-y-0.5 transition-all duration-200">
+                  <Link href="/portal" className="block text-center py-4 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 font-bold text-sm text-white shadow-md hover:shadow-violet-600/20 hover:-translate-y-0.5 transition-all duration-200">
                     Launch Regional Portal →
                   </Link>
-                </div>
+                </motion.div>
               ) : (
                 <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 p-10 rounded-2xl text-center text-slate-500">
                   Select a node on the map to inspect live metrics.
                 </div>
               )}
-            </div>
-          </ScrollReveal>
+            </AnimatePresence>
+          </motion.div>
         </div>
       </div>
     </section>
