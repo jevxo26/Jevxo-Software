@@ -1,13 +1,45 @@
 "use client";
 
+import { useGetWebsitesQuery } from "@/lib/redux/slices/apiSlice";
+
 export default function AdminHostingPage() {
-  const domainsList = [
-    { domain: "apexgroup.com", ip: "104.21.43.18", ssl: "Valid", bandwidth: "1.1 TB", storage: "42 GB", expires: "2026-12-14" },
-    { domain: "vortexagency.co.uk", ip: "172.67.142.92", ssl: "Valid", bandwidth: "850 GB", storage: "35 GB", expires: "2026-11-20" },
-    { domain: "greenfieldbio.com", ip: "104.22.8.22", ssl: "Expiring", bandwidth: "1.8 TB", storage: "60 GB", expires: "2026-07-28" },
-    { domain: "sandsrealestate.ae", ip: "104.21.90.101", ssl: "Valid", bandwidth: "200 GB", storage: "12 GB", expires: "2027-01-05" },
-    { domain: "apexanalytics.sg", ip: "172.67.8.44", ssl: "Expired", bandwidth: "120 GB", storage: "8 GB", expires: "2026-06-30" },
-  ];
+  const { data: websites = [], isLoading, isError } = useGetWebsitesQuery(undefined);
+
+  if (isLoading) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[400px] gap-3">
+        <div className="w-10 h-10 border-4 border-violet-600 border-t-transparent rounded-full animate-spin"></div>
+        <p className="text-sm font-semibold text-slate-500">Querying active hosting nodes...</p>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[400px] text-center p-6 bg-red-50/50 border border-red-900/10 rounded-2xl">
+        <span className="text-3xl">⚠️</span>
+        <h3 className="text-base font-bold text-red-900 mt-3">Failed to load hosting records</h3>
+        <p className="text-xs text-red-600 mt-1">Please verify your connection and try again.</p>
+      </div>
+    );
+  }
+
+  const domainsList = websites.map((w: any) => {
+    const expiryDate = w.websiteDomain?.expiryDate
+      ? new Date(w.websiteDomain.expiryDate).toISOString().split("T")[0]
+      : w.ssl?.expiryDate
+      ? new Date(w.ssl.expiryDate).toISOString().split("T")[0]
+      : "No Expiry";
+
+    return {
+      domain: w.domain || w.name,
+      ip: w.hosting?.server || "127.0.0.1",
+      ssl: w.ssl?.status || "Valid",
+      bandwidth: w.hosting?.bandwidth || "0 GB",
+      storage: w.hosting?.storage || "0 GB",
+      expires: expiryDate,
+    };
+  });
 
   return (
     <div className="flex flex-col gap-7">
@@ -96,7 +128,7 @@ export default function AdminHostingPage() {
               </tr>
             </thead>
             <tbody>
-              {domainsList.map((item, index) => (
+              {domainsList.map((item: any, index: number) => (
                 <tr key={index} className="border-b border-slate-900/5 hover:bg-white/50 transition-colors">
                   <td className="py-3 px-2.5 font-bold text-slate-900">{item.domain}</td>
                   <td className="py-3 px-2.5 text-slate-500">{item.ip}</td>

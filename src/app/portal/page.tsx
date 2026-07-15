@@ -4,6 +4,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Shield, Handshake, Users, Briefcase, Rocket, Laptop, ArrowLeft, Key } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { useLoginMutation } from "@/lib/redux/slices/apiSlice";
+import { setCredentials } from "@/lib/redux/slices/authSlice";
 
 interface RoleItem {
   id: string;
@@ -16,6 +19,8 @@ interface RoleItem {
 
 export default function PortalPage() {
   const router = useRouter();
+  const dispatch = useDispatch();
+  const [login, { isLoading: isLoggingIn }] = useLoginMutation();
 
   const rolesList: RoleItem[] = [
     { id: "admin", name: "Global Admin", desc: "Command center for regional websites, pricing, and client suspension.", icon: <Shield className="w-6 h-6" />, username: "admin@jevxo.com", badge: "Superuser" },
@@ -28,19 +33,35 @@ export default function PortalPage() {
 
   const [selectedRole, setSelectedRole] = useState<RoleItem>(rolesList[0]);
   const [password, setPassword] = useState("••••••••");
-  const [isLoggingIn, setIsLoggingIn] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleRoleSelect = (role: RoleItem) => {
     setSelectedRole(role);
+    setErrorMsg("");
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoggingIn(true);
-    setTimeout(() => {
-      // Redirect to unified dashboard with role sub-route
+    setErrorMsg("");
+    const resolvedPassword = password === "••••••••" || !password ? "password123" : password;
+
+    try {
+      const result = await login({
+        email: selectedRole.username,
+        password: resolvedPassword,
+      }).unwrap();
+
+      dispatch(setCredentials({
+        token: result.access_token,
+        user: { email: selectedRole.username, name: selectedRole.name },
+        role: selectedRole.id,
+      }));
+
       router.push(`/dashboard/${selectedRole.id}`);
-    }, 1200);
+    } catch (err: any) {
+      console.error("Login failed:", err);
+      setErrorMsg(err?.data?.message || "Invalid workspace credentials or server offline.");
+    }
   };
 
   return (
@@ -130,6 +151,12 @@ export default function PortalPage() {
                     className="w-full py-3 px-4 rounded-lg border border-slate-200 bg-slate-50 text-slate-900 text-sm focus:border-violet-500/50 outline-none"
                   />
                 </div>
+
+                {errorMsg && (
+                  <div className="mb-5 text-xs text-red-600 font-semibold bg-red-50 p-3 rounded-lg border border-red-100 leading-normal">
+                    ⚠️ {errorMsg}
+                  </div>
+                )}
 
                 <button
                   type="submit"

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Bai_Jamjuree } from "next/font/google";
 import "./globals.css";
 import LayoutWrapper from "@/components/layout/LayoutWrapper";
+import StoreProvider from "@/components/providers/StoreProvider";
 
 const baiJamjuree = Bai_Jamjuree({
   subsets: ["latin"],
@@ -54,7 +55,9 @@ export default function RootLayout({
         </div>
 
         <div className="relative z-10 flex flex-col min-h-screen">
-          <LayoutWrapper>{children}</LayoutWrapper>
+          <StoreProvider>
+            <LayoutWrapper>{children}</LayoutWrapper>
+          </StoreProvider>
         </div>
       </body>
     </html>

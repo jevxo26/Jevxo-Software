@@ -1,10 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { initialClients, ClientItem } from "../../mockData";
+import { useGetClientsQuery, useUpdateClientMutation } from "@/lib/redux/slices/apiSlice";
+
+export interface ClientItem {
+  id: string;
+  name: string;
+  plan: string;
+  country: string;
+  status: string;
+  website: string;
+}
 
 export default function AdminClientsPage() {
-  const [clients, setClients] = useState<ClientItem[]>(initialClients);
+  const { data: clients = [], isLoading, error } = useGetClientsQuery(undefined);
+  const [updateClient] = useUpdateClientMutation();
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
   const [selectedClient, setSelectedClient] = useState<ClientItem | null>(null);
@@ -13,20 +23,19 @@ export default function AdminClientsPage() {
     setSelectedClient(client);
   };
 
-  const confirmSuspendClient = () => {
+  const confirmSuspendClient = async () => {
     if (selectedClient) {
-      setClients(clients.map(c => {
-        if (c.id === selectedClient.id) {
-          const nextStatus = c.status === "Suspended" ? "Active" : "Suspended";
-          return { ...c, status: nextStatus };
-        }
-        return c;
-      }));
-      setSelectedClient(null);
+      const newStatus = selectedClient.status === "Suspended" ? "ACTIVE" : "SUSPENDED";
+      try {
+        await updateClient({ id: selectedClient.id, status: newStatus }).unwrap();
+        setSelectedClient(null);
+      } catch (err) {
+        console.error("Failed to update client status:", err);
+      }
     }
   };
 
-  const filteredClients = clients.filter(c => {
+  const filteredClients = (clients as ClientItem[] || []).filter((c: ClientItem) => {
     const matchesSearch = c.name.toLowerCase().includes(searchQuery.toLowerCase()) || c.id.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesFilter = statusFilter === "All" ? true : c.status === statusFilter;
     return matchesSearch && matchesFilter;
@@ -79,9 +88,31 @@ export default function AdminClientsPage() {
               </tr>
             </thead>
             <tbody>
-              {filteredClients.map((c) => (
+               {isLoading && (
+                <tr>
+                  <td colSpan={6} className="py-8 text-center text-slate-500 font-semibold">
+                    <span className="inline-block w-4 h-4 border-2 border-solid border-violet-600 border-t-transparent rounded-full animate-spin mr-2.5 align-middle" />
+                    Connecting to Jevxo API Node...
+                  </td>
+                </tr>
+              )}
+              {error && (
+                <tr>
+                  <td colSpan={6} className="py-8 text-center text-red-500 font-semibold bg-red-50/50 rounded-lg">
+                    ⚠️ Failed to fetch clients from secure database API.
+                  </td>
+                </tr>
+              )}
+              {!isLoading && !error && filteredClients.length === 0 && (
+                <tr>
+                  <td colSpan={6} className="py-8 text-center text-slate-400">
+                    No clients matching your query filter.
+                  </td>
+                </tr>
+              )}
+              {!isLoading && !error && filteredClients.map((c) => (
                 <tr key={c.id} className="border-b border-slate-900/5 hover:bg-slate-900/[0.02] transition-colors">
-                  <td className="py-3.5 px-2.5 font-bold text-slate-900">{c.id}</td>
+                  <td className="py-3.5 px-2.5 font-mono text-xs font-bold text-slate-900 truncate max-w-[120px]">{c.id}</td>
                   <td className="py-3.5 px-2.5">
                     <div className="font-semibold">{c.name}</div>
                     <div className="text-[11px] text-slate-400 mt-0.5">{c.website}</div>
