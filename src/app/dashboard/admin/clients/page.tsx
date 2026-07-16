@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useGetClientsQuery, useUpdateClientMutation } from "@/lib/redux/slices/apiSlice";
+import { useGetClientsQuery, useUpdateClientMutation } from "@/lib/redux/baisapi";
 
 export interface ClientItem {
   id: string;
