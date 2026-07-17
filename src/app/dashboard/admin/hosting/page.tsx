@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetWebsitesQuery } from "@/lib/redux/baisapi";
+import { useGetWebsitesQuery } from "@/lib/redux/user/userApi";
 
 export default function AdminHostingPage() {
   const { data: websites = [], isLoading, isError } = useGetWebsitesQuery(undefined);

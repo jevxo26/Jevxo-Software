@@ -71,13 +71,56 @@ export default function NetworkSection({ nodes, selectedNode, setSelectedNode }:
           >
             <div className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-200 relative p-5 rounded-2xl h-[420px] overflow-hidden flex items-center justify-center">
               {/* Fake SVG World Map Background */}
-              <svg viewBox="0 0 1000 500" className="w-full h-full opacity-15 pointer-events-none">
+              <svg viewBox="0 0 1000 500" className="w-full h-full opacity-10 pointer-events-none">
                 <path d="M150,150 Q170,120 200,130 T250,160 T300,120 T350,150 T400,110 T450,130 T500,160 T550,130 T600,160 T650,120 T700,140 T750,120 T800,150 T850,130 T900,170" fill="none" stroke="#94a3b8" strokeWidth="2" strokeDasharray="5,5" />
                 <path d="M100,280 Q130,240 180,260 T250,230 T320,270 T400,220 T480,260 T550,230 T620,280 T700,240 T780,290 T850,250 T920,300" fill="none" stroke="#94a3b8" strokeWidth="2" strokeDasharray="5,5" />
                 <circle cx="150" cy="180" r="10" fill="#94a3b8" opacity="0.2" />
                 <circle cx="320" cy="220" r="15" fill="#94a3b8" opacity="0.2" />
                 <circle cx="550" cy="160" r="12" fill="#94a3b8" opacity="0.2" />
                 <circle cx="780" cy="250" r="18" fill="#94a3b8" opacity="0.2" />
+              </svg>
+
+              {/* Pulsing Bezier Network Connections */}
+              <svg viewBox="0 0 1000 500" className="absolute inset-0 w-full h-full pointer-events-none z-5 opacity-40">
+                <defs>
+                  <linearGradient id="flow-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.9" />
+                    <stop offset="50%" stopColor="#7c3aed" stopOpacity="0.9" />
+                    <stop offset="100%" stopColor="#4f46e5" stopOpacity="0.9" />
+                  </linearGradient>
+                  <filter id="glow-effect" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="2.5" result="blur" />
+                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                  </filter>
+                </defs>
+
+                <style>{`
+                  @keyframes flow {
+                    to {
+                      stroke-dashoffset: -32;
+                    }
+                  }
+                  .animate-flow-line {
+                    stroke-dasharray: 8 16;
+                    animation: flow 3s linear infinite;
+                  }
+                `}</style>
+
+                {/* Underlay paths */}
+                <g opacity="0.3">
+                  <path d="M 280,160 Q 380,120 480,150" fill="none" stroke="#94a3b8" strokeWidth="1" />
+                  <path d="M 480,150 Q 550,170 620,210" fill="none" stroke="#94a3b8" strokeWidth="1" />
+                  <path d="M 620,210 Q 670,220 720,240" fill="none" stroke="#94a3b8" strokeWidth="1" />
+                  <path d="M 720,240 Q 750,260 780,290" fill="none" stroke="#94a3b8" strokeWidth="1" />
+                </g>
+
+                {/* Animated flowing paths */}
+                <g filter="url(#glow-effect)">
+                  <path d="M 280,160 Q 380,120 480,150" fill="none" stroke="url(#flow-gradient)" strokeWidth="1.5" className="animate-flow-line" />
+                  <path d="M 480,150 Q 550,170 620,210" fill="none" stroke="url(#flow-gradient)" strokeWidth="1.5" className="animate-flow-line" />
+                  <path d="M 620,210 Q 670,220 720,240" fill="none" stroke="url(#flow-gradient)" strokeWidth="1.5" className="animate-flow-line" />
+                  <path d="M 720,240 Q 750,260 780,290" fill="none" stroke="url(#flow-gradient)" strokeWidth="1.5" className="animate-flow-line" />
+                </g>
               </svg>
 
               {/* Interactive Nodes */}
@@ -113,7 +156,11 @@ export default function NetworkSection({ nodes, selectedNode, setSelectedNode }:
                         ? "opacity-100 text-violet-700 font-bold translate-y-0.5" 
                         : "opacity-60 text-slate-505 translate-y-0"
                     }`}>
-                      {node.name.split(" ")[0]}
+                      {node.name.includes("United States") ? "USA" :
+                       node.name.includes("United Kingdom") ? "UK" :
+                       node.name.includes("United Arab Emirates") ? "UAE" :
+                       node.name.includes("Bangladesh") ? "Bangladesh (HQ)" :
+                       node.name}
                     </span>
                   </button>
                 );

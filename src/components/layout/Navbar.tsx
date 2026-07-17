@@ -97,9 +97,9 @@ export default function Navbar() {
                 <div key={link.href} className="relative group">
                   <Link
                     href={link.href}
-                    className={`relative px-3.5 py-2.5 rounded-[8px] text-[11px] font-bold tracking-wider uppercase transition-all duration-300 flex items-center gap-1.5 whitespace-nowrap ${isLinkActive
-                        ? "text-violet-750 bg-violet-600/5 font-extrabold"
-                        : "text-slate-650 hover:text-slate-950 hover:bg-slate-900/5"
+                    className={`relative px-3.5 py-2.5 rounded-[8px] text-[11px] font-bold tracking-wider uppercase transition-all duration-200 flex items-center gap-1.5 whitespace-nowrap ${isLinkActive
+                        ? "text-violet-600 bg-violet-600/5 font-extrabold"
+                        : "text-slate-650 hover:text-violet-600 hover:bg-violet-600/5"
                       }`}
                   >
                     {link.label}
@@ -122,9 +122,9 @@ export default function Navbar() {
                         <Link
                           key={sub.label}
                           href={sub.href}
-                          className={`block px-4 py-2.5 rounded-xl text-[13px] font-semibold transition-colors duration-150 ${pathname === sub.href
-                              ? "text-violet-700 bg-violet-600/5"
-                              : "text-slate-705 hover:text-slate-950 hover:bg-slate-900/5"
+                          className={`block px-4 py-2.5 rounded-xl text-[13px] font-semibold transition-all duration-200 ${pathname === sub.href
+                              ? "text-violet-600 bg-violet-600/5"
+                              : "text-slate-705 hover:text-violet-600 hover:bg-violet-600/5"
                             }`}
                         >
                           {sub.label}
@@ -137,9 +137,9 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`relative px-3.5 py-2.5 rounded-[8px] text-[11px] font-bold tracking-wider uppercase transition-all duration-300 group whitespace-nowrap ${pathname === link.href
-                      ? "text-violet-750 bg-violet-600/5 font-extrabold"
-                      : "text-slate-655 hover:text-slate-950 hover:bg-slate-900/5"
+                  className={`relative px-3.5 py-2.5 rounded-[8px] text-[11px] font-bold tracking-wider uppercase transition-all duration-200 group whitespace-nowrap ${pathname === link.href
+                      ? "text-violet-600 bg-violet-600/5 font-extrabold"
+                      : "text-slate-655 hover:text-violet-600 hover:bg-violet-600/5"
                     }`}
                 >
                   {link.label}
@@ -155,13 +155,13 @@ export default function Navbar() {
           <div className="flex items-center gap-[10px] shrink-0">
             <Link
               href="/portal"
-              className="hidden min-[1251px]:inline-block px-4 py-2 rounded-lg text-[13px] font-bold tracking-wide border border-slate-900/10 text-slate-700 hover:border-slate-900/20 hover:bg-slate-900/5 transition-all duration-200"
+              className="hidden min-[1251px]:inline-block px-4 py-2 rounded-lg text-[13px] font-bold tracking-wide border border-slate-900/10 text-slate-700 hover:border-violet-600 hover:text-violet-600 hover:bg-violet-600/5 transition-all duration-200"
             >
               Sign In
             </Link>
             <Link
               href="/contact"
-              className="hidden min-[1251px]:inline-block px-5 py-2.5 rounded-lg text-[13px] font-bold tracking-wide text-white bg-gradient-to-r from-violet-600 to-indigo-600 shadow-md hover:shadow-violet-600/25 hover:-translate-y-0.5 transition-all duration-250"
+              className="hidden min-[1251px]:inline-block px-5 py-2.5 rounded-lg text-[13px] font-bold tracking-wide text-white bg-gradient-to-r from-violet-600 to-indigo-600 shadow-md hover:shadow-violet-600/25 hover:-translate-y-0.5 transition-all duration-200"
             >
               Book a Demo
             </Link>
@@ -213,9 +213,9 @@ export default function Navbar() {
                 onClick={() =>
                   setOpenMobileSection(openMobileSection === link.href ? null : link.href)
                 }
-                className={`relative text-lg font-bold tracking-tight px-8 py-2 rounded-[10px] transition-all duration-300 flex items-center gap-2 ${isLinkActive
-                    ? "text-violet-705 bg-violet-600/10 font-extrabold scale-105"
-                    : "text-slate-800 hover:text-slate-950 hover:bg-slate-900/5"
+                className={`relative text-lg font-bold tracking-tight px-8 py-2 rounded-[10px] transition-all duration-200 flex items-center gap-2 ${isLinkActive
+                    ? "text-violet-600 bg-violet-600/10 font-extrabold scale-105"
+                    : "text-slate-800 hover:text-violet-600 hover:bg-violet-600/5"
                   }`}
                 style={{
                   transitionDelay: `${i * 0.02}s`,
@@ -241,9 +241,9 @@ export default function Navbar() {
                   <Link
                     key={sub.label}
                     href={sub.href}
-                    className={`flex items-center gap-2 text-[15px] font-semibold px-6 py-2 rounded-lg transition-colors duration-150 ${pathname === sub.href
-                        ? "text-violet-750"
-                        : "text-slate-650 hover:text-slate-950"
+                    className={`flex items-center gap-2 text-[15px] font-semibold px-6 py-2 rounded-lg transition-all duration-200 ${pathname === sub.href
+                        ? "text-violet-600"
+                        : "text-slate-650 hover:text-violet-600"
                       }`}
                   >
                     {sub.label}
@@ -255,9 +255,9 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className={`relative text-lg font-bold tracking-tight px-8 py-2 rounded-[10px] transition-all duration-300 ${pathname === link.href
-                  ? "text-violet-705 bg-violet-600/10 font-extrabold scale-105"
-                  : "text-slate-800 hover:text-slate-950 hover:bg-slate-900/5"
+              className={`relative text-lg font-bold tracking-tight px-8 py-2 rounded-[10px] transition-all duration-200 ${pathname === link.href
+                  ? "text-violet-600 bg-violet-600/10 font-extrabold scale-105"
+                  : "text-slate-800 hover:text-violet-600 hover:bg-violet-600/5"
                 }`}
               style={{
                 transitionDelay: `${i * 0.02}s`,
@@ -273,13 +273,13 @@ export default function Navbar() {
 
         <Link
           href="/portal"
-          className="px-8 py-3 rounded-[10px] text-base font-semibold border border-slate-900/10 text-slate-800 text-center w-[220px] hover:bg-slate-900/5 transition-all"
+          className="px-8 py-3 rounded-[10px] text-base font-semibold border border-slate-900/10 text-slate-800 text-center w-[220px] hover:border-violet-600 hover:text-violet-600 hover:bg-violet-600/5 transition-all duration-200"
         >
           Sign In
         </Link>
         <Link
           href="/contact"
-          className="mt-[10px] px-8 py-3.5 rounded-[10px] text-base font-bold bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-lg text-center w-[220px] hover:shadow-violet-600/20 hover:-translate-y-0.5 transition-all"
+          className="mt-[10px] px-8 py-3.5 rounded-[10px] text-base font-bold bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-lg text-center w-[220px] hover:shadow-violet-600/20 hover:-translate-y-0.5 transition-all duration-200"
         >
           Book a Demo →
         </Link>

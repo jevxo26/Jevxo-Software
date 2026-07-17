@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Shield, Handshake, Users, Briefcase, Rocket, Laptop, ArrowLeft, Key } from "lucide-react";
 import { useDispatch } from "react-redux";
-import { useLoginMutation } from "@/lib/redux/baisapi";
+import { useLoginMutation } from "@/lib/redux/user/authApi";
 import { setCredentials } from "@/lib/redux/slices/authSlice";
 
 interface RoleItem {

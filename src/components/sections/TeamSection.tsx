@@ -59,9 +59,19 @@ export default function TeamSection() {
                 className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-300 p-7 rounded-2xl text-center group h-full flex flex-col justify-between"
               >
                 <div>
-                  {/* Fake Avatar */}
-                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-violet-600 to-indigo-600 mx-auto mb-5 flex items-center justify-center text-2xl font-bold text-white shadow-md shadow-violet-600/20 group-hover:scale-110 group-hover:rotate-3 transition-all duration-350">
-                    {m.name.charAt(0)}
+                  {/* Premium Avatar */}
+                  <div className="relative w-20 h-20 mx-auto mb-5 rounded-full overflow-hidden border border-slate-200 shadow-md group-hover:scale-105 group-hover:shadow-violet-600/20 transition-all duration-350">
+                    {m.avatar ? (
+                      <img
+                        src={m.avatar}
+                        alt={m.name}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-350"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-violet-600 to-indigo-600 flex items-center justify-center text-2xl font-bold text-white">
+                        {m.name.charAt(0)}
+                      </div>
+                    )}
                   </div>
                   <h3 className="text-lg font-bold text-slate-900 mb-1">{m.name}</h3>
                   <div className="text-xs font-semibold text-cyan-600 mb-3 uppercase tracking-wider">{m.role}</div>

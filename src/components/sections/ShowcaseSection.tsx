@@ -89,11 +89,27 @@ export default function ShowcaseSection() {
                   variants={hoverLift}
                   className="bg-white/70 border border-slate-900/[0.08] backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.04)] hover:bg-white/95 hover:border-slate-900/[0.16] transition-all duration-300 rounded-2xl overflow-hidden flex flex-col h-full group"
                 >
-                  {/* Image Placeholder with Gradients */}
-                  <div className="h-[200px] bg-gradient-to-br from-violet-100 to-cyan-50 flex items-center justify-center relative border-b border-slate-900/5 overflow-hidden">
-                    <IconLaptop />
-                    <div className="absolute bottom-4 left-4 bg-white/90 border border-slate-900/10 px-2.5 py-1 rounded-md text-[10px] font-bold text-cyan-700 uppercase tracking-wider">
+                  {/* Showcase Image */}
+                  <div className="h-[200px] relative border-b border-slate-900/5 overflow-hidden bg-slate-50 flex items-center justify-center">
+                    {item.image ? (
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-violet-100 to-cyan-50 flex items-center justify-center">
+                        <IconLaptop />
+                      </div>
+                    )}
+                    <div className="absolute bottom-4 left-4 bg-white/90 border border-slate-900/10 px-2.5 py-1 rounded-md text-[10px] font-bold text-cyan-700 uppercase tracking-wider z-10">
                       {item.category}
+                    </div>
+                    {/* Hover Overlay */}
+                    <div className="absolute inset-0 bg-slate-950/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-5">
+                      <span className="bg-white/90 backdrop-blur-md px-3.5 py-2 rounded-lg text-[10px] font-bold uppercase tracking-wider text-slate-800 border border-slate-200/80 shadow-md transform translate-y-1.5 group-hover:translate-y-0 transition-transform duration-300">
+                        View Project
+                      </span>
                     </div>
                   </div>
 
