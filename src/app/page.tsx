@@ -29,10 +29,10 @@ export default function HomePage() {
   const [nodes, setNodes] = useState(networkNodes);
   const [selectedNode, setSelectedNode] = useState<typeof networkNodes[0] | null>(null);
   const [plans, setPlans] = useState([
-    { name: "Starter", price: 29, desc: "For single freelancers or startups", features: ["1 Active Website", "Basic CRM Tracker", "5 Team Seats", "Storage up to 5GB", "Shared Hosting Node"] },
-    { name: "Business", price: 79, desc: "For growing regional businesses", features: ["3 Active Websites", "CRM + Automated Reminders", "25 Team Seats", "Storage up to 25GB", "Dedicated Hosting Node", "Intern Evaluators"] },
-    { name: "Growth", price: 149, desc: "For scaling multi-region brands", features: ["10 Active Websites", "CRM + Kanban + AI Lead Score", "Unlimited Team Seats", "Storage up to 100GB", "E-commerce Engine Integration", "Basic Marketing Hub (1-4)"] },
-    { name: "Enterprise", price: 299, desc: "For global operations and networks", features: ["Unlimited Websites", "All 6 Dashboard Panels", "Custom White-labeling", "Enterprise SLA & Support", "Marketing Hub (All 13 Modules)", "Country Domain Multi-routing"] },
+    { name: "Starter", price: 29, desc: "Perfect for local shops and emerging startups.", features: ["1 Custom Website Integration", "Basic Jevxo CRM Tracker", "5 Operations Team Seats", "10 GB Encrypted NVMe Storage", "Shared Cloud Hosting Node"] },
+    { name: "Business", price: 79, desc: "Built for expanding regional enterprises and retailers.", features: ["3 Dedicated Websites", "Jevxo CRM + Automated Reminders", "25 Operational Team Seats", "50 GB High-Speed NVMe Storage", "Isolated Regional Hosting Node", "Intern & HRM Evaluators"] },
+    { name: "Scale", price: 149, desc: "Designed for multi-branch brands and corporate operations.", features: ["10 Custom Brand Websites", "CRM + Kanban + AI Lead Scoring", "Unlimited Operations Seats", "150 GB Enterprise SSD Storage", "Headless Commerce API Engine", "Omni-Channel Marketing (1-4 Modules)"] },
+    { name: "Enterprise", price: 299, desc: "Unrestricted ecosystem for global brands and corporations.", features: ["Unlimited Custom Sites & Apps", "All 6 Enterprise Panels Active", "Full White-labeled Client Portal", "Dedicated SLA & 24/7 Priority Support", "Complete Omni-Channel Hub (All 13 Modules)", "Dynamic Multi-Country IP Routing"] },
   ]);
 
   // Load from local storage if available

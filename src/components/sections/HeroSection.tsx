@@ -305,7 +305,7 @@ function HeroOrbit() {
         <span className="absolute inset-0 rounded-full border border-violet-200/70 animate-ping opacity-30 pointer-events-none" />
         <span className="absolute -inset-1.5 rounded-full bg-gradient-to-br from-violet-500/20 via-transparent to-cyan-400/20 blur-md pointer-events-none" />
         <img
-          src="/logo.png"
+          src="/logo.svg"
           alt="Company Logo"
           className="w-11 h-11 object-contain transition-transform duration-500 group-hover:scale-110 relative z-10"
           onError={(e) => {
@@ -427,6 +427,9 @@ export default function HeroSection() {
     <>
       {/* ── 1. HERO MAIN SECTION ── */}
       <section className="relative min-h-[92vh] flex items-center overflow-hidden pt-36 pb-20 bg-gradient-to-b from-violet-50/70 to-transparent">
+        {/* Background Grid Pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#7c3aed03_1px,transparent_1px),linear-gradient(to_bottom,#7c3aed03_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)] pointer-events-none" />
+
         {/* Ambient background field */}
         <motion.div
           className="absolute w-[600px] h-[600px] -top-36 -right-24 rounded-full bg-violet-600/10 blur-[120px] pointer-events-none"

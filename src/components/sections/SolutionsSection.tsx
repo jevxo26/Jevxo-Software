@@ -64,14 +64,14 @@ const IconRocket = () => (
 );
 
 const solutions = [
-  { id: "1", title: "Custom Websites", desc: "High-performance marketing & corporate sites powered by Next.js.", Icon: IconGlobe, tag: "Website" },
-  { id: "2", title: "E-commerce Engine", desc: "Headless commerce solutions with lightning-fast checkout flows.", Icon: IconCart, tag: "Ecommerce" },
-  { id: "3", title: "Jevxo CRM", desc: "Lead tracking, pipeline visualizers, and conversion insights.", Icon: IconChart, tag: "CRM" },
-  { id: "4", title: "Jevxo HRM", desc: "Staff attendance, leave management, and growth trackers.", Icon: IconUsers, tag: "HRM" },
-  { id: "5", title: "Jevxo School", desc: "Student management, grading systems, and fee portals.", Icon: IconGraduation, tag: "School" },
-  { id: "6", title: "Jevxo Restaurant", desc: "POS integration, tables management, and digital menu builders.", Icon: IconUtensils, tag: "Restaurant" },
-  { id: "7", title: "Business Suite", desc: "General ERP, invoicing, and asset tracking for large operations.", Icon: IconBriefcase, tag: "Business Mgmt" },
-  { id: "8", title: "Marketing Hub", desc: "Automated social posting, email drip campaigns, and ROI tracking.", Icon: IconRocket, tag: "Marketing" },
+  { id: "1", title: "Jevxo Cloud Hosting", desc: "Containerized hosting nodes with integrated multi-region CDN and DDoS mitigation.", Icon: IconGlobe, tag: "Cloud Infrastructure" },
+  { id: "2", title: "Jevxo Commerce API", desc: "Headless, API-first shopping engines optimized for fast high-volume checkout flows.", Icon: IconCart, tag: "Headless Commerce" },
+  { id: "3", title: "Jevxo CRM Suite", desc: "Visual pipeline automation, smart lead scoring, and customer relationship databases.", Icon: IconChart, tag: "Sales CRM" },
+  { id: "4", title: "Jevxo HRM Core", desc: "Smart employee attendance, leave management, payroll systems, and evaluation logs.", Icon: IconUsers, tag: "HR Operations" },
+  { id: "5", title: "Jevxo Edu™ Suite", desc: "Academic ERP featuring student portals, fee collections, and automated report cards.", Icon: IconGraduation, tag: "EdTech Systems" },
+  { id: "6", title: "Jevxo POS Systems", desc: "High-speed point of sale tracking, offline synchronization, and inventory managers.", Icon: IconUtensils, tag: "Retail & F&B" },
+  { id: "7", title: "Jevxo Enterprise ERP", desc: "Asset registers, cross-department balance sheets, and automated invoicing utilities.", Icon: IconBriefcase, tag: "Corporate Finance" },
+  { id: "8", title: "Jevxo InsightPro™", desc: "Omni-channel advertising sync, marketing attribution, and predictive ROI models.", Icon: IconRocket, tag: "Marketing AI" },
 ];
 
 export default function SolutionsSection() {

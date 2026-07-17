@@ -45,12 +45,12 @@ const IconSparkles = () => (
 );
 
 const ventures = [
-  { title: "Jevxo Web", desc: "Global design & engineering studio crafting high-end SaaS applications and experiences.", Icon: IconZap, focus: "UI/UX & Engineering" },
-  { title: "Jevxo School", desc: "E-learning and educational administrative networks serving institutions worldwide.", Icon: IconGraduation, focus: "EdTech Systems" },
-  { title: "Jevxo Restaurant", desc: "Unified kitchen management, order tracking, and table optimization platforms.", Icon: IconUtensils, focus: "F&B SaaS Solutions" },
-  { title: "Jevxo Business", desc: "Comprehensive Enterprise Resource Planning and logistics operating suites.", Icon: IconBriefcase, focus: "Corporate ERP" },
-  { title: "Jevxo Marketing", desc: "AI-driven automated marketing campaigns, SEO auditing, and ad management hubs.", Icon: IconTarget, focus: "Growth Automation" },
-  { title: "Future Ventures", desc: "Investing in next-generation decentralized databases and AI-agent business systems.", Icon: IconSparkles, focus: "R&D and Ventures" },
+  { title: "Jevxo Cloud", desc: "Global design & cloud engineering studio crafting resilient SaaS applications and next-gen interfaces.", Icon: IconZap, focus: "UI/UX & Cloud Engineering" },
+  { title: "Jevxo Edu", desc: "Cloud ERP and learning networks serving educational institutions and colleges worldwide.", Icon: IconGraduation, focus: "EdTech Platforms" },
+  { title: "Jevxo Retail", desc: "Unified retail point of sale, inventory tracking, and warehouse optimization platforms.", Icon: IconUtensils, focus: "F&B & Retail Systems" },
+  { title: "Jevxo Enterprise", desc: "Comprehensive enterprise resource planning, automated accounting, and logistics operating systems.", Icon: IconBriefcase, focus: "Enterprise ERP" },
+  { title: "Jevxo InsightPro", desc: "AI-driven automated marketing pipelines, SEO diagnostics, and omni-channel tracking engines.", Icon: IconTarget, focus: "Marketing AI" },
+  { title: "Jevxo R&D Labs", desc: "Researching and investing in next-generation decentralized databases and business AI agent frameworks.", Icon: IconSparkles, focus: "R&D & Incubations" },
 ];
 
 export default function VenturesSection() {
